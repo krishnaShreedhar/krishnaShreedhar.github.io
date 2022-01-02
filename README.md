@@ -1,41 +1,12 @@
 ## Welcome!
 
-You can use the [editor on GitHub](https://github.com/krishnaShreedhar/krishnaShreedhar.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Hi,
+I'm a full time Learner and a Seeker. 
+I know that this world can be a better place to live, and I'll do my part to improve it. 
+I aspire to build a system to help give all of us; not equal opportunity but one that enables each one of us to flourish variously. 
+How is a garden beautiful if all the flowers grown are the same?
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Timeline
-
-2022
-: Spring semester at WPI
-
-2021
-: Fall semester at WPI
-
-2020
-: PhD applications
-
-2019
-: Machine Learning Engineer at Yantriks
-
-2018
-: Completed M.Tech at IISc
-
-2016
-: Started M.Tech at IISc
-
-2015
-: Job in TCS
-
-2014
-: Completed B.E. Computer Engineering from Savitribai Phule Pune University
-
-2010
-: Started B.E. Computer Engineering
-: Completed HSC
-
-2008
-: Completed SSC
+[Timeline](markdowns/timeline.md)
 
 ### Markdown
 
@@ -65,6 +36,5 @@ For more details see [Basic writing and formatting syntax](https://docs.github.c
 
 Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/krishnaShreedhar/krishnaShreedhar.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### Resume
+Download my resume [here](pdfs/Dec2021_ShreeResume_wo_contact.pdf)
