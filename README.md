@@ -8,7 +8,7 @@ How is a garden beautiful if all the flowers grown are the same?
 
 [Timeline](markdowns/timeline.md)
 
-### Markdown
+### Research Interests
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
