@@ -307,6 +307,21 @@ ul.disc li::before {
 	top: 11px;
 	vertical-align: middle;
 }
+
+ul.resources li {
+	content: "";
+    color: #ffffff;
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #7dc24b; /* #FF0077; */
+	position: absolute;
+	left: -17px;
+	top: 11px;
+}
+
+
 dt {
 	margin: 0;
 	color: #7dc24b; /* #FF0077; */
@@ -1046,6 +1061,11 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	line-height: 1.875;
 	margin-bottom: 0.3rem;
 	letter-spacing: .4rem;
+}
+
+
+a.white {
+    color: #b2ac88;
 }
 
 /**

@@ -483,6 +483,14 @@ textarea {
 	width: 100%;
 }
 
+.col-thirteen {
+	width: 33.33333%;
+	color: #FFFFFF;
+}
+
+ul.white{
+  color:#FFFFFF;
+}
 /**
  * small screens - (_grid.scss)
  * --------------------------------------------------------------- 
@@ -545,6 +553,10 @@ textarea {
 		width: 100%;
 	}
 
+	.tab-white {
+		width: 100%;
+	    color: #313131;
+	}
 }
 
 /**
