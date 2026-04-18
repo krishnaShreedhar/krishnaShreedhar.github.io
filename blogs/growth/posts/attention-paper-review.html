@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Paper Review: Attention Is All You Need · Shreedhar Kodate</title>
+    <meta name="description" content="A structured review of the Transformer paper — core ideas, open questions, and what to read next.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="../../../css/blog.css">
+    <script src="../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <a class="menu-toggle" href="#"><span>Menu</span></a>
+            <div class="logo"><a href="../../../index.html">SK</a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../">Blog</a></li>
+                    <li><a href="../../../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../">Growth</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Paper Review</span>
+        </div>
+        <h1 class="post-title">Paper Review: Attention Is All You Need</h1>
+        <p class="post-subtitle">
+            Vaswani et al., NeurIPS 2017. A structured review covering the core contribution,
+            what I understood quickly, what took longer, and what to read next.
+        </p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">·</span>
+            <span>January 2024</span>
+            <span class="post-meta__sep">·</span>
+            <span>7 min review</span>
+            <span class="post-meta__sep">·</span>
+            <span class="resource-card__status status--done" style="vertical-align:middle">Done</span>
+        </div>
+        <div class="tags-row">
+            <span class="tag tag--growth">paper-review</span>
+            <span class="tag tag--growth">transformers</span>
+            <span class="tag tag--growth">nlp</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+
+    <aside class="post-toc">
+        <div class="post-toc__title">Contents</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+
+    <article class="post-body">
+
+        <!--
+        ================================================================
+        PAPER REVIEW TEMPLATE
+        ================================================================
+        HOW TO USE THIS TEMPLATE:
+          · Fill in each section below for your paper.
+          · The "Quick Card" is a summary box — keep it to 4-6 bullet points.
+          · "What confused me" is where honest learning happens — don't skip it.
+          · "What to read next" closes the loop and makes this useful for others.
+
+        To add a new paper review:
+          1. Copy this file to blogs/growth/posts/new-paper-slug.html
+          2. Update all metadata (title, description, breadcrumb, meta, tags)
+          3. Fill in the sections below
+          4. Add a resource-card entry in blogs/growth/index.html
+        ================================================================
+        -->
+
+        <!-- Quick summary card -->
+        <div class="callout callout--tip">
+            <span class="callout__label">Paper at a Glance</span>
+            <strong>Title:</strong> Attention Is All You Need<br>
+            <strong>Authors:</strong> Vaswani, Shazeer, Parmar, Uszkoreit et al.<br>
+            <strong>Venue:</strong> NeurIPS 2017<br>
+            <strong>One-line:</strong> Replaces RNNs/CNNs in seq2seq with pure self-attention,
+            achieving SOTA on WMT translation at lower training cost.<br>
+            <strong>My rating:</strong> &#9733;&#9733;&#9733;&#9733;&#9733; — essential reading
+        </div>
+
+        <h2 id="core-contribution">Core Contribution</h2>
+        <p>
+            The Transformer is the first sequence transduction model built entirely on
+            attention mechanisms, without any recurrence or convolution. This removes the
+            sequential dependency that prevented RNNs from being parallelised, and establishes
+            a new architecture family that now underlies almost all large language models.
+        </p>
+        <p>
+            The key claim: <em>for sequence modelling tasks, attention can fully replace
+            recurrence</em>, and doing so both improves quality and dramatically reduces
+            training time.
+        </p>
+
+        <h2 id="what-i-understood-quickly">What I Understood Quickly</h2>
+        <ul>
+            <li>The motivation against RNNs: sequential computation, long-range dependency
+                path length.</li>
+            <li>The mechanics of scaled dot-product attention — straightforward once you see
+                the Q/K/V framing.</li>
+            <li>Multi-head attention as parallel attention sub-spaces (analogous to using
+                multiple convolutional filter sizes).</li>
+            <li>The encoder-decoder structure and why causal masking is needed in the decoder.</li>
+        </ul>
+
+        <h2 id="what-confused-me">What Confused Me (and How I Resolved It)</h2>
+
+        <h3 id="why-sqrt-dk">Why divide by √d_k?</h3>
+        <p>
+            The paper says large dot products push softmax into regions of small gradients,
+            but it takes a moment to see why this happens at scale. The key insight: for
+            random unit-variance Q and K vectors of dimension d_k, the dot product has
+            variance d_k — so dividing by √d_k restores unit variance regardless of dimension.
+        </p>
+
+        <h3 id="positional-encoding-choice">Why sine/cosine for positional encoding?</h3>
+        <p>
+            The paper's argument about linear interpolation to unseen positions is elegant
+            but compressed. A clearer version: sin(pos + k) can be written as a linear
+            combination of sin(pos) and cos(pos), so the model can learn to attend to
+            "offset by k" positions via linear projection. This also means relative position
+            is representable — which turns out to matter a great deal in later work.
+        </p>
+
+        <h2 id="what-i-would-do-differently">What I Would Test If I Were the Author</h2>
+        <ul>
+            <li>Learnable positional encodings were ablated briefly. I'd want a more thorough
+                comparison across longer sequences.</li>
+            <li>The paper evaluates on machine translation only. The architecture's
+                applicability to other sequence tasks (which we now know is vast) is left
+                implicit.</li>
+            <li>Attention head visualisation is included but informal. A systematic
+                interpretability study would have been valuable.</li>
+        </ul>
+
+        <h2 id="connections-and-follow-ons">Connections &amp; Follow-Ons</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Paper</th>
+                    <th>Relationship</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BERT (Devlin et al., 2018)</td>
+                    <td>Encoder-only Transformer, bidirectional pre-training</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>GPT (Radford et al., 2018)</td>
+                    <td>Decoder-only Transformer, autoregressive LM pre-training</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>Relative Attention (Shaw et al., 2018)</td>
+                    <td>Improves positional encoding with relative positions</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Sparse Transformer (Child et al., 2019)</td>
+                    <td>Addresses O(n²) attention cost for long sequences</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Vision Transformer ViT (Dosovitskiy et al., 2020)</td>
+                    <td>Applies the same architecture to image patches</td>
+                    <td>High</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="implementation-notes">Implementation Notes</h2>
+        <p>
+            For a from-scratch PyTorch implementation with detailed annotations, see my
+            companion technical post:
+            <a href="../../technical/posts/intro-to-transformers.html">Attention Is All You Need — Practitioner's Walkthrough</a>.
+        </p>
+
+        <div class="callout callout--note">
+            <span class="callout__label">Learning Path</span>
+            Suggested sequence for someone new to transformers:
+            <ol style="margin-top:0.8rem; margin-bottom:0; padding-left:2rem;">
+                <li>Read sections 1–3 of the paper first (motivation + architecture).</li>
+                <li>Work through <em>The Annotated Transformer</em> (Rush, 2018).</li>
+                <li>Implement multi-head attention from scratch before reading the rest.</li>
+                <li>Return to sections 4–6 (training, experiments) with working code context.</li>
+            </ol>
+        </div>
+
+        <section class="post-references">
+            <h2 class="refs-title">References</h2>
+            <ol class="references-list">
+                <li id="ref-1">
+                    Vaswani et al. (2017). <em>Attention is all you need.</em> NeurIPS.
+                    <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">arXiv:1706.03762</a>
+                </li>
+                <li id="ref-2">
+                    Rush, A. (2018). <em>The Annotated Transformer.</em>
+                    <a href="https://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank" rel="noopener">Harvard NLP</a>
+                </li>
+            </ol>
+        </section>
+
+        <nav class="post-nav">
+            <a href="../" class="post-nav__item post-nav__item--prev">
+                <span class="post-nav__label">&larr; Back</span>
+                <span class="post-nav__title">Growth Journey</span>
+            </a>
+            <a href="../../technical/posts/intro-to-transformers.html"
+               class="post-nav__item post-nav__item--next">
+                <span class="post-nav__label">Related &rarr;</span>
+                <span class="post-nav__title">Practitioner's Walkthrough</span>
+            </a>
+        </nav>
+
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../">Growth</a>
+                <a href="../../">All Blogs</a>
+                <a href="../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="../../../js/blog.js"></script>
+</body>
+</html>

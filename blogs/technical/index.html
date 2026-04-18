@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Technical Blog — Shreedhar Kodate</title>
+    <meta name="description" content="Deep dives into machine learning, mathematics, and software engineering.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/blog.css">
+    <script src="../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <a class="menu-toggle" href="#"><span>Menu</span></a>
+            <div class="logo"><a href="../../index.html">SK</a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../experience/">Experience</a></li>
+                    <li class="current"><a href="../">Blog</a></li>
+                    <li><a href="../../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<section class="page-hero page-hero--technical">
+    <div class="row">
+        <span class="page-hero__eyebrow">Technical</span>
+        <h1>Engineering &amp; Machine Learning</h1>
+        <p class="page-hero__desc">
+            Deep dives into ML research, mathematical intuition, systems design,
+            and software engineering — written for practitioners who enjoy the details.
+        </p>
+    </div>
+</section>
+
+<!-- ============================================================
+     Post listing
+     HOW TO ADD A POST:
+       1. Copy one .post-card block below.
+       2. Update href to the new post's HTML file in posts/.
+       3. Update date (day / month), title, excerpt, tags, reading time.
+       4. Create the corresponding posts/my-new-post.html using the
+          template at templates/blog-post.html.
+       5. Run `python py/build.py` if generating from markdown.
+============================================================ -->
+<section class="blog-listing">
+    <div class="row">
+
+        <div class="post-grid">
+
+            <!-- POST: Intro to Transformers ----------------------------- -->
+            <a href="posts/intro-to-transformers.html" class="post-card anim-in">
+                <div class="post-card__date">
+                    <span class="post-card__date-day">12</span>
+                    <span class="post-card__date-month">Jan&nbsp;2024</span>
+                </div>
+                <div class="post-card__body">
+                    <h2 class="post-card__title">Attention Is All You Need — A Practitioner's Walkthrough</h2>
+                    <p class="post-card__excerpt">
+                        Re-deriving scaled dot-product attention from first principles, with
+                        annotated PyTorch code, mermaid architecture diagrams, and a
+                        discussion of why positional encoding works the way it does.
+                    </p>
+                    <div class="post-card__footer">
+                        <span class="tag">transformers</span>
+                        <span class="tag">attention</span>
+                        <span class="tag">pytorch</span>
+                        <span class="post-card__readtime">&#9711;&nbsp;12 min</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- POST PLACEHOLDER ----------------------------------------
+                 Duplicate and fill in to add a new technical post.
+            <a href="posts/your-new-post.html" class="post-card anim-in anim-in--1">
+                <div class="post-card__date">
+                    <span class="post-card__date-day">DD</span>
+                    <span class="post-card__date-month">Mon YYYY</span>
+                </div>
+                <div class="post-card__body">
+                    <h2 class="post-card__title">Your Post Title</h2>
+                    <p class="post-card__excerpt">One or two sentence description.</p>
+                    <div class="post-card__footer">
+                        <span class="tag">tag-one</span>
+                        <span class="tag">tag-two</span>
+                        <span class="post-card__readtime">&#9711;&nbsp;N min</span>
+                    </div>
+                </div>
+            </a>
+            -->
+
+        </div><!-- /.post-grid -->
+
+    </div>
+</section>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../">All Blogs</a>
+                <a href="../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="../../js/blog.js"></script>
+</body>
+</html>

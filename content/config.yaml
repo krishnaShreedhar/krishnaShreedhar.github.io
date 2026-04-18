@@ -1,0 +1,69 @@
+# ======================================================================
+# config.yaml — Site-wide configuration for krishnaShreedhar.github.io
+#
+# Used by py/build.py to generate HTML pages from markdown.
+# Edit this file to update site metadata, blog categories, and skills.
+# ======================================================================
+
+site:
+  title: "Shreedhar Kodate"
+  description: "ML Engineer | Learner | Seeker"
+  url: "https://krishnashreedhar.github.io"
+  author: "Shreedhar Kodate"
+  email: "nitai.shreedhar@gmail.com"
+
+social:
+  linkedin: "https://www.linkedin.com/in/shreedhar-kodate/"
+  github:   "https://github.com/krishnaShreedhar"
+  instagram: "https://www.instagram.com/krishna.shreedhar/"
+
+# Blog categories — used to generate listing pages
+categories:
+  - id: technical
+    name: "Technical"
+    tagline: "Engineering & Machine Learning"
+    description: >
+      Deep dives into ML research, mathematical intuition, systems design,
+      and software engineering — written for practitioners who enjoy the details.
+    color: "#7dc24b"
+    icon: "💻"
+    output_dir: "blogs/technical/posts"
+
+  - id: leadership
+    name: "Leadership & People"
+    tagline: "On Culture, Teams & Craft"
+    description: >
+      The soft skills behind great engineering — how teams think, how culture
+      forms, and how individuals grow into leaders worth following.
+    color: "#5ba3d9"
+    icon: "🌟"
+    output_dir: "blogs/leadership/posts"
+
+  - id: community
+    name: "Community & Ideas"
+    tagline: "On Humanity & Shared Life"
+    description: >
+      Kind ideas for everyone — on spirituality, gratitude, belonging,
+      and the quieter questions that give the louder ones their meaning.
+    color: "#d4a843"
+    icon: "🌎"
+    output_dir: "blogs/community/posts"
+
+  - id: growth
+    name: "Growth Journey"
+    tagline: "Learning in Public"
+    description: >
+      A living log of papers read, courses taken, projects built, and lectures
+      absorbed — distilled for anyone walking a similar path.
+    color: "#9b6bd4"
+    icon: "🌱"
+    output_dir: "blogs/growth/posts"
+
+# CDN libraries used in blog posts
+cdn:
+  highlight_css: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+  highlight_js:  "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+  katex_css:     "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+  katex_js:      "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+  katex_auto:    "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  mermaid_js:    "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"

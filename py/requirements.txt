@@ -1,0 +1,14 @@
+# =====================================================================
+# requirements.txt — Python dependencies for py/build.py
+#
+# Install:  pip install -r py/requirements.txt
+# =====================================================================
+
+# Markdown processing
+mistune>=3.0.0
+
+# YAML frontmatter
+PyYAML>=6.0
+
+# Optional: file-change watcher for --watch mode
+watchdog>=3.0.0
