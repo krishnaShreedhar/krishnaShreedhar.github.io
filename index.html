@@ -1,1439 +1,621 @@
 <!DOCTYPE html>
-<!--[if IE 8 ]>
-<html class="no-js oldie ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>
-<html class="no-js oldie ie9" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<html class="no-js" lang="en">
 <head>
-
-    <!--- basic page needs
-    ================================================== -->
     <meta charset="utf-8">
-    <title>Shreedhar Kodate</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- mobile specific metas
-    ================================================== -->
+    <title>Shreedhar Kodate — ML Engineer</title>
+    <meta name="description" content="Personal site of Shreedhar Kodate — Machine Learning Engineer, learner, seeker. Somewhere between the stars and Half Dome.">
+    <meta name="author" content="Shreedhar Kodate">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- CSS
-  ================================================== -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <link rel="stylesheet" href="css/home.css">
 
-    <!-- script
-    ================================================== -->
-    <script src="js/modernizr.js"></script>
-    <script src="js/pace.min.js"></script>
-
-    <!-- favicons
-     ================================================== -->
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="favicon.png">
-
 </head>
 
-<body id="top">
+<body id="top" class="sk-page home-page">
 
-<!-- header
-================================================== -->
+<!-- Reading progress bar (optional on home but keeps visual consistency) -->
+<div class="reading-progress"></div>
+
+<!-- Theme toggle -->
+<button class="theme-toggle" aria-label="Toggle dark / light theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1"  x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22"   x2="5.64"  y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1"  y1="12" x2="3"  y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22"  y1="19.78" x2="5.64"  y2="18.36"/>
+        <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<!-- ============================================================
+     Section Ribbon — fixed right-side nav dots
+============================================================ -->
+<nav class="section-ribbon" aria-label="Page section navigation">
+    <ul>
+        <li>
+            <a href="#home-hero" class="ribbon-dot active" aria-label="Go to top">
+                <span class="ribbon-label">Top</span>
+            </a>
+        </li>
+        <li>
+            <a href="#about" class="ribbon-dot" aria-label="Go to About">
+                <span class="ribbon-label">About</span>
+            </a>
+        </li>
+        <li>
+            <a href="#journey" class="ribbon-dot" aria-label="Go to Journey">
+                <span class="ribbon-label">Journey</span>
+            </a>
+        </li>
+        <li>
+            <a href="#explore" class="ribbon-dot" aria-label="Go to Explore">
+                <span class="ribbon-label">Explore</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- ============================================================
+     Navigation
+============================================================ -->
 <header>
     <div class="row">
-
         <div class="top-bar">
-            <a class="menu-toggle" href="#"><span>Menu</span></a>
-
+            <a class="menu-toggle" href="#" aria-label="Open menu"><span>Menu</span></a>
             <div class="logo">
-                <a href="index.html"></a>
+                <a href="#top" title="Shreedhar Kodate">SK</a>
             </div>
-
-            <nav id="main-nav-wrap">
+            <nav id="main-nav-wrap" aria-label="Main navigation">
                 <ul class="main-navigation">
-                    <li class="current"><a class="smoothscroll" href="#intro" title="">Home</a></li>
-                    <li><a class="smoothscroll" href="#about" title="">About</a></li>
-                    <li><a class="smoothscroll" href="#resume" title="">Resume</a></li>
-                    <li><a class="smoothscroll" href="#portfolio" title="">Photographs</a></li>
-                    <li><a class="smoothscroll" href="#contact" title="">Contact</a></li>
-                    <li><a href="experience/" title="">Experience</a></li>
-                    <li><a href="blogs/" title="">Blog</a></li>
-                    <li><a href="resources.html" title="">Resources</a></li>
+                    <li class="current"><a href="#top">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#journey">Journey</a></li>
+                    <li><a href="experience/">Experience</a></li>
+                    <li><a href="blogs/">Blog</a></li>
+                    <li><a href="resources.html">Resources</a></li>
                 </ul>
             </nav>
-        </div> <!-- /top-bar -->
-
-    </div> <!-- /row -->
-</header> <!-- /header -->
-
-<!-- intro section
-================================================== -->
-<section id="intro">
-
-    <div class="intro-overlay"></div>
-
-    <div class="intro-content">
-        <div class="row">
-
-            <div class="col-twelve">
-
-                <h5>Hello, World.</h5>
-                <h1>I'm Shree.</h1>
-
-                <p class="intro-position">
-                    <span>Machine Learning Engineer</span>
-                    <!--	   				<span>UI/UX Designer</span> -->
-                </p>
-
-                <a class="button stroke smoothscroll" href="#about" title="">More about me</a>
-
-            </div>
-
-        </div>
-    </div> <!-- /intro-content -->
-
-    <ul class="intro-social">
-        <li><a href="https://www.linkedin.com/in/shreedhar-kodate/"><i class="fa fa-linkedin"></i></a></li>
-        <li><a href="https://github.com/krishnaShreedhar"><i class="fa fa-github"></i></a></li>
-        <!--         <li><a href="#"><i class="fa fa-behance"></i></a></li>-->
-        <!--         <li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
-        <!--         <li><a href="#"><i class="fa fa-dribbble"></i></a></li>-->
-        <li><a href="https://www.instagram.com/krishna.shreedhar/"><i class="fa fa-instagram"></i></a></li>
-        <li><a href="https://www.facebook.com/shreedharkodate"><i class="fa fa-facebook"></i></a></li>
-    </ul> <!-- /intro-social -->
-
-</section> <!-- /intro -->
-
-
-<!-- about section
-================================================== -->
-<section id="about">
-
-    <div class="row section-intro">
-        <div class="col-twelve">
-
-            <h5>About</h5>
-            <h1>Hi there!</h1>
-
-            <div class="intro-info">
-
-                <img src="images/shree_profile_pic.jpg" alt="Profile Picture">
-
-                <p class="lead">
-                    I'm a full-time Learner and a Seeker. <br>
-                    I aspire to build a system to provide all of us; not an equal opportunity,
-                    but the one that enables each one of us to flourish exquisitely. <br>
-                    How is a garden mesmerizing; if all the flowers grown in it, are the same?
-                </p>
-            </div>
-
-        </div>
-    </div> <!-- /section-intro -->
-
-    <div class="row about-content">
-
-        <div class="col-six tab-full">
-
-            <h3>Profile</h3>
-            <p>Methodical Machine Learning Engineer with a cumulative experience of 4 years.</p>
-
-            <ul class="info-list">
-                <li>
-                    <strong>Fullname:</strong>
-                    <span>
-                        <a href="https://www.linkedin.com/in/shreedhar-kodate/">
-                            Shreedhar Shreeshail Kodate
-                        </a>
-                    </span>
-                </li>
-                <li>
-                    <strong>Current Job:</strong>
-                    <span>
-                        Teaching Assistant - Data Science
-                    </span>
-                </li>
-                <li>
-                    <strong>Website:</strong>
-                    <span>
-                        <a href="https://krishnashreedhar.github.io/">
-                            krishnaShreedhar.github.io
-                        </a>
-                    </span>
-                </li>
-                <li>
-                    <strong>Email:</strong>
-                    <span>
-                        <a href="mailto:nitai.shreedhar@gmail.com">
-                            nitai.shreedhar@gmail.com
-                        </a>
-                    </span>
-                </li>
-
-            </ul> <!-- /info-list -->
-
-        </div>
-
-        <div class="col-six tab-full">
-
-            <h3>Skills</h3>
-            <p>
-                Skilled problem-solver with unique perspective in solutions,
-                focused on answering why do we do what we do while tackling daily problems.
-            </p>
-
-            <ul class="skill-bars">
-
-                <li>
-                    <div class="progress percent95">
-<!--                        <span>95%</span>-->
-                    </div>
-                    <strong>Machine Learning</strong>
-                </li>
-                <li>
-                    <div class="progress percent90">
-<!--                        <span>90%</span>-->
-                    </div>
-                    <strong>Python</strong>
-                </li>
-                <li>
-
-                    <div class="progress percent85">
-<!--                        <span>75%</span>-->
-                    </div>
-                    <strong>Problem Solving</strong>
-                </li>
-                <li>
-                    <div class="progress percent85">
-<!--                        <span>85%</span>-->
-                    </div>
-                    <strong>SQL</strong>
-                </li>
-                <li>
-                    <div class="progress percent70">
-<!--                        <span>70%</span>-->
-                    </div>
-                    <strong>Google Cloud Platform</strong>
-                </li>
-
-            </ul> <!-- /skill-bars -->
-
-        </div>
-
-    </div>
-
-    <div class="row button-section">
-        <div class="col-twelve">
-            <a href="#contact" title="Hire Me" class="button stroke smoothscroll">Hire Me</a>
-            <a href="docs/resume/sskodate_resume.pdf" title="Download CV" class="button button-primary">Download CV</a>
         </div>
     </div>
+</header>
+
+
+<!-- ============================================================
+     Hero
+============================================================ -->
+<section id="home-hero" class="home-hero" aria-label="Introduction">
+
+    <!-- Star-twinkle canvas — added by JS below -->
+    <canvas id="star-canvas" class="star-canvas" aria-hidden="true"></canvas>
+
+    <!-- Dark overlay -->
+    <div class="home-hero__overlay" aria-hidden="true"></div>
+
+    <!-- Content -->
+    <div class="home-hero__content">
+        <p class="home-hero__eyebrow">Hello, World.</p>
+        <h1 class="home-hero__name">I'm Shree.</h1>
+        <p class="home-hero__role">Machine Learning Engineer</p>
+        <p class="home-hero__quote" id="cosmic-quote" aria-live="polite"></p>
+        <a href="#about" class="home-hero__cta">Explore &darr;</a>
+    </div>
+
+    <!-- Social icons -->
+    <ul class="home-hero__social" aria-label="Social links">
+        <li>
+            <a href="https://www.linkedin.com/in/shreedhar-kodate/" target="_blank"
+               rel="noopener noreferrer" aria-label="LinkedIn">
+                <!-- LinkedIn SVG -->
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/krishnaShreedhar" target="_blank"
+               rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                </svg>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Scroll hint -->
+    <div class="home-hero__scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="home-hero__scroll-line"></div>
+    </div>
+
+</section>
+
+
+<!-- ============================================================
+     About
+============================================================ -->
+<section id="about" class="home-section" aria-labelledby="about-heading">
+    <div class="sk-row">
+
+        <span class="section-eyebrow">About</span>
+        <h2 id="about-heading">Hi there.</h2>
+
+        <div class="home-about__grid">
+
+            <!-- Left — photo + bio + interest badges -->
+            <div class="home-about__left">
+
+                <div class="home-about__photo-frame">
+                    <img class="home-about__photo"
+                         src="images/shree_profile_pic.jpg"
+                         alt="Shreedhar Kodate smiling">
+                </div>
+
+                <p class="home-about__lead">
+                    I'm a full-time Learner and a Seeker.<br>
+                    I aspire to build systems that give each one of us the opportunity to
+                    flourish exquisitely &mdash; not equal opportunity,
+                    but a <em>personal</em> one.<br><br>
+                    How is a garden mesmerizing if all the flowers are the same?
+                </p>
+
+                <!-- Fun personality badges -->
+                <div class="interest-badges" role="list" aria-label="Interests">
+                    <span class="interest-badge" role="listitem">🌌 Galaxies</span>
+                    <span class="interest-badge" role="listitem">⚫ Black Holes</span>
+                    <span class="interest-badge" role="listitem">🏔️ Yosemite</span>
+                    <span class="interest-badge" role="listitem">🌿 National Parks</span>
+                    <span class="interest-badge" role="listitem">🤖 Machine Learning</span>
+                    <span class="interest-badge" role="listitem">📐 Linear Algebra</span>
+                </div>
 
-</section> <!-- /process-->
-
-
-<!-- resume Section
-================================================== -->
-<section id="resume" class="grey-section">
-
-    <div class="row section-intro">
-        <div class="col-twelve">
-
-            <h5>Resume</h5>
-            <h1>A bird's-eye view of my professional journey.</h1>
-
-            <p class="lead">
-
-            </p>
-
-        </div>
-    </div> <!-- /section-intro-->
-
-    <div class="row resume-timeline">
-
-        <div class="col-twelve resume-header">
-
-            <h2>Career</h2>
-
-        </div> <!-- /resume-header -->
-
-        <div class="col-twelve">
-
-            <div class="timeline-wrap">
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-briefcase" style="color:Tomato;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Applied ML Research Assistant</h3>
-                        <p>
-                            Aug. 2021 - May 2023<br>
-                            Worcester, MA, USA
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Worcester Polytechnic Institute (part-time)</h4>
-                        <p>
-                            Implemented MLOps, modular OOPs Python classes, SparkML, vectorized code, and
-                            cached dataset for faster distributed training of Deep Learning models on
-                            WPI High-Performance Cluster (HPC). <br>
-                            Trained various deep learning models on propriety audio, video, images, and
-                            text datasets during my research work. <br>
-                            Published a research paper in IEEE CASE 2023 while assisting in teaching
-                            Computational Data Intelligence course.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-briefcase" style="color:Tomato;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Machine Learning Intern (Fall) Biotechnology Research</h3>
-                        <p>
-                            Aug 2022 - Dec 2022<br>
-                            San Francisco, CA, USA
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Openwater.cc (startup)</h4>
-                        <p>
-                            Trained a self-supervised One-shot learning based Head Segmentation model with 0.75 Dice similarity score.
-                            This model will help deliver MRI-based treatments for brain-related illnesses.
-                            It removes the current dependency on CT scan  and prevents the risk of cancer due to ionization. <br>
-                            Worked on a high-impact project changing more than 1 million lives by helping detect stroke in the first response.<br>
-                            Auto-generating labels by one-shot data augmentation for MRI segmentation dataset, and implementing UNETR, a Vision Transfomer (ViT) based model.
-                            Also worked on a time series transformer model for stroke detection.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-briefcase" style="color:Tomato;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Summer Intern Applied Research - Deep Learning</h3>
-                        <p>May 2022 - August 2022</p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Quantiphi Inc.</h4>
-                        <p>
-                            Implemented Graph Machine Learning and GPT, T5, Transformer based algorithms to large Knowledge Graphs for automatic multi-hop Question Generation.
-                            This helps to generate 100s of meaningful questions from every single  document which further enhances the document understanding for Question Answering. <br>
-                            Researched on applying Graph Machine Learning algorithms to large Knowledge Graphs
-                            for automatic multi-hop Question Generation. <br>
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:DodgerBlue;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Master's Degree (M.S. in Data Science)</h3>
-                        <p>
-                            August 2021 - May 2023 (expected)<br>
-                            Worcester, MA, USA
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Worcester Polytechnic Institute</h4>
-                        <p>
-                            My area of research is in applying Machine Learning and Deep Learning techniques to
-                            various problems in Education, Medicine, Transportation, Autonomous Vehicles, and Robotics.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-briefcase" style="color:Tomato;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Senior Machine Learning Engineer</h3>
-                        <p>February 2021 - July 2021</p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Quantiphi Inc.</h4>
-                        <p>
-                            Created a pipeline of OpenCV data augmentation, model-assisted data cleaning and
-                            labelling to qualify dataset to train Efficientnet models which improved
-                            classification accuracy by 20% of frequently varying image designs into 500 classes.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-briefcase" style="color:Tomato;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Software Engineer Machine Learning</h3>
-                        <p>January 2019 - August 2020</p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Yantriks India Pvt. Ltd. (startup)</h4>
-                        <p>
-                            Designed and implemented end-to-end ML systems for Global Returns Forecasting,
-                            Dynamic Capacity Planning, etc.<br>
-                            Increased inference performance by 70% and decrease running cost by 20% for
-                            deployment code by bootstrapping.<br>
-                            Implemented parameterized code to enable Neural Architecture Search (NAS)
-                            driven by JSON config.<br>
-                            Mentored an intern for 4 months while implementing EDA and ML data flow
-                            pipelines for Anomaly Detection.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:DodgerBlue;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Talk</h3>
-                        <p>
-                            May 2017<br>
-                            Bengaluru, KA, India
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>
-                            <a href="https://www.youtube.com/watch?v=5LsAa-XHHl4">
-                                Talk on Essence of Linear Algebra
-                            </a>
-                        </h4>
-                        <p>
-                            Gave a talk on Essence of Linear Algebra in IISc Summer School 2017 to
-                            80 students from across India. <br>
-                            Inspired by the graphical intuition behind the far-reaching applications of LA concepts.
-                            <a href="https://www.youtube.com/watch?v=5LsAa-XHHl4">
-                                Here's the link.
-                            </a>
-                            Thanks to the great videos on the 3Blue1Brown YouTube channel.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:DodgerBlue;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Master of Technology (M.Tech)</h3>
-                        <p>
-                            August 2016 - December 2018<br>
-                            Bengaluru, KA, India
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Indian Institute of Science</h4>
-                        <p>
-                            I studied various courses in the Intelligent Systems stream of the
-                            Computer Science and Automation department.
-                            Relevant courses: Machine Learning, Deep Learning, Natural Language Processing,
-                            Reinforcement Learning, Game Theory, Probability and Statistics.
-                            Contributed ideas to the
-                            <a href="https://arxiv.org/abs/1912.03851">
-                                Intelligent Traffic Lights System's project.
-                            </a>
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:DodgerBlue;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Bachelor in Engineering (B.E.)</h3>
-                        <p>
-                            August 2010 - June 2014
-                            Pune, MH, India
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>Savitribai Phule Pune University</h4>
-                        <p>
-                            I studied Computer Science in the D. Y. Patil College of Engineering, Akurdi.
-                            I gained first-hand exposure in "Engineering" software solutions for real world problems
-                            from scratch.
-                            I was exposed to inspiring ideas while doing projects in different frameworks starting from
-                            C++ console programs to VB scripts to Web-based projects.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-            </div> <!-- /timeline-wrap -->
-
-        </div> <!-- /col-twelve -->
-
-    </div> <!-- /resume-timeline -->
-
-<!--    <div class="row resume-timeline">-->
-
-<!--        <div class="col-twelve resume-header">-->
-
-<!--            <h2>Education</h2>-->
-
-<!--        </div> &lt;!&ndash; /resume-header &ndash;&gt;-->
-
-<!--        <div class="col-twelve">-->
-
-<!--            <div class="timeline-wrap">-->
-
-
-<!--                -->
-
-<!--            </div> &lt;!&ndash; /timeline-wrap &ndash;&gt;-->
-
-<!--        </div> &lt;!&ndash; /col-twelve &ndash;&gt;-->
-
-<!--    </div> &lt;!&ndash; /resume-timeline &ndash;&gt;-->
-
-    <div class="row resume-timeline">
-
-        <div class="col-twelve resume-header">
-
-            <h2>Projects</h2>
-
-        </div> <!-- /resume-header -->
-
-        <div class="col-twelve">
-
-            <div class="timeline-wrap">
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:Orange;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Reinforcement Learning</h3>
-                        <p>
-                            January 2022 - May 2022<br>
-                            Worcester, MA, USA
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>
-                            <a href="https://github.com/AvnishGupta143/DDPG_AMR_Control">
-                                DDPG for Turtlebots Path planning
-                            </a>
-                        </h4>
-                        <p>
-                            Trained RL agents using DDPG algorithm to handle mapless navigation in simple and
-                            obstacle filled environments.<br>
-                            Designed the state space and reward function to help the RL agents learn to take efficient
-                            actions and reach goals without any collisions. The solution is scalable, dynamic,
-                            and has minimal manual intervention.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:Orange;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Deep Learning</h3>
-                        <p>
-                            January 2022 - May 2022<br>
-                            Worcester, MA, USA
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>
-                            <a href="https://github.com/AbhayKarade/offroad_net">
-                                OffRoadNet - Path detection for Autonomous Vehicles
-                            </a>
-                        </h4>
-                        <p>
-                            Our motivation for this project was to improve the offroad path detection performance, and
-                            make it light enough to deploy the trained model on edge devices and fast inference.
-                            And thus, progress towards autonomy level 5 in difficult terrains.<br>
-                            We trained various Deep Learning architectures like PSPHead, ENCHead,
-                            with ResNet pretrained backbone. <br>
-                            We also finetuned the hyperparameters and also met the state-of-the-art performance
-                            on the RUGD and Yamaha dataset.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:Orange;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>Machine Learning</h3>
-                        <p>
-                            August 2021 - Dec 2021<br>
-                            Worcester, MA, USA
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>
-                            <a href="https://krishnashreedhar.github.io/wpi_cs539_ml_proj/">
-                                Brain Tumor Radiogenomic Classification using 3D-CNN
-                            </a>
-                        </h4>
-                        <p>
-                            Worked on a very important and challenging dataset of brain MRI scans downloaded from a
-                            Kaggle competition. <br>
-                            We tried a one-shot atlas based data augmentation and
-                            ensemble methods to improve DNA methylation classification. <br>
-                            Trained 3D CNN and Resnet50 models on 4 different types of brain MRI scan data. <br>
-                            Created an ensemble of these models to increase the methylation classification
-                            performance by 4%.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-                <div class="timeline-block">
-
-                    <div class="timeline-ico">
-                        <i class="fa fa-graduation-cap" style="color:Orange;"></i>
-                    </div>
-
-                    <div class="timeline-header">
-                        <h3>NeurIPS 2019 Deep RL Workshop</h3>
-                        <p>
-                            August 2018 - Dec 2018<br>
-                            Bengaluru, KA, India
-                        </p>
-                    </div>
-
-                    <div class="timeline-content">
-                        <h4>
-                            <a href="https://arxiv.org/abs/1912.03851">
-                                Intelligent Coordination among Multiple Traffic Intersections Using
-                                Multi-Agent Reinforcement Learning
-                            </a>
-                        </h4>
-                        <p>
-                            This project is done in collaboration Research and development team at Siemens India.
-                            We worked on demonstrating the effectiveness of the Deep RL solutions to be better
-                            than human intuition based Fixed Signal Time controls. <br>
-                            Setup PTV Vissim and Aimsun for simulating the traffic environments based on
-                            Bengaluru's traffic analysis. <br>
-                            Ideated traffic density representation which helped the A3C based RL agents to learn
-                            to create green corridors. <br>
-                            Achieved considerable results wherein Average Waiting time for vehicles is
-                            reduced by 1 minute saving <bold>1000s</bold> of minutes cumulatively.
-                        </p>
-                    </div>
-
-                </div> <!-- /timeline-block -->
-
-            </div> <!-- /timeline-wrap -->
-
-        </div> <!-- /col-twelve -->
-
-    </div> <!-- /resume-timeline -->
-
-</section> <!-- /features -->
-
-
-<!-- Portfolio Section
-================================================== -->
-<section id="portfolio">
-
-    <div class="row section-intro">
-        <div class="col-twelve">
-
-            <h5>@alexshree.stories</h5>
-            <h1>Camera's attempt towards capturing what our EYES can.</h1>
-            <p>
-                <a class="insta-social" href="https://www.instagram.com/alexshree.stories/"><i class="fa fa-instagram"></i></a>
-            </p>
-
-
-        </div>
-    </div> <!-- /section-intro-->
-
-    <div class="row portfolio-content">
-
-        <div class="col-twelve">
-
-            <!-- portfolio-wrapper -->
-            <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
-
-                <div class="bgrid folio-item">
-                    <div class="item-wrap">
-                        <img src="images/portfolio/sf_cable_car_001.jpg" alt="Liberty">
-                        <a href="#modal-01" class="overlay">
-                            <div class="folio-item-table">
-                                <div class="folio-item-cell">
-                                    <h3 class="folio-title">San Francisco</h3>
-                                    <span class="folio-types">
-		     					       	  Cable car
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- /folio-item -->
-
-                <div class="bgrid folio-item">
-                    <div class="item-wrap">
-                        <img src="images/portfolio/stars_001.png" alt="Shutterbug">
-                        <a href="#modal-02" class="overlay">
-                            <div class="folio-item-table">
-                                <div class="folio-item-cell">
-                                    <h3 class="folio-title">Stars</h3>
-                                    <span class="folio-types">
-		     					       	  Orion's belt
-		     					      </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- /folio-item -->
-
-                <div class="bgrid folio-item">
-                    <div class="item-wrap">
-                        <img src="images/portfolio/alex_cake.png" alt="AlexCake">
-                        <a href="#modal-03" class="overlay">
-                            <div class="folio-item-table">
-                                <div class="folio-item-cell">
-                                    <h3 class="folio-title">Cake</h3>
-                                    <span class="folio-types">
-		     					       	  By Alex
-		     					      </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- /folio-item -->
-
-                <div class="bgrid folio-item">
-                    <div class="item-wrap">
-                        <img src="images/portfolio/sf_golden_gate.png" alt="GoldenGateBridge">
-                        <a href="#modal-04" class="overlay">
-                            <div class="folio-item-table">
-                                <div class="folio-item-cell">
-                                    <h3 class="folio-title">Golden Gate Bridge</h3>
-                                    <span class="folio-types">
-		     					       	  Iconic San Francisco
-		     					      </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- /folio-item -->
-
-                <div class="bgrid folio-item">
-                    <div class="item-wrap">
-                        <img src="images/portfolio/m_veggies.png" alt="Veggies">
-                        <a href="#modal-05" class="overlay">
-                            <div class="folio-item-table">
-                                <div class="folio-item-cell">
-                                    <h3 class="folio-title">Veggies</h3>
-                                    <span class="folio-types">
-		     					       	  Ready to Roast
-		     					      </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- /folio-item -->
-
-                <div class="bgrid folio-item">
-                    <div class="item-wrap">
-                        <img src="images/portfolio/ma_blizzard.png" alt="Blizzard">
-                        <a href="#modal-06" class="overlay">
-                            <div class="folio-item-table">
-                                <div class="folio-item-cell">
-                                    <h3 class="folio-title">Blizzard</h3>
-                                    <span class="folio-types">
-		     					       	  Massachusetts
-		     					      </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- /folio-item -->
-
-                <div class="bgrid folio-item">
-                    <div class="item-wrap">
-                        <img src="images/portfolio/jalebi_001.png" alt="Jalebi">
-                        <a href="#modal-07" class="overlay">
-                            <div class="folio-item-table">
-                                <div class="folio-item-cell">
-                                    <h3 class="folio-title">Jalebi</h3>
-                                    <span class="folio-types">
-		     					       	  Delicacy
-		     					      </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div> <!-- /folio-item -->
-
-                <!-- modal popups - begin
-                ============================================================= -->
-                <div id="modal-01" class="popup-modal slider mfp-hide">
-
-                    <div class="media">
-                        <img src="images/portfolio/modals/m_sf_cable_car_001.png" alt=""/>
-                    </div>
-
-                    <div class="description-box">
-                        <h4>CableCar</h4>
-                        <p>
-                            Guided by rails public transport. A ride one of its kind.
-                        </p>
-
-                        <div class="categories">Traveling</div>
-                    </div>
-
-                    <div class="link-box">
-                        <a href="https://www.sfmta.com/getting-around/muni/cable-cars">Go to Muni</a>
-                        <a href="#" class="popup-modal-dismiss">Close</a>
-                    </div>
-
-                </div> <!-- /modal-01 -->
-
-                <div id="modal-02" class="popup-modal slider mfp-hide">
-
-                    <div class="media">
-                        <img src="images/portfolio/modals/m_stars_001.png" alt=""/>
-                    </div>
-
-                    <div class="description-box">
-                        <h4>Stars</h4>
-                        <p>
-                            Applied a few techniques of photography. It was exciting to capture the light
-                            from stars which are 100s of light-years away in your smartphone forever.
-                        </p>
-
-                        <div class="categories">AstroPhotography</div>
-                    </div>
-
-                    <div class="link-box">
-                        <a href="https://en.wikipedia.org/wiki/Astrophotography">Try it out</a>
-                        <a href="#" class="popup-modal-dismiss">Close</a>
-                    </div>
-
-                </div> <!-- /modal-02 -->
-
-                <div id="modal-03" class="popup-modal slider mfp-hide">
-
-                    <div class="media">
-                        <img src="images/portfolio/modals/m_alex_cake.png" alt=""/>
-                    </div>
-
-                    <div class="description-box">
-                        <h4>AlexCake</h4>
-                        <p>
-                            Eggless cake made with love by Alex.
-                        </p>
-
-                        <div class="categories">Cooking</div>
-                    </div>
-
-                    <div class="link-box">
-                        <a href="#">Recipe</a>
-                        <a href="#" class="popup-modal-dismiss">Close</a>
-                    </div>
-
-                </div> <!-- /modal-03 -->
-
-                <div id="modal-04" class="popup-modal slider mfp-hide">
-
-                    <div class="media">
-                        <img src="images/portfolio/modals/m_sf_golden_gate.png" alt=""/>
-                    </div>
-
-                    <div class="description-box">
-                        <h4>Golden Gate Bridge</h4>
-                        <p>
-                            The iconic bridge covered by none other than, Karl, the Fog.
-                        </p>
-
-                        <div class="categories">Traveling</div>
-                    </div>
-
-                    <div class="link-box">
-                        <a href="https://www.goldengate.org/">Know more</a>
-                        <a href="#" class="popup-modal-dismiss">Close</a>
-                    </div>
-
-                </div> <!-- /modal-04 -->
-
-                <div id="modal-05" class="popup-modal slider mfp-hide">
-
-                    <div class="media">
-                        <img src="images/portfolio/modals/m_veggies.png" alt=""/>
-                    </div>
-
-                    <div class="description-box">
-                        <h4>Veggies</h4>
-                        <p>
-                            The all good broccoli, potatoes, brussels sprouts, carrots, and cauliflower,
-                            tossed in oil and indian spices. Roasted for 45 minutes at 375 F.
-                        </p>
-
-                        <div class="categories">Cooking</div>
-                    </div>
-
-                    <div class="link-box">
-                        <a href="https://www.youtube.com/watch?v=cXc1v5I6MYs">Want to cook?</a>
-                        <a href="#" class="popup-modal-dismiss">Close</a>
-                    </div>
-
-                </div> <!-- /modal-05 -->
-
-                <div id="modal-06" class="popup-modal slider mfp-hide">
-
-                    <div class="media">
-                        <img src="images/portfolio/modals/m_ma_blizzard.png" alt=""/>
-                    </div>
-
-                    <div class="description-box">
-                        <h4>Blizzard</h4>
-                        <p>This was my first experience with snow, and the Blizzard was quite exciting.</p>
-
-                        <div class="categories">Living</div>
-                    </div>
-
-                    <div class="link-box">
-                        <a href="https://education.nationalgeographic.org/resource/blizzard">What is it?</a>
-                        <a href="#" class="popup-modal-dismiss">Close</a>
-                    </div>
-
-                </div> <!-- /modal-06 -->
-
-                <div id="modal-07" class="popup-modal slider mfp-hide">
-
-                    <div class="media">
-                        <img src="images/portfolio/modals/m_jalebi_001.png" alt=""/>
-                    </div>
-
-                    <div class="description-box">
-                        <h4>Jalebi</h4>
-                        <p>
-                            Homemade sweet. Sweeter after offering to the sweet Lordships Nitai Gauranga at IHF Boston.
-                        </p>
-
-                        <div class="categories">Living</div>
-                    </div>
-
-                    <div class="link-box">
-                        <a href="https://ihfboston.org/">Visit IHFB</a>
-                        <a href="#" class="popup-modal-dismiss">Close</a>
-                    </div>
-
-                </div> <!-- /modal-07 -->
-
-
-                <!-- modal popups - end
-             ============================================================= -->
-
-            </div> <!-- /portfolio-wrapper -->
-
-        </div>  <!-- /twelve -->
-
-    </div> <!-- /portfolio-content -->
-
-</section> <!-- /portfolio -->
-
-
-<!--&lt;!&ndash; CTA Section-->
-<!--================================================== &ndash;&gt;-->
-<!--<section id="cta" class="grey-section">-->
-
-<!--    <div class="row cta-content">-->
-
-<!--        <div class="col-twelve section-ads">-->
-
-<!--            <h2 class="h01"><a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT">Styleshout Recommends-->
-<!--                Dreamhost.</a></h2>-->
-
-<!--            <p class="lead">-->
-<!--                Looking for an awesome and reliable webhosting? Try <a-->
-<!--                    href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT"><span>DreamHost</span></a>.-->
-<!--                Get <span>$50 off</span> when you sign up with the promocode <span>styleshout</span>.-->
-<!--                &lt;!&ndash; Simply type	the promocode in the box labeled “Promo Code” when placing your order. &ndash;&gt;-->
-<!--            </p>-->
-
-<!--            <div class="action">-->
-<!--                <a class="button button-primary large" href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT">Sign Up-->
-<!--                    Now</a>-->
-<!--            </div>-->
-
-<!--        </div>-->
-
-<!--    </div> &lt;!&ndash; /cta-content &ndash;&gt;-->
-
-<!--</section> &lt;!&ndash; /cta &ndash;&gt;-->
-
-
-<!--&lt;!&ndash; services Section-->
-<!--================================================== &ndash;&gt;-->
-<!--<section id="services">-->
-
-<!--    <div class="overlay"></div>-->
-
-<!--    <div class="row section-intro">-->
-<!--        <div class="col-twelve">-->
-
-<!--            <h5>Services</h5>-->
-<!--            <h1>What Can I Do For You?</h1>-->
-
-<!--            <p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi-->
-<!--                aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>-->
-
-<!--        </div>-->
-<!--    </div> &lt;!&ndash; /section-intro &ndash;&gt;-->
-
-<!--    <div class="row services-content">-->
-
-<!--        <div id="owl-slider" class="owl-carousel services-list">-->
-
-<!--            <div class="service">-->
-
-<!--                <span class="icon"><i class="icon-earth"></i></span>-->
-
-<!--                <div class="service-content">-->
-
-<!--                    <h3>Webdesign</h3>-->
-
-<!--                    <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
-<!--                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi-->
-<!--                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit-->
-<!--                        aspernatur aut odit aut fugit.-->
-<!--                    </p>-->
-
-<!--                </div>-->
-
-<!--            </div> &lt;!&ndash; /service &ndash;&gt;-->
-
-<!--            <div class="service">-->
-
-<!--                <span class="icon"><i class="icon-window"></i></span>-->
-
-<!--                <div class="service-content">-->
-
-<!--                    <h3>Web Development</h3>-->
-
-<!--                    <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
-<!--                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi-->
-<!--                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit-->
-<!--                        aspernatur aut odit aut fugit.-->
-<!--                    </p>-->
-
-<!--                </div>-->
-
-<!--            </div> &lt;!&ndash; /service &ndash;&gt;-->
-
-<!--            <div class="service">-->
-
-<!--                <span class="icon"><i class="icon-paint-brush"></i></span>-->
-
-<!--                <div class="service-content">-->
-
-<!--                    <h3>Branding</h3>-->
-
-<!--                    <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
-<!--                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi-->
-<!--                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit-->
-<!--                        aspernatur aut odit aut fugit.-->
-<!--                    </p>-->
-
-<!--                </div>-->
-
-<!--            </div> &lt;!&ndash; /service &ndash;&gt;-->
-
-<!--            <div class="service">-->
-
-<!--                <span class="icon"><i class="icon-toggles"></i></span>-->
-
-<!--                <div class="service-content">-->
-
-<!--                    <h3>UI/UX Design</h3>-->
-
-<!--                    <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
-<!--                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi-->
-<!--                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit-->
-<!--                        aspernatur aut odit aut fugit.-->
-<!--                    </p>-->
-
-<!--                </div>-->
-
-<!--            </div> &lt;!&ndash; /service &ndash;&gt;-->
-
-<!--            <div class="service">-->
-
-<!--                <span class="icon"><i class="icon-image"></i></span>-->
-
-<!--                <div class="service-content">-->
-
-<!--                    <h3>Graphics Design</h3>-->
-
-<!--                    <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
-<!--                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi-->
-<!--                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit-->
-<!--                        aspernatur aut odit aut fugit.-->
-<!--                    </p>-->
-
-<!--                </div>-->
-
-<!--            </div> &lt;!&ndash; /service &ndash;&gt;-->
-
-<!--            <div class="service">-->
-
-<!--                <span class="icon"><i class="icon-chat"></i></span>-->
-
-<!--                <div class="service-content">-->
-
-<!--                    <h3>Consultancy</h3>-->
-
-<!--                    <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium-->
-<!--                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi-->
-<!--                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit-->
-<!--                        aspernatur aut odit aut fugit.-->
-<!--                    </p>-->
-
-<!--                </div>-->
-
-<!--            </div> &lt;!&ndash; /service &ndash;&gt;-->
-
-<!--        </div> &lt;!&ndash; /services-list &ndash;&gt;-->
-
-<!--    </div> &lt;!&ndash; /services-content &ndash;&gt;-->
-
-<!--</section> &lt;!&ndash; /services &ndash;&gt;-->
-
-
-<!--&lt;!&ndash; stats Section-->
-<!--================================================== &ndash;&gt;-->
-<!--<section id="stats" class="count-up">-->
-
-<!--    <div class="row">-->
-<!--        <div class="col-twelve">-->
-
-<!--            <div class="block-1-6 block-s-1-3 block-tab-1-2 block-mob-full stats-list">-->
-
-<!--                <div class="bgrid stat">-->
-
-<!--                    <div class="icon-part">-->
-<!--                        <i class="icon-pencil-ruler"></i>-->
-<!--                    </div>-->
-
-<!--                    <h3 class="stat-count">-->
-<!--                        1500-->
-<!--                    </h3>-->
-
-<!--                    <h5 class="stat-title">-->
-<!--                        Projects Completed-->
-<!--                    </h5>-->
-
-<!--                </div> &lt;!&ndash; /stat &ndash;&gt;-->
-
-<!--                <div class="bgrid stat">-->
-
-<!--                    <div class="icon-part">-->
-<!--                        <i class="icon-users"></i>-->
-<!--                    </div>-->
-
-<!--                    <h3 class="stat-count">-->
-<!--                        900-->
-<!--                    </h3>-->
-
-<!--                    <h5 class="stat-title">-->
-<!--                        Happy Clients-->
-<!--                    </h5>-->
-
-<!--                </div> &lt;!&ndash; /stat &ndash;&gt;-->
-
-<!--                <div class="bgrid stat">-->
-
-<!--                    <div class="icon-part">-->
-<!--                        <i class="icon-badge"></i>-->
-<!--                    </div>-->
-
-<!--                    <h3 class="stat-count">-->
-<!--                        200-->
-<!--                    </h3>-->
-
-<!--                    <h5 class="stat-title">-->
-<!--                        Awards Received-->
-<!--                    </h5>-->
-
-<!--                </div> &lt;!&ndash; /stat &ndash;&gt;-->
-
-<!--                <div class="bgrid stat">-->
-
-<!--                    <div class="icon-part">-->
-<!--                        <i class="icon-light-bulb"></i>-->
-<!--                    </div>-->
-
-<!--                    <h3 class="stat-count">-->
-<!--                        120-->
-<!--                    </h3>-->
-
-<!--                    <h5 class="stat-title">-->
-<!--                        Crazy Ideas-->
-<!--                    </h5>-->
-
-<!--                </div> &lt;!&ndash; /stat &ndash;&gt;-->
-
-<!--                <div class="bgrid stat">-->
-
-<!--                    <div class="icon-part">-->
-<!--                        <i class="icon-cup"></i>-->
-<!--                    </div>-->
-
-<!--                    <h3 class="stat-count">-->
-<!--                        1500-->
-<!--                    </h3>-->
-
-<!--                    <h5 class="stat-title">-->
-<!--                        Coffee Cups-->
-<!--                    </h5>-->
-
-<!--                </div> &lt;!&ndash; /stat &ndash;&gt;-->
-
-<!--                <div class="bgrid stat">-->
-
-<!--                    <div class="icon-part">-->
-<!--                        <i class="icon-clock"></i>-->
-<!--                    </div>-->
-
-<!--                    <h3 class="stat-count">-->
-<!--                        7200-->
-<!--                    </h3>-->
-
-<!--                    <h5 class="stat-title">-->
-<!--                        Hours-->
-<!--                    </h5>-->
-
-<!--                </div> &lt;!&ndash; /stat &ndash;&gt;-->
-
-<!--            </div> &lt;!&ndash; /stats-list &ndash;&gt;-->
-
-<!--        </div> &lt;!&ndash; /twelve &ndash;&gt;-->
-<!--    </div> &lt;!&ndash; /row &ndash;&gt;-->
-
-<!--</section> &lt;!&ndash; /stats &ndash;&gt;-->
-
-
-<!-- contact
-================================================== -->
-<section id="contact">
-
-    <div class="row section-intro">
-        <div class="col-twelve">
-
-            <h5>Contact</h5>
-            <h1>I'd love to hear from you.</h1>
-
-            <p class="lead">
-                This contact form is not fixed yet. Please email me directly at nitai.shreedhar@gmail.com
-                and include "isWebVisited=True" in your email.
-            </p>
-
-        </div>
-    </div> <!-- /section-intro -->
-
-<!--    <div class="row contact-form">-->
-
-<!--        <div class="col-twelve">-->
-
-<!--            &lt;!&ndash; form &ndash;&gt;-->
-<!--            <form name="contactForm" id="contactForm" method="post" action="">-->
-<!--                <fieldset>-->
-
-<!--                    <div class="form-field">-->
-<!--                        <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2"-->
-<!--                               required="">-->
-<!--                    </div>-->
-<!--                    <div class="form-field">-->
-<!--                        <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value=""-->
-<!--                               required="">-->
-<!--                    </div>-->
-<!--                    <div class="form-field">-->
-<!--                        <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">-->
-<!--                    </div>-->
-<!--                    <div class="form-field">-->
-<!--                        <textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50"-->
-<!--                                  required=""></textarea>-->
-<!--                    </div>-->
-<!--                    <div class="form-field">-->
-<!--                        <button class="submitform">Submit</button>-->
-<!--                        <div id="submit-loader">-->
-<!--                            <div class="text-loader">Sending...</div>-->
-<!--                            <div class="s-loader">-->
-<!--                                <div class="bounce1"></div>-->
-<!--                                <div class="bounce2"></div>-->
-<!--                                <div class="bounce3"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                </fieldset>-->
-<!--            </form> &lt;!&ndash; Form End &ndash;&gt;-->
-
-<!--            &lt;!&ndash; contact-warning &ndash;&gt;-->
-<!--            <div id="message-warning">-->
-<!--            </div>-->
-<!--            &lt;!&ndash; contact-success &ndash;&gt;-->
-<!--            <div id="message-success">-->
-<!--                <i class="fa fa-check"></i>Your message was sent, thank you!<br>-->
-<!--            </div>-->
-
-<!--        </div> &lt;!&ndash; /col-twelve &ndash;&gt;-->
-
-<!--    </div> &lt;!&ndash; /contact-form &ndash;&gt;-->
-
-    <div class="row contact-info">
-
-        <div class="col-four tab-full">
-
-            <div class="icon">
-                <i class="icon-pin"></i>
             </div>
 
-            <h5>Where to find me</h5>
+            <!-- Right — profile info, skills, CTA -->
+            <div class="home-about__right">
 
-            <p>
-                Worcester, MA<br>
-                Oakland, CA<br>
-                US
-            </p>
+                <!-- Profile block -->
+                <div class="home-about__block">
+                    <p class="home-about__block-label">Profile</p>
+                    <ul class="about-info-list">
+                        <li>
+                            <strong>Name</strong>
+                            <span>
+                                <a href="https://www.linkedin.com/in/shreedhar-kodate/"
+                                   target="_blank" rel="noopener noreferrer">
+                                    Shreedhar Shreeshail Kodate
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <strong>Role</strong>
+                            <span>Machine Learning Engineer</span>
+                        </li>
+                        <li>
+                            <strong>Website</strong>
+                            <span>
+                                <a href="https://krishnashreedhar.github.io/">
+                                    krishnaShreedhar.github.io
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <strong>Location</strong>
+                            <span>Oakland, CA · US</span>
+                        </li>
+                    </ul>
+                </div>
 
+                <!-- Skills block -->
+                <div class="home-about__block">
+                    <p class="home-about__block-label">What I work with</p>
+                    <div class="skill-tags" role="list" aria-label="Technical skills">
+                        <span class="skill-tag" role="listitem">Machine Learning</span>
+                        <span class="skill-tag" role="listitem">Deep Learning</span>
+                        <span class="skill-tag" role="listitem">Python</span>
+                        <span class="skill-tag" role="listitem">PyTorch</span>
+                        <span class="skill-tag" role="listitem">SQL</span>
+                        <span class="skill-tag" role="listitem">Google Cloud</span>
+                        <span class="skill-tag" role="listitem">Computer Vision</span>
+                        <span class="skill-tag" role="listitem">NLP</span>
+                        <span class="skill-tag" role="listitem">MLOps</span>
+                        <span class="skill-tag" role="listitem">SparkML</span>
+                    </div>
+                </div>
+
+                <!-- CTAs -->
+                <div class="about-cta-row">
+                    <a href="docs/resume/sskodate_resume.pdf" class="btn-primary"
+                       target="_blank" rel="noopener noreferrer">
+                        Download CV &darr;
+                    </a>
+                    <a href="experience/" class="btn-outline">
+                        Full Experience &rarr;
+                    </a>
+                </div>
+
+            </div>
+        </div><!-- /.home-about__grid -->
+
+    </div><!-- /.sk-row -->
+</section>
+
+
+<!-- ============================================================
+     Journey (timeline highlights)
+============================================================ -->
+<section id="journey" class="home-section home-section--alt" aria-labelledby="journey-heading">
+    <div class="sk-row">
+
+        <div class="journey-header">
+            <div>
+                <span class="section-eyebrow">Journey</span>
+                <h2 id="journey-heading">A Bird's-Eye View</h2>
+            </div>
+            <a href="experience/" class="journey-all-link" aria-label="Full experience page">
+                Full timeline &rarr;
+            </a>
         </div>
 
-        <div class="col-four tab-full collapse">
+        <div class="journey-track" role="list" aria-label="Career highlights">
 
-            <div class="icon">
-                <i class="icon-mail"></i>
+            <div class="journey-item journey-item--work" role="listitem">
+                <div class="journey-card">
+                    <div class="journey-card__top">
+                        <span class="journey-card__period">Aug 2021 – May 2023</span>
+                        <span class="journey-card__type">Work &amp; Research</span>
+                    </div>
+                    <h3>Applied ML Research Assistant</h3>
+                    <p class="journey-card__org">Worcester Polytechnic Institute</p>
+                    <p class="journey-card__desc">
+                        MLOps, distributed deep learning on HPC, multimodal research across
+                        audio, video, and text — published in IEEE CASE 2023.
+                    </p>
+                </div>
             </div>
 
-            <h5>Email Me At</h5>
-
-            <p>
-                nitai.shreedhar@gmail.com
-                <!--				<br>-->
-                <!--			   	info@kardswebsite.com			     -->
-            </p>
-
-        </div>
-
-        <div class="col-four tab-full">
-
-            <div class="icon">
-                <i class="icon-phone"></i>
+            <div class="journey-item journey-item--work" role="listitem">
+                <div class="journey-card">
+                    <div class="journey-card__top">
+                        <span class="journey-card__period">Aug – Dec 2022</span>
+                        <span class="journey-card__type">Internship</span>
+                    </div>
+                    <h3>Machine Learning Intern — Biotechnology</h3>
+                    <p class="journey-card__org">Openwater.cc &middot; San Francisco, CA</p>
+                    <p class="journey-card__desc">
+                        Self-supervised one-shot head segmentation for MRI-based stroke
+                        detection — a model that could change more than a million lives.
+                    </p>
+                </div>
             </div>
 
-            <h5>Call Me At</h5>
+            <div class="journey-item journey-item--edu" role="listitem">
+                <div class="journey-card">
+                    <div class="journey-card__top">
+                        <span class="journey-card__period">Aug 2021 – May 2023</span>
+                        <span class="journey-card__type">Education</span>
+                    </div>
+                    <h3>M.S. in Data Science</h3>
+                    <p class="journey-card__org">Worcester Polytechnic Institute</p>
+                    <p class="journey-card__desc">
+                        Research focus on applying ML &amp; deep learning to education,
+                        medicine, autonomous vehicles, and robotics.
+                    </p>
+                </div>
+            </div>
 
-            <p>
-                Kindly, email for phone number.<br>
-<!--                Mobile: (+63) 555 0100<br>-->
-<!--                Fax: (+63) 555 0101-->
-            </p>
+            <div class="journey-item journey-item--work" role="listitem">
+                <div class="journey-card">
+                    <div class="journey-card__top">
+                        <span class="journey-card__period">Feb – Jul 2021</span>
+                        <span class="journey-card__type">Work</span>
+                    </div>
+                    <h3>Senior Machine Learning Engineer</h3>
+                    <p class="journey-card__org">Quantiphi Inc.</p>
+                    <p class="journey-card__desc">
+                        OpenCV augmentation pipeline + model-assisted labelling that boosted
+                        image classification accuracy by 20% across 500 classes.
+                    </p>
+                </div>
+            </div>
 
-        </div>
+            <div class="journey-item journey-item--edu" role="listitem">
+                <div class="journey-card">
+                    <div class="journey-card__top">
+                        <span class="journey-card__period">Aug 2016 – Dec 2018</span>
+                        <span class="journey-card__type">Education</span>
+                    </div>
+                    <h3>M.Tech — Computer Science &amp; Automation</h3>
+                    <p class="journey-card__org">Indian Institute of Science, Bengaluru</p>
+                    <p class="journey-card__desc">
+                        Intelligent Systems stream: ML, DL, NLP, Reinforcement Learning,
+                        Game Theory. Co-authored an
+                        <a href="https://arxiv.org/abs/1912.03851" target="_blank"
+                           rel="noopener noreferrer">
+                            NeurIPS 2019 workshop paper
+                        </a>
+                        on multi-agent traffic control.
+                    </p>
+                </div>
+            </div>
 
-    </div> <!-- /contact-info -->
+        </div><!-- /.journey-track -->
 
-</section> <!-- /contact -->
+    </div><!-- /.sk-row -->
+</section>
 
 
-<!-- footer
-================================================== -->
+<!-- ============================================================
+     Explore
+============================================================ -->
+<section id="explore" class="home-explore" aria-labelledby="explore-heading">
+    <div class="sk-row">
 
-<footer>
-    <div class="row">
+        <span class="section-eyebrow">Explore</span>
+        <h2 id="explore-heading">What's Here</h2>
+        <p class="section-desc">
+            Writing, deep experience records, and curated resources — all in one place.
+        </p>
 
-        <div class="col-six tab-full pull-right social">
+        <div class="explore-grid">
 
-            <ul class="footer-social">
-                <li><a href="https://www.linkedin.com/in/shreedhar-kodate/"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="https://github.com/krishnaShreedhar"><i class="fa fa-github"></i></a></li>
-                <li><a href="https://www.instagram.com/krishna.shreedhar/"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="https://www.facebook.com/shreedharkodate"><i class="fa fa-facebook"></i></a></li>
+            <a href="blogs/" class="explore-card explore-card--blog"
+               aria-label="Go to Blog">
+                <div class="explore-card__icon" aria-hidden="true">&#9997;&#65039;</div>
+                <h3>Blog</h3>
+                <p>
+                    Writing on machine learning, leadership, humanity, and personal growth —
+                    to think clearly and share openly.
+                </p>
+                <span class="explore-card__cta">Read posts &rarr;</span>
+            </a>
+
+            <a href="experience/" class="explore-card explore-card--exp"
+               aria-label="Go to Experience page">
+                <div class="explore-card__icon" aria-hidden="true">&#128640;</div>
+                <h3>Experience</h3>
+                <p>
+                    Detailed, expandable timeline of work, research, education, and
+                    projects — with a full skills cloud.
+                </p>
+                <span class="explore-card__cta">See journey &rarr;</span>
+            </a>
+
+            <a href="resources.html" class="explore-card explore-card--resources"
+               aria-label="Go to Resources page">
+                <div class="explore-card__icon" aria-hidden="true">&#128218;</div>
+                <h3>Resources</h3>
+                <p>
+                    Curated papers, courses, tools, and links that I find genuinely
+                    worth returning to.
+                </p>
+                <span class="explore-card__cta">Browse &rarr;</span>
+            </a>
+
+        </div><!-- /.explore-grid -->
+
+    </div><!-- /.sk-row -->
+</section>
+
+
+<!-- ============================================================
+     Footer
+============================================================ -->
+<footer class="home-footer" role="contentinfo">
+    <div class="sk-row">
+        <div class="home-footer__inner">
+
+            <div class="home-footer__brand">
+                <span class="home-footer__logo">SK</span>
+                <span class="home-footer__tagline">somewhere between the stars and Half Dome</span>
+            </div>
+
+            <ul class="home-footer__social" aria-label="Social links">
+                <li>
+                    <a href="https://www.linkedin.com/in/shreedhar-kodate/"
+                       target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                             width="16" height="16">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/krishnaShreedhar"
+                       target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                             width="16" height="16">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/shreedharkodate"
+                       target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                             width="16" height="16">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                </li>
             </ul>
 
-        </div>
-
-        <div class="col-six tab-full">
-            <div class="copyright">
-                <span>© Copyright <a href="https://www.styleshout.com/free-templates/kards/">Kards</a> 2016.</span>
-                <span>Design by <a href="http://www.styleshout.com/">styleshout</a></span>
+            <div class="home-footer__meta">
+                <span class="home-footer__copy">&copy; Shreedhar Kodate</span>
             </div>
-        </div>
 
-        <div id="go-top">
-            <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
         </div>
-
-    </div> <!-- /row -->
+    </div>
 </footer>
 
-<div id="preloader">
-    <div id="loader"></div>
-</div>
 
-<!-- Java Script
-================================================== -->
-<script src="js/jquery-2.1.3.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
+<!-- ============================================================
+     Scripts
+============================================================ -->
+<script src="js/blog.js"></script>
+
+<script>
+/* ----------------------------------------------------------------
+ * HOME PAGE INLINE SCRIPTS
+ * - Star canvas animation
+ * - Rotating cosmic / nature quotes
+ * - Nav transparency on scroll
+ * - Scroll-triggered section animations
+ * ---------------------------------------------------------------- */
+(function () {
+    'use strict';
+
+    /* ---- 1. Cosmic / Yosemite quotes -------------------------------- */
+    var quotes = [
+        { text: 'The cosmos is within us. We are made of star-stuff.', author: 'Carl Sagan' },
+        { text: 'In every walk with nature, one receives far more than he seeks.', author: 'John Muir' },
+        { text: 'Between every two pines is a doorway to a new world.', author: 'John Muir' },
+        { text: 'The universe is under no obligation to make sense to you.', author: 'Neil deGrasse Tyson' },
+        { text: 'Going to the mountains is going home.', author: 'John Muir' },
+        { text: 'Not all those who wander are lost.', author: 'J.R.R. Tolkien' },
+        { text: 'Climb the mountains and get their good tidings.', author: 'John Muir' },
+        { text: 'Black holes are where God divided by zero.', author: 'Steven Wright' }
+    ];
+
+    var q = quotes[Math.floor(Math.random() * quotes.length)];
+    var el = document.getElementById('cosmic-quote');
+    if (el) {
+        el.innerHTML = '\u201c' + q.text + '\u201d &mdash; <em>' + q.author + '</em>';
+    }
+
+
+    /* ---- 2. Star-canvas twinkling ----------------------------------- */
+    var canvas = document.getElementById('star-canvas');
+    if (canvas) {
+        var ctx = canvas.getContext('2d');
+        var stars = [];
+
+        function createStars() {
+            stars = [];
+            var count = Math.floor((canvas.width * canvas.height) / 3200);
+            for (var i = 0; i < count; i++) {
+                stars.push({
+                    x:     Math.random() * canvas.width,
+                    y:     Math.random() * canvas.height,
+                    r:     Math.random() * 1.4 + 0.2,
+                    base:  Math.random() * 0.55 + 0.2,
+                    speed: Math.random() * 0.008 + 0.003,
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+        }
+
+        function resize() {
+            canvas.width  = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            createStars();
+        }
+
+        function draw(t) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < stars.length; i++) {
+                var s = stars[i];
+                var o = s.base * (0.55 + 0.45 * Math.sin(t * s.speed + s.phase));
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + o + ')';
+                ctx.fill();
+            }
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        requestAnimationFrame(draw);
+    }
+
+
+    /* ---- 3. Nav transparency: solid once scrolled past hero --------- */
+    var header = document.querySelector('header');
+    function handleScroll() {
+        if (window.scrollY > 60) {
+            header.classList.add('nav-solid');
+        } else {
+            header.classList.remove('nav-solid');
+        }
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+
+    /* ---- 4. Scroll-triggered animations (IntersectionObserver) ------ */
+    var animEls = document.querySelectorAll('.journey-item, .explore-card');
+    if ('IntersectionObserver' in window && animEls.length) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        animEls.forEach(function (el) { observer.observe(el); });
+    } else {
+        /* Fallback: show everything */
+        animEls.forEach(function (el) { el.classList.add('visible'); });
+    }
+
+
+    /* ---- 5. Smooth-scroll for in-page anchor links ------------------ */
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+
+    /* ---- 6. Ribbon nav — highlight active section via IO ------------ */
+    var ribbonDots = document.querySelectorAll('.ribbon-dot');
+    var ribbonSectionIds = ['home-hero', 'about', 'journey', 'explore'];
+
+    if ('IntersectionObserver' in window && ribbonDots.length) {
+        var ribbonObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var id = entry.target.id;
+                    ribbonDots.forEach(function (dot) {
+                        var href = dot.getAttribute('href').replace('#', '');
+                        dot.classList.toggle('active', href === id);
+                    });
+                }
+            });
+        }, { threshold: 0.35 });
+
+        ribbonSectionIds.forEach(function (id) {
+            var sec = document.getElementById(id);
+            if (sec) ribbonObs.observe(sec);
+        });
+    }
+
+}());
+</script>
 
 </body>
-
 </html>
