@@ -60,8 +60,17 @@
     transition: color 0.3s ease !important;
 }
 
+.home-page header .logo a svg {
+    stroke: #f0ede6 !important;
+    transition: stroke 0.3s ease !important;
+}
+
 .home-page header.nav-solid .logo a {
     color: var(--sk-accent) !important;
+}
+
+.home-page header.nav-solid .logo a svg {
+    stroke: var(--sk-accent) !important;
 }
 
 .home-page .main-navigation li a {
@@ -617,17 +626,18 @@
 .journey-item:nth-child(4) { transition-delay: 0.3s; }
 .journey-item:nth-child(5) { transition-delay: 0.4s; }
 
-/* Dot */
+/* Dot — left is set so that translateX(-50%) centers it on the track line (left:0.55rem) */
 .journey-item::before {
     content: '';
     position: absolute;
-    left: -3rem;
+    left: calc(-3rem + 0.55rem);   /* line offset 0.55rem; translateX(-50%) puts center on line */
     top: 1.35rem;
     width: 1.2rem;
     height: 1.2rem;
     border-radius: 50%;
     border: 2px solid var(--sk-text-faint);
     background: var(--sk-bg);
+    transform: translateX(-50%);
     transition: border-color 0.25s ease, background 0.25s ease;
     z-index: 1;
 }
@@ -1017,7 +1027,7 @@ footer.home-footer {
     .home-hero__social { gap: 1.2rem; }
     .home-hero__cta    { padding: 1rem 2.4rem; }
     .journey-track     { padding-left: 2.4rem; }
-    .journey-item::before { left: -2.4rem; }
+    .journey-item::before { left: calc(-2.4rem + 0.55rem); } /* keepstransform:translateX(-50%) from base */
 }
 
 

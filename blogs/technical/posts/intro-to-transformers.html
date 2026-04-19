@@ -2,19 +2,14 @@
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Attention Is All You Need — Practitioner's Walkthrough · Shreedhar Kodate</title>
-    <meta name="description" content="Re-deriving scaled dot-product attention from first principles with annotated PyTorch code, mermaid diagrams, and KaTeX math.">
+    <title>Attention Is All You Need — A Practitioner's Walkthrough &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Re-deriving scaled dot-product attention from first principles, with annotated PyTorch code, mermaid architecture diagrams, and a discussion of why positional e">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../../../css/base.css">
     <link rel="stylesheet" href="../../../css/main.css">
     <link rel="stylesheet" href="../../../css/blog.css">
-
-    <!-- KaTeX (math rendering) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
-          integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-
-    <!-- highlight.js (syntax highlighting) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
     <script src="../../../js/modernizr.js"></script>
     <link rel="icon" type="image/png" href="../../../favicon.png">
@@ -24,382 +19,183 @@
 <div class="reading-progress"></div>
 
 <button class="theme-toggle" aria-label="Toggle theme">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
 </button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
 
 <header>
     <div class="row">
         <div class="top-bar">
-            <a class="menu-toggle" href="#"><span>Menu</span></a>
-            <div class="logo"><a href="../../../index.html">SK</a></div>
+            <div class="logo"><a href="../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
             <nav id="main-nav-wrap">
                 <ul class="main-navigation">
                     <li><a href="../../../index.html">Home</a></li>
                     <li><a href="../../../experience/">Experience</a></li>
-                    <li class="current"><a href="../../">Blog</a></li>
-                    <li><a href="../resources.html">Resources</a></li>
+                    <li class="current"><a href="../../../blogs/">Blog</a></li>
+                    <li><a href="../../../resources.html">Resources</a></li>
                 </ul>
             </nav>
         </div>
     </div>
 </header>
 
-<!-- ============================================================
-     Post header
-============================================================ -->
 <div class="post-header">
     <div class="row">
         <div class="post-breadcrumb">
-            <a href="../../">Blog</a>
+            <a href="../../../blogs/">Blog</a>
             <span class="post-breadcrumb__sep">/</span>
-            <a href="../">Technical</a>
+            <a href="../../../blogs/technical/">Technical</a>
             <span class="post-breadcrumb__sep">/</span>
-            <span class="post-breadcrumb__current">Attention Walkthrough</span>
+            <span class="post-breadcrumb__current">Attention Is All You Need — A Practitioner's Walkt</span>
         </div>
         <h1 class="post-title">Attention Is All You Need — A Practitioner's Walkthrough</h1>
-        <p class="post-subtitle">
-            Re-deriving scaled dot-product attention from first principles, with annotated
-            PyTorch, mermaid architecture diagrams, and a discussion of why positional
-            encoding works the way it does.
-        </p>
+        <p class="post-subtitle">Re-deriving scaled dot-product attention from first principles, with annotated PyTorch code, mermaid architecture diagrams, and a discussion of why positional encoding works the way it does.
+</p>
         <div class="post-meta">
             <span class="post-meta__author">Shreedhar Kodate</span>
-            <span class="post-meta__sep">·</span>
-            <span>12 January 2024</span>
-            <span class="post-meta__sep">·</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2024-01-12</span>
+            <span class="post-meta__sep">&middot;</span>
             <span>12 min read</span>
         </div>
-        <div class="tags-row">
-            <span class="tag">transformers</span>
-            <span class="tag">attention</span>
-            <span class="tag">pytorch</span>
-            <span class="tag">nlp</span>
-        </div>
+        <div class="tags-row"><span class="tag tag--technical">transformers</span><span class="tag tag--technical">attention</span><span class="tag tag--technical">pytorch</span><span class="tag tag--technical">nlp</span></div>
     </div>
 </div>
 
-<!-- ============================================================
-     Two-column: TOC + article
-============================================================ -->
 <div class="row">
 <div class="post-layout">
-
-    <!-- TOC -->
     <aside class="post-toc">
         <div class="post-toc__title">Contents</div>
-        <nav class="toc-nav">
-            <ul data-auto></ul>
-            <!-- data-auto tells blog.js to populate from headings automatically -->
-        </nav>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
     </aside>
-
-    <!-- Article body -->
-    <article class="post-body">
-
-        <h2 id="motivation">Motivation</h2>
-        <p>
-            The 2017 paper <em>Attention Is All You Need</em> <a class="cite" href="#ref-1">[1]</a>
-            replaced recurrent networks with a pure attention mechanism and changed the trajectory
-            of natural language processing permanently. But reading the paper cold can feel dense.
-            This walkthrough rebuilds each piece from scratch so the intuition is clear before the
-            math arrives.
-        </p>
-
-        <blockquote>
-            <p>The dominant sequence transduction models are based on complex recurrent or
-            convolutional neural networks. We propose a new simple network architecture,
-            the Transformer, based solely on attention mechanisms.</p>
-            <cite>Vaswani et al., 2017</cite>
-        </blockquote>
-
-        <!-- ------------------------------------------------------- -->
-        <h2 id="the-problem-with-rnns">The Problem With RNNs</h2>
-        <p>
-            Recurrent networks process tokens one at a time. Each hidden state
-            <code>h_t</code> depends on <code>h_{t-1}</code>, which means:
-        </p>
-        <ul>
-            <li>Training cannot be parallelised across time steps.</li>
-            <li>Long-range dependencies require gradients to travel through many steps,
-                leading to vanishing or exploding gradients.</li>
-        </ul>
-
-        <div class="callout callout--note">
-            <span class="callout__label">Note</span>
-            LSTMs mitigate but do not eliminate the long-range dependency problem.
-            Attention removes the path-length bottleneck entirely: any two positions
-            interact in O(1) operations.
-        </div>
-
-        <!-- ------------------------------------------------------- -->
-        <h2 id="scaled-dot-product-attention">Scaled Dot-Product Attention</h2>
-        <p>
-            Given queries <strong>Q</strong>, keys <strong>K</strong>, and values <strong>V</strong>,
-            attention is defined as:
-        </p>
-
-        <!-- Math block — rendered by KaTeX auto-render -->
-        <div class="math-block">
-            \[ \text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right) V \]
-        </div>
-
-        <p>
-            The scaling factor <span class="math-inline">\(\sqrt{d_k}\)</span> prevents the dot
-            products from growing large in magnitude when the key dimension is high, which would
-            push softmax into regions of extremely small gradients.
-        </p>
-
-        <!-- Code block -->
-        <div class="code-wrapper">
-            <span class="code-lang">python</span>
-            <pre><code class="language-python">import math
+    <article class="post-body" id="post-article">
+        <h2>Motivation</h2>
+<p>The 2017 paper <em>Attention Is All You Need</em> <a class="cite" href="#ref-1">[1]</a> replaced recurrent networks with a pure
+attention mechanism and changed the trajectory of NLP permanently. This walkthrough
+rebuilds each piece from scratch so the intuition is clear before the math arrives.</p>
+<blockquote>
+<p>The dominant sequence transduction models are based on complex recurrent or convolutional
+neural networks. We propose a new simple network architecture, the Transformer, based solely
+on attention mechanisms.</p>
+<p>— Vaswani et al., 2017</p>
+</blockquote>
+<h2>The Problem With RNNs</h2>
+<p>Recurrent networks process tokens one at a time. Each hidden state <code>h_t</code> depends on <code>h_{t-1}</code>:</p>
+<ul>
+<li>Training cannot be parallelised across time steps.</li>
+<li>Long-range dependencies cause vanishing / exploding gradients.</li>
+</ul>
+<div class="callout callout--note"><span class="callout__label">Note</span>LSTMs mitigate but do not eliminate the long-range dependency problem. Attention removes
+the path-length bottleneck entirely: any two positions interact in O(1) operations.</div>
+<h2>Scaled Dot-Product Attention</h2>
+<p>Given queries <strong>Q</strong>, keys <strong>K</strong>, and values <strong>V</strong>, attention is:</p>
+<p><div class="math-block">\[
+\text{Attention}(Q, K, V) = \text{softmax}!\left(\frac{QK^\top}{\sqrt{d_k}}\right) V
+\]</div></p>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">import math
 import torch
 import torch.nn.functional as F
 
 def scaled_dot_product_attention(Q, K, V, mask=None):
-    """
-    Args:
-        Q: (batch, heads, seq_q, d_k)
-        K: (batch, heads, seq_k, d_k)
-        V: (batch, heads, seq_k, d_v)
-        mask: optional boolean tensor broadcastable to (batch, heads, seq_q, seq_k)
-    Returns:
-        output: (batch, heads, seq_q, d_v)
-        weights: (batch, heads, seq_q, seq_k)
-    """
     d_k = Q.size(-1)
     scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k)
-
     if mask is not None:
         scores = scores.masked_fill(mask == 0, float('-inf'))
-
     weights = F.softmax(scores, dim=-1)
-    output  = torch.matmul(weights, V)
-    return output, weights
-</code></pre>
-        </div>
+    return torch.matmul(weights, V), weights
+</code></pre></div>
+<h2>Multi-Head Attention</h2>
+<p><div class="math-block">\[
+\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h),W^O
+\]</div></p>
+<h2>Architecture Overview</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Input[&quot;Input Tokens&quot;] --&gt; Embed[&quot;Embedding + Positional Encoding&quot;]
+    Embed --&gt; Encoder[&quot;Encoder × N&quot;]
+    Encoder --&gt; Memory[&quot;Memory&quot;]
+    Target[&quot;Target (shifted)&quot;] --&gt; TEmbed[&quot;Embedding + Positional Encoding&quot;]
+    TEmbed --&gt; Decoder[&quot;Decoder × N&quot;]
+    Memory --&gt; Decoder
+    Decoder --&gt; Out[&quot;Linear + Softmax&quot;]
+</div></div>
+<h2>Positional Encoding</h2>
+<p><div class="math-block">\[
+PE_{(pos,2i)} = \sin!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+\quad
+PE_{(pos,2i+1)} = \cos!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+\]</div></p>
+<h2>References</h2>
+<p><a class="cite" href="#ref-1">[1]</a>: Vaswani et al. (2017). <em>Attention is all you need.</em> NeurIPS.
+<a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+<p><a class="cite" href="#ref-2">[2]</a>: Rush, A. (2018). <em>The Annotated Transformer.</em> Harvard NLP.</p>
+<p><a class="cite" href="#ref-3">[3]</a>: Alammar, J. (2018). <em>The Illustrated Transformer.</em></p>
 
-        <!-- ------------------------------------------------------- -->
-        <h2 id="multi-head-attention">Multi-Head Attention</h2>
-        <p>
-            Rather than applying a single attention function, the Transformer runs
-            <em>h</em> attention heads in parallel on different linear projections of Q, K, V:
-        </p>
-
-        <div class="math-block">
-            \[ \text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h)\,W^O \]
-            \[ \text{where} \quad \text{head}_i = \text{Attention}(QW_i^Q,\, KW_i^K,\, VW_i^V) \]
-        </div>
-
-        <div class="code-wrapper">
-            <span class="code-lang">python</span>
-            <pre><code class="language-python">import torch.nn as nn
-
-class MultiHeadAttention(nn.Module):
-    def __init__(self, d_model=512, num_heads=8):
-        super().__init__()
-        assert d_model % num_heads == 0
-        self.d_k      = d_model // num_heads
-        self.h        = num_heads
-        self.W_q      = nn.Linear(d_model, d_model)
-        self.W_k      = nn.Linear(d_model, d_model)
-        self.W_v      = nn.Linear(d_model, d_model)
-        self.W_o      = nn.Linear(d_model, d_model)
-
-    def split_heads(self, x, batch):
-        x = x.view(batch, -1, self.h, self.d_k)
-        return x.transpose(1, 2)                 # (batch, h, seq, d_k)
-
-    def forward(self, Q, K, V, mask=None):
-        B = Q.size(0)
-        Q = self.split_heads(self.W_q(Q), B)
-        K = self.split_heads(self.W_k(K), B)
-        V = self.split_heads(self.W_v(V), B)
-        x, _ = scaled_dot_product_attention(Q, K, V, mask)
-        x = x.transpose(1, 2).contiguous().view(B, -1, self.h * self.d_k)
-        return self.W_o(x)
-</code></pre>
-        </div>
-
-        <!-- ------------------------------------------------------- -->
-        <h2 id="architecture-overview">Architecture Overview</h2>
-        <p>
-            The full Transformer stacks encoder and decoder blocks. The diagram below
-            shows the data flow — generated with Mermaid.
-        </p>
-
-        <div class="mermaid-wrap">
-            <div class="mermaid">
-graph TD
-    Input["Input Tokens"] --> Embed["Token Embedding + Positional Encoding"]
-    Embed --> EncBlock["Encoder Block × N\n(Self-Attention → Add & Norm → FFN → Add & Norm)"]
-    EncBlock --> Memory["Encoder Memory"]
-
-    TgtInput["Target Tokens (shifted right)"] --> TEmbedding["Token Embedding + Positional Encoding"]
-    TEmbedding --> DecBlock["Decoder Block × N\n(Masked Self-Attn → Cross-Attn → FFN)"]
-    Memory --> DecBlock
-    DecBlock --> Linear["Linear + Softmax"]
-    Linear --> Output["Output Probabilities"]
-
-    style EncBlock fill:#1a2a1a,stroke:#7dc24b,color:#c9d1d9
-    style DecBlock fill:#1a1a2a,stroke:#5ba3d9,color:#c9d1d9
-            </div>
-            <p class="diagram-caption">Fig 1. Transformer encoder–decoder data flow.</p>
-        </div>
-
-        <!-- ------------------------------------------------------- -->
-        <h2 id="positional-encoding">Positional Encoding</h2>
-        <p>
-            Because self-attention is permutation-invariant, position information must be
-            injected explicitly. The paper uses sine and cosine functions of different frequencies:
-        </p>
-
-        <div class="math-block">
-            \[
-            PE_{(pos,\,2i)}   = \sin\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
-            \quad
-            PE_{(pos,\,2i+1)} = \cos\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
-            \]
-        </div>
-
-        <p>
-            This design has two appealing properties:
-        </p>
-        <ol>
-            <li>The encoding for any position can be expressed as a linear function of the
-                encoding for a <em>fixed offset</em> — useful for generalising to unseen lengths.</li>
-            <li>The values lie in <span class="math-inline">\([-1, 1]\)</span> so they have the
-                same magnitude as the learned embeddings they are added to.</li>
-        </ol>
-
-        <!-- ------------------------------------------------------- -->
-        <h2 id="key-hyperparameters">Key Hyperparameters</h2>
-
-        <table>
-            <thead>
-                <tr><th>Hyperparameter</th><th>Base model</th><th>Large model</th><th>Notes</th></tr>
-            </thead>
-            <tbody>
-                <tr><td><code>d_model</code></td><td>512</td><td>1024</td><td>Embedding dimension</td></tr>
-                <tr><td><code>num_heads</code></td><td>8</td><td>16</td><td>Must divide <code>d_model</code></td></tr>
-                <tr><td><code>d_ff</code></td><td>2048</td><td>4096</td><td>Feed-forward inner dim</td></tr>
-                <tr><td><code>N</code> (layers)</td><td>6</td><td>6</td><td>Encoder = Decoder</td></tr>
-                <tr><td>Dropout</td><td>0.1</td><td>0.3</td><td>Applied after each sub-layer</td></tr>
-            </tbody>
-        </table>
-
-        <!-- ------------------------------------------------------- -->
-        <h2 id="takeaways">Takeaways</h2>
-        <ul>
-            <li>Attention complexity is <span class="math-inline">\(O(n^2 d)\)</span> in sequence
-                length — quadratic, which matters for long documents.</li>
-            <li>Multi-head attention lets the model jointly attend to information from different
-                representation sub-spaces.</li>
-            <li>The architecture generalises: GPT, BERT, T5, and LLMs all derive from this foundation.</li>
-        </ul>
-
-        <div class="callout callout--tip">
-            <span class="callout__label">Next step</span>
-            Implement the full Transformer from scratch in PyTorch following
-            <em>The Annotated Transformer</em> by Harvard NLP — then fine-tune on a small
-            seq2seq task to develop intuition for the hyperparameter interactions.
-        </div>
-
-        <!-- ===================================================
-             References
-             HOW TO ADD A REFERENCE:
-               1. Add a new <li> inside .references-list.
-               2. In the post body, use <a class="cite" href="#ref-N">[N]</a>
-                  to cite it inline.
-        =================================================== -->
-        <section class="post-references">
-            <h2 class="refs-title">References</h2>
-            <ol class="references-list">
-                <li id="ref-1">
-                    Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł.,
-                    &amp; Polosukhin, I. (2017). <em>Attention is all you need.</em>
-                    Advances in Neural Information Processing Systems, 30.
-                    <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">arXiv:1706.03762</a>
-                </li>
-                <li id="ref-2">
-                    Rush, A. (2018). <em>The Annotated Transformer.</em>
-                    <a href="https://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank" rel="noopener">Harvard NLP</a>
-                </li>
-                <li id="ref-3">
-                    Alammar, J. (2018). <em>The Illustrated Transformer.</em>
-                    <a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">jalammar.github.io</a>
-                </li>
-            </ol>
-        </section>
-
-        <!-- Post navigation -->
+        <section class="post-references"><h2 class="refs-title">References</h2><ol class="references-list"><li id="ref-1">Vaswani et al. (2017). *Attention is all you need.* NeurIPS.
+      https://arxiv.org/abs/1706.03762</li>
+<li id="ref-2">Rush, A. (2018). *The Annotated Transformer.* Harvard NLP.</li>
+<li id="ref-3">Alammar, J. (2018). *The Illustrated Transformer.*</li>
+</ol></section>
         <nav class="post-nav">
-            <a href="../" class="post-nav__item post-nav__item--prev">
-                <span class="post-nav__label">&larr; Back to listing</span>
+            <a href="../../../blogs/technical/" class="post-nav__item post-nav__item--prev">
+                <span class="post-nav__label">&larr; Back</span>
                 <span class="post-nav__title">Technical Blog</span>
             </a>
-            <span></span><!-- placeholder for next post -->
+            <span></span>
         </nav>
-
     </article>
-</div><!-- /.post-layout -->
-</div><!-- /.row -->
+</div>
+</div>
 
 <footer class="sk-footer">
     <div class="sk-row">
         <div class="sk-footer__inner">
             <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
             <div class="sk-footer__links">
-                <a href="../">Technical</a>
-                <a href="../../">All Blogs</a>
+                <a href="../../../blogs/technical/">Technical</a>
+                <a href="../../../blogs/">All Blogs</a>
                 <a href="../../../index.html">Home</a>
             </div>
         </div>
     </div>
 </footer>
 
-<!-- highlight.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('pre code').forEach(function (el) {
-            hljs.highlightElement(el);
-        });
-    });
-</script>
-
-<!-- KaTeX auto-render -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
-        integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-        integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4Usy0x1f" crossorigin="anonymous"
-        onload="renderMathInElement(document.body, {
-            delimiters: [
-                {left: '\\[', right: '\\]', display: true},
-                {left: '\\(', right: '\\)', display: false},
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false}
-            ]
-        });"></script>
-
-<!-- Mermaid -->
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>
-    mermaid.initialize({
-        startOnLoad: true,
-        theme: document.body.dataset.theme === 'light' ? 'default' : 'dark',
-        themeVariables: {
-            darkMode: true,
-            background: '#141414',
-            primaryColor: '#1a2a1a',
-            primaryTextColor: '#c9d1d9',
-            primaryBorderColor: '#7dc24b',
-            lineColor: '#7dc24b',
-            fontSize: '14px'
-        }
-    });
-</script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
 
 <script src="../../../js/blog.js"></script>
 </body>

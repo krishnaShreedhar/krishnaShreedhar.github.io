@@ -193,6 +193,137 @@ body.sk-page header .logo a {
     font-size: 2rem;
     letter-spacing: 0.08rem;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+body.sk-page header .logo a svg {
+    width: 2.2rem;
+    height: 2.2rem;
+    stroke: var(--sk-accent);
+    transition: stroke 0.3s ease;
+}
+
+body.sk-page header .logo a:hover svg {
+    stroke: var(--sk-accent-hi);
+}
+
+/* Desktop: show nav as horizontal flex row, hide hamburger */
+@media screen and (min-width: 769px) {
+    body.sk-page header .row      { min-height: 6.6rem; }
+    body.sk-page header .top-bar {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 4rem;
+        min-height: 6.6rem;
+        width: 100%;
+        min-width: 0;
+        background: transparent;
+    }
+    body.sk-page header .logo {
+        float: none !important;
+        margin: 0 !important;
+    }
+    body.sk-page #main-nav-wrap {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        width: auto !important;
+        display: flex !important;
+        align-items: center;
+    }
+    body.sk-page .main-navigation {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        width: auto;
+        height: auto;
+        clear: none;
+    }
+    body.sk-page .main-navigation > li {
+        display: inline-flex !important;
+    }
+    body.sk-page .main-navigation li a {
+        padding: 0.4rem 1.2rem !important;
+        line-height: normal;
+        display: block;
+    }
+    body.sk-page .menu-toggle {
+        display: none !important;
+    }
+}
+
+/* Mobile: dropdown via .open class */
+@media screen and (max-width: 768px) {
+    body.sk-page header .row      { min-height: 6rem; }
+    body.sk-page header .top-bar {
+        position: static !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2.4rem;
+        min-height: 6rem;
+        width: 100%;
+        background: transparent;
+    }
+    body.sk-page header .logo {
+        float: none !important;
+        margin: 0 !important;
+        order: 1;
+    }
+    body.sk-page .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        order: 2;
+        float: none !important;
+        margin: 0 !important;
+        position: static !important;
+    }
+    body.sk-page #main-nav-wrap {
+        position: fixed !important;
+        top: 6rem !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        z-index: 799;
+        border-top: 1px solid var(--sk-border-sub);
+    }
+    body.sk-page .main-navigation {
+        display: none !important;
+        flex-direction: column !important;
+        background: rgba(13, 13, 13, 0.97) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        padding: 2rem 3.2rem 3rem !important;
+        width: 100%;
+    }
+    body.sk-page #main-nav-wrap.open .main-navigation {
+        display: flex !important;
+    }
+    [data-theme="light"] body.sk-page .main-navigation {
+        background: rgba(238, 236, 230, 0.98) !important;
+    }
+    body.sk-page .main-navigation > li {
+        display: block !important;
+        width: 100%;
+    }
+    body.sk-page .main-navigation li a {
+        padding: 1.2rem 0 !important;
+        display: block !important;
+        border-bottom: 1px solid var(--sk-border-sub);
+    }
+    body.sk-page .main-navigation li:last-child a {
+        border-bottom: none;
+    }
 }
 
 body.sk-page .main-navigation li a {
@@ -1578,4 +1709,201 @@ body.sk-page .main-navigation li.current > a::after {
     .timeline-item > summary { grid-template-columns: 1fr auto; }
     .tl-period { display: none; }
     .post-nav { grid-template-columns: 1fr; }
+}
+
+
+/* ===================================================================
+ * 25. Resources page — grouped resource lists
+ * =================================================================== */
+.resource-section-wrap {
+    padding: 4rem 0 10rem;
+}
+
+.resource-group {
+    margin-bottom: 7rem;
+}
+
+.resource-group__header {
+    margin-bottom: 3.2rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--sk-border-sub);
+}
+
+.resource-group__eyebrow {
+    display: block;
+    font-family: var(--sk-head);
+    font-size: 1.05rem;
+    letter-spacing: 0.28rem;
+    text-transform: uppercase;
+    color: var(--sk-accent);
+    margin-bottom: 0.8rem;
+}
+
+.resource-group__title {
+    font-family: var(--sk-head);
+    font-size: clamp(2.4rem, 3.5vw, 3.2rem);
+    color: var(--sk-heading);
+    margin: 0;
+}
+
+.resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Resource card variant for resources.html (icon / body / status layout) */
+.resource-card__icon {
+    font-size: 1.8rem;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sk-accent-dim);
+    border-radius: var(--sk-r);
+    flex-shrink: 0;
+}
+
+.resource-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.resource-card__name {
+    font-family: var(--sk-head);
+    font-size: 1.6rem;
+    color: var(--sk-heading);
+    line-height: 1.3;
+    transition: color 0.22s ease;
+}
+
+.resource-card:hover .resource-card__name { color: var(--sk-accent-hi); }
+
+.resource-card__desc {
+    font-size: 1.35rem;
+    color: var(--sk-text-dim);
+    line-height: 1.6;
+}
+
+.resource-card__status--free {
+    background: rgba(125, 194, 75, 0.10);
+    color: #7dc24b;
+    padding: 0.25em 0.75em;
+    border-radius: var(--sk-r);
+    font-family: var(--sk-head);
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    border: 1px solid rgba(125,194,75,0.18);
+}
+
+.resource-card__status--paid {
+    background: rgba(212, 168, 67, 0.10);
+    color: #d4a843;
+    padding: 0.25em 0.75em;
+    border-radius: var(--sk-r);
+    font-family: var(--sk-head);
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    border: 1px solid rgba(212,168,67,0.18);
+}
+
+@media only screen and (max-width: 600px) {
+    .resource-card__status--free,
+    .resource-card__status--paid { display: none; }
+}
+
+
+/* ===================================================================
+ * 26. Site ribbon — fixed vertical nav dots for non-home sk-pages
+ * =================================================================== */
+.site-ribbon {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 490;
+}
+
+.site-ribbon ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    align-items: center;
+}
+
+/* Share ribbon-dot styles — works for both .section-ribbon (home) and .site-ribbon */
+.site-ribbon .ribbon-dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease,
+                border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-theme="light"] .site-ribbon .ribbon-dot {
+    background: rgba(0, 0, 0, 0.18);
+    border-color: rgba(0, 0, 0, 0.14);
+}
+
+.site-ribbon .ribbon-dot:hover {
+    background: var(--sk-accent);
+    border-color: var(--sk-accent);
+    transform: scale(1.5);
+    box-shadow: 0 0 10px var(--sk-accent-glow);
+    text-decoration: none;
+}
+
+.site-ribbon .ribbon-dot.active {
+    background: var(--sk-accent);
+    border-color: var(--sk-accent);
+    transform: scale(1.4);
+    box-shadow: 0 0 8px var(--sk-accent-glow);
+}
+
+.site-ribbon .ribbon-label {
+    position: absolute;
+    right: calc(100% + 1rem);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--sk-head);
+    font-size: 1.0rem;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    color: var(--sk-text-dim);
+    background: var(--sk-surface);
+    border: 1px solid var(--sk-border-sub);
+    padding: 0.3rem 0.9rem;
+    border-radius: 0.35rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.site-ribbon .ribbon-dot:hover .ribbon-label {
+    opacity: 1;
+}
+
+@media screen and (max-width: 900px) {
+    .site-ribbon { display: none; }
 }
