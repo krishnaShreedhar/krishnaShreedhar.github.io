@@ -169,7 +169,7 @@
                 <div class="home-about__photo-frame">
                     <img class="home-about__photo"
                          src="images/shree_profile_pic.jpg"
-                         alt="Shreedhar Kodate smiling">
+                         alt=""> <!-- TODO: Update alt text later -->
                 </div>
 
                 <p class="home-about__lead">
@@ -182,12 +182,11 @@
 
                 <!-- Fun personality badges -->
                 <div class="interest-badges" role="list" aria-label="Interests">
+                    <span class="interest-badge" role="listitem">🤖 AI/ML</span>
                     <span class="interest-badge" role="listitem">🌌 Galaxies</span>
                     <span class="interest-badge" role="listitem">⚫ Black Holes</span>
-                    <span class="interest-badge" role="listitem">🏔️ Yosemite</span>
-                    <span class="interest-badge" role="listitem">🌿 National Parks</span>
-                    <span class="interest-badge" role="listitem">🤖 Machine Learning</span>
-                    <span class="interest-badge" role="listitem">📐 Linear Algebra</span>
+                    <span class="interest-badge" role="listitem">🏔️ Yosemite National Park</span>
+                    <span class="interest-badge" role="listitem"> Lego</span>
                 </div>
 
             </div>
@@ -204,7 +203,7 @@
                             <span>
                                 <a href="https://www.linkedin.com/in/shreedhar-kodate/"
                                    target="_blank" rel="noopener noreferrer">
-                                    Shreedhar Shreeshail Kodate
+                                    Shreedhar Kodate
                                 </a>
                             </span>
                         </li>
@@ -222,7 +221,7 @@
                         </li>
                         <li>
                             <strong>Location</strong>
-                            <span>Oakland, CA · US</span>
+                            <span>San Francisco, CA, US</span>
                         </li>
                     </ul>
                 </div>
@@ -231,16 +230,17 @@
                 <div class="home-about__block">
                     <p class="home-about__block-label">What I work with</p>
                     <div class="skill-tags" role="list" aria-label="Technical skills">
-                        <span class="skill-tag" role="listitem">Machine Learning</span>
+                        <span class="skill-tag" role="listitem">Large-scale Machine Learning</span>
+                        <span class="skill-tag" role="listitem">Computer Vision</span>
                         <span class="skill-tag" role="listitem">Deep Learning</span>
+                        <span class="skill-tag" role="listitem">Google Cloud</span>
+                        <span class="skill-tag" role="listitem">NLP</span>
+                        <span class="skill-tag" role="listitem">MLOps</span>
                         <span class="skill-tag" role="listitem">Python</span>
                         <span class="skill-tag" role="listitem">PyTorch</span>
                         <span class="skill-tag" role="listitem">SQL</span>
-                        <span class="skill-tag" role="listitem">Google Cloud</span>
-                        <span class="skill-tag" role="listitem">Computer Vision</span>
-                        <span class="skill-tag" role="listitem">NLP</span>
-                        <span class="skill-tag" role="listitem">MLOps</span>
-                        <span class="skill-tag" role="listitem">SparkML</span>
+                        <span class="skill-tag" role="listitem">PyTest</span>
+                        <span class="skill-tag" role="listitem">Claude Code</span>
                     </div>
                 </div>
 
@@ -279,36 +279,34 @@
         </div>
 
         <div class="journey-track" role="list" aria-label="Career highlights">
-
             <div class="journey-item journey-item--work" role="listitem">
                 <div class="journey-card">
                     <div class="journey-card__top">
-                        <span class="journey-card__period">Aug 2021 – May 2023</span>
-                        <span class="journey-card__type">Work &amp; Research</span>
+                        <span class="journey-card__period">Jan 2024 – Present</span>
+                        <span class="journey-card__type">Work</span>
                     </div>
-                    <h3>Applied ML Research Assistant</h3>
-                    <p class="journey-card__org">Worcester Polytechnic Institute</p>
+                    <h3>Senior Software Engineer</h3>
+                    <p class="journey-card__org">Renesas Electronics America Inc.</p>
                     <p class="journey-card__desc">
-                        MLOps, distributed deep learning on HPC, multimodal research across
-                        audio, video, and text — published in IEEE CASE 2023.
+                        MLOps, Synthetic data generation and quality assurance, Vision Language Action (VLA) model
+                        fine-tuning and inference, Optimization and hardware-in-the-loop model verification.
                     </p>
                 </div>
             </div>
 
-            <div class="journey-item journey-item--work" role="listitem">
-                <div class="journey-card">
-                    <div class="journey-card__top">
-                        <span class="journey-card__period">Aug – Dec 2022</span>
-                        <span class="journey-card__type">Internship</span>
-                    </div>
-                    <h3>Machine Learning Intern — Biotechnology</h3>
-                    <p class="journey-card__org">Openwater.cc &middot; San Francisco, CA</p>
-                    <p class="journey-card__desc">
-                        Self-supervised one-shot head segmentation for MRI-based stroke
-                        detection — a model that could change more than a million lives.
-                    </p>
-                </div>
-            </div>
+<!--            <div class="journey-item journey-item&#45;&#45;work" role="listitem">-->
+<!--                <div class="journey-card">-->
+<!--                    <div class="journey-card__top">-->
+<!--                        <span class="journey-card__period">Aug 2021 – May 2023</span>-->
+<!--                        <span class="journey-card__type">Work &amp; Research</span>-->
+<!--                    </div>-->
+<!--                    <h3>Applied ML Research Assistant</h3>-->
+<!--                    <p class="journey-card__org">Worcester Polytechnic Institute</p>-->
+<!--                    <p class="journey-card__desc">-->
+<!--                        MLOps, distributed deep learning on HPC, multimodal research-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="journey-item journey-item--edu" role="listitem">
                 <div class="journey-card">
@@ -319,8 +317,12 @@
                     <h3>M.S. in Data Science</h3>
                     <p class="journey-card__org">Worcester Polytechnic Institute</p>
                     <p class="journey-card__desc">
-                        Research focus on applying ML &amp; deep learning to education,
-                        medicine, autonomous vehicles, and robotics.
+                        Research focus on applying ML and computer vision in applications like
+                        medicine, autonomous vehicles, and robotics, published in
+                        <a href="https://ieeexplore.ieee.org/abstract/document/10260647" target="_blank"
+                           rel="noopener noreferrer">
+                            IEEE CASE 2023
+                        </a>.
                     </p>
                 </div>
             </div>
@@ -328,7 +330,7 @@
             <div class="journey-item journey-item--work" role="listitem">
                 <div class="journey-card">
                     <div class="journey-card__top">
-                        <span class="journey-card__period">Feb – Jul 2021</span>
+                        <span class="journey-card__period">Feb 2021 – Jul 2021</span>
                         <span class="journey-card__type">Work</span>
                     </div>
                     <h3>Senior Machine Learning Engineer</h3>
@@ -336,6 +338,20 @@
                     <p class="journey-card__desc">
                         OpenCV augmentation pipeline + model-assisted labelling that boosted
                         image classification accuracy by 20% across 500 classes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="journey-item journey-item--work" role="listitem">
+                <div class="journey-card">
+                    <div class="journey-card__top">
+                        <span class="journey-card__period">Jan 2019 – Jul 2020</span>
+                        <span class="journey-card__type">Work</span>
+                    </div>
+                    <h3>Machine Learning Engineer</h3>
+                    <p class="journey-card__org">Blue Yonder (Yantriks)</p>
+                    <p class="journey-card__desc">
+                        Time-series forecasting in retail domain, large-scale software engineering.
                     </p>
                 </div>
             </div>
@@ -428,7 +444,7 @@
 
             <div class="home-footer__brand">
                 <span class="home-footer__logo">SK</span>
-                <span class="home-footer__tagline">somewhere between the stars and Half Dome</span>
+                <span class="home-footer__tagline">Somewhere between the Stars and the Half Dome</span>
             </div>
 
             <ul class="home-footer__social" aria-label="Social links">
