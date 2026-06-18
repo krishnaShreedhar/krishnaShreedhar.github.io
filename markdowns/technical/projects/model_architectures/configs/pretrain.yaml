@@ -1,0 +1,49 @@
+pretrain:
+  # --- Data ---
+  dataset_name: "conceptual_captions"  # HuggingFace dataset id
+  data_root: "/data/pretrain"          # Local cache / extracted data root
+  train_split: "train"
+  val_split: "validation"
+  max_train_samples: null              # null = use full dataset
+  max_val_samples: 5000
+
+  # --- Training ---
+  output_dir: "/workspace/outputs/pretrain"
+  num_epochs: 30
+  batch_size_per_gpu: 64
+  gradient_accumulation_steps: 2      # Effective batch = 64 * 2 * 2 GPUs = 256
+  num_workers: 8
+  pin_memory: true
+
+  # --- Optimizer ---
+  optimizer: "adamw"
+  learning_rate: 1.0e-4
+  weight_decay: 0.05
+  beta1: 0.9
+  beta2: 0.95
+  eps: 1.0e-8
+  grad_clip: 1.0
+
+  # --- Scheduler ---
+  scheduler: "cosine_with_warmup"
+  warmup_steps: 2000
+  min_lr_ratio: 0.1
+
+  # --- Mixed Precision ---
+  fp16: false
+  bf16: true                           # H200 supports BF16
+
+  # --- Logging ---
+  log_level: "INFO"
+  log_interval: 50                     # Steps between log entries
+  wandb_project: "small-vlm-pretrain"
+  wandb_run_name: null                 # null = auto-generated
+
+  # --- Checkpointing ---
+  save_interval: 1000                  # Save every N steps
+  keep_last_n_checkpoints: 3
+  resume_from_checkpoint: null         # Path to checkpoint or null
+
+  # --- Distributed ---
+  num_gpus: 2
+  ddp_find_unused_parameters: false

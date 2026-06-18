@@ -1,0 +1,25 @@
+logging:
+  level: DEBUG
+  file: 22_cudnn_algorithm_selection.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cudnn_algorithm_selection"
+  N: 8
+  C: 64
+  H: 56
+  W: 56
+  K: 128
+  kH: 3
+  kW: 3
+  pad_h: 1
+  pad_w: 1
+  stride_h: 1
+  stride_w: 1
+  dilation_h: 1
+  dilation_w: 1
+  layout: NCHW
+  time_limit_ms: 1000.0   # per-algorithm time budget for benchmarking
+  num_algo_perf_runs: 5   # timing repeats per algorithm

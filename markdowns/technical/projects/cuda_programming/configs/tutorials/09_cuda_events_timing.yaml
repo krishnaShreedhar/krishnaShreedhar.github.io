@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 09_cuda_events_timing.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cuda_events_timing"
+  N: 4194304           # 4M float elements
+  num_iterations: 100  # iterations for statistics (mean/std)
+  warmup_iterations: 5 # initial iterations to discard

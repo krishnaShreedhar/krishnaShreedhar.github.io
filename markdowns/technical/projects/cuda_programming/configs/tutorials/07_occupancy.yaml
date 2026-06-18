@@ -1,0 +1,15 @@
+logging:
+  level: DEBUG
+  file: 07_occupancy.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "occupancy"
+  # kernel_type: light (few regs) | heavy (many regs) | smem (large shared mem)
+  kernel_types: [light, heavy, smem]
+  block_sizes: [32, 64, 128, 256, 512, 1024]
+  shared_mem_per_block: 8192    # bytes for smem kernel variant
+  N: 1048576
+  num_iterations: 10

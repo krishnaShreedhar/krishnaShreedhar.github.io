@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  rl_envs:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: rl_envs:latest
+    container_name: rl_envs
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    volumes:
+      - type: bind
+        source: ../src
+        target: /workspace/rl_envs/src
+      - type: bind
+        source: ../configs
+        target: /workspace/rl_envs/configs
+      - type: bind
+        source: ../logs
+        target: /workspace/rl_envs/logs
+      - type: bind
+        source: ../docs
+        target: /workspace/rl_envs/docs
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+  # ROS2 Humble service for autonomous vehicle experiments
+  ros2:
+    image: osrf/ros:humble-desktop
+    container_name: rl_ros2
+    environment:
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - type: bind
+        source: ../src
+        target: /ros_ws/rl_envs/src
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    network_mode: host

@@ -1,0 +1,43 @@
+logging:
+  level: INFO
+  log_file: logs/pandas_pyspark.log
+  max_bytes: 104857600
+  backup_count: 5
+
+data:
+  random_seed: 42
+  num_rows: 100000
+  num_partitions: 4
+  output_dir: outputs/
+
+spark:
+  app_name: PandasPySparkDemo
+  master: local[4]
+  executor_memory: 4g
+  executor_cores: 2
+  shuffle_partitions: 200
+  adaptive_enabled: true
+  broadcast_threshold_mb: 10
+  arrow_enabled: true
+
+pandas:
+  chunksize: 10000
+  low_memory: false
+  category_threshold: 50  # use category dtype if unique values < this
+
+window:
+  rolling_window: 7
+  ewm_span: 7
+
+ml_pipeline:
+  train_ratio: 0.8
+  cv_folds: 3
+  parallelism: 2
+  max_depth_options: [3, 5, 7]
+  step_size_options: [0.05, 0.1]
+
+data_quality:
+  null_threshold: 0.05
+  min_age: 0
+  max_age: 120
+  min_revenue: 0

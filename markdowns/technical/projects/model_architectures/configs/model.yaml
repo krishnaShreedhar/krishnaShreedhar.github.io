@@ -1,0 +1,33 @@
+model:
+  # --- Vision Encoder (ViT-Small-like) ---
+  image_size: 224          # Input image resolution (H x W)
+  patch_size: 16           # Each patch is 16x16 pixels → 196 patches for 224x224
+  in_channels: 3
+  vision_hidden_dim: 384
+  vision_num_heads: 6
+  vision_num_layers: 6
+  vision_mlp_ratio: 4.0
+  vision_dropout: 0.0
+  vision_attn_dropout: 0.0
+
+  # --- Vision-Language Projection (MLP connector) ---
+  projection_hidden_dim: 768  # Intermediate MLP dim
+
+  # --- Language Decoder (GPT-2-small-like) ---
+  vocab_size: 50257        # GPT-2 BPE tokenizer vocabulary size
+  max_seq_len: 128         # Maximum caption token length
+  lang_hidden_dim: 384
+  lang_num_heads: 6
+  lang_num_layers: 6
+  lang_mlp_ratio: 4.0
+  lang_dropout: 0.1
+  lang_attn_dropout: 0.0
+  use_cross_attention: true  # Cross-attend to vision tokens in decoder
+
+  # --- Special Tokens ---
+  bos_token_id: 50256      # <|endoftext|> used as BOS in GPT-2
+  eos_token_id: 50256
+  pad_token_id: 50256
+
+  # --- Derived (do not edit manually) ---
+  num_vision_tokens: 196   # (image_size / patch_size)^2

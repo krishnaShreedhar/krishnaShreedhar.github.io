@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "onnx-graph-optimizations"
+version = "0.1.0"
+description = "ONNX graph optimization techniques: export, inspect, fuse, and benchmark ONNX models with ONNX Runtime"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Core deep learning (PyTorch export)
+    "torch>=2.3.0",
+    "torchvision>=0.18.0",
+
+    # ONNX ecosystem
+    "onnx>=1.16.0",
+    "onnxruntime>=1.18.0",         # CPU; use onnxruntime-gpu for CUDA
+
+    # sklearn → ONNX
+    "scikit-learn>=1.5.0",
+    "skl2onnx>=1.17.0",
+
+    # Scientific computing
+    "numpy>=1.26.0",
+    "pandas>=2.2.0",
+
+    # Visualization
+    "matplotlib>=3.9.0",
+
+    # Configuration
+    "pyyaml>=6.0.1",
+]
+
+[project.optional-dependencies]
+notebook = [
+    "jupyter>=1.1.0",
+    "ipykernel>=6.29.5",
+    "seaborn>=0.13.0",
+]
+gpu = [
+    # Replace onnxruntime with the GPU build:
+    # pip install onnxruntime-gpu
+]
+dev = [
+    "ruff>=0.5.0",
+    "pytest>=8.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 11_pinned_memory.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "pinned_memory"
+  # Transfer sizes in MB to test
+  sizes_mb: [1, 4, 16, 64, 256, 512]
+  num_iterations: 20

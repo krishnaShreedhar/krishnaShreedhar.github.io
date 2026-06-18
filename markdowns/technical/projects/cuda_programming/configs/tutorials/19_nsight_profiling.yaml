@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 19_nsight_profiling.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "nsight_profiling"
+  N: 4194304
+  num_phases: 4        # number of NVTX-annotated phases
+  num_iterations: 5

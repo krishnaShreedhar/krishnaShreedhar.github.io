@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  cuda_tutorials:
+    build:
+      context: ..                  # project root (one level up from docker/)
+      dockerfile: docker/Dockerfile
+    image: cuda_tutorials:latest
+    container_name: cuda_tutorials
+
+    # NVIDIA GPU runtime — requires nvidia-container-toolkit
+    runtime: nvidia
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,compat32
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              # Uncomment to pin to specific GPU indices:
+              # device_ids: ["0", "1"]
+
+    volumes:
+      # Mount source for live editing (no rebuild on code changes)
+      - type: bind
+        source: ../src
+        target: /workspace/cuda_programming/src
+        read_only: false
+      # Mount configs
+      - type: bind
+        source: ../configs
+        target: /workspace/cuda_programming/configs
+        read_only: false
+      # Persist logs on the host
+      - type: bind
+        source: ../logs
+        target: /workspace/cuda_programming/logs
+        read_only: false
+      # Persist build artifacts
+      - type: volume
+        source: build_cache
+        target: /workspace/cuda_programming/build
+
+    # Keep container running for interactive use
+    stdin_open: true
+    tty: true
+
+    # Default command — override with: docker-compose run cuda_tutorials ./tutorial_01_...
+    command: /bin/bash
+
+volumes:
+  build_cache:
+    driver: local

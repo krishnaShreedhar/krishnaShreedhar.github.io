@@ -1,0 +1,59 @@
+logging:
+  level: INFO
+  log_file: logs/kafka_event_driven.log
+  max_bytes: 104857600
+  backup_count: 5
+
+kafka:
+  bootstrap_servers: "localhost:9092"
+  use_mock: true
+
+producer:
+  acks: all
+  enable_idempotence: true
+  linger_ms: 5
+  batch_size: 65536
+  compression_type: lz4
+  retries: 2147483647
+  max_in_flight_requests: 5
+
+consumer:
+  group_id: demo-consumer-group
+  auto_offset_reset: earliest
+  enable_auto_commit: false
+  max_poll_records: 500
+  session_timeout_ms: 30000
+  heartbeat_interval_ms: 10000
+
+topics:
+  user_events:
+    partitions: 4
+    replication_factor: 1
+    retention_ms: 604800000
+  predictions:
+    partitions: 4
+    replication_factor: 1
+  monitoring:
+    partitions: 2
+    replication_factor: 1
+  dlq:
+    partitions: 1
+    replication_factor: 1
+
+event_patterns:
+  saga_timeout_s: 30
+  outbox_poll_interval_s: 1
+  dlq_max_retries: 3
+  dlq_backoff_base_s: 2.0
+
+ml_pipeline:
+  feature_window_s: 86400
+  model_v2_traffic_pct: 20
+  monitoring_sample_rate: 1.0
+
+streaming:
+  window_size_s: 300
+  slide_interval_s: 60
+  session_gap_s: 30
+  lag_alert_threshold: 1000
+  num_events_to_generate: 200

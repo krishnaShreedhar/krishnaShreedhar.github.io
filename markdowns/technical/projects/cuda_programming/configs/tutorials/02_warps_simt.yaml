@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 02_warps_simt.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "warps_simt"
+  N: 2097152           # 2M elements
+  divergence_stride: 32  # stride at which branch alternates (32 = warp boundary = no divergence, 1 = max divergence)
+  num_iterations: 20

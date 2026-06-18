@@ -1,0 +1,28 @@
+logging:
+  level: DEBUG
+  format: "%(asctime)s [%(levelname)s] %(name)s — %(message)s"
+  file: "logs/kv_cache.log"
+
+gpu:
+  device: "cuda:0"
+
+model:
+  vocab_size: 4096
+  d_model: 512
+  num_heads: 8
+  num_kv_heads: 8        # set < num_heads for grouped-query attention
+  num_layers: 6
+  d_ff: 2048
+  max_seq_len: 1024
+  head_dim: 64           # d_model / num_heads
+
+kv_cache:
+  max_batch_size: 4
+  max_seq_len: 1024
+  dtype: "bfloat16"      # cache precision
+
+inference:
+  prompt_tokens: 64      # number of prefill tokens
+  max_new_tokens: 128    # tokens to generate
+  temperature: 1.0
+  benchmark_iters: 5     # runs for throughput measurement

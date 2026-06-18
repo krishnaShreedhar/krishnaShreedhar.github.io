@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  quantization-lab:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: quantization-deep-learning:latest
+    container_name: quantization_lab
+    ports:
+      - "8888:8888"
+    volumes:
+      # Mount project source for live editing
+      - ../src:/workspace/src:ro
+      - ../config.yaml:/workspace/config.yaml:ro
+      # Mount output directories for persistence between runs
+      - ../logs:/workspace/logs
+      - ../outputs:/workspace/outputs
+    environment:
+      - PYTHONPATH=/workspace
+      - PYTHONUNBUFFERED=1
+      # Use qnnpack for ARM/Linux compatibility
+      - TORCH_QUANTIZATION_ENGINE=qnnpack
+    working_dir: /workspace
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/api"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s

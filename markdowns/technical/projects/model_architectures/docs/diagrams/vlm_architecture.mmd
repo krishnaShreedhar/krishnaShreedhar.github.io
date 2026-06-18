@@ -1,0 +1,43 @@
+%%{init: {"theme": "default"}}%%
+flowchart TD
+    subgraph INPUT["Input"]
+        IMG["Image\n(B, 3, 224, 224)"]
+        TXT["Caption tokens\n(B, T)  [BOS, w1, w2, …]"]
+    end
+
+    subgraph VE["Vision Encoder  (ViT-Small)"]
+        direction TB
+        PE["PatchEmbedding\nConv2d 16×16 stride 16\n→ (B, 196, 384)"]
+        CLS["Prepend [CLS] token\n→ (B, 197, 384)"]
+        POSV["+ Positional Embedding\n(learnable, 197 × 384)"]
+        VB1["ViTBlock × 6\nLayerNorm → MHSA → Add\nLayerNorm → FFN  → Add"]
+        LNV["LayerNorm"]
+        PE --> CLS --> POSV --> VB1 --> LNV
+    end
+
+    subgraph PROJ["Vision Projection  (MLP connector)"]
+        direction TB
+        FC1["Linear 384 → 768 + GELU"]
+        FC2["Linear 768 → 384"]
+        FC1 --> FC2
+    end
+
+    subgraph LD["Language Decoder  (GPT-small)"]
+        direction TB
+        TE["Token Embedding\n(vocab=50257, dim=384)"]
+        POSL["+ Positional Embedding\n(learnable, 128 × 384)"]
+        DB["DecoderBlock × 6\n① LayerNorm → Causal MHSA → Add\n② LayerNorm → Cross-Attn  → Add\n③ LayerNorm → FFN         → Add"]
+        LNL["LayerNorm"]
+        LMH["LM Head  Linear 384 → 50257\n(weight-tied with Token Embedding)"]
+        TE --> POSL --> DB --> LNL --> LMH
+    end
+
+    subgraph OUTPUT["Output"]
+        LOGITS["Logits  (B, T-1, 50257)\nCross-entropy vs. target tokens\n(teacher-forced training)"]
+    end
+
+    IMG --> VE
+    LNV -- "patch_tokens\n(B, 196, 384)" --> PROJ
+    PROJ -- "proj_tokens\n(B, 196, 384)" --> DB
+    TXT --> TE
+    LMH --> LOGITS

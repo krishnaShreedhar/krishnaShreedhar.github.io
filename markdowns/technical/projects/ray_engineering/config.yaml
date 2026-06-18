@@ -1,0 +1,38 @@
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
+  log_file: logs/ray_engineering.log
+  max_bytes: 104857600  # 100 MB
+  backup_count: 5
+
+ray:
+  init:
+    num_cpus: 4
+    num_gpus: 0
+    object_store_memory: 1073741824  # 1GB
+
+core_primitives:
+  batch_size: 100
+  num_workers: 4
+  chunk_size: 10
+
+distributed_training:
+  num_workers: 2
+  use_gpu: false
+  epochs: 5
+  learning_rate: 0.001
+  batch_size: 64
+  num_to_keep_checkpoints: 3
+
+hyperparameter_tuning:
+  num_samples: 20
+  max_epochs: 10
+  grace_period: 2
+  reduction_factor: 3
+  metric: accuracy
+  mode: max
+
+model_serving:
+  num_replicas: 2
+  max_concurrent_queries: 10
+  max_batch_size: 32
+  batch_wait_timeout_s: 0.05

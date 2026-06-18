@@ -1,0 +1,14 @@
+logging:
+  level: DEBUG
+  file: 15_tiled_matmul.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "tiled_matmul"
+  M: 2048              # rows of A, rows of C
+  N: 2048              # cols of B, cols of C
+  K: 2048              # cols of A, rows of B
+  tile_size: 32        # shared memory tile dimension
+  num_iterations: 10

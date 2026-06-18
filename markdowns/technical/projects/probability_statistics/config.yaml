@@ -1,0 +1,35 @@
+logging:
+  level: INFO
+  log_file: logs/probability_statistics.log
+  max_bytes: 104857600
+  backup_count: 5
+
+data:
+  sample_size: 1000
+  random_seed: 42
+  output_dir: outputs/
+
+descriptive_stats:
+  trimmed_mean_pct: 0.05
+  percentiles: [0.10, 0.25, 0.50, 0.75, 0.90, 0.95, 0.99]
+  distribution_bins: 50
+
+hypothesis_testing:
+  alpha: 0.05
+  power: 0.80
+  bootstrap_iterations: 10000
+  effect_size: 0.02
+  baseline_rate: 0.10
+  alternative: two-sided
+
+bayesian_ab:
+  prior_alpha: 1
+  prior_beta: 1
+  monte_carlo_samples: 100000
+  credible_interval: 0.95
+
+sql_analytics:
+  database: ":memory:"
+  histogram_bins: 20
+  iqr_multiplier: 1.5
+  fdr_threshold: 0.05

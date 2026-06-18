@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+  # ── JupyterLab + Pandas + PySpark ─────────────────────────────────────────
+  pandas-pyspark-lab:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: pandas_pyspark_lab
+    ports:
+      - "8888:8888"      # JupyterLab UI
+      - "4040:4040"      # Spark UI (driver web UI)
+    volumes:
+      # Mount source so edits are reflected without rebuild
+      - ../src:/app/src
+      - ../config.yaml:/app/config.yaml
+      # Persist logs and outputs outside container
+      - ../logs:/app/logs
+      - ../outputs:/app/outputs
+    environment:
+      - PYTHONPATH=/app/src
+      - PYSPARK_PYTHON=python3
+      - PYSPARK_DRIVER_PYTHON=python3
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+    # Increase shared memory for Spark
+    shm_size: "2gb"
+    restart: unless-stopped
+
+  # ── One-shot runner: execute all Python modules in sequence ───────────────
+  pandas-pyspark-runner:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: pandas_pyspark_runner
+    volumes:
+      - ../src:/app/src
+      - ../config.yaml:/app/config.yaml
+      - ../logs:/app/logs
+      - ../outputs:/app/outputs
+    environment:
+      - PYTHONPATH=/app/src
+      - PYSPARK_PYTHON=python3
+      - PYSPARK_DRIVER_PYTHON=python3
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+    shm_size: "2gb"
+    # Runs all demonstration scripts sequentially and exits
+    command: >
+      bash -c "
+        set -e
+        echo '=== Running pandas_core modules ==='
+        python /app/src/pandas_core/dataframe_operations.py
+        python /app/src/pandas_core/groupby_patterns.py
+        python /app/src/pandas_core/time_series_ops.py
+        echo '=== Running pandas_optimization modules ==='
+        python /app/src/pandas_optimization/performance_patterns.py
+        python /app/src/pandas_optimization/dtype_optimizer.py
+        python /app/src/pandas_optimization/chunked_processing.py
+        echo '=== Running data_quality module ==='
+        python /app/src/data_quality/quality_checks.py
+        echo '=== Running pyspark_core modules ==='
+        python /app/src/pyspark_core/dataframe_ops.py
+        python /app/src/pyspark_core/window_functions.py
+        echo '=== Running pyspark_optimization modules ==='
+        python /app/src/pyspark_optimization/optimization_patterns.py
+        python /app/src/pyspark_optimization/pandas_udf_examples.py
+        echo '=== Running ml_pipelines modules ==='
+        python /app/src/ml_pipelines/feature_pipeline.py
+        python /app/src/ml_pipelines/model_pipeline.py
+        echo '=== All modules completed successfully ==='
+      "
+    profiles:
+      - runner

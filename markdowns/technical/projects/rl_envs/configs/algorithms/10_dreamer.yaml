@@ -1,0 +1,46 @@
+algorithm: dreamer
+use_case: autonomous_vehicle
+
+logging:
+  level: INFO
+
+training:
+  max_episodes: 5000
+  world_model_lr: 0.0006
+  actor_lr: 0.00008
+  critic_lr: 0.0002
+  gamma: 0.997
+  lambda_: 0.95
+  horizon: 15
+  batch_size: 16
+  seq_len: 50
+  replay_start: 500
+  kl_scale: 1.0
+  free_nats: 3.0
+
+buffer:
+  capacity: 100000
+
+env:
+  name: vehicle_env
+  num_obstacles: 5
+  obstacle_radius: 0.08
+  goal_threshold: 0.05
+  max_speed: 0.05
+  max_steering: 0.5
+  max_accel: 0.1
+  dt: 0.1
+  vehicle_radius: 0.03
+  reward_goal: 10.0
+  reward_collision: -1.0
+  reward_step: -0.001
+  reward_progress_scale: 0.1
+  max_episode_steps: 500
+
+model:
+  obs_dim: 7
+  action_dim: 2
+  latent_dim: 32
+  hidden_dim: 200
+  embed_dim: 50
+  hidden_dims: [400, 400]

@@ -1,0 +1,21 @@
+[project]
+name = "ray-engineering"
+version = "0.1.0"
+description = "Ray distributed computing examples for deep learning"
+requires-python = ">=3.11"
+dependencies = [
+    "ray[all]>=2.9.0",
+    "torch>=2.0.0",
+    "pyyaml>=6.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "optuna>=3.0.0",
+    "matplotlib>=3.7.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,75 @@
+tuning:
+  # --- Study ---
+  study_name: "small_vlm_hpt"
+  storage: "sqlite:////workspace/outputs/hpt/optuna.db"
+  direction: "maximize"               # Maximize validation CIDEr
+  n_trials: 50
+  n_jobs: 1                           # Parallel Optuna workers (1 = sequential)
+  timeout: null                       # Max seconds for study (null = unlimited)
+
+  # --- Pruning ---
+  pruner: "median"                    # "median", "hyperband", or "none"
+  pruner_n_startup_trials: 5
+  pruner_n_warmup_steps: 500
+
+  # --- Search Space ---
+  search_space:
+    learning_rate:
+      type: "loguniform"
+      low: 1.0e-5
+      high: 5.0e-4
+
+    batch_size_per_gpu:
+      type: "categorical"
+      choices: [16, 32, 64]
+
+    vision_num_layers:
+      type: "int"
+      low: 4
+      high: 8
+
+    lang_num_layers:
+      type: "int"
+      low: 4
+      high: 8
+
+    vision_hidden_dim:
+      type: "categorical"
+      choices: [256, 384, 512]
+
+    lang_hidden_dim:
+      type: "categorical"
+      choices: [256, 384, 512]
+
+    lang_dropout:
+      type: "uniform"
+      low: 0.0
+      high: 0.2
+
+    weight_decay:
+      type: "loguniform"
+      low: 1.0e-4
+      high: 1.0e-1
+
+    warmup_steps:
+      type: "int"
+      low: 100
+      high: 2000
+      step: 100
+
+  # --- Training Budget Per Trial ---
+  trial:
+    num_epochs: 3
+    max_train_samples: 20000
+    max_val_samples: 2000
+    gradient_accumulation_steps: 4
+    num_gpus: 2
+    bf16: true
+
+  # --- Data ---
+  dataset_name: "coco_captions"
+  data_root: "/data/coco"
+
+  # --- Output ---
+  output_dir: "/workspace/outputs/hpt"
+  log_level: "INFO"

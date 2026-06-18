@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "model-architectures"
+version = "0.1.0"
+description = "Minimal, explainable Small VLM (Vision-Language Model) for image captioning"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Core deep learning
+    "torch>=2.4.0",
+    "torchvision>=0.19.0",
+    # NLP / tokenisation
+    "transformers>=4.44.0",
+    # Dataset loading
+    "datasets>=2.21.0",
+    # Tensor utilities
+    "einops>=0.8.0",
+    # Image loading
+    "Pillow>=10.4.0",
+    # Config
+    "pyyaml>=6.0.1",
+    # Hyperparameter tuning
+    "optuna>=3.6.1",
+    # Distributed / mixed-precision helpers
+    "accelerate>=0.33.0",
+    # Experiment tracking
+    "wandb>=0.17.0",
+    # Progress bars
+    "tqdm>=4.66.5",
+    # Numerical
+    "numpy>=1.26.0",
+    # BLEU metric (NLTK for fallback reward)
+    "nltk>=3.9.0",
+]
+
+[project.optional-dependencies]
+notebook = [
+    "jupyter>=1.1.0",
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.9.0",
+    "seaborn>=0.13.2",
+]
+cider = [
+    # Install separately: pip install pycocoevalcap
+    # https://github.com/tylin/coco-caption
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

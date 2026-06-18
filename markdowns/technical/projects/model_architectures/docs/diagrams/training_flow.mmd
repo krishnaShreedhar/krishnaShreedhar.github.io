@@ -1,0 +1,45 @@
+%%{init: {"theme": "default"}}%%
+flowchart LR
+    DS[("Dataset\nConceptual Captions\n/ COCO")]
+
+    subgraph PRE["① Pre-training  (pretrain.py)"]
+        direction TB
+        P1["Next-token prediction\non image-caption pairs\nLoss: cross-entropy"]
+        P2["30 epochs · LR 1e-4\nCosine + warmup\nBF16 · 2× H200"]
+        P1 --> P2
+    end
+
+    subgraph FT["② Fine-tuning  (finetune.py)"]
+        direction TB
+        F1["Task-specific captioning\non COCO Captions\nLower LR for vision encoder"]
+        F2["10 epochs · LR 2e-5\nVision LR × 0.1\nBF16 · 2× H200"]
+        F1 --> F2
+    end
+
+    subgraph SFT["③a SFT  (rl_sft_trainer.py mode=sft)"]
+        S1["Supervised fine-tuning on\nhigh-quality curated captions\n5 epochs · LR 5e-6"]
+    end
+
+    subgraph RL["③b RL  (rl_sft_trainer.py mode=rl)"]
+        direction TB
+        R1["Sample K=4 captions\nper image (nucleus sampling)"]
+        R2["Score with CIDEr / BLEU-4\nreward"]
+        R3["REINFORCE policy gradient\n+ KL penalty vs. ref model\n+ Entropy bonus"]
+        R1 --> R2 --> R3
+    end
+
+    subgraph INF["④ Inference  (generator.py)"]
+        direction TB
+        I1["Greedy"]
+        I2["Beam Search\n(num_beams=5)"]
+        I3["Nucleus Sampling\n(top-p=0.9)"]
+    end
+
+    subgraph HPT["⑤ Hyperparameter Tuning\n(hyperparameter_tuning.py)"]
+        H1["Optuna study\n50 trials · MedianPruner"]
+        H2["Search: LR, batch size,\nlayer counts, hidden dims,\ndropout, weight decay"]
+        H1 --> H2
+    end
+
+    DS --> PRE --> FT --> SFT & RL --> INF
+    HPT -.->|"best params\nfeed back to"| PRE

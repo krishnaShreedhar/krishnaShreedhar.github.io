@@ -1,0 +1,13 @@
+logging:
+  level: DEBUG
+  file: 05_shared_memory_bank_conflicts.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "shared_memory_bank_conflicts"
+  matrix_size: 4096    # square matrix dimension (must be divisible by tile_size)
+  tile_size: 32        # shared memory tile dimension (warp width)
+  padding: 1           # extra column padding to avoid bank conflicts (0 = no padding, 1 = recommended)
+  num_iterations: 20

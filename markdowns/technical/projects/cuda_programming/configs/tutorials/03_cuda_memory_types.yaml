@@ -1,0 +1,14 @@
+logging:
+  level: DEBUG
+  file: 03_cuda_memory_types.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cuda_memory_types"
+  N: 4194304           # 4M elements (float)
+  num_iterations: 50
+  # access_pattern: sequential | strided | random
+  access_patterns: [sequential, strided, random]
+  stride: 4            # stride for strided access pattern

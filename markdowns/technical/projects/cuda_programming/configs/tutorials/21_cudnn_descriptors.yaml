@@ -1,0 +1,26 @@
+logging:
+  level: DEBUG
+  file: 21_cudnn_descriptors.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cudnn_descriptors"
+  # Convolution parameters
+  N: 8                 # batch size
+  C: 64                # input channels
+  H: 56                # input height
+  W: 56                # input width
+  K: 128               # output channels (filters)
+  kH: 3                # kernel height
+  kW: 3                # kernel width
+  pad_h: 1
+  pad_w: 1
+  stride_h: 1
+  stride_w: 1
+  dilation_h: 1
+  dilation_w: 1
+  # layout: NCHW | NHWC
+  layout: NCHW
+  num_iterations: 20

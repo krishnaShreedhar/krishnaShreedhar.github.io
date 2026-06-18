@@ -1,0 +1,56 @@
+logging:
+  level: INFO
+  log_file: logs/quantization_dl.log
+  max_bytes: 104857600
+  backup_count: 5
+
+model:
+  type: cnn  # cnn or lstm
+  in_channels: 1
+  num_classes: 10
+  input_height: 28
+  input_width: 28
+  hidden_dim: 128
+  output_dir: outputs/models/
+
+data:
+  num_samples: 10000
+  num_calibration_samples: 100
+  batch_size: 32
+  num_workers: 0
+  random_seed: 42
+
+ptq:
+  backend: qnnpack  # qnnpack (ARM) or fbgemm (x86)
+  reduce_range: false
+
+qat:
+  epochs: 3
+  learning_rate: 0.0001
+  weight_decay: 0.00001
+  backend: qnnpack
+
+calibration:
+  percentile: 99.9
+  mse_search_steps: 100
+  mse_alpha_range: [0.8, 1.0]
+  kl_bins: 2048
+  kl_num_quantized_bins: 256
+  moving_average_constant: 0.01
+
+evaluation:
+  benchmark_iterations: 100
+  warmup_iterations: 10
+  batch_size: 1
+  sensitivity_metric: accuracy  # accuracy or loss
+
+quantization_schemes:
+  symmetric_weights: true
+  asymmetric_activations: true
+  per_channel_weights: true
+  per_tensor_activations: true
+
+mixed_precision:
+  sensitive_layer_threshold: 0.01  # keep at FP16 if accuracy drop > this
+  default_dtype: int8
+  sensitive_dtype: float16

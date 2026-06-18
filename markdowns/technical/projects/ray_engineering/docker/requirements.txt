@@ -1,0 +1,7 @@
+ray[all]==2.9.0
+torch>=2.0.0
+pyyaml>=6.0
+numpy>=1.24.0
+pandas>=2.0.0
+optuna>=3.0.0
+matplotlib>=3.7.0

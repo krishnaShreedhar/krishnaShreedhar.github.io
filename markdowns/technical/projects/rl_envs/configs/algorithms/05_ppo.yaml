@@ -1,0 +1,34 @@
+algorithm: ppo
+use_case: vlm_finetuning
+
+logging:
+  level: INFO
+
+training:
+  max_episodes: 3000
+  learning_rate: 0.0003
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_epsilon: 0.2
+  n_epochs: 4
+  n_steps: 128
+  batch_size: 32
+  entropy_coef: 0.01
+  value_loss_coef: 0.5
+  max_grad_norm: 0.5
+
+env:
+  name: vlm_env
+  num_questions: 1000
+  embedding_dim: 128
+  num_choices: 4
+  reward_correct: 1.0
+  reward_wrong: -0.5
+  use_synthetic_data: true
+  max_episode_steps: 1
+
+network:
+  input_dim: 128
+  action_dim: 4
+  hidden_dims: [256, 256]
+  action_space_type: discrete

@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  onnx-optimizer:
+    build:
+      context: ..              # project root (contains config.yaml, src/, etc.)
+      dockerfile: docker/Dockerfile
+    image: onnx-graph-optimizations:latest
+    container_name: onnx_optimizer
+    ports:
+      - "8888:8888"            # Jupyter Notebook
+    volumes:
+      - ..:/workspace          # live-mount project root for development
+      - onnx_logs:/workspace/logs
+      - onnx_outputs:/workspace/outputs
+    environment:
+      - PYTHONPATH=/workspace
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+    # Override to run a specific script instead of Jupyter:
+    # command: ["python", "src/model_exporter/pytorch_exporter.py", "config.yaml"]
+    restart: unless-stopped
+
+volumes:
+  onnx_logs:
+  onnx_outputs:

@@ -1,0 +1,27 @@
+logging:
+  level: DEBUG          # DEBUG | INFO | WARNING | ERROR
+  format: "%(asctime)s [%(levelname)s] %(name)s — %(message)s"
+  file: "logs/gpu_basics.log"
+
+gpu:
+  device_ids: [0, 1]    # H200 GPU indices
+  primary_device: 0
+
+memory:
+  allocation_sizes_mb: [64, 256, 512, 1024, 2048]
+  use_pinned_memory: true
+  memory_fraction: 0.9  # max fraction of GPU memory to use
+
+transfer:
+  tensor_shapes:
+    - [1024, 1024]
+    - [4096, 4096]
+    - [8192, 8192]
+  num_warmup_iters: 5
+  num_benchmark_iters: 20
+  use_cuda_streams: true
+  num_streams: 4
+
+profiler:
+  sample_interval_ms: 100
+  duration_s: 10

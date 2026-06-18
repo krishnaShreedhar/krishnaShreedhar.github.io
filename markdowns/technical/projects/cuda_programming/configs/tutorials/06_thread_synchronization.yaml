@@ -1,0 +1,13 @@
+logging:
+  level: DEBUG
+  file: 06_thread_synchronization.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "thread_synchronization"
+  N: 1048576           # must be power of 2
+  block_size: 256
+  num_iterations: 10
+  run_without_sync: true   # ablation: also run broken version without __syncthreads

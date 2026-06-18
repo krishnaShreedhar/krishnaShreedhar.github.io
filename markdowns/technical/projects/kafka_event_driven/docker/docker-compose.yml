@@ -1,0 +1,96 @@
+version: "3.8"
+
+# -----------------------------------------------------------------------------
+# Kafka Event-Driven Architecture — Docker Compose
+#
+# Services
+# --------
+# zookeeper : Coordination service required by Kafka (bitnami image).
+# kafka     : Apache Kafka broker (bitnami image).
+# app       : The kafka_event_driven Python application.
+#
+# Usage
+# -----
+# With mock broker (no real Kafka needed):
+#   docker build -f docker/Dockerfile -t kafka-event-driven .
+#   docker run kafka-event-driven
+#
+# With real Kafka (set use_mock: false in config.yaml):
+#   docker compose -f docker/docker-compose.yml up
+# -----------------------------------------------------------------------------
+
+services:
+
+  zookeeper:
+    image: bitnami/zookeeper:3.8
+    container_name: kafka_ed_zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ZOO_LOG_LEVEL=WARN
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper_data:/bitnami/zookeeper
+    healthcheck:
+      test: ["CMD-SHELL", "zkServer.sh status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka:
+    image: bitnami/kafka:3.5
+    container_name: kafka_ed_broker
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=1
+      - KAFKA_CFG_NUM_PARTITIONS=4
+      - KAFKA_CFG_LOG_RETENTION_HOURS=168
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LOG_LEVEL=WARN
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka_data:/bitnami/kafka
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      interval: 15s
+      timeout: 10s
+      retries: 8
+      start_period: 30s
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: kafka_ed_app
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      - PYTHONPATH=/app/src
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ../logs:/app/logs
+      - ../config.yaml:/app/config.yaml:ro
+    # Override use_mock in config to use the real Kafka container
+    command: >
+      python -c "
+      import yaml, pathlib;
+      cfg = yaml.safe_load(open('/app/config.yaml'));
+      cfg['kafka']['use_mock'] = False;
+      cfg['kafka']['bootstrap_servers'] = 'kafka:9092';
+      from streaming_analytics.event_processor import main;
+      main()
+      "
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local

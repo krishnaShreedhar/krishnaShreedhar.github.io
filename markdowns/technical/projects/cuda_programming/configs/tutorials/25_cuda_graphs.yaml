@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 25_cuda_graphs.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cuda_graphs"
+  num_kernels: 10       # kernels in the graph
+  N: 1048576            # elements per kernel
+  num_replay_iterations: 100   # how many times to replay the graph

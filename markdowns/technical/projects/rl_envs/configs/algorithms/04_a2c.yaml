@@ -1,0 +1,26 @@
+algorithm: a2c
+use_case: path_planning
+
+logging:
+  level: INFO
+
+training:
+  max_episodes: 2000
+  learning_rate: 0.0003
+  gamma: 0.99
+  n_steps: 20
+  entropy_coef: 0.01
+  value_loss_coef: 0.5
+  max_grad_norm: 0.5
+
+env:
+  name: grid_world
+  grid_size: 10
+  num_obstacles: 10
+  max_episode_steps: 200
+
+network:
+  input_dim: 4
+  action_dim: 4
+  hidden_dims: [128, 128]
+  action_space_type: discrete

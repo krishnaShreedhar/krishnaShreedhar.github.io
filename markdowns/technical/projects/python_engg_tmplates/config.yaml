@@ -1,0 +1,38 @@
+logging:
+  level: INFO
+  log_file: logs/python_engg.log
+  max_bytes: 104857600
+  backup_count: 5
+  queue_size: -1  # unlimited
+
+service:
+  name: python-engg-demo
+  max_workers: 4
+  batch_size: 256
+  gc_threshold: 1000
+
+concurrency:
+  thread_pool_size: 10
+  process_pool_size: 4
+  semaphore_limit: 5
+  async_queue_maxsize: 100
+  rate_limit_rps: 20
+
+collections:
+  lru_cache_size: 1024
+  deque_maxlen: 1000
+  sliding_window_size: 7
+  batch_size: 100
+
+retry:
+  max_attempts: 3
+  backoff_factor: 2.0
+  jitter: true
+
+cache:
+  ttl_seconds: 300
+  max_size: 500
+
+metrics:
+  histogram_maxlen: 1000
+  percentiles: [0.50, 0.90, 0.95, 0.99]

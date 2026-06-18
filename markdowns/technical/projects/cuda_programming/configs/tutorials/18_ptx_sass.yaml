@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 18_ptx_sass.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "ptx_sass"
+  N: 4194304           # 4M elements
+  unroll_factor: 8     # pragma unroll depth
+  num_iterations: 20

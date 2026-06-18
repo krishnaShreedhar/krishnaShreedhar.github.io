@@ -1,0 +1,47 @@
+logging:
+  level: INFO
+  log_file: logs/onnx_optimizations.log
+  max_bytes: 104857600   # 100 MB
+  backup_count: 5
+
+model:
+  output_dir: outputs/models/
+  input_names: ["input"]
+  output_names: ["output"]
+  opset_version: 17
+  dynamic_axes:
+    input:
+      0: batch_size
+
+pytorch_model:
+  in_channels: 1
+  num_classes: 10
+  input_height: 28
+  input_width: 28
+  batch_size: 1
+  hidden_dim: 128
+
+sklearn_model:
+  n_features: 10
+  n_classes: 3
+  n_samples: 1000
+
+optimization:
+  levels:
+    - ORT_DISABLE_ALL
+    - ORT_ENABLE_BASIC
+    - ORT_ENABLE_EXTENDED
+    - ORT_ENABLE_ALL
+  save_optimized: true
+  transformer_model_type: bert   # for transformer-specific optimizations
+
+inference:
+  providers: ["CPUExecutionProvider"]
+  benchmark_iterations: 100
+  warmup_iterations: 10
+  batch_sizes: [1, 4, 8, 16, 32]
+  enable_profiling: false
+
+graph_analysis:
+  print_all_nodes: false
+  max_nodes_to_print: 20

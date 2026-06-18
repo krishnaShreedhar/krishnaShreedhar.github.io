@@ -1,0 +1,109 @@
+version: "3.9"
+
+# Shared GPU configuration for 2x H200 nodes
+x-gpu-config: &gpu-config
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: 2
+            capabilities: [gpu]
+  environment:
+    - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
+    - NCCL_DEBUG=INFO
+    - WANDB_API_KEY=${WANDB_API_KEY:-}
+
+services:
+  # -----------------------------------------------------------------------
+  # Pre-training job
+  # -----------------------------------------------------------------------
+  pretrain:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: small-vlm:latest
+    <<: *gpu-config
+    volumes:
+      - ${DATA_DIR:-/data}:/data
+      - ${OUTPUT_DIR:-/workspace/outputs}:/workspace/outputs
+    command: >
+      torchrun
+        --nproc_per_node=2
+        --rdzv_backend=c10d
+        --rdzv_endpoint=localhost:29500
+        -m src.training.pretrain
+    ipc: host   # Required for shared-memory DataLoader workers across GPUs
+
+  # -----------------------------------------------------------------------
+  # Fine-tuning job
+  # -----------------------------------------------------------------------
+  finetune:
+    image: small-vlm:latest
+    <<: *gpu-config
+    volumes:
+      - ${DATA_DIR:-/data}:/data
+      - ${OUTPUT_DIR:-/workspace/outputs}:/workspace/outputs
+    command: >
+      torchrun
+        --nproc_per_node=2
+        --rdzv_backend=c10d
+        --rdzv_endpoint=localhost:29500
+        -m src.training.finetune
+    ipc: host
+
+  # -----------------------------------------------------------------------
+  # RL/SFT job
+  # -----------------------------------------------------------------------
+  rl_sft:
+    image: small-vlm:latest
+    <<: *gpu-config
+    volumes:
+      - ${DATA_DIR:-/data}:/data
+      - ${OUTPUT_DIR:-/workspace/outputs}:/workspace/outputs
+    command: >
+      torchrun
+        --nproc_per_node=2
+        --rdzv_backend=c10d
+        --rdzv_endpoint=localhost:29500
+        -m src.training.rl_sft_trainer
+    ipc: host
+
+  # -----------------------------------------------------------------------
+  # Inference job (single GPU)
+  # -----------------------------------------------------------------------
+  inference:
+    image: small-vlm:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+      - WANDB_API_KEY=${WANDB_API_KEY:-}
+    volumes:
+      - ${DATA_DIR:-/data}:/data
+      - ${OUTPUT_DIR:-/workspace/outputs}:/workspace/outputs
+    command: python3 -m src.inference.generator
+
+  # -----------------------------------------------------------------------
+  # Hyperparameter tuning job (single GPU per trial)
+  # -----------------------------------------------------------------------
+  tuning:
+    image: small-vlm:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+    volumes:
+      - ${DATA_DIR:-/data}:/data
+      - ${OUTPUT_DIR:-/workspace/outputs}:/workspace/outputs
+    command: python3 -m src.tuning.hyperparameter_tuning

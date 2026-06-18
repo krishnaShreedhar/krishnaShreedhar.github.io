@@ -1,0 +1,59 @@
+rl_sft:
+  mode: "sft"                          # "sft" (supervised fine-tuning) or "rl" (REINFORCE)
+
+  # --- Data ---
+  dataset_name: "coco_captions"
+  data_root: "/data/coco"
+  train_split: "train"
+  val_split: "validation"
+  max_train_samples: null
+  max_val_samples: 2000
+
+  # --- Pretrained Checkpoint ---
+  pretrained_checkpoint: "/workspace/outputs/finetune/checkpoint_best.pt"
+
+  # --- SFT Settings ---
+  sft:
+    output_dir: "/workspace/outputs/sft"
+    num_epochs: 5
+    batch_size_per_gpu: 16
+    gradient_accumulation_steps: 8
+    learning_rate: 5.0e-6
+    weight_decay: 0.01
+    grad_clip: 1.0
+    scheduler: "cosine_with_warmup"
+    warmup_steps: 100
+
+  # --- RL Settings (REINFORCE with BLEU/CIDEr reward) ---
+  rl:
+    output_dir: "/workspace/outputs/rl"
+    num_epochs: 3
+    batch_size_per_gpu: 8
+    gradient_accumulation_steps: 16
+    learning_rate: 1.0e-6
+    grad_clip: 0.5
+    reward_metric: "cider"             # "bleu4", "cider", or "combined"
+    reward_baseline: "running_mean"    # Variance-reduction baseline
+    kl_coeff: 0.01                     # KL penalty to reference model
+    entropy_coeff: 0.001               # Entropy regularization
+    num_rollouts_per_sample: 4         # Captions sampled per image during RL
+    temperature: 1.0                   # Sampling temperature for rollouts
+    top_p: 0.9
+
+  # --- Mixed Precision ---
+  fp16: false
+  bf16: true
+
+  # --- Logging ---
+  log_level: "INFO"
+  log_interval: 10
+  wandb_project: "small-vlm-rl-sft"
+  wandb_run_name: null
+
+  # --- Checkpointing ---
+  save_interval: 100
+  keep_last_n_checkpoints: 3
+
+  # --- Distributed ---
+  num_gpus: 2
+  ddp_find_unused_parameters: false

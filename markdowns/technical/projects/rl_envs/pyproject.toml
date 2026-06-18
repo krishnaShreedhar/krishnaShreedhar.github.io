@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "rl_envs"
+version = "0.1.0"
+description = "Educational reinforcement learning tutorials: 10 algorithms across path planning, autonomous vehicles, and VLM finetuning."
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.4",
+    "torchvision",
+    "numpy",
+    "pyyaml",
+    "gymnasium",
+    "matplotlib",
+    "tensorboard",
+    "transformers",
+    "tqdm",
+    "scipy",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

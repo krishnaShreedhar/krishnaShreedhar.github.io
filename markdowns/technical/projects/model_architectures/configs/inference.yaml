@@ -1,0 +1,34 @@
+inference:
+  # --- Model ---
+  checkpoint_path: "/workspace/outputs/finetune/checkpoint_best.pt"
+  device: "cuda"
+
+  # --- Input ---
+  image_path: null                     # Single image path (or null for batch mode)
+  image_dir: null                      # Directory of images for batch inference
+  output_file: "/workspace/outputs/inference/captions.json"
+
+  # --- Decoding Strategy ---
+  decoding_strategy: "beam_search"     # "greedy", "beam_search", or "nucleus"
+
+  greedy:
+    max_new_tokens: 64
+
+  beam_search:
+    num_beams: 5
+    max_new_tokens: 64
+    length_penalty: 1.0
+    no_repeat_ngram_size: 3
+
+  nucleus:                             # Top-p / top-k sampling
+    max_new_tokens: 64
+    temperature: 0.8
+    top_p: 0.9
+    top_k: 50
+
+  # --- Batching ---
+  batch_size: 16
+  num_workers: 4
+
+  # --- Logging ---
+  log_level: "INFO"

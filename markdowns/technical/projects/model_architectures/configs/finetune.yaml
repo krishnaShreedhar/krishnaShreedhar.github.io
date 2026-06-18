@@ -1,0 +1,54 @@
+finetune:
+  # --- Data ---
+  dataset_name: "coco_captions"        # HuggingFace dataset id
+  data_root: "/data/coco"
+  train_split: "train"
+  val_split: "validation"
+  max_train_samples: null
+  max_val_samples: 5000
+
+  # --- Pretrained Checkpoint ---
+  pretrained_checkpoint: "/workspace/outputs/pretrain/checkpoint_best.pt"
+  freeze_vision_encoder: false         # Fine-tune all parameters
+  vision_encoder_lr_scale: 0.1        # Use 10x lower LR for vision encoder
+
+  # --- Training ---
+  output_dir: "/workspace/outputs/finetune"
+  num_epochs: 10
+  batch_size_per_gpu: 32
+  gradient_accumulation_steps: 4      # Effective batch = 32 * 4 * 2 GPUs = 256
+  num_workers: 8
+  pin_memory: true
+
+  # --- Optimizer ---
+  optimizer: "adamw"
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  beta1: 0.9
+  beta2: 0.999
+  eps: 1.0e-8
+  grad_clip: 1.0
+
+  # --- Scheduler ---
+  scheduler: "cosine_with_warmup"
+  warmup_steps: 200
+  min_lr_ratio: 0.0
+
+  # --- Mixed Precision ---
+  fp16: false
+  bf16: true
+
+  # --- Logging ---
+  log_level: "INFO"
+  log_interval: 20
+  wandb_project: "small-vlm-finetune"
+  wandb_run_name: null
+
+  # --- Checkpointing ---
+  save_interval: 200
+  keep_last_n_checkpoints: 3
+  resume_from_checkpoint: null
+
+  # --- Distributed ---
+  num_gpus: 2
+  ddp_find_unused_parameters: false

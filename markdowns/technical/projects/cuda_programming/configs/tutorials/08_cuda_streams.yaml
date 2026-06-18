@@ -1,0 +1,13 @@
+logging:
+  level: DEBUG
+  file: 08_cuda_streams.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cuda_streams"
+  num_streams: 4
+  chunk_size: 262144   # elements per chunk (float)
+  num_chunks: 16       # total chunks to process
+  num_iterations: 5    # repeat whole experiment

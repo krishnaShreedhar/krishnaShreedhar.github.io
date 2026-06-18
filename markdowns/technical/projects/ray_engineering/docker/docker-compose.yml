@@ -1,0 +1,62 @@
+version: "3.9"
+
+# Ray cluster with one head node and one worker node.
+# Scale workers with: docker compose up --scale ray-worker=4
+
+services:
+  ray-head:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: ray-engineering:latest
+    container_name: ray-head
+    # Expose Ray dashboard and client server ports
+    ports:
+      - "8265:8265"   # Ray Dashboard
+      - "10001:10001" # Ray Client Server
+      - "6379:6379"   # GCS (Redis) port
+    environment:
+      - RAY_HEAD_SERVICE_HOST=ray-head
+    volumes:
+      - ../logs:/app/logs
+      - ../config.yaml:/app/config.yaml
+    shm_size: "2gb"   # Required for Plasma shared-memory object store
+    command: >
+      sh -c "
+        ray start --head
+          --num-cpus=4
+          --num-gpus=0
+          --object-store-memory=1073741824
+          --dashboard-host=0.0.0.0
+          --port=6379
+          --ray-client-server-port=10001 &&
+        python src/core_primitives/remote_functions.py
+      "
+    networks:
+      - ray-net
+
+  ray-worker:
+    image: ray-engineering:latest
+    depends_on:
+      - ray-head
+    environment:
+      - RAY_HEAD_SERVICE_HOST=ray-head
+    volumes:
+      - ../logs:/app/logs
+      - ../config.yaml:/app/config.yaml
+    shm_size: "2gb"
+    command: >
+      sh -c "
+        ray start
+          --address=ray-head:6379
+          --num-cpus=2
+          --num-gpus=0
+          --object-store-memory=536870912 &&
+        tail -f /dev/null
+      "
+    networks:
+      - ray-net
+
+networks:
+  ray-net:
+    driver: bridge

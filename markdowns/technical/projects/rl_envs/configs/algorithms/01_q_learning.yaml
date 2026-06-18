@@ -1,0 +1,28 @@
+algorithm: q_learning
+use_case: path_planning
+
+logging:
+  level: INFO
+
+training:
+  max_episodes: 2000
+  alpha: 0.1
+  gamma: 0.99
+  epsilon_start: 1.0
+  epsilon_end: 0.01
+  epsilon_decay: 0.995
+
+env:
+  name: grid_world
+  grid_size: 10
+  num_obstacles: 10
+  max_episode_steps: 200
+  reward_goal: 10.0
+  reward_wall: -1.0
+  reward_step: -0.01
+  random_start: true
+  random_goal: true
+
+network:
+  n_states: 100
+  n_actions: 4

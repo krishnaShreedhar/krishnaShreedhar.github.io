@@ -1,0 +1,39 @@
+logging:
+  level: INFO
+  format: "%(asctime)s [%(levelname)s] %(name)s — %(message)s"
+  file: "logs/parallelism.log"
+
+distributed:
+  backend: "nccl"       # nccl for GPU-to-GPU communication
+  num_gpus: 2
+  find_unused_parameters: false
+
+model:
+  vocab_size: 8192
+  d_model: 1024
+  num_heads: 16
+  num_layers: 12
+  d_ff: 4096
+  max_seq_len: 256
+  dropout: 0.1
+
+dataset:
+  num_samples: 8192
+  seq_len: 128
+  vocab_size: 8192
+
+training:
+  batch_size: 64           # global batch size (split across GPUs)
+  num_epochs: 3
+  learning_rate: 3.0e-4
+  weight_decay: 1.0e-2
+  gradient_clip_norm: 1.0
+  use_amp: true
+  amp_dtype: "bfloat16"
+  log_every_n_steps: 10
+  checkpoint_dir: "logs/checkpoints_parallel"
+
+fsdp:
+  sharding_strategy: "FULL_SHARD"    # FULL_SHARD | SHARD_GRAD_OP | NO_SHARD
+  cpu_offload: false
+  min_num_params: 1000000            # shard modules with ≥1M params

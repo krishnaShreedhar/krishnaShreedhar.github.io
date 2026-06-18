@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 12_atomic_operations.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "atomic_operations"
+  N: 4194304           # 4M samples
+  num_bins: 256        # histogram bins
+  num_iterations: 20

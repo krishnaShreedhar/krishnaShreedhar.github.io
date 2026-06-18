@@ -1,0 +1,13 @@
+logging:
+  level: DEBUG
+  file: 14_warp_shuffle.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "warp_shuffle"
+  N: 8388608           # 8M elements
+  # warp_reduce_op: sum | max | min
+  warp_reduce_ops: [sum, max, min]
+  num_iterations: 20

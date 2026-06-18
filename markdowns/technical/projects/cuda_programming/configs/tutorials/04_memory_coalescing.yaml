@@ -1,0 +1,13 @@
+logging:
+  level: DEBUG
+  file: 04_memory_coalescing.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "memory_coalescing"
+  M: 4096              # matrix rows
+  N: 4096              # matrix cols
+  strides: [1, 2, 4, 8, 16, 32]   # strides to test for non-coalesced access
+  num_iterations: 20

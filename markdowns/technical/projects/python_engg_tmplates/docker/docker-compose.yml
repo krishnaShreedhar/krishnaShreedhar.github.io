@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  python-engg-demo:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: python-engg-demo
+    volumes:
+      # Mount project root into container so logs/ persists on host
+      - ../logs:/app/logs
+      # Mount src for live code editing without rebuild
+      - ../src:/app/src:ro
+      - ../config.yaml:/app/config.yaml:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Override CMD to run a specific demo:
+    #   docker-compose run python-engg-demo python src/concurrency/async_patterns.py
+    command: python src/production_template/service.py
+    restart: "no"

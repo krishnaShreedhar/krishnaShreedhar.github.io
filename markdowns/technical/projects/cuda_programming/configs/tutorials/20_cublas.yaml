@@ -1,0 +1,16 @@
+logging:
+  level: DEBUG
+  file: 20_cublas.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cublas"
+  M: 4096
+  N: 4096
+  K: 4096
+  alpha: 1.0
+  beta: 0.0
+  use_tensor_cores: true   # cublasSetMathMode(CUBLAS_TENSOR_OP_MATH)
+  num_iterations: 20

@@ -1,0 +1,13 @@
+logging:
+  level: DEBUG
+  file: 10_unified_memory.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "unified_memory"
+  N: 4194304           # 4M float elements
+  num_iterations: 10
+  prefetch_enabled: true
+  advise_read_mostly: true

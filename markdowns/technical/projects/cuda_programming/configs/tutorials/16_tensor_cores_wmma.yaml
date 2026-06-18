@@ -1,0 +1,14 @@
+logging:
+  level: DEBUG
+  file: 16_tensor_cores_wmma.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "tensor_cores_wmma"
+  M: 4096              # must be multiple of 16
+  N: 4096
+  K: 4096
+  num_iterations: 20
+  # Comparison: fp32_cuda_cores vs fp16_tensor_cores

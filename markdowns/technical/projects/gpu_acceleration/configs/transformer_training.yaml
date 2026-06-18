@@ -1,0 +1,32 @@
+logging:
+  level: INFO
+  format: "%(asctime)s [%(levelname)s] %(name)s — %(message)s"
+  file: "logs/transformer_training.log"
+
+gpu:
+  device: "cuda:0"
+
+model:
+  vocab_size: 8192
+  d_model: 512
+  num_heads: 8
+  num_layers: 6
+  d_ff: 2048
+  max_seq_len: 256
+  dropout: 0.1
+
+dataset:
+  num_samples: 4096
+  seq_len: 128
+  vocab_size: 8192   # must match model.vocab_size
+
+training:
+  batch_size: 32
+  num_epochs: 5
+  learning_rate: 3.0e-4
+  weight_decay: 1.0e-2
+  gradient_clip_norm: 1.0
+  use_amp: true          # automatic mixed precision (BF16 on H200)
+  amp_dtype: "bfloat16"  # bfloat16 | float16
+  log_every_n_steps: 10
+  checkpoint_dir: "logs/checkpoints"

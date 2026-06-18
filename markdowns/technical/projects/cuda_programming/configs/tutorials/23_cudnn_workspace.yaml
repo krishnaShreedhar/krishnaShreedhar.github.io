@@ -1,0 +1,26 @@
+logging:
+  level: DEBUG
+  file: 23_cudnn_workspace.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "cudnn_workspace"
+  N: 8
+  C: 64
+  H: 56
+  W: 56
+  K: 128
+  kH: 3
+  kW: 3
+  pad_h: 1
+  pad_w: 1
+  stride_h: 1
+  stride_w: 1
+  dilation_h: 1
+  dilation_w: 1
+  layout: NCHW
+  # Workspace caps in MB to test (ablation: larger = better algos possible)
+  max_workspace_mb_values: [0, 4, 16, 64, 256, 1024]
+  num_iterations: 10

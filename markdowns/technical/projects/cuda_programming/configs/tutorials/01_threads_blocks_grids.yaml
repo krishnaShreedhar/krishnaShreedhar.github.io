@@ -1,0 +1,12 @@
+logging:
+  level: DEBUG
+  file: 01_threads_blocks_grids.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "threads_blocks_grids"
+  N: 1048576           # vector size (1M elements)
+  block_dims: [32, 64, 128, 256, 512]  # ablation sweep over block sizes
+  num_iterations: 10   # timing iterations per block_dim

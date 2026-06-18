@@ -1,0 +1,14 @@
+logging:
+  level: DEBUG
+  file: 13_parallel_reduction.log
+
+device:
+  id: 0
+
+tutorial:
+  name: "parallel_reduction"
+  N: 16777216          # 16M elements (power of 2)
+  block_size: 256
+  # variants: naive | optimized | warp_shuffle
+  variants: [naive, optimized, warp_shuffle]
+  num_iterations: 20
