@@ -1868,6 +1868,23 @@ body.sk-page .main-navigation li.current > a::after {
     .resource-card__status--paid { display: none; }
 }
 
+/* Resources hub — category accent colors (hub cards + page-hero eyebrow),
+   reusing the site's 4-color category system (green / blue / amber / purple) */
+.hub-card--cs::before           { background: #7dc24b; }
+.hub-card--aiml::before         { background: #9b6bd4; }
+.hub-card--programming::before  { background: #5ba3d9; }
+.hub-card--science::before      { background: #d4a843; }
+
+.hub-card--cs          .hub-card__icon { background: rgba(125,194,75, 0.12); color: #7dc24b; }
+.hub-card--aiml        .hub-card__icon { background: rgba(155,107,212,0.12); color: #9b6bd4; }
+.hub-card--programming .hub-card__icon { background: rgba(91, 163,217,0.12); color: #5ba3d9; }
+.hub-card--science     .hub-card__icon { background: rgba(212,168, 67,0.12); color: #d4a843; }
+
+.page-hero--cs          .page-hero__eyebrow { color: #7dc24b; }
+.page-hero--aiml        .page-hero__eyebrow { color: #9b6bd4; }
+.page-hero--programming .page-hero__eyebrow { color: #5ba3d9; }
+.page-hero--science     .page-hero__eyebrow { color: #d4a843; }
+
 
 /* ===================================================================
  * 26. Site ribbon — fixed vertical nav dots for non-home sk-pages
