@@ -1,5 +1,16 @@
-# Python Engineering Patterns
-
+---
+title: "Python Engineering Patterns"
+subtitle: "A curated collection of minimal, runnable examples illustrating production-grade Python engineering patterns. Every module is self-contained, reads its configuration from `config.yaml`, and writes structured logs..."
+category: technical
+project: python_engg_tmplates
+project_title: "Python Engineering Patterns"
+date: 2025-01-22
+reading_time: 2
+tags:
+  - python-engg-tmplates
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/python_engg_tmplates/index.html"
+---
 A curated collection of minimal, runnable examples illustrating production-grade Python
 engineering patterns. Every module is self-contained, reads its configuration from
 `config.yaml`, and writes structured logs under `logs/`.

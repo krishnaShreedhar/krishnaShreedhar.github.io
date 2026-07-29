@@ -1,5 +1,17 @@
-# Time and Ordering in Distributed Systems
-
+---
+title: "Time and Ordering in Distributed Systems"
+subtitle: "Time and ordering are fundamental challenges in distributed systems. Clocks drift, messages are delayed arbitrarily, and there is no global \"now\". Logical clocks provide ordering without relying on synchronized..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-03
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/12_distributed_systems_theory/04_time_ordering.html"
+---
 Time and ordering are fundamental challenges in distributed systems. Clocks drift, messages are delayed arbitrarily, and there is no global "now". Logical clocks provide ordering without relying on synchronized physical clocks, enabling correct reasoning about causality and event ordering.
 
 ## Physical Clock Problems

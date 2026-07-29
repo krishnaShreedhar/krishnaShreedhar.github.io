@@ -1,5 +1,17 @@
-# RESTful API Design
-
+---
+title: "RESTful API Design"
+subtitle: "REST (Representational State Transfer) is the dominant architectural style for public and internal HTTP APIs. A well-designed REST API is resource-oriented, uses HTTP conventions correctly, and is consistent enough..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-04
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/11_api_design/01_restful_design.html"
+---
 REST (Representational State Transfer) is the dominant architectural style for public and internal HTTP APIs. A well-designed REST API is resource-oriented, uses HTTP conventions correctly, and is consistent enough that clients can predict how to interact with new endpoints.
 
 ## Resource Hierarchy and URL Design

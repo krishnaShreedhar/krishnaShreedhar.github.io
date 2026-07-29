@@ -1,5 +1,17 @@
-# Deep Learning Quantization Concepts
-
+---
+title: "Deep Learning Quantization Concepts"
+subtitle: "Quantization maps a continuous floating-point tensor to a discrete integer representation. The core mathematical transformation is:"
+category: technical
+project: quantization_deep_learning
+project_title: "Deep Learning Quantization"
+date: 2025-04-29
+reading_time: 6
+tags:
+  - quantization-deep-learning
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/quantization_deep_learning/docs/concepts.html"
+---
 ## 1. Quantization Fundamentals
 
 Quantization maps a continuous floating-point tensor to a discrete integer representation. The core mathematical transformation is:

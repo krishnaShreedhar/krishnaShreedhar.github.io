@@ -1,5 +1,17 @@
-# Model Parallelism
-
+---
+title: "Model Parallelism"
+subtitle: "Model parallelism distributes different parts of a neural network across multiple GPUs when the model is too large to fit on a single device even with parameter sharding. While data parallelism scales by processing..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-12-24
+reading_time: 5
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/05_scaling_ml_systems/02_model_parallelism.html"
+---
 Model parallelism distributes different parts of a neural network across multiple GPUs when the model is too large to fit on a single device even with parameter sharding. While data parallelism scales by processing more data simultaneously, model parallelism scales by partitioning the model itself — dividing layers, splitting weight matrices across devices, or routing to specialized expert subnetworks.
 
 ## Model Parallelism Strategies

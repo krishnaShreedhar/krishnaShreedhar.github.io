@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RL Environments — Educational Reinforcement Learning Tutorials &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A collection of 10 reinforcement learning algorithm implementations built for educational purposes. Each algorithm is minimal, well-documented, and tied to a co">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">RL Environments — Educational Reinforcement Learni</span>
+        </div>
+        <h1 class="post-title">RL Environments — Educational Reinforcement Learning Tutorials</h1>
+        <p class="post-subtitle">A collection of 10 reinforcement learning algorithm implementations built for educational purposes. Each algorithm is minimal, well-documented, and tied to a concrete use case. All hyper-parameters live in YAML...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-10-27</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="docs/plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="docs/algorithms/10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A collection of 10 reinforcement learning algorithm implementations built for
+educational purposes. Each algorithm is minimal, well-documented, and tied to a
+concrete use case. All hyper-parameters live in YAML config files; there are no
+command-line arguments.</p>
+<hr />
+<h2>Algorithms</h2>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Algorithm</th>
+  <th>Type</th>
+  <th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>01</td>
+  <td>Q-Learning</td>
+  <td>Tabular</td>
+  <td>Path planning (GridWorld)</td>
+</tr>
+<tr>
+  <td>02</td>
+  <td>DQN</td>
+  <td>Value-based Deep RL</td>
+  <td>Path planning (continuous state)</td>
+</tr>
+<tr>
+  <td>03</td>
+  <td>Double DQN</td>
+  <td>Value-based Deep RL</td>
+  <td>Improved path planning</td>
+</tr>
+<tr>
+  <td>04</td>
+  <td>A2C</td>
+  <td>Policy Gradient</td>
+  <td>Autonomous vehicles</td>
+</tr>
+<tr>
+  <td>05</td>
+  <td>PPO</td>
+  <td>Policy Gradient</td>
+  <td>Autonomous vehicles</td>
+</tr>
+<tr>
+  <td>06</td>
+  <td>DDPG</td>
+  <td>Continuous Control</td>
+  <td>Autonomous vehicles</td>
+</tr>
+<tr>
+  <td>07</td>
+  <td>TD3</td>
+  <td>Continuous Control</td>
+  <td>Autonomous vehicles</td>
+</tr>
+<tr>
+  <td>08</td>
+  <td>SAC</td>
+  <td>Continuous Control</td>
+  <td>Autonomous vehicles</td>
+</tr>
+<tr>
+  <td>09</td>
+  <td>PPO / GRPO</td>
+  <td>LLM/VLM Finetuning</td>
+  <td>VLM reward alignment</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>Dreamer</td>
+  <td>Model-based RL</td>
+  <td>Autonomous vehicles</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Use Cases</h2>
+<h3>1. Path Planning</h3>
+<p>Agent navigates a 10x10 GridWorld with obstacles from a random start to a
+random goal. Discrete action space (up/down/left/right). Algorithms 01–03.</p>
+<h3>2. Autonomous Vehicles</h3>
+<p>Simulated vehicle control with continuous state and action spaces. Integrates
+with a ROS2 Humble container for realistic sensor/actuator interfaces.
+Algorithms 04–08, 10.</p>
+<h3>3. VLM Finetuning</h3>
+<p>Reinforcement learning from human feedback (RLHF) style fine-tuning of
+vision-language models using PPO and GRPO reward signals. Algorithm 09.</p>
+<hr />
+<h2>Hardware</h2>
+<ul>
+<li>2x NVIDIA H200 GPUs</li>
+<li>CUDA 13.0.1</li>
+<li>Ubuntu 22.04</li>
+</ul>
+<p>GPU IDs are configured in <code>configs/global.yaml</code> (<code>device.gpu_ids: [0, 1]</code>).</p>
+<hr />
+<h2>Quick Start</h2>
+<h3>1. Build and enter the container</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker
+docker compose up -d
+docker compose exec rl_envs bash
+</code></pre></div>
+<h3>2. Run Q-Learning on GridWorld</h3>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">from core.config_loader import ConfigLoader
+from core.logger import RLLogger
+from algorithms.q_learning import QLearningAgent
+from envs.path_planning import GridWorldEnv
+from training import Trainer
+import torch
+
+cfg = ConfigLoader.merge(&quot;configs/global.yaml&quot;, &quot;configs/algorithms/01_q_learning.yaml&quot;)
+logger = RLLogger(&quot;q_learning&quot;, cfg[&quot;logging.log_dir&quot;], cfg[&quot;logging.level&quot;])
+device = torch.device(&quot;cpu&quot;)
+
+env = GridWorldEnv(cfg.raw, logger)
+agent = QLearningAgent(cfg.raw, device, logger)
+trainer = Trainer(agent, env, cfg, logger)
+history = trainer.train()
+</code></pre></div>
+<h3>3. Run DQN on GridWorld</h3>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">cfg = ConfigLoader.merge(&quot;configs/global.yaml&quot;, &quot;configs/algorithms/02_dqn.yaml&quot;)
+# ... same pattern, use DQNAgent
+</code></pre></div>
+<hr />
+<h2>Config System</h2>
+<p>Every experiment is driven by two YAML files that are deep-merged at startup:</p>
+<pre><code>configs/global.yaml               # shared defaults (logging, device, buffer, training schedule)
+configs/algorithms/NN_algo.yaml   # algorithm + env overrides
+</code></pre>
+<p>Algorithm values override global values at every nesting level. Access values
+via dot notation:</p>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">cfg.get(&quot;training.batch_size&quot;, 64)   # returns default if missing
+cfg[&quot;training.batch_size&quot;]           # raises KeyError if missing
+</code></pre></div>
+<p>No CLI arguments. No fallbacks inside algorithm code.</p>
+<hr />
+<h2>Logging</h2>
+<p>All logs are written to <code>logs/&lt;name&gt;.log</code> and mirrored to stdout.</p>
+<p>Log format:</p>
+<pre><code>[YYYY-MM-DD HH:MM:SS.mmm] [LEVEL  ] [name] message
+</code></pre>
+<p>Structured log lines:</p>
+<pre><code>[METRICS] step=500 loss=0.0423 epsilon=0.72 mean_q=1.34
+[EPISODE] episode=42 reward=7.35 steps=120 goal_reached=True
+</code></pre>
+<p>Log levels:</p>
+<ul>
+<li><code>DEBUG</code>: step-level detail (action, reward, Q-values)</li>
+<li><code>INFO</code>: episode summaries, checkpoints, target network updates</li>
+<li><code>WARNING</code>: NaN/Inf losses, unexpected events</li>
+</ul>
+<hr />
+<h2>Project Structure</h2>
+<pre><code>rl_envs/
+├── configs/
+│   ├── global.yaml
+│   └── algorithms/
+│       ├── 01_q_learning.yaml
+│       ├── 02_dqn.yaml
+│       └── 03_double_dqn.yaml
+├── docker/
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── .env
+├── docs/
+│   ├── plan.md
+│   └── algorithms/
+│       ├── 01_q_learning.md
+│       ├── 02_dqn.md
+│       └── 03_double_dqn.md
+├── logs/              # runtime log files (git-ignored except .gitkeep)
+├── src/
+│   ├── core/          # BaseAgent, BaseEnv, ReplayBuffer, RLLogger, ConfigLoader
+│   ├── training/      # Trainer
+│   ├── algorithms/    # q_learning, dqn, double_dqn, a2c, ppo, ddpg, td3, sac, grpo, dreamer
+│   └── envs/          # path_planning, autonomous_vehicle, vlm_finetuning
+├── pyproject.toml
+└── README.md
+</code></pre>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/plan.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">RL Environments — Project Plan</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

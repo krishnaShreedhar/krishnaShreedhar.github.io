@@ -1,5 +1,17 @@
-# Tutorial 14: Warp Shuffle Intrinsics
-
+---
+title: "Tutorial 14: Warp Shuffle Intrinsics"
+subtitle: "See `src/tutorials/14_warp_shuffle/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-12-20
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/14_warp_shuffle.html"
+---
 ## Concept
 
 See `src/tutorials/14_warp_shuffle/main.cu` for detailed inline comments explaining

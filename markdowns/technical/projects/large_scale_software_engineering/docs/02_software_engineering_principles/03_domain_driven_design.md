@@ -1,5 +1,17 @@
-# Domain-Driven Design (DDD)
-
+---
+title: "Domain-Driven Design (DDD)"
+subtitle: "Domain-Driven Design is an approach to software development that places the business domain model at the center of the design process. DDD provides a set of strategic and tactical patterns that help align software..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-25
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/02_software_engineering_principles/03_domain_driven_design.html"
+---
 Domain-Driven Design is an approach to software development that places the business domain model at the center of the design process. DDD provides a set of strategic and tactical patterns that help align software structure with business concepts, enabling complex domains to be modeled accurately and evolved safely.
 
 ## Strategic DDD

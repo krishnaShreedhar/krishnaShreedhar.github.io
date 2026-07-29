@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ONNX Graph Optimizations &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A self-contained project illustrating ONNX features and graph optimization techniques with minimal, runnable code examples.  Every concept is paired with workin">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">ONNX Graph Optimizations</span>
+        </div>
+        <h1 class="post-title">ONNX Graph Optimizations</h1>
+        <p class="post-subtitle">A self-contained project illustrating ONNX features and graph optimization techniques with minimal, runnable code examples.  Every concept is paired with working code, mermaid diagrams, and extensive logging so a...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-09-03</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">onnx-graph-optimizations</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">ONNX Graph Optimizations</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">ONNX Graph Optimizations</a></li><li class="project-nav__lvl-1"><a href="docs/concepts.html">ONNX Concepts and Graph Optimization</a></li><li class="project-nav__lvl-1"><a href="docs/flow_diagrams.html">ONNX Optimization Pipeline - Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A self-contained project illustrating ONNX features and graph optimization techniques
+with minimal, runnable code examples.  Every concept is paired with working code,
+mermaid diagrams, and extensive logging so a learner can trace exactly what happens at
+each step.</p>
+<hr />
+<h2>What This Project Covers</h2>
+<table>
+<thead>
+<tr>
+  <th>Topic</th>
+  <th>Module</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>PyTorch → ONNX export</td>
+  <td><code>src/model_exporter/pytorch_exporter.py</code></td>
+  <td>CNN export with shape validation</td>
+</tr>
+<tr>
+  <td>sklearn → ONNX export</td>
+  <td><code>src/model_exporter/sklearn_exporter.py</code></td>
+  <td>Pipeline export via skl2onnx</td>
+</tr>
+<tr>
+  <td>ORT optimization levels</td>
+  <td><code>src/graph_optimizer/optimization_pipeline.py</code></td>
+  <td>DISABLE_ALL → BASIC → EXTENDED → ALL</td>
+</tr>
+<tr>
+  <td>Constant folding</td>
+  <td><code>src/graph_optimizer/constant_folder.py</code></td>
+  <td>Detect and quantify foldable nodes</td>
+</tr>
+<tr>
+  <td>Fusion detection</td>
+  <td><code>src/graph_optimizer/fusion_analyzer.py</code></td>
+  <td>Conv+BN+Relu, MatMul+Add, Gelu, etc.</td>
+</tr>
+<tr>
+  <td>ORT inference</td>
+  <td><code>src/inference_engine/ort_inference.py</code></td>
+  <td>Session creation, single + batch inference</td>
+</tr>
+<tr>
+  <td>Benchmarking</td>
+  <td><code>src/inference_engine/benchmark.py</code></td>
+  <td>Latency, throughput, p50/p95/p99</td>
+</tr>
+<tr>
+  <td>Execution Providers</td>
+  <td><code>src/inference_engine/execution_providers.py</code></td>
+  <td>CPU / CUDA / TensorRT selection</td>
+</tr>
+<tr>
+  <td>Graph inspection</td>
+  <td><code>src/graph_analysis/graph_inspector.py</code></td>
+  <td>Nodes, edges, initializers, metadata</td>
+</tr>
+<tr>
+  <td>Shape propagation</td>
+  <td><code>src/graph_analysis/shape_analyzer.py</code></td>
+  <td>Tensor shapes through the graph</td>
+</tr>
+<tr>
+  <td>Operator counting</td>
+  <td><code>src/graph_analysis/node_counter.py</code></td>
+  <td>Distribution charts, multi-level compare</td>
+</tr>
+<tr>
+  <td>Full pipeline demo</td>
+  <td><code>src/notebooks/onnx_optimization_demo.ipynb</code></td>
+  <td>End-to-end notebook</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Project Structure</h2>
+<pre><code>onnx_graph_optimizations/
+    src/
+        notebooks/              # Jupyter notebook: full pipeline demo
+        model_exporter/         # pytorch_exporter.py, sklearn_exporter.py
+        graph_optimizer/        # optimization_pipeline.py, constant_folder.py, fusion_analyzer.py
+        inference_engine/       # ort_inference.py, benchmark.py, execution_providers.py
+        graph_analysis/         # graph_inspector.py, shape_analyzer.py, node_counter.py
+    docs/
+        concepts.md             # ONNX concepts with mermaid diagrams
+        flow_diagrams.md        # Pipeline flow diagrams
+    docker/
+        Dockerfile
+        docker-compose.yml
+        requirements.txt
+    logs/                       # Runtime log files (auto-created)
+    outputs/
+        models/                 # Exported and optimized .onnx files + charts
+    README.md
+    pyproject.toml
+    config.yaml                 # Single source of truth for all constants
+</code></pre>
+<hr />
+<h2>ONNX Core Concepts</h2>
+<h3>What is ONNX?</h3>
+<p>ONNX (Open Neural Network Exchange) is an open format for representing machine learning
+models.  It defines:</p>
+<ul>
+<li>A <strong>computation graph</strong> (nodes connected by typed edges).</li>
+<li>A set of <strong>operator specifications</strong> (Conv, BatchNorm, Relu, Gemm, …).</li>
+<li>A <strong>serialisation format</strong> (protobuf <code>.onnx</code> file).</li>
+</ul>
+<p>Any framework can export to ONNX; any runtime can load it.</p>
+<h3>ONNX Graph Structure</h3>
+<pre><code>ModelProto
+  └── GraphProto
+        ├── node[]          operator nodes (Conv, BN, Relu, …)
+        ├── input[]         external inputs (e.g., image tensor)
+        ├── output[]        graph outputs
+        ├── initializer[]   constant tensors (weights, biases)
+        └── value_info[]    intermediate tensor shapes (after shape inference)
+</code></pre>
+<h3>ORT Optimization Levels</h3>
+<table>
+<thead>
+<tr>
+  <th>Level</th>
+  <th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>ORT_DISABLE_ALL</code></td>
+  <td>No optimizations. Useful for debugging raw graph.</td>
+</tr>
+<tr>
+  <td><code>ORT_ENABLE_BASIC</code></td>
+  <td>Constant folding, identity elimination, slice removal.</td>
+</tr>
+<tr>
+  <td><code>ORT_ENABLE_EXTENDED</code></td>
+  <td>Operator fusion: Conv+BN folding, Conv+BN+Relu → single kernel, Gelu, LayerNorm.</td>
+</tr>
+<tr>
+  <td><code>ORT_ENABLE_ALL</code></td>
+  <td>Layout optimization (NCHW→NHWC etc.) + all above.</td>
+</tr>
+</tbody>
+</table>
+<h3>BatchNorm Folding (most impactful fusion)</h3>
+<p>At inference time, BatchNorm is a <strong>linear transform</strong> on the preceding Conv output.
+ORT folds BN parameters (γ, β, μ, σ²) into Conv weights and bias:</p>
+<pre><code>W_fused = W_conv · (γ / √(σ² + ε))
+b_fused = b_conv · (γ / √(σ² + ε)) + β - μ · (γ / √(σ² + ε))
+</code></pre>
+<p>Result: <strong>BatchNorm node disappears</strong> from the graph.  For a network with N Conv+BN pairs,
+you eliminate N nodes with zero accuracy loss.</p>
+<hr />
+<h2>Quick Start</h2>
+<h3>1. Install dependencies</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd projects/onnx_graph_optimizations
+pip install -e &quot;.[notebook]&quot;
+</code></pre></div>
+<p>For GPU support (CUDA):</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">pip install onnxruntime-gpu   # replaces onnxruntime
+</code></pre></div>
+<h3>2. Export the CNN model</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python src/model_exporter/pytorch_exporter.py config.yaml
+# → outputs/models/cnn_model.onnx
+</code></pre></div>
+<h3>3. Export the sklearn pipeline</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python src/model_exporter/sklearn_exporter.py config.yaml
+# → outputs/models/sklearn_pipeline.onnx
+</code></pre></div>
+<h3>4. Inspect the graph</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python src/graph_analysis/graph_inspector.py config.yaml outputs/models/cnn_model.onnx
+python src/graph_analysis/shape_analyzer.py config.yaml outputs/models/cnn_model.onnx
+python src/graph_analysis/node_counter.py config.yaml outputs/models/cnn_model.onnx
+</code></pre></div>
+<h3>5. Apply optimizations</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python src/graph_optimizer/optimization_pipeline.py config.yaml outputs/models/cnn_model.onnx
+# → outputs/models/optimized_ORT_DISABLE_ALL.onnx
+# → outputs/models/optimized_ORT_ENABLE_BASIC.onnx
+# → outputs/models/optimized_ORT_ENABLE_EXTENDED.onnx
+# → outputs/models/optimized_ORT_ENABLE_ALL.onnx
+</code></pre></div>
+<h3>6. Analyse fusion patterns</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python src/graph_optimizer/fusion_analyzer.py config.yaml outputs/models/cnn_model.onnx
+python src/graph_optimizer/constant_folder.py config.yaml outputs/models/cnn_model.onnx
+</code></pre></div>
+<h3>7. Benchmark inference</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python src/inference_engine/benchmark.py config.yaml \
+    outputs/models/cnn_model.onnx \
+    outputs/models/optimized_ORT_ENABLE_ALL.onnx
+</code></pre></div>
+<h3>8. Check available EPs</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python src/inference_engine/execution_providers.py config.yaml outputs/models/cnn_model.onnx
+</code></pre></div>
+<h3>9. Run the full notebook</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd projects/onnx_graph_optimizations
+jupyter notebook src/notebooks/onnx_optimization_demo.ipynb
+</code></pre></div>
+<h3>10. Docker</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd projects/onnx_graph_optimizations/docker
+docker-compose up --build
+# Open http://localhost:8888
+</code></pre></div>
+<hr />
+<h2>Configuration</h2>
+<p>All constants live in <code>config.yaml</code>.  No command-line arguments needed — scripts read the config file as their first positional argument (defaults to <code>config.yaml</code>).</p>
+<p>Key sections:</p>
+<div class="code-wrapper"><span class="code-lang">yaml</span><pre><code class="language-yaml">pytorch_model:
+  in_channels: 1        # grayscale (MNIST-style)
+  num_classes: 10
+  input_height: 28
+  input_width: 28
+
+optimization:
+  levels: [ORT_DISABLE_ALL, ORT_ENABLE_BASIC, ORT_ENABLE_EXTENDED, ORT_ENABLE_ALL]
+  save_optimized: true
+
+inference:
+  benchmark_iterations: 100
+  warmup_iterations: 10
+  batch_sizes: [1, 4, 8, 16, 32]
+</code></pre></div>
+<hr />
+<h2>Outputs</h2>
+<p>After running the full pipeline you will find:</p>
+<pre><code>outputs/models/
+    cnn_model.onnx
+    sklearn_pipeline.onnx
+    optimized_ORT_DISABLE_ALL.onnx
+    optimized_ORT_ENABLE_BASIC.onnx
+    optimized_ORT_ENABLE_EXTENDED.onnx
+    optimized_ORT_ENABLE_ALL.onnx
+    baseline_operator_distribution.png
+    optimization_node_reduction.png
+    inference_performance.png
+    baseline_vs_optimized.png
+    multi_level_node_counts.png
+
+logs/
+    onnx_optimizations.log     # structured per-module log with timestamps
+</code></pre>
+<hr />
+<h2>Documentation</h2>
+<ul>
+<li><code>docs/concepts.md</code> — ONNX ecosystem, graph structure, optimization levels, EP selection,
+all with Mermaid diagrams and reference tables.</li>
+<li><code>docs/flow_diagrams.md</code> — Step-by-step flow diagrams for export, optimization, inference,
+analysis, and benchmarking pipelines.</li>
+</ul>
+<hr />
+<h2>Key Libraries</h2>
+<table>
+<thead>
+<tr>
+  <th>Library</th>
+  <th>Version</th>
+  <th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>torch</code></td>
+  <td>≥2.3</td>
+  <td>Model definition and ONNX export</td>
+</tr>
+<tr>
+  <td><code>onnx</code></td>
+  <td>≥1.16</td>
+  <td>Graph loading, checking, shape inference</td>
+</tr>
+<tr>
+  <td><code>onnxruntime</code></td>
+  <td>≥1.18</td>
+  <td>Optimized inference + graph optimization</td>
+</tr>
+<tr>
+  <td><code>scikit-learn</code></td>
+  <td>≥1.5</td>
+  <td>sklearn pipeline for export demo</td>
+</tr>
+<tr>
+  <td><code>skl2onnx</code></td>
+  <td>≥1.17</td>
+  <td>sklearn → ONNX conversion</td>
+</tr>
+<tr>
+  <td><code>numpy</code></td>
+  <td>≥1.26</td>
+  <td>Input/output array handling</td>
+</tr>
+<tr>
+  <td><code>matplotlib</code></td>
+  <td>≥3.9</td>
+  <td>Operator distribution charts</td>
+</tr>
+<tr>
+  <td><code>pyyaml</code></td>
+  <td>≥6.0</td>
+  <td>YAML config parsing</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/concepts.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">ONNX Concepts and Graph Optimization</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

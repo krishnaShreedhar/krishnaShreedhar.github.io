@@ -1,5 +1,17 @@
-# API Documentation
-
+---
+title: "API Documentation"
+subtitle: "API documentation is the primary interface between API providers and consumers. Good documentation enables developers to integrate quickly without support. The OpenAPI Specification is the industry standard for..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-16
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/11_api_design/03_api_documentation.html"
+---
 API documentation is the primary interface between API providers and consumers. Good documentation enables developers to integrate quickly without support. The OpenAPI Specification is the industry standard for documenting REST APIs; AsyncAPI covers event-driven APIs.
 
 ## OpenAPI Specification Structure

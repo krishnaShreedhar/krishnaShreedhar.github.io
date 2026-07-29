@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Software Engineering Principles &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Software engineering principles are the foundational rules and heuristics that guide the design of code at all levels — from individual functions to entire syst">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Software Engineering Principles</span>
+        </div>
+        <h1 class="post-title">Software Engineering Principles</h1>
+        <p class="post-subtitle">Software engineering principles are the foundational rules and heuristics that guide the design of code at all levels — from individual functions to entire system modules. Mastery of these principles separates...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-02-22</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>1 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section active"><a href="index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Software engineering principles are the foundational rules and heuristics that guide the design of code at all levels — from individual functions to entire system modules. Mastery of these principles separates software that is easy to change, test, and understand from code that accrues technical debt.</p>
+<h2>Overview</h2>
+<div class="mermaid-wrap"><div class="mermaid">mindmap
+  root((Engineering\nPrinciples))
+    SOLID
+      Single Responsibility
+      Open-Closed
+      Liskov Substitution
+      Interface Segregation
+      Dependency Inversion
+    DRY / KISS / YAGNI
+      Don't Repeat Yourself
+      Keep It Simple
+      You Aren't Gonna Need It
+    Domain-Driven Design
+      Ubiquitous Language
+      Bounded Contexts
+      Aggregates
+      Domain Events
+      Repositories
+    Package Design
+      REP - Reuse
+      CCP - Common Closure
+      CRP - Common Reuse
+      ADP - Acyclic Dependencies
+      SDP - Stable Dependencies
+    Coding Principles
+      Separation of Concerns
+      Law of Demeter
+      Command-Query Separation
+      Fail Fast
+      Composition Over Inheritance
+</div></div>
+<h2>How Principles Relate</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    HLPrinciples[High-Level Design Principles]
+    HLPrinciples --&gt; DDD[Domain-Driven Design\nDefines system structure]
+    HLPrinciples --&gt; PKG[Package Design Principles\nDefines module boundaries]
+
+    ModPrinciples[Module-Level Principles]
+    ModPrinciples --&gt; SOLID[SOLID\nDefines class/component design]
+    ModPrinciples --&gt; DRY[DRY / KISS / YAGNI\nDefines code quality heuristics]
+
+    ImplPrinciples[Implementation Principles]
+    ImplPrinciples --&gt; Code[Coding Principles\nSoC, LoD, CQS, Fail Fast]
+
+    DDD --&gt; ModPrinciples
+    PKG --&gt; ModPrinciples
+    SOLID --&gt; ImplPrinciples
+    DRY --&gt; ImplPrinciples
+</div></div>
+<h2>Topics in This Section</h2>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>Topic</th>
+  <th>Key Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="01_solid_principles.html">01_solid_principles.md</a></td>
+  <td>SOLID</td>
+  <td>SRP, OCP, LSP, ISP, DIP</td>
+</tr>
+<tr>
+  <td><a href="02_dry_kiss_yagni.html">02_dry_kiss_yagni.md</a></td>
+  <td>DRY / KISS / YAGNI</td>
+  <td>Code quality heuristics</td>
+</tr>
+<tr>
+  <td><a href="03_domain_driven_design.html">03_domain_driven_design.md</a></td>
+  <td>DDD</td>
+  <td>Bounded contexts, aggregates, ubiquitous language</td>
+</tr>
+<tr>
+  <td><a href="04_package_module_design.html">04_package_module_design.md</a></td>
+  <td>Package Design</td>
+  <td>REP, CCP, CRP, ADP, SDP, SAP</td>
+</tr>
+<tr>
+  <td><a href="05_coding_design_principles.html">05_coding_design_principles.md</a></td>
+  <td>Coding Principles</td>
+  <td>SoC, LoD, CQS, fail fast, composition</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../01_architectural_paradigms/08_reactive_architecture.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Reactive Architecture</span></a>
+            <a href="01_solid_principles.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">SOLID Principles</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

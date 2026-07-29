@@ -1,5 +1,17 @@
-# Network Protocols
-
+---
+title: "Network Protocols"
+subtitle: "Network protocols are the foundational rules governing how data is transmitted across networks. Understanding protocol behaviour — connection establishment, flow control, encryption negotiation, and congestion..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-08-16
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/04_communication_protocols/05_network_protocols.html"
+---
 Network protocols are the foundational rules governing how data is transmitted across networks. Understanding protocol behaviour — connection establishment, flow control, encryption negotiation, and congestion management — enables engineers to diagnose performance problems and make informed infrastructure decisions.
 
 ## Protocol Stack

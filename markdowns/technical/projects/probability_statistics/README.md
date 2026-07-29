@@ -1,5 +1,16 @@
-# Probability & Statistics
-
+---
+title: "Probability & Statistics"
+subtitle: "A self-contained educational project illustrating core Probability and Statistics concepts through minimal, runnable Python code and SQL analytics. Designed so a practitioner can read the source, understand the..."
+category: technical
+project: probability_statistics
+project_title: "Probability & Statistics"
+date: 2025-02-14
+reading_time: 4
+tags:
+  - probability-statistics
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/probability_statistics/index.html"
+---
 A self-contained educational project illustrating core Probability and Statistics concepts through minimal, runnable Python code and SQL analytics. Designed so a practitioner can read the source, understand the algorithm, and immediately apply it to real data.
 
 ---

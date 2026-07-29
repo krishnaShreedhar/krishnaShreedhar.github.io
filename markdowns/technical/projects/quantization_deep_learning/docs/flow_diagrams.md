@@ -1,5 +1,17 @@
-# Quantization Workflow Diagrams
-
+---
+title: "Quantization Workflow Diagrams"
+subtitle: "The Post-Training Quantization pipeline transforms a trained FP32 model into an INT8 model without retraining. The key steps are: data collection, statistics gathering, scale computation, and model conversion."
+category: technical
+project: quantization_deep_learning
+project_title: "Deep Learning Quantization"
+date: 2025-03-04
+reading_time: 4
+tags:
+  - quantization-deep-learning
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/quantization_deep_learning/docs/flow_diagrams.html"
+---
 ## 1. Standard PTQ Workflow (8 Steps)
 
 The Post-Training Quantization pipeline transforms a trained FP32 model into an INT8 model without retraining. The key steps are: data collection, statistics gathering, scale computation, and model conversion.

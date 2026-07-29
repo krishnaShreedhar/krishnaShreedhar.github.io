@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DDPG — Deep Deterministic Policy Gradient &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Standard policy gradient methods work with **stochastic policies** π(a|s) and require integration over the action space. For high-dimensional continuous actions">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">DDPG — Deep Deterministic Policy Gradient</span>
+        </div>
+        <h1 class="post-title">DDPG — Deep Deterministic Policy Gradient</h1>
+        <p class="post-subtitle">Standard policy gradient methods work with **stochastic policies** π(a|s) and require integration over the action space. For high-dimensional continuous actions this integral becomes computationally intractable.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-02-27</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2 active"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Deterministic Policy Gradient Theorem</h2>
+<p>Standard policy gradient methods work with <strong>stochastic policies</strong> π(a|s) and
+require integration over the action space. For high-dimensional continuous
+actions this integral becomes computationally intractable.</p>
+<p>The <strong>Deterministic Policy Gradient (DPG)</strong> theorem (Silver et al. 2014) shows
+that the gradient of a deterministic policy μ_θ(s) can be computed as:</p>
+<pre><code>∇_θ J(μ_θ) = E_ρ[ ∇_θ μ_θ(s) · ∇_a Q^μ(s,a)|_{a=μ_θ(s)} ]
+</code></pre>
+<p>This is the chain rule through the critic: move the action in the direction
+that increases Q-value, then move the policy parameters to produce that action.</p>
+<p>DDPG (Lillicrap et al. 2016) scales this to deep networks by combining:</p>
+<ol>
+<li><strong>Deterministic policy</strong> (no action sampling needed).</li>
+<li><strong>Off-policy learning</strong> via experience replay.</li>
+<li><strong>Target networks</strong> for stable Bellman targets.</li>
+</ol>
+<hr />
+<h2>Actor-Critic for Continuous Actions</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph Online[&quot;Online Networks (trained)&quot;]
+        A[&quot;Actor\nμ_θ(s)\nstate→action&quot;]
+        C[&quot;Critic\nQ_φ(s,a)\nstate+action→Q&quot;]
+    end
+
+    subgraph Target[&quot;Target Networks (slow-updated)&quot;]
+        AT[&quot;Actor Target\nμ_θ'(s)&quot;]
+        CT[&quot;Critic Target\nQ_φ'(s,a)&quot;]
+    end
+
+    subgraph Replay[&quot;Experience Replay Buffer&quot;]
+        B[&quot;(s, a, r, s', done)&quot;]
+    end
+
+    ENV[&quot;Environment&quot;] -- &quot;step(μ_θ(s) + noise)&quot; --&gt; B
+    B -- &quot;sample batch&quot; --&gt; C
+    B -- &quot;sample batch&quot; --&gt; CT
+    AT -- &quot;target action\na' = μ_θ'(s')&quot; --&gt; CT
+    CT -- &quot;target Q\ny = r + γ·Q_φ'(s',a')&quot; --&gt; C
+    C -- &quot;critic loss\nMSE(Q_φ(s,a), y)&quot; --&gt; C
+    C -- &quot;actor gradient\n-∇Q_φ(s, μ_θ(s))&quot; --&gt; A
+    A -- &quot;soft update τ&quot; --&gt; AT
+    C -- &quot;soft update τ&quot; --&gt; CT
+</div></div>
+<hr />
+<h2>Experience Replay</h2>
+<p>DDPG is <strong>off-policy</strong>: transitions are stored in a replay buffer and sampled
+uniformly at random for training. This provides two benefits:</p>
+<ol>
+<li><strong>Break temporal correlations</strong>: consecutive environment steps are highly
+correlated; random mini-batches decorrelate the training data.</li>
+<li><strong>Data reuse</strong>: each transition can be used for multiple gradient updates,
+improving sample efficiency.</li>
+</ol>
+<p>The <code>replay_start</code> parameter delays training until the buffer has enough
+diverse transitions to form meaningful mini-batches.</p>
+<hr />
+<h2>Target Networks</h2>
+<p>Without target networks, the Bellman backup target:</p>
+<pre><code>y = r + γ · Q(s', μ(s'))
+</code></pre>
+<p>is computed using the same network being updated. This creates a moving target
+and causes oscillations or divergence.</p>
+<p>Target networks provide stable targets by updating slowly:</p>
+<pre><code>θ' ← τ·θ + (1-τ)·θ'    (Polyak averaging, τ ≪ 1)
+</code></pre>
+<p>With <code>τ = 0.005</code>, the target network changes ~0.5% per step — providing smooth,
+lag-stable Bellman targets.</p>
+<hr />
+<h2>Ornstein-Uhlenbeck (OU) Noise for Exploration</h2>
+<p>Because the policy is deterministic, explicit exploration noise must be added
+during training. OU noise generates <strong>temporally correlated</strong> exploration:</p>
+<pre><code>dx_t = θ(μ - x_t)dt + σ·dW_t
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>θ = 0.15</code>: mean-reversion speed (noise returns to μ = 0)</li>
+<li><code>σ = policy_noise</code>: noise intensity (from config)</li>
+<li><code>dW_t ~ N(0,1)</code>: Wiener process increment</li>
+</ul>
+<p>For vehicle control, temporally correlated noise is more realistic than i.i.d.
+Gaussian noise — a steering perturbation that persists for a few steps explores
+different driving trajectories more effectively than random jitter.</p>
+<hr />
+<h2>Autonomous Vehicle Use Case</h2>
+<p>DDPG maps naturally to vehicle control:</p>
+<table>
+<thead>
+<tr>
+  <th>RL Component</th>
+  <th>Vehicle Domain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>State (7-dim)</td>
+  <td>position (x,y), velocity (vx,vy), heading, distance to goal, obstacle proximity</td>
+</tr>
+<tr>
+  <td>Action (2-dim)</td>
+  <td>throttle/brake [-1,1], steering angle [-1,1]</td>
+</tr>
+<tr>
+  <td>Reward</td>
+  <td>progress toward goal - collision penalty - energy use</td>
+</tr>
+<tr>
+  <td>Done</td>
+  <td>reached goal, collision, or max_steps</td>
+</tr>
+</tbody>
+</table>
+<p>The continuous action space is essential: discrete throttle/steering levels
+would create jerky, unrealistic vehicle behaviour.</p>
+<hr />
+<h2>Key Hyperparameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Default</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>actor_lr</code></td>
+  <td>1e-3</td>
+  <td>Actor learning rate; often lower than critic_lr</td>
+</tr>
+<tr>
+  <td><code>critic_lr</code></td>
+  <td>1e-3</td>
+  <td>Critic learning rate</td>
+</tr>
+<tr>
+  <td><code>tau</code></td>
+  <td>0.005</td>
+  <td>Soft update speed; too high → unstable targets</td>
+</tr>
+<tr>
+  <td><code>gamma</code></td>
+  <td>0.99</td>
+  <td>Discount; high for long-horizon navigation</td>
+</tr>
+<tr>
+  <td><code>policy_noise</code></td>
+  <td>0.1</td>
+  <td>OU noise sigma; higher → more exploration</td>
+</tr>
+<tr>
+  <td><code>replay_start</code></td>
+  <td>1000</td>
+  <td>Buffer warm-up steps before training begins</td>
+</tr>
+<tr>
+  <td><code>batch_size</code></td>
+  <td>256</td>
+  <td>Mini-batch size; larger → more stable gradients</td>
+</tr>
+<tr>
+  <td><code>action_scale</code></td>
+  <td>1.0</td>
+  <td>Tanh output scale (max action magnitude)</td>
+</tr>
+<tr>
+  <td><code>hidden_dims</code></td>
+  <td>[400,300]</td>
+  <td>Network width; 400 first layer, 300 second</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>[400, 300]</code> architecture follows the original DDPG paper's recommendation
+for continuous control tasks.</p>
+<hr />
+<h2>Limitations</h2>
+<p>DDPG's main weakness is <strong>Q-value overestimation</strong>: the actor is trained to
+maximise the critic's Q-values, but the critic tends to overestimate, leading
+the actor toward poor actions that the critic incorrectly rates as good. This
+is addressed by TD3 (see <code>07_td3.md</code>).</p>
+
+        
+        <nav class="post-nav">
+            <a href="05_ppo.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">PPO — Proximal Policy Optimization</span></a>
+            <a href="07_td3.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">TD3 — Twin Delayed Deep Deterministic Policy Gradient</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

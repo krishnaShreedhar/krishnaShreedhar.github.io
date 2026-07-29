@@ -1,5 +1,17 @@
-# Coding Design Principles
-
+---
+title: "Coding Design Principles"
+subtitle: "Beyond SOLID and package design, a set of lower-level coding principles guides the design of individual functions, classes, and interactions. These principles — Separation of Concerns, Law of Demeter, Command-Query..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-11
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/02_software_engineering_principles/05_coding_design_principles.html"
+---
 Beyond SOLID and package design, a set of lower-level coding principles guides the design of individual functions, classes, and interactions. These principles — Separation of Concerns, Law of Demeter, Command-Query Separation, Fail Fast, and Composition over Inheritance — are the everyday vocabulary of clean code.
 
 ## Overview

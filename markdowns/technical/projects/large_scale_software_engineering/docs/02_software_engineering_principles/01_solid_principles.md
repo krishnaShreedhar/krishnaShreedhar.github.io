@@ -1,5 +1,17 @@
-# SOLID Principles
-
+---
+title: "SOLID Principles"
+subtitle: "SOLID is an acronym for five object-oriented design principles introduced by Robert C. Martin that, when applied together, produce code that is easy to maintain, extend, and test. Each principle addresses a specific..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-12
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/02_software_engineering_principles/01_solid_principles.html"
+---
 SOLID is an acronym for five object-oriented design principles introduced by Robert C. Martin that, when applied together, produce code that is easy to maintain, extend, and test. Each principle addresses a specific dimension of coupling and cohesion in software design.
 
 ## The Five Principles

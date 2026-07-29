@@ -1,5 +1,17 @@
-# Sustainability in Software Engineering
-
+---
+title: "Sustainability in Software Engineering"
+subtitle: "Green software engineering is the practice of building software systems that consume the minimum necessary energy and produce the minimum carbon footprint. As data centres represent 1-2% of global electricity..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-12
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/15_emerging_paradigms/04_sustainability.html"
+---
 Green software engineering is the practice of building software systems that consume the minimum necessary energy and produce the minimum carbon footprint. As data centres represent 1-2% of global electricity consumption and AI workloads grow rapidly, sustainability becomes both an ethical and business imperative.
 
 ## Carbon Footprint of Software

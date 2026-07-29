@@ -1,5 +1,17 @@
-# Consistency Models
-
+---
+title: "Consistency Models"
+subtitle: "Consistency models define the guarantees a distributed system makes about the order in which operations appear to execute. Different models offer different trade-offs between correctness and performance. Choosing the..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-10
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/12_distributed_systems_theory/03_consistency_models.html"
+---
 Consistency models define the guarantees a distributed system makes about the order in which operations appear to execute. Different models offer different trade-offs between correctness and performance. Choosing the right model requires understanding what ordering guarantees the application actually needs.
 
 ## Consistency Model Hierarchy

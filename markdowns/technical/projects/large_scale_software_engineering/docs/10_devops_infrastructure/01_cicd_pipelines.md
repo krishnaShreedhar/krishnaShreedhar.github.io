@@ -1,5 +1,17 @@
-# CI/CD Pipelines
-
+---
+title: "CI/CD Pipelines"
+subtitle: "CI/CD (Continuous Integration / Continuous Delivery) pipelines automate the path from code commit to production deployment, providing fast feedback on code quality and enabling safe, frequent releases. Well-designed..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-11
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/10_devops_infrastructure/01_cicd_pipelines.html"
+---
 CI/CD (Continuous Integration / Continuous Delivery) pipelines automate the path from code commit to production deployment, providing fast feedback on code quality and enabling safe, frequent releases. Well-designed pipelines are the foundation of high-velocity software delivery.
 
 ## CI/CD Pipeline Stages

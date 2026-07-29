@@ -1,5 +1,17 @@
-# Scalability Dimensions
-
+---
+title: "Scalability Dimensions"
+subtitle: "Scalability has multiple dimensions — systems can scale along compute, storage, network, and geographic axes. Understanding which dimension is the bottleneck determines the appropriate scaling strategy. Premature..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-06
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/06_scalability_performance/01_scalability_dimensions.html"
+---
 Scalability has multiple dimensions — systems can scale along compute, storage, network, and geographic axes. Understanding which dimension is the bottleneck determines the appropriate scaling strategy. Premature scaling optimizations are expensive; late scaling decisions cause outages.
 
 ## Scaling Dimensions

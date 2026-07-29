@@ -1,5 +1,17 @@
-# 02 — Deep Q-Network (DQN)
-
+---
+title: "02 — Deep Q-Network (DQN)"
+subtitle: "DQN (Mnih et al., 2015) extends Q-Learning to large, continuous state spaces by replacing the tabular Q-table with a **deep neural network** that maps states to Q-values for all actions."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-12-31
+reading_time: 3
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/02_dqn.html"
+---
 ## Concept
 
 DQN (Mnih et al., 2015) extends Q-Learning to large, continuous state spaces

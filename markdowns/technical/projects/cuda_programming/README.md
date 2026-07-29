@@ -1,5 +1,16 @@
-# CUDA & cuDNN Programming Tutorials
-
+---
+title: "CUDA & cuDNN Programming Tutorials"
+subtitle: "25 standalone CUDA C++ tutorials covering GPU programming from fundamentals to advanced library usage. Each tutorial targets NVIDIA H200 (sm_90) and implements one concept with ablation experiments, extensive..."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-05-29
+reading_time: 3
+tags:
+  - cuda-programming
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/index.html"
+---
 25 standalone CUDA C++ tutorials covering GPU programming from fundamentals to
 advanced library usage. Each tutorial targets NVIDIA H200 (sm_90) and
 implements one concept with ablation experiments, extensive logging, and YAML

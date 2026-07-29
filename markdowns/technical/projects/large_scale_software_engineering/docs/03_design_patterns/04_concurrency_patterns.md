@@ -1,5 +1,17 @@
-# Concurrency Patterns
-
+---
+title: "Concurrency Patterns"
+subtitle: "Concurrency patterns provide reusable solutions to the challenges of writing correct, efficient multi-threaded and asynchronous programs. They address thread management, safe data sharing, producer-consumer..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-09-23
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/03_design_patterns/04_concurrency_patterns.html"
+---
 Concurrency patterns provide reusable solutions to the challenges of writing correct, efficient multi-threaded and asynchronous programs. They address thread management, safe data sharing, producer-consumer coordination, and event handling in concurrent environments.
 
 ## Thread Pool Pattern

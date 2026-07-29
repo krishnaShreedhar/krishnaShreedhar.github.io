@@ -1,5 +1,17 @@
-# Infrastructure Security
-
+---
+title: "Infrastructure Security"
+subtitle: "Infrastructure security protects the compute, network, and storage layers that run applications. Cloud environments require explicit security configuration — the shared responsibility model means the cloud provider..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-09
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/08_security_engineering/04_infrastructure_security.html"
+---
 Infrastructure security protects the compute, network, and storage layers that run applications. Cloud environments require explicit security configuration — the shared responsibility model means the cloud provider secures the infrastructure, but tenants must secure everything they deploy on it.
 
 ## Network Security Architecture

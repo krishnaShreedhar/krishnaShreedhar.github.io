@@ -1,5 +1,17 @@
-# Tutorial 17: CUTLASS
-
+---
+title: "Tutorial 17: CUTLASS"
+subtitle: "See `src/tutorials/17_cutlass/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-07-06
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/17_cutlass.html"
+---
 ## Concept
 
 See `src/tutorials/17_cutlass/main.cu` for detailed inline comments explaining

@@ -1,5 +1,17 @@
-# Communication Protocols
-
+---
+title: "Communication Protocols"
+subtitle: "Communication protocols define how services exchange data — the encoding, transport, sequencing, and error-handling rules that govern inter-service interactions. Choosing the right protocol involves trade-offs..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-01-23
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/04_communication_protocols/index.html"
+---
 Communication protocols define how services exchange data — the encoding, transport, sequencing, and error-handling rules that govern inter-service interactions. Choosing the right protocol involves trade-offs between latency, reliability, coupling, and operational complexity.
 
 ## Overview

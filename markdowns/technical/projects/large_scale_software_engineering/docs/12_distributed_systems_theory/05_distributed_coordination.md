@@ -1,5 +1,17 @@
-# Distributed Coordination
-
+---
+title: "Distributed Coordination"
+subtitle: "Distributed coordination solves the problem of multiple nodes agreeing on shared state and coordinating actions — tasks that are trivial with a single thread but require careful design in distributed systems where..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-07
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/12_distributed_systems_theory/05_distributed_coordination.html"
+---
 Distributed coordination solves the problem of multiple nodes agreeing on shared state and coordinating actions — tasks that are trivial with a single thread but require careful design in distributed systems where nodes can fail independently.
 
 ## Distributed Locking

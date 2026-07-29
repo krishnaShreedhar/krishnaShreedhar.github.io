@@ -1,5 +1,17 @@
-# SAC — Soft Actor-Critic
-
+---
+title: "SAC — Soft Actor-Critic"
+subtitle: "Soft Actor-Critic (SAC) [Haarnoja et al., 2018] extends the standard RL objective with an entropy bonus, encouraging the policy to remain as stochastic as possible while maximising cumulative reward. This maximum..."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-02-09
+reading_time: 4
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/08_sac.html"
+---
 **Use case:** Autonomous vehicle continuous control  
 **Type:** Off-policy, maximum entropy, model-free RL  
 **Action space:** Continuous

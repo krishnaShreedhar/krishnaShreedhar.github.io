@@ -1,5 +1,17 @@
-# Log Management
-
+---
+title: "Log Management"
+subtitle: "Log management covers the production, collection, aggregation, storage, and analysis of application and system logs. Effective logging provides the detailed narrative needed to diagnose production incidents and audit..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-28
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/09_observability_monitoring/04_log_management.html"
+---
 Log management covers the production, collection, aggregation, storage, and analysis of application and system logs. Effective logging provides the detailed narrative needed to diagnose production incidents and audit security events.
 
 ## Structured Logging

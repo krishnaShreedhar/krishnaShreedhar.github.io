@@ -1,5 +1,17 @@
-# Caching Strategies
-
+---
+title: "Caching Strategies"
+subtitle: "Caching stores copies of frequently accessed data in a faster storage layer (memory) to reduce latency and database load. The fundamental trade-off is between data freshness (how up-to-date cached data is) and..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-14
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/05_data_management/04_caching_strategies.html"
+---
 Caching stores copies of frequently accessed data in a faster storage layer (memory) to reduce latency and database load. The fundamental trade-off is between data freshness (how up-to-date cached data is) and performance (how much work is saved by serving from cache).
 
 ## Cache Architecture Layers

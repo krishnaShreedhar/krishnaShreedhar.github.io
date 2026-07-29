@@ -1,5 +1,17 @@
-# Security Engineering Principles
-
+---
+title: "Security Engineering Principles"
+subtitle: "Security principles are foundational guidelines that shape the design of secure systems. Applying these principles during design is orders of magnitude cheaper than remediating vulnerabilities after deployment...."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-01-03
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/08_security_engineering/01_security_principles.html"
+---
 Security principles are foundational guidelines that shape the design of secure systems. Applying these principles during design is orders of magnitude cheaper than remediating vulnerabilities after deployment. Security is not a feature — it is a property of the system.
 
 ## Core Security Principles

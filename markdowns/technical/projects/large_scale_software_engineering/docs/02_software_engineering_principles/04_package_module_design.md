@@ -1,5 +1,17 @@
-# Package and Module Design Principles
-
+---
+title: "Package and Module Design Principles"
+subtitle: "Package and module design principles, formalized by Robert C. Martin, govern how to group classes and components into cohesive, stable, and reusable packages. Poor package structure causes ripple-effect changes,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-03
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/02_software_engineering_principles/04_package_module_design.html"
+---
 Package and module design principles, formalized by Robert C. Martin, govern how to group classes and components into cohesive, stable, and reusable packages. Poor package structure causes ripple-effect changes, makes testing difficult, and prevents independent deployment of components.
 
 ## The Six Principles

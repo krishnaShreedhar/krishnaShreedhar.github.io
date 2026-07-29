@@ -1,5 +1,17 @@
-# Model Serving
-
+---
+title: "Model Serving"
+subtitle: "Model serving is the infrastructure that makes trained models available for predictions in production. The serving strategy depends on latency requirements, throughput needs, and the trade-off between real-time..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-04-30
+reading_time: 3
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/01_ml_systems_architecture/03_model_serving.html"
+---
 Model serving is the infrastructure that makes trained models available for predictions in production. The serving strategy depends on latency requirements, throughput needs, and the trade-off between real-time responsiveness and batch efficiency.
 
 ## Serving Architecture Patterns

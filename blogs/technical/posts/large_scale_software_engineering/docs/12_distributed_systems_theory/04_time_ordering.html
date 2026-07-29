@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Time and Ordering in Distributed Systems &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Time and ordering are fundamental challenges in distributed systems. Clocks drift, messages are delayed arbitrarily, and there is no global "now". Logical clock">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Time and Ordering in Distributed Systems</span>
+        </div>
+        <h1 class="post-title">Time and Ordering in Distributed Systems</h1>
+        <p class="post-subtitle">Time and ordering are fundamental challenges in distributed systems. Clocks drift, messages are delayed arbitrarily, and there is no global "now". Logical clocks provide ordering without relying on synchronized...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-03-03</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2 active"><a href="04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Time and ordering are fundamental challenges in distributed systems. Clocks drift, messages are delayed arbitrarily, and there is no global &quot;now&quot;. Logical clocks provide ordering without relying on synchronized physical clocks, enabling correct reasoning about causality and event ordering.</p>
+<h2>Physical Clock Problems</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph ClockDrift[Physical Clock Drift Problem]
+        Node1[Node 1 Clock: 10:00:00.000]
+        Node2[Node 2 Clock: 10:00:00.050]
+        Node3[Node 3 Clock: 09:59:59.900]
+
+        Problem[Problem:\nNode 3 event at 09:59:59.900\nappears to predate Node 1 event at 10:00:00.000\nbut in reality happened AFTER it\n\nLast-write-wins based on timestamp\nproduces incorrect results!]
+        style Problem fill:#fee2e2,stroke:#dc2626
+    end
+
+    NTP[NTP synchronizes clocks\nbut accuracy is 1-100ms\nnot sufficient for ordering distributed events]
+</div></div>
+<h2>Lamport Logical Clocks</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant P1 as Process 1
+    participant P2 as Process 2
+    participant P3 as Process 3
+
+    Note over P1: time=1
+    P1-&gt;&gt;P1: Event a (send) time=1
+    P1-&gt;&gt;P2: Message with timestamp=1
+
+    Note over P2: time=1
+    P2-&gt;&gt;P2: Event b time=2
+    P2-&gt;&gt;P2: Receive from P1: max(2,1)+1=3
+
+    Note over P3: time=1
+    P3-&gt;&gt;P3: Event c time=2
+    P3-&gt;&gt;P1: Message with timestamp=2
+
+    Note over P1: Receive from P3: max(1,2)+1=3
+    P1-&gt;&gt;P1: Event d time=4
+
+    Note over P1,P3: Rule: receive(msg) → clock = max(local, msg.clock) + 1
+    Note over P1,P3: If A happened-before B, then clock(A) &lt; clock(B)
+    Note over P1,P3: Converse is NOT true - concurrent events can have any order
+</div></div>
+<h2>Vector Clocks</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph VectorClockExample[Vector Clock Example - 3 Nodes]
+        Init[Initial state:\nN1: 0,0,0\nN2: 0,0,0\nN3: 0,0,0]
+
+        E1[N1 local event\nN1: 1,0,0]
+        E2[N2 local event\nN2: 0,1,0]
+        E3[N1 sends to N2\nN1: 2,0,0\nN2 receives: max = 2,1,0 + N2 inc = 2,2,0]
+        E4[N3 local event\nN3: 0,0,1]
+
+        Init --&gt; E1 &amp; E2 &amp; E4
+        E1 &amp; E2 --&gt; E3
+
+        Comparison[Comparing vectors:\nA happens-before B if A[i] &lt;= B[i] for all i\nand A[i] &lt; B[i] for at least one i\nConcurrent if neither A &lt; B nor B &lt; A]
+    end
+</div></div>
+<h2>Hybrid Logical Clocks (HLC)</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph HLC[Hybrid Logical Clock Design]
+        Physical[Physical Time Component\nNTP-synchronized wall clock\nHuman-readable timestamps\nGood for TTL and time-based queries]
+        Logical[Logical Counter Component\nIncremented on causally related events\nOrders events within same millisecond]
+        Combined[HLC = max physical, received HLC\nplus logical counter\nPreserves causality\nApproximates physical time]
+        Physical --&gt; Combined
+        Logical --&gt; Combined
+    end
+
+    Usage[Used by:\nCockroachDB\nYugabyteDB\nMongoDBatlas\nFor distributed transactions\nwith time-based ordering]
+    style Combined fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Clock Drift</strong>: Physical clocks on different machines drift over time and are not perfectly synchronized even with NTP (Network Time Protocol). NTP accuracy is typically 1-100ms, insufficient for ordering events in a distributed system where message delivery is measured in microseconds.</p>
+</li>
+<li><p><strong>Lamport Logical Clocks</strong>: A monotonically increasing integer counter attached to every event and message. Rules: (1) increment counter before each local event, (2) when sending a message, attach current counter, (3) when receiving a message, set counter to max(local, received) + 1. If event A happens-before event B, then L(A) &lt; L(B). The converse is false — concurrent events can have any Lamport order.</p>
+</li>
+<li><p><strong>Happens-Before Relation</strong>: Event A happens-before event B if: (1) A and B are in the same process and A comes first, (2) A is the sending and B is the receiving of the same message, or (3) there is a transitive chain. Events that are not connected by happens-before are <strong>concurrent</strong> — their order is undefined and unimportant.</p>
+</li>
+<li><p><strong>Vector Clocks</strong>: An array of counters, one per process. Capture causal relationships completely — vector clocks can determine whether any two events are causally related or concurrent. A happens-before B iff A[i] ≤ B[i] for all i and A[j] &lt; B[j] for some j. Used by Dynamo-style databases for conflict detection.</p>
+</li>
+<li><p><strong>Version Vectors</strong>: Similar to vector clocks but track the version of each replica's latest update. Used by Riak, Voldemort, and DynamoDB to detect conflicting writes in multi-master replication.</p>
+</li>
+<li><p><strong>Hybrid Logical Clocks (HLC)</strong>: Combines physical time (wall clock) with a logical counter. The physical component keeps HLC close to NTP time (for human-readable timestamps and TTL-based operations); the logical component provides causality ordering. Used by CockroachDB and YugabyteDB for distributed transaction timestamps.</p>
+</li>
+<li><p><strong>TrueTime (Google Spanner)</strong>: Google's GPS and atomic clock-based API that provides a time interval [earliest, latest] within which the current time falls, with a bounded uncertainty of a few milliseconds. Spanner uses this to implement external consistency (linearizability) globally by waiting out the uncertainty interval before committing.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Clock Type</th>
+  <th>Causality Tracking</th>
+  <th>Space</th>
+  <th>Physical Time</th>
+  <th>Systems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Physical (NTP)</td>
+  <td>No</td>
+  <td>O(1)</td>
+  <td>Approximate</td>
+  <td>Logs, TTL</td>
+</tr>
+<tr>
+  <td>Lamport</td>
+  <td>Partial (no concurrent detection)</td>
+  <td>O(1)</td>
+  <td>No</td>
+  <td>Event ordering</td>
+</tr>
+<tr>
+  <td>Vector Clocks</td>
+  <td>Full</td>
+  <td>O(N)</td>
+  <td>No</td>
+  <td>Conflict detection</td>
+</tr>
+<tr>
+  <td>HLC</td>
+  <td>Full</td>
+  <td>O(1)</td>
+  <td>Approximate</td>
+  <td>Distributed DBs</td>
+</tr>
+<tr>
+  <td>TrueTime</td>
+  <td>Full</td>
+  <td>O(1)</td>
+  <td>Exact (bounded)</td>
+  <td>Spanner</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Apply</h2>
+<ul>
+<li><strong>Lamport clocks</strong>: When you need total event ordering and don't need to distinguish concurrent events</li>
+<li><strong>Vector clocks</strong>: When you need to detect causally unrelated (concurrent) operations — required for CRDT and conflict detection in eventually consistent systems</li>
+<li><strong>HLC</strong>: When you need both causality and approximate real-time ordering in a distributed database</li>
+<li><strong>Physical time only</strong>: Never for distributed event ordering — only for human-readable timestamps and approximate TTL-based expiry</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="03_consistency_models.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Consistency Models</span></a>
+            <a href="05_distributed_coordination.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Distributed Coordination</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

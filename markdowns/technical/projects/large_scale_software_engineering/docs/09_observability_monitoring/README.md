@@ -1,5 +1,17 @@
-# Observability and Monitoring
-
+---
+title: "Observability and Monitoring"
+subtitle: "Observability is the ability to understand a system's internal state from its external outputs. In distributed systems, where traditional debugging is impossible, observability is the primary tool for understanding..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-22
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/09_observability_monitoring/index.html"
+---
 Observability is the ability to understand a system's internal state from its external outputs. In distributed systems, where traditional debugging is impossible, observability is the primary tool for understanding production behaviour, diagnosing failures, and validating system health.
 
 ## Overview

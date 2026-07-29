@@ -1,5 +1,17 @@
-# Drift Detection
-
+---
+title: "Drift Detection"
+subtitle: "Drift detection is the process of identifying when the statistical properties of data or model behavior change in production, indicating that a deployed model may no longer be reliable. Unlike traditional software..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-02-23
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/02_mlops/03_drift_detection.html"
+---
 Drift detection is the process of identifying when the statistical properties of data or model behavior change in production, indicating that a deployed model may no longer be reliable. Unlike traditional software where bugs cause immediate failures, ML model degradation is gradual and silent — models continue to return predictions, but those predictions become increasingly wrong as the world shifts away from what the model learned.
 
 ## Types of Drift

@@ -1,5 +1,17 @@
-# Experiment Tracking
-
+---
+title: "Experiment Tracking"
+subtitle: "Experiment tracking is the practice of logging, organizing, and comparing ML training runs — capturing hyperparameters, metrics, and artifacts to make experimentation reproducible and comparable. Without systematic..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-06-11
+reading_time: 3
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/02_mlops/02_experiment_tracking.html"
+---
 Experiment tracking is the practice of logging, organizing, and comparing ML training runs — capturing hyperparameters, metrics, and artifacts to make experimentation reproducible and comparable. Without systematic tracking, ML development degenerates into "notebook chaos" where promising experiments are lost, results cannot be reproduced, and teams repeat work.
 
 ## Experiment Tracking Architecture

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>02 — Deep Q-Network (DQN) &middot; Shreedhar Kodate</title>
+    <meta name="description" content="DQN (Mnih et al., 2015) extends Q-Learning to large, continuous state spaces by replacing the tabular Q-table with a **deep neural network** that maps states to">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">02 — Deep Q-Network (DQN)</span>
+        </div>
+        <h1 class="post-title">02 — Deep Q-Network (DQN)</h1>
+        <p class="post-subtitle">DQN (Mnih et al., 2015) extends Q-Learning to large, continuous state spaces by replacing the tabular Q-table with a **deep neural network** that maps states to Q-values for all actions.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-31</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2 active"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Concept</h2>
+<p>DQN (Mnih et al., 2015) extends Q-Learning to large, continuous state spaces
+by replacing the tabular Q-table with a <strong>deep neural network</strong> that maps
+states to Q-values for all actions.</p>
+<p>The key insight: if we just plug a neural network into the Q-Learning update
+rule, training is unstable because:</p>
+<ol>
+<li>Consecutive transitions are highly correlated (non-i.i.d. data).</li>
+<li>The TD target changes every update step (moving target problem).</li>
+</ol>
+<p>DQN introduces two innovations that fix both issues.</p>
+<hr />
+<h2>DQN Innovations</h2>
+<h3>1. Experience Replay</h3>
+<p>All transitions <code>(s, a, r, s', done)</code> are stored in a <strong>replay buffer</strong>
+(circular queue of capacity N). Mini-batches are sampled uniformly at random
+for each gradient step.</p>
+<p>Benefits:</p>
+<ul>
+<li>Breaks temporal correlation between consecutive transitions.</li>
+<li>Each transition can be replayed multiple times (data efficiency).</li>
+<li>Stable, i.i.d.-like training signal for the neural network.</li>
+</ul>
+<h3>2. Target Network</h3>
+<p>A separate <strong>target network</strong> Q_target (a frozen copy of the online network)
+is used to compute the TD target:</p>
+<pre><code>target = r + gamma * max_a' Q_target(s', a') * (1 - done)
+loss   = MSE( Q_online(s, a), target )
+</code></pre>
+<p>The target network parameters are hard-copied from the online network every
+<code>target_update_freq</code> steps. Between copies, the target is stationary, which
+greatly stabilises training.</p>
+<hr />
+<h2>Network Architecture</h2>
+<pre><code>input_dim  --&gt;  Linear(input_dim, 128)  --&gt;  ReLU
+           --&gt;  Linear(128, 128)        --&gt;  ReLU
+           --&gt;  Linear(128, output_dim)
+</code></pre>
+<p>Output: Q-values for all actions simultaneously. Action selection uses
+<code>argmax</code> over the output vector.</p>
+<p>No batch normalisation. No dropout. Keep it simple.</p>
+<hr />
+<h2>Use Case: Path Planning (Continuous State)</h2>
+<p>Unlike Q-Learning, DQN takes the raw continuous observation vector as input:
+<code>[row/N, col/N, goal_row/N, goal_col/N]</code>. This means the same agent
+architecture scales to much larger grids or even pixel-based observations.</p>
+<p><strong>Observation dim</strong>: 4<br />
+<strong>Action dim</strong>: 4 (discrete)<br />
+<strong>Network input</strong>: float32 vector of shape [4]</p>
+<hr />
+<h2>Flow Diagram</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    A([Start Episode]) --&gt; B[Reset GridWorld]
+    B --&gt; C[Observe state s]
+    C --&gt; D{Epsilon-greedy}
+    D --&gt;|random| E[Random action a]
+    D --&gt;|greedy| F[&quot;a = argmax Q_online(s)&quot;]
+    E --&gt; G[Execute action]
+    F --&gt; G
+    G --&gt; H[&quot;Receive r, s', done&quot;]
+    H --&gt; I[Push to Replay Buffer]
+    I --&gt; J{Buffer &gt;= replay_start?}
+    J --&gt;|No| K[Skip update]
+    J --&gt;|Yes| L[Sample mini-batch of size B]
+    L --&gt; M[&quot;Compute target: r + gamma * max Q_target(s') * (1-done)&quot;]
+    M --&gt; N[&quot;Loss = MSE(Q_online(s,a), target)&quot;]
+    N --&gt; O[Backward + Adam step]
+    O --&gt; P{Step % target_update_freq == 0?}
+    P --&gt;|Yes| Q[Hard copy online -&gt; target]
+    P --&gt;|No| R[Continue]
+    Q --&gt; R
+    R --&gt; S[Decay epsilon]
+    K --&gt; S
+    S --&gt; T{done?}
+    T --&gt;|No| C
+    T --&gt;|Yes| U[Log episode]
+    U --&gt; V{Max episodes?}
+    V --&gt;|No| A
+    V --&gt;|Yes| W([End Training])
+</div></div>
+<hr />
+<h2>Key Config Parameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>network.input_dim</code></td>
+  <td>Observation vector size (4 for GridWorld)</td>
+</tr>
+<tr>
+  <td><code>network.output_dim</code></td>
+  <td>Number of discrete actions (4)</td>
+</tr>
+<tr>
+  <td><code>network.hidden_dims</code></td>
+  <td>Hidden layer widths, e.g. [128, 128]</td>
+</tr>
+<tr>
+  <td><code>training.batch_size</code></td>
+  <td>Mini-batch size (64)</td>
+</tr>
+<tr>
+  <td><code>training.learning_rate</code></td>
+  <td>Adam learning rate (0.001)</td>
+</tr>
+<tr>
+  <td><code>training.gamma</code></td>
+  <td>Discount factor (0.99)</td>
+</tr>
+<tr>
+  <td><code>training.epsilon_start</code></td>
+  <td>Initial epsilon (1.0)</td>
+</tr>
+<tr>
+  <td><code>training.epsilon_end</code></td>
+  <td>Minimum epsilon (0.01)</td>
+</tr>
+<tr>
+  <td><code>training.epsilon_decay_steps</code></td>
+  <td>Linear annealing over N steps (10000)</td>
+</tr>
+<tr>
+  <td><code>training.target_update_freq</code></td>
+  <td>Hard update every N gradient steps (500)</td>
+</tr>
+<tr>
+  <td><code>training.replay_start</code></td>
+  <td>Minimum buffer size before learning (1000)</td>
+</tr>
+<tr>
+  <td><code>buffer.capacity</code></td>
+  <td>Replay buffer size (50000)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Comparison to Q-Learning</h2>
+<table>
+<thead>
+<tr>
+  <th>Aspect</th>
+  <th>Q-Learning</th>
+  <th>DQN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>State representation</td>
+  <td>Discrete integer index</td>
+  <td>Continuous float vector</td>
+</tr>
+<tr>
+  <td>Function approximator</td>
+  <td>Lookup table</td>
+  <td>Deep neural network</td>
+</tr>
+<tr>
+  <td>Memory</td>
+  <td>O(N * A) table</td>
+  <td>Replay buffer + network weights</td>
+</tr>
+<tr>
+  <td>Exploration</td>
+  <td>Epsilon-greedy (multiplicative decay)</td>
+  <td>Epsilon-greedy (linear decay)</td>
+</tr>
+<tr>
+  <td>Update</td>
+  <td>Online TD(0) after every step</td>
+  <td>Mini-batch from replay buffer</td>
+</tr>
+<tr>
+  <td>Target stability</td>
+  <td>Immediate update (can oscillate)</td>
+  <td>Frozen target network</td>
+</tr>
+<tr>
+  <td>Scalability</td>
+  <td>Small discrete spaces only</td>
+  <td>Continuous, high-dimensional</td>
+</tr>
+<tr>
+  <td>Training stability</td>
+  <td>High (exact)</td>
+  <td>Moderate (can diverge)</td>
+</tr>
+<tr>
+  <td>GPU requirement</td>
+  <td>None</td>
+  <td>Beneficial for large networks</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="01_q_learning.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">01 — Q-Learning</span></a>
+            <a href="03_double_dqn.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">03 — Double DQN</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

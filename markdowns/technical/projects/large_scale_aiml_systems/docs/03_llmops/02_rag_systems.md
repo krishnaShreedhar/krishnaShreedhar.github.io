@@ -1,5 +1,17 @@
-# RAG Systems
-
+---
+title: "RAG Systems"
+subtitle: "Retrieval-Augmented Generation (RAG) is a technique that enhances LLM responses by retrieving relevant documents from an external knowledge base and including them in the context window before generation. RAG..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-04-01
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/03_llmops/02_rag_systems.html"
+---
 Retrieval-Augmented Generation (RAG) is a technique that enhances LLM responses by retrieving relevant documents from an external knowledge base and including them in the context window before generation. RAG addresses the key limitations of standalone LLMs: knowledge cutoff dates, hallucination of facts, and inability to access private or proprietary knowledge — without requiring expensive model fine-tuning.
 
 ## RAG Architecture

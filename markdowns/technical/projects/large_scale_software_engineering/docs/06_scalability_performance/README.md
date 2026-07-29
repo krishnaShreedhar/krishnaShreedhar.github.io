@@ -1,5 +1,17 @@
-# Scalability and Performance
-
+---
+title: "Scalability and Performance"
+subtitle: "Scalability is the ability of a system to handle growing amounts of work by adding resources. Performance is the efficiency with which a system uses those resources. At scale, these two properties must be co-designed..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-10
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/06_scalability_performance/index.html"
+---
 Scalability is the ability of a system to handle growing amounts of work by adding resources. Performance is the efficiency with which a system uses those resources. At scale, these two properties must be co-designed — a system can be scalable but slow, or fast but brittle under load.
 
 ## Overview

@@ -1,5 +1,17 @@
-# Cell-Based Architecture
-
+---
+title: "Cell-Based Architecture"
+subtitle: "Cell-Based Architecture organizes a system into independent, self-contained deployment units called cells — each capable of serving a subset of users autonomously. The primary design goal is blast-radius reduction:..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-08-02
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/06_cell_based_architecture.html"
+---
 Cell-Based Architecture organizes a system into independent, self-contained deployment units called cells — each capable of serving a subset of users autonomously. The primary design goal is blast-radius reduction: failures in one cell do not propagate to others, enabling high availability without requiring globally coordinated failover.
 
 ## Architecture Diagrams

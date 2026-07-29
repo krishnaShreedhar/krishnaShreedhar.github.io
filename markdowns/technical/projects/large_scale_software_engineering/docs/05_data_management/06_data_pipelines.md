@@ -1,5 +1,17 @@
-# Data Pipelines
-
+---
+title: "Data Pipelines"
+subtitle: "Data pipelines move data from source systems to destinations — transforming, enriching, and validating it along the way. Pipelines range from nightly batch ETL jobs to real-time streaming architectures processing..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-24
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/05_data_management/06_data_pipelines.html"
+---
 Data pipelines move data from source systems to destinations — transforming, enriching, and validating it along the way. Pipelines range from nightly batch ETL jobs to real-time streaming architectures processing millions of events per second.
 
 ## Pipeline Architecture Spectrum

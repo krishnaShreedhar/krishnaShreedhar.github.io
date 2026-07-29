@@ -1,5 +1,17 @@
-# Distributed Training
-
+---
+title: "Distributed Training"
+subtitle: "Distributed training splits the workload of training large neural networks across multiple GPUs and multiple machines. As models grow to billions or trillions of parameters and training datasets grow to trillions of..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-06-19
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/05_scaling_ml_systems/01_distributed_training.html"
+---
 Distributed training splits the workload of training large neural networks across multiple GPUs and multiple machines. As models grow to billions or trillions of parameters and training datasets grow to trillions of tokens, single-GPU training becomes infeasible — distributed training is the only approach that can train frontier models within reasonable time and cost budgets.
 
 ## Distributed Training Strategies Overview

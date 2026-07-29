@@ -1,5 +1,17 @@
-# Tutorial 24: cuDNN Fused Operations
-
+---
+title: "Tutorial 24: cuDNN Fused Operations"
+subtitle: "See `src/tutorials/24_cudnn_fused_ops/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-02-16
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/24_cudnn_fused_ops.html"
+---
 ## Concept
 
 See `src/tutorials/24_cudnn_fused_ops/main.cu` for detailed inline comments explaining

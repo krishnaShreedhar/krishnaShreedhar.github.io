@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Edge and Distributed Computing &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Edge computing moves computation closer to where data is generated and consumed — end users, IoT devices, and geographically distributed systems. This reduces l">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Edge and Distributed Computing</span>
+        </div>
+        <h1 class="post-title">Edge and Distributed Computing</h1>
+        <p class="post-subtitle">Edge computing moves computation closer to where data is generated and consumed — end users, IoT devices, and geographically distributed systems. This reduces latency dramatically and enables new application patterns...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-11-01</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2 active"><a href="02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Edge computing moves computation closer to where data is generated and consumed — end users, IoT devices, and geographically distributed systems. This reduces latency dramatically and enables new application patterns that were impossible when all computation was centralized.</p>
+<h2>Edge Compute Hierarchy</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Device[Device Edge]
+        IoT[IoT Sensors\nEmbedded ML\nLocal inference]
+        Mobile[Mobile Devices\nOn-device AI\nOffline capability]
+    end
+
+    subgraph NetworkEdge[Network Edge - MEC]
+        CellTower[5G Cell Tower\nMulti-Access Edge Computing\nUltra-low latency\n1-5ms to device]
+        CPE[Customer Premise\nEquipment]
+    end
+
+    subgraph CDNEdge[CDN Edge - PoPs]
+        CloudflareEdge[Cloudflare Workers\nVercel Edge Functions\nFastly Compute\n50-100ms to global users]
+    end
+
+    subgraph Cloud[Cloud Region]
+        AWS[AWS Region\nFull compute and data\n100-300ms globally]
+    end
+
+    Device --&gt; NetworkEdge --&gt; CDNEdge --&gt; Cloud
+
+    style Device fill:#dcfce7,stroke:#16a34a
+    style CDNEdge fill:#dbeafe,stroke:#2563eb
+    style Cloud fill:#fef3c7,stroke:#d97706
+</div></div>
+<h2>CDN Edge Computing (Cloudflare Workers)</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    User[User in Singapore] --&gt; CF[Cloudflare PoP\nSingapore\nEdge Function executes HERE]
+    CF --&gt; Origin[Origin Server\nUS-East\ncalled only when needed]
+
+    subgraph EdgeCapabilities[What Runs at Edge]
+        Auth[JWT Validation\nno origin round-trip]
+        Routing[A/B Test Routing\nCanary traffic splitting]
+        Transform[Response Transformation\nPersonalization]
+        Cache[Edge Cache\nContent serving]
+        Rate2[Rate Limiting\nper IP globally]
+    end
+
+    CF --&gt; Auth &amp; Routing &amp; Transform &amp; Cache &amp; Rate2
+
+    Latency[Result:\n10ms vs 200ms\nfor authenticated edge response]
+    style Latency fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>WebAssembly (WASM) at the Edge</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph WASM[WebAssembly Value Proposition]
+        Lang[Write in: Rust Go C Python]
+        Compile[Compile to WASM\nportable binary]
+        Run[Run anywhere:\nBrowser\nEdge functions\nServer-side\nEmbedded]
+        Lang --&gt; Compile --&gt; Run
+    end
+
+    subgraph Advantages[WASM Advantages]
+        Fast[Near-native performance\nno interpreter overhead]
+        Safe[Sandboxed execution\nno system access by default]
+        Portable[Write once run anywhere\ncross-platform]
+        Small[Small binary size\nfast startup]
+    end
+
+    style Fast fill:#dcfce7,stroke:#16a34a
+    style Safe fill:#dbeafe,stroke:#2563eb
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Edge Computing</strong>: Processing data at or near the source of data generation rather than in a centralized cloud region. Reduces latency by bringing compute closer to users, reduces bandwidth costs by processing data locally before sending to the cloud, and enables offline-capable applications.</p>
+</li>
+<li><p><strong>CDN Edge Functions</strong>: Serverless functions that run within CDN points of presence (PoPs) globally. Cloudflare Workers, Vercel Edge Functions, and Fastly Compute at Edge execute JavaScript, TypeScript, and WASM at hundreds of locations worldwide. Enables sub-10ms response times for authenticated, personalized responses.</p>
+</li>
+<li><p><strong>Multi-Access Edge Computing (MEC)</strong>: ETSI standard for deploying compute within cellular network infrastructure (at or near cell towers). Enables ultra-low latency (1-5ms) applications for autonomous vehicles, augmented reality, and real-time industrial control that require more than CDN edge can provide.</p>
+</li>
+<li><p><strong>WebAssembly (WASM)</strong>: A binary instruction format for a stack-based virtual machine. Designed as a portable compilation target for high-level languages (Rust, C++, Go). Runs at near-native speed in browsers and server-side runtimes. WASM + WASI (system interface) enables portable server-side compute without containers.</p>
+</li>
+<li><p><strong>Offline-First</strong>: Application design where the application is fully functional without internet connectivity. Data is stored locally (IndexedDB, SQLite via SQLite WASM) and synchronized when connectivity is available. Conflict resolution is required. CRDTs enable conflict-free offline-first sync.</p>
+</li>
+<li><p><strong>Durable Objects (Cloudflare)</strong>: Stateful compute at the edge. Single-instance JavaScript objects that run at the closest edge location to the client, maintaining state across requests. Enables real-time collaboration (shared cursors, chat), game servers, and rate limiting without a central data store.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Approach</th>
+  <th>Latency</th>
+  <th>Compute Power</th>
+  <th>Data Consistency</th>
+  <th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Cloud-only</td>
+  <td>High</td>
+  <td>Unlimited</td>
+  <td>Strong</td>
+  <td>Low (scale)</td>
+</tr>
+<tr>
+  <td>CDN edge</td>
+  <td>Low</td>
+  <td>Limited</td>
+  <td>Eventual</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>MEC</td>
+  <td>Very low</td>
+  <td>Moderate</td>
+  <td>Eventual</td>
+  <td>High</td>
+</tr>
+<tr>
+  <td>On-device</td>
+  <td>Near-zero</td>
+  <td>Very limited</td>
+  <td>Local</td>
+  <td>Hardware</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>CDN edge functions</strong>: Authentication, A/B testing, personalization, bot protection — request-scoped logic that doesn't need database writes</li>
+<li><strong>Full edge compute</strong>: Real-time applications requiring ultra-low latency (gaming, AR/VR, industrial IoT)</li>
+<li><strong>WASM at edge</strong>: Compute-intensive tasks (image processing, ML inference) that exceed JavaScript performance limits</li>
+<li><strong>Offline-first</strong>: Consumer mobile apps where poor connectivity is expected (developing regions, mobile use cases)</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="01_platform_engineering.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Platform Engineering</span></a>
+            <a href="03_ebpf.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">eBPF (Extended Berkeley Packet Filter)</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

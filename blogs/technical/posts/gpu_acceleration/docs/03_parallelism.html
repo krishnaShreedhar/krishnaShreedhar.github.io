@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Module 3 — Parallelism: DDP & FSDP on 2× H200 &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This module demonstrates two complementary parallelism strategies for scaling Transformer training across both H200 GPUs connected via NVLink.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Module 3 — Parallelism: DDP & FSDP on 2× H200</span>
+        </div>
+        <h1 class="post-title">Module 3 — Parallelism: DDP & FSDP on 2× H200</h1>
+        <p class="post-subtitle">This module demonstrates two complementary parallelism strategies for scaling Transformer training across both H200 GPUs connected via NVLink.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-04-05</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">gpu-acceleration</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">GPU Acceleration — Transformer Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">GPU Acceleration — Transformer Tutorials</a></li><li class="project-nav__lvl-1"><a href="01_gpu_basics.html">Module 1 — GPU Basics: Memory & Data Transfer</a></li><li class="project-nav__lvl-1"><a href="02_transformer_training.html">Module 2 — Transformer Training on GPU</a></li><li class="project-nav__lvl-1 active"><a href="03_parallelism.html">Module 3 — Parallelism: DDP & FSDP on 2× H200</a></li><li class="project-nav__lvl-1"><a href="04_kv_cache.html">Module 4 — KV-Cache from Scratch</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Overview</h2>
+<p>This module demonstrates two complementary parallelism strategies for
+scaling Transformer training across both H200 GPUs connected via NVLink.</p>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>ddp_trainer.py</code></td>
+  <td><strong>Data parallelism</strong> — each GPU has a full model copy</td>
+</tr>
+<tr>
+  <td><code>fsdp_trainer.py</code></td>
+  <td><strong>Model + data parallelism</strong> — parameters sharded across GPUs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>DistributedDataParallel (DDP)</h2>
+<h3>Concept</h3>
+<p>Each GPU holds a <strong>complete copy</strong> of the model. The dataset is split across
+GPUs via <code>DistributedSampler</code>. After each backward pass, DDP <strong>all-reduces</strong>
+gradients so every replica stays identical.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph &quot;GPU 0 (rank 0)&quot;
+        M0[&quot;Full Model Copy&quot;]
+        D0[&quot;Batch shard 0&quot;]
+        D0 --&gt; M0
+        M0 --&gt; G0[&quot;Gradients&quot;]
+    end
+    subgraph &quot;GPU 1 (rank 1)&quot;
+        M1[&quot;Full Model Copy&quot;]
+        D1[&quot;Batch shard 1&quot;]
+        D1 --&gt; M1
+        M1 --&gt; G1[&quot;Gradients&quot;]
+    end
+
+    G0 &amp; G1 --&gt;|&quot;NCCL All-Reduce\n(NVLink: ~900 GB/s)&quot;| AVG[&quot;Averaged Gradients&quot;]
+    AVG --&gt; M0 &amp; M1
+</div></div>
+<h3>Communication Pattern</h3>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant R0 as GPU 0 (rank 0)
+    participant R1 as GPU 1 (rank 1)
+
+    R0-&gt;&gt;R0: forward + backward (local gradients)
+    R1-&gt;&gt;R1: forward + backward (local gradients)
+
+    note over R0,R1: DDP triggers all-reduce automatically
+    R0-&gt;&gt;R1: send grad shard (ring all-reduce)
+    R1-&gt;&gt;R0: send grad shard (ring all-reduce)
+
+    R0-&gt;&gt;R0: optimizer.step()
+    R1-&gt;&gt;R1: optimizer.step()
+    note over R0,R1: models stay in sync
+</div></div>
+<h3>When to use DDP</h3>
+<ul>
+<li>Model fits in a single GPU's memory.</li>
+<li>Want maximum simplicity — DDP is a one-line wrapper.</li>
+<li>On H200 with NVLink, all-reduce bandwidth is ~900 GB/s — communication
+overhead is negligible for most models.</li>
+</ul>
+<hr />
+<h2>FullyShardedDataParallel (FSDP)</h2>
+<h3>Concept</h3>
+<p>FSDP shards <strong>parameters, gradients, and optimizer states</strong> across GPUs.
+Each GPU owns only <code>1/N</code> of each tensor. Just-in-time all-gather before
+each forward pass reconstructs the full parameter, then immediately frees it.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph &quot;Before training&quot;
+        P[&quot;Full model parameters\n(e.g. 10 GB)&quot;]
+        P --&gt;|&quot;FSDP sharding&quot;| S0[&quot;Shard 0 on GPU 0\n(5 GB)&quot;]
+        P --&gt;|&quot;FSDP sharding&quot;| S1[&quot;Shard 1 on GPU 1\n(5 GB)&quot;]
+    end
+
+    subgraph &quot;Forward pass (layer L)&quot;
+        S0 &amp; S1 --&gt;|&quot;All-gather&quot;| FL[&quot;Full layer params\n(temporary, freed after use)&quot;]
+        FL --&gt; FWD[&quot;Forward computation&quot;]
+    end
+
+    subgraph &quot;Backward pass&quot;
+        FWD --&gt; GS0[&quot;Reduce-scatter gradients\nback to shards&quot;]
+    end
+</div></div>
+<h3>Sharding Strategies</h3>
+<table>
+<thead>
+<tr>
+  <th>Strategy</th>
+  <th>What's sharded</th>
+  <th>Memory saving</th>
+  <th>Communication cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>FULL_SHARD</code></td>
+  <td>Params + grads + optimizer</td>
+  <td>1/N per GPU</td>
+  <td>All-gather + reduce-scatter each layer</td>
+</tr>
+<tr>
+  <td><code>SHARD_GRAD_OP</code></td>
+  <td>Grads + optimizer (params kept full)</td>
+  <td>~2/3</td>
+  <td>Reduce-scatter only</td>
+</tr>
+<tr>
+  <td><code>NO_SHARD</code></td>
+  <td>Nothing (equivalent to DDP)</td>
+  <td>None</td>
+  <td>All-reduce</td>
+</tr>
+</tbody>
+</table>
+<h3>auto_wrap_policy</h3>
+<p>FSDP needs to know which sub-modules to shard independently:</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    ROOT[&quot;TransformerLM&quot;]
+    ROOT --&gt; EB[&quot;token_emb\n(small → not sharded)&quot;]
+    ROOT --&gt; B0[&quot;TransformerBlock 0\n(≥1M params → SHARD)&quot;]
+    ROOT --&gt; B1[&quot;TransformerBlock 1\n(≥1M params → SHARD)&quot;]
+    ROOT --&gt; BN[&quot;...&quot;]
+    ROOT --&gt; HEAD[&quot;head\n(small → not sharded)&quot;]
+
+    style B0 fill:#f96,color:#000
+    style B1 fill:#f96,color:#000
+</div></div>
+<p>Configured via <code>fsdp.min_num_params</code> in YAML.</p>
+<hr />
+<h2>NVLink vs PCIe for Multi-GPU</h2>
+<p>The 2× H200 server uses <strong>NVLink 4.0</strong> between GPUs:</p>
+<table>
+<thead>
+<tr>
+  <th>Link</th>
+  <th>Bandwidth</th>
+  <th>Latency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>NVLink 4.0 (H200)</td>
+  <td>~900 GB/s bidirectional</td>
+  <td>~1 µs</td>
+</tr>
+<tr>
+  <td>PCIe 5.0 ×16</td>
+  <td>~128 GB/s</td>
+  <td>~5 µs</td>
+</tr>
+</tbody>
+</table>
+<p>NVLink makes FSDP's all-gather/reduce-scatter overhead very small,
+making FULL_SHARD viable even for moderate-size models.</p>
+<hr />
+<h2>Launching</h2>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># DDP — 2 GPUs
+torchrun --nproc_per_node=2 -m src.parallelism.ddp_trainer
+
+# FSDP — 2 GPUs
+torchrun --nproc_per_node=2 -m src.parallelism.fsdp_trainer
+</code></pre></div>
+<p><code>torchrun</code> sets <code>RANK</code>, <code>LOCAL_RANK</code>, <code>WORLD_SIZE</code> env vars automatically.
+Each process calls <code>dist.init_process_group()</code> to form the group, then
+<code>torch.cuda.set_device(local_rank)</code> to bind to its GPU.</p>
+<h3>Key config knobs (<code>configs/parallelism.yaml</code>)</h3>
+<table>
+<thead>
+<tr>
+  <th>Key</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>distributed.backend</code></td>
+  <td><code>nccl</code> (GPU-to-GPU via NVLink/PCIe)</td>
+</tr>
+<tr>
+  <td><code>fsdp.sharding_strategy</code></td>
+  <td><code>FULL_SHARD</code> → most memory efficient</td>
+</tr>
+<tr>
+  <td><code>fsdp.cpu_offload</code></td>
+  <td>Move params to CPU RAM when not in use (slower)</td>
+</tr>
+<tr>
+  <td><code>fsdp.min_num_params</code></td>
+  <td>Threshold for wrapping sub-modules</td>
+</tr>
+<tr>
+  <td><code>training.batch_size</code></td>
+  <td><strong>Global</strong> batch size; each GPU sees <code>batch_size/N</code></td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="02_transformer_training.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Module 2 — Transformer Training on GPU</span></a>
+            <a href="04_kv_cache.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Module 4 — KV-Cache from Scratch</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

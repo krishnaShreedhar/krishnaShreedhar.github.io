@@ -1,5 +1,17 @@
-# Monolithic Architecture
-
+---
+title: "Monolithic Architecture"
+subtitle: "A monolithic architecture packages all application functionality into a single deployable unit. All components — UI, business logic, and data access — share the same process space and are deployed together, making..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-08
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/01_monolithic_architecture.html"
+---
 A monolithic architecture packages all application functionality into a single deployable unit. All components — UI, business logic, and data access — share the same process space and are deployed together, making development straightforward but creating coupling that complicates independent scaling and evolution.
 
 ## Architecture Diagrams

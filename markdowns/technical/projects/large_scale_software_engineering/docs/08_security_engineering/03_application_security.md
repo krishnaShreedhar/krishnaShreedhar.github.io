@@ -1,5 +1,17 @@
-# Application Security
-
+---
+title: "Application Security"
+subtitle: "Application security addresses vulnerabilities in software code and design. The OWASP Top 10 provides the canonical list of critical web application security risks. Addressing these during development is far cheaper..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-08-21
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/08_security_engineering/03_application_security.html"
+---
 Application security addresses vulnerabilities in software code and design. The OWASP Top 10 provides the canonical list of critical web application security risks. Addressing these during development is far cheaper than remediating them after deployment.
 
 ## OWASP Top 10 Overview

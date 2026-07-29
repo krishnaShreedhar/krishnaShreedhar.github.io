@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ONNX Optimization Pipeline - Flow Diagrams &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Detailed workflow diagrams for every stage of the ONNX optimization lifecycle. Each diagram corresponds directly to code in the `src/` modules.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">ONNX Optimization Pipeline - Flow Diagrams</span>
+        </div>
+        <h1 class="post-title">ONNX Optimization Pipeline - Flow Diagrams</h1>
+        <p class="post-subtitle">Detailed workflow diagrams for every stage of the ONNX optimization lifecycle. Each diagram corresponds directly to code in the `src/` modules.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-10-03</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">onnx-graph-optimizations</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">ONNX Graph Optimizations</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">ONNX Graph Optimizations</a></li><li class="project-nav__lvl-1"><a href="concepts.html">ONNX Concepts and Graph Optimization</a></li><li class="project-nav__lvl-1 active"><a href="flow_diagrams.html">ONNX Optimization Pipeline - Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Detailed workflow diagrams for every stage of the ONNX optimization lifecycle.
+Each diagram corresponds directly to code in the <code>src/</code> modules.</p>
+<hr />
+<h2>1. Model Export Pipeline</h2>
+<p>This flow covers <code>src/model_exporter/pytorch_exporter.py</code> and
+<code>src/model_exporter/sklearn_exporter.py</code>.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([Start: define model architecture])
+
+    subgraph PyTorch[&quot;PyTorch → ONNX (pytorch_exporter.py)&quot;]
+        direction TB
+        PT1[&quot;Define SimpleCNN\nConv→BN→ReLU→Conv→BN→ReLU\n→AvgPool→Flatten→Linear×2&quot;]
+        PT2[&quot;model.eval()\n(disables dropout/BN training mode)&quot;]
+        PT3[&quot;Create dummy input\ntorch.randn(B, C, H, W)&quot;]
+        PT4[&quot;torch.onnx.export()\nopset=17, dynamic_axes={'input': {0: 'batch_size'}}\ndo_constant_folding=True&quot;]
+        PT5[&quot;onnx.checker.check_model()&quot;]
+        PT6[&quot;onnx.shape_inference.infer_shapes()&quot;]
+        PT7[&quot;Log: opset, node_count,\ninput/output shapes&quot;]
+    end
+
+    subgraph Sklearn[&quot;sklearn → ONNX (sklearn_exporter.py)&quot;]
+        direction TB
+        SK1[&quot;make_classification()\nsynthetic dataset&quot;]
+        SK2[&quot;Pipeline(StandardScaler\n+ LogisticRegression)&quot;]
+        SK3[&quot;pipeline.fit(X, y)&quot;]
+        SK4[&quot;skl2onnx.convert_sklearn()\nFloatTensorType, opset=17&quot;]
+        SK5[&quot;onnx.checker.check_model()&quot;]
+        SK6[&quot;Log: node types,\noperator count&quot;]
+    end
+
+    ONNX_FILE[&quot;.onnx file\n(outputs/models/)&quot;]
+
+    START --&gt; PT1 --&gt; PT2 --&gt; PT3 --&gt; PT4 --&gt; PT5 --&gt; PT6 --&gt; PT7 --&gt; ONNX_FILE
+    START --&gt; SK1 --&gt; SK2 --&gt; SK3 --&gt; SK4 --&gt; SK5 --&gt; SK6 --&gt; ONNX_FILE
+</div></div>
+<h3>Export Key Decision Points</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Q1{&quot;Dynamic batch\nsize needed?&quot;}
+    Q1 -- Yes --&gt; DYN[&quot;dynamic_axes={'input': {0: 'batch_size'}}&quot;]
+    Q1 -- No  --&gt; STAT[&quot;No dynamic_axes\n(fixed shape, smaller model)&quot;]
+
+    Q2{&quot;do_constant_folding?&quot;}
+    Q2 -- Yes --&gt; CF[&quot;Pre-folds constants\nat export time&quot;]
+    Q2 -- No  --&gt; NCF[&quot;Larger graph\nbut more transparent&quot;]
+
+    Q3{&quot;opset version?&quot;}
+    Q3 -- &quot;17 (recommended)&quot; --&gt; OPS17[&quot;Broad ORT support\nLayerNorm as first-class op&quot;]
+    Q3 -- &quot;&lt;11&quot;              --&gt; OPS_OLD[&quot;Missing Resize,\nRange ops&quot;]
+    Q3 -- &quot;&gt;20&quot;             --&gt; OPS_NEW[&quot;Newest features,\ncheck ORT version support&quot;]
+</div></div>
+<hr />
+<h2>2. Graph Optimization Pipeline</h2>
+<p>This flow covers <code>src/graph_optimizer/optimization_pipeline.py</code>,
+<code>constant_folder.py</code>, and <code>fusion_analyzer.py</code>.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    INPUT_MODEL[&quot;Input: raw .onnx file\n(from export step)&quot;]
+
+    subgraph Scan[&quot;Pre-optimization Analysis&quot;]
+        direction TB
+        FU[&quot;FusionAnalyzer.find_patterns()\nDetect Conv+BN+Relu,\nMatMul+Add, etc.&quot;]
+        CF[&quot;ConstantFolder.analyse()\nCount foldable nodes&quot;]
+        GI[&quot;GraphInspector.inspect()\nNode count, op types, shapes&quot;]
+    end
+
+    subgraph Levels[&quot;Apply ORT Levels (OptimizationPipeline)&quot;]
+        direction TB
+        L0[&quot;SessionOptions.graph_optimization_level\n= ORT_DISABLE_ALL\n→ save optimized_ORT_DISABLE_ALL.onnx&quot;]
+        L1[&quot;= ORT_ENABLE_BASIC\n→ constant folding, identity elim\n→ save optimized_ORT_ENABLE_BASIC.onnx&quot;]
+        L2[&quot;= ORT_ENABLE_EXTENDED\n→ + Conv+BN folding, op fusion\n→ save optimized_ORT_ENABLE_EXTENDED.onnx&quot;]
+        L3[&quot;= ORT_ENABLE_ALL\n→ + layout optimization\n→ save optimized_ORT_ENABLE_ALL.onnx&quot;]
+    end
+
+    subgraph PostAnalysis[&quot;Post-optimization Analysis&quot;]
+        direction TB
+        NC[&quot;NodeCounter.compare_counts()\nNode reduction per level&quot;]
+        FA[&quot;FusionAnalyzer.compare_fusion()\nBN nodes before/after&quot;]
+        CF2[&quot;ConstantFolder.compare()\nFolded node delta&quot;]
+    end
+
+    REPORT[&quot;Structured Log Report\n+ comparison charts&quot;]
+
+    INPUT_MODEL --&gt; Scan
+    Scan --&gt; Levels
+    L0 --&gt; L1 --&gt; L2 --&gt; L3
+    Levels --&gt; PostAnalysis
+    PostAnalysis --&gt; REPORT
+</div></div>
+<h3>BatchNorm Folding - Node-level Detail</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph RAW[&quot;Before (ORT_ENABLE_BASIC)&quot;]
+        direction TB
+        CW[&quot;Conv weights\nW: [32,1,3,3]&quot;]
+        CB[&quot;Conv bias\nb: [32]&quot;]
+        C[&quot;Conv node&quot;]
+        BNW[&quot;BN.weight γ\nBN.bias β\nBN.mean μ\nBN.var σ²&quot;]
+        BN[&quot;BatchNorm node\n(ε=1e-5)&quot;]
+        RL[&quot;Relu node&quot;]
+        CW &amp; CB --&gt; C --&gt; BN
+        BNW --&gt; BN --&gt; RL
+    end
+
+    subgraph FUSED[&quot;After (ORT_ENABLE_EXTENDED)&quot;]
+        direction TB
+        FW[&quot;Fused Conv weights\nW' = W · (γ/√(σ²+ε))&quot;]
+        FB[&quot;Fused Conv bias\nb' = b·(γ/√(σ²+ε)) + β − μ·(γ/√(σ²+ε))&quot;]
+        FC[&quot;Conv node\n(BN absorbed)&quot;]
+        FR[&quot;Relu node&quot;]
+        FW &amp; FB --&gt; FC --&gt; FR
+    end
+
+    RAW -- &quot;ORT_ENABLE_EXTENDED&quot; --&gt; FUSED
+</div></div>
+<hr />
+<h2>3. Inference Request Flow with EP Selection</h2>
+<p>This flow covers <code>src/inference_engine/ort_inference.py</code> and
+<code>src/inference_engine/execution_providers.py</code>.</p>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant App as Application
+    participant Sel as ExecutionProviderSelector
+    participant ORT as ort.InferenceSession
+    participant EP1 as CUDAExecutionProvider
+    participant EP2 as CPUExecutionProvider
+
+    App-&gt;&gt;Sel: build_provider_list(['CUDA', 'CPU'])
+    Sel-&gt;&gt;Sel: ort.get_available_providers()
+    alt CUDA available
+        Sel--&gt;&gt;App: ['CUDAExecutionProvider', 'CPUExecutionProvider']
+    else CUDA not available
+        Sel--&gt;&gt;App: ['CPUExecutionProvider']
+    end
+
+    App-&gt;&gt;ORT: InferenceSession(model, providers=[...])
+    ORT-&gt;&gt;ORT: Load and optimize graph
+    ORT-&gt;&gt;ORT: Partition nodes to EPs
+
+    loop For each node in graph
+        ORT-&gt;&gt;EP1: Can you run this op?
+        alt EP1 supports op
+            EP1--&gt;&gt;ORT: Yes
+            ORT-&gt;&gt;EP1: Execute node
+        else EP1 doesn't support op
+            ORT-&gt;&gt;EP2: Execute node (fallback)
+        end
+    end
+
+    App-&gt;&gt;ORT: session.run(None, {&quot;input&quot;: data})
+    ORT-&gt;&gt;EP1: Execute Conv, Gemm (GPU ops)
+    EP1--&gt;&gt;ORT: intermediate tensor
+    ORT-&gt;&gt;EP2: Execute unsupported ops (CPU fallback)
+    EP2--&gt;&gt;ORT: output tensor
+    ORT--&gt;&gt;App: [output_array]
+</div></div>
+<h3>Session Options Configuration Flow</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    OPT[&quot;ort.SessionOptions()&quot;]
+    OPT --&gt; GL[&quot;graph_optimization_level\n= ORT_ENABLE_ALL&quot;]
+    OPT --&gt; OF[&quot;optimized_model_filepath\n= 'outputs/models/opt.onnx'&quot;]
+    OPT --&gt; PROF[&quot;enable_profiling = True\n(optional, see config.inference.enable_profiling)&quot;]
+    OPT --&gt; THR[&quot;inter_op_num_threads = 0\n(auto-detect)\nintra_op_num_threads = 0&quot;]
+
+    GL &amp; OF &amp; PROF &amp; THR --&gt; SESSION[&quot;ort.InferenceSession(model, opts, providers)&quot;]
+    SESSION --&gt; RUN[&quot;session.run(output_names, input_dict)&quot;]
+    RUN --&gt; OUT[&quot;list of np.ndarray outputs&quot;]
+</div></div>
+<hr />
+<h2>4. Graph Analysis Workflow</h2>
+<p>This flow covers <code>src/graph_analysis/graph_inspector.py</code>,
+<code>shape_analyzer.py</code>, and <code>node_counter.py</code>.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    ONNX_FILE[&quot;.onnx file&quot;]
+
+    subgraph Load[&quot;Load &amp; Validate&quot;]
+        direction TB
+        LD[&quot;onnx.load(path)&quot;]
+        SI[&quot;onnx.shape_inference.infer_shapes()\n→ fills value_info with tensor shapes&quot;]
+        CHK[&quot;onnx.checker.check_model()\n→ raises on structural errors&quot;]
+    end
+
+    subgraph Structure[&quot;Structural Inspection (GraphInspector)&quot;]
+        direction TB
+        META[&quot;Log metadata:\n  ir_version, opset, graph name&quot;]
+        IOS[&quot;Log inputs/outputs:\n  name, shape, dtype&quot;]
+        INITS[&quot;Log initializers:\n  name, shape, numel, dtype\n  total_parameters count&quot;]
+        NODES[&quot;Inspect nodes:\n  op_type, name, inputs, outputs\n  attributes (kernel_size, strides…)&quot;]
+        OPP[&quot;Detect optimization opportunities:\n  unfused Conv+BN+Relu patterns\n  Dropout at inference&quot;]
+    end
+
+    subgraph Shapes[&quot;Shape Propagation (ShapeAnalyzer)&quot;]
+        direction TB
+        MAP[&quot;Build shape_map:\n  tensor_name → [dims]&quot;]
+        PROP[&quot;Print per-node:\n  [idx] op_type  in=[x:shape]  →  out=[y:shape]&quot;]
+        DYN[&quot;Find dynamic dimensions:\n  symbolic dims (batch_size, seq_len)&quot;]
+    end
+
+    subgraph Counting[&quot;Operator Counting (NodeCounter)&quot;]
+        direction TB
+        CNT[&quot;Count by op_type:\n  Conv×2, BN×2, Relu×3 …&quot;]
+        SORT[&quot;Sort descending by count&quot;]
+        CHART1[&quot;plot_distribution()\n  → horizontal bar chart\n  → saved to outputs/models/&quot;]
+        CHART2[&quot;compare_counts(models_dict)\n  → grouped bar across opt levels&quot;]
+    end
+
+    ONNX_FILE --&gt; Load
+    Load --&gt; Structure
+    Load --&gt; Shapes
+    Load --&gt; Counting
+</div></div>
+<h3>Shape Inference Detail</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Before[&quot;Before infer_shapes&quot;]
+        GI[&quot;graph.input → shape known&quot;]
+        VI_EMPTY[&quot;graph.value_info → EMPTY&quot;]
+        GO[&quot;graph.output → shape unknown&quot;]
+    end
+
+    subgraph After[&quot;After infer_shapes&quot;]
+        GI2[&quot;graph.input → shape known&quot;]
+        VI_FULL[&quot;graph.value_info\n→ ALL intermediate tensor shapes\npopulated by symbolic propagation&quot;]
+        GO2[&quot;graph.output → shape resolved&quot;]
+    end
+
+    Before -- &quot;onnx.shape_inference.infer_shapes()&quot; --&gt; After
+</div></div>
+<hr />
+<h2>5. End-to-End Benchmarking Flow</h2>
+<p>This flow covers <code>src/inference_engine/benchmark.py</code>.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([Start benchmark])
+
+    subgraph Setup[&quot;Setup (per model × batch_size)&quot;]
+        direction TB
+        SESS[&quot;Create ort.InferenceSession\nORT_ENABLE_ALL&quot;]
+        DUMMY[&quot;Build dummy input\nnp.random.randn(batch_size, C, H, W).astype(float32)&quot;]
+    end
+
+    subgraph WarmUp[&quot;Warm-up Phase&quot;]
+        direction TB
+        WU_LOOP[&quot;for _ in range(warmup_iterations=10):\n    session.run(None, inputs)&quot;]
+        WU_NOTE[&quot;Purpose: prime CPU caches,\nJIT-compile ORT kernels&quot;]
+    end
+
+    subgraph Timed[&quot;Timed Loop&quot;]
+        direction TB
+        TLOOP[&quot;for _ in range(benchmark_iterations=100):&quot;]
+        T0[&quot;t0 = time.perf_counter()&quot;]
+        RUN[&quot;session.run(None, inputs)&quot;]
+        RECORD[&quot;latencies_ms.append((t1-t0)*1000)&quot;]
+    end
+
+    subgraph Stats[&quot;Statistics&quot;]
+        direction TB
+        MEAN[&quot;mean_latency_ms&quot;]
+        STD[&quot;std_latency_ms&quot;]
+        P50[&quot;p50_latency_ms  (median)&quot;]
+        P95[&quot;p95_latency_ms  (tail latency)&quot;]
+        P99[&quot;p99_latency_ms  (worst-case)&quot;]
+        THRU[&quot;throughput = batch_size / (mean_ms / 1000)&quot;]
+    end
+
+    REPORT[&quot;BenchmarkResult dataclass\n→ logged to file + console&quot;]
+
+    START --&gt; Setup --&gt; WarmUp --&gt; Timed --&gt; Stats --&gt; REPORT
+</div></div>
+<h3>Benchmark Interpretation Guide</h3>
+<table>
+<thead>
+<tr>
+  <th>Metric</th>
+  <th>When to care</th>
+  <th>What it tells you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>mean_latency_ms</code></td>
+  <td>Always</td>
+  <td>Average cost per inference call</td>
+</tr>
+<tr>
+  <td><code>p50_latency_ms</code></td>
+  <td>Steady-state systems</td>
+  <td>Typical latency (50% of calls faster)</td>
+</tr>
+<tr>
+  <td><code>p95_latency_ms</code></td>
+  <td>SLA-bound services</td>
+  <td>Latency seen by 95% of requests</td>
+</tr>
+<tr>
+  <td><code>p99_latency_ms</code></td>
+  <td>Latency-sensitive APIs</td>
+  <td>Near-worst-case; affects tail users</td>
+</tr>
+<tr>
+  <td><code>throughput_samples_per_s</code></td>
+  <td>Batch workloads</td>
+  <td>Maximum data processing rate</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Throughput vs Latency trade-off</strong>: Larger batch sizes increase throughput
+but also increase p99 latency.  Choose batch size based on your SLA.</p>
+<hr />
+<h2>6. Complete System Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    CFG[&quot;config.yaml\n(single source of truth)&quot;]
+
+    CFG --&gt; EXP
+    CFG --&gt; OPT
+    CFG --&gt; INF
+    CFG --&gt; ANA
+
+    subgraph EXP[&quot;src/model_exporter/&quot;]
+        PE[&quot;pytorch_exporter.py\nSimpleCNN → ONNX&quot;]
+        SE[&quot;sklearn_exporter.py\nPipeline → ONNX&quot;]
+    end
+
+    subgraph ANA[&quot;src/graph_analysis/&quot;]
+        GI2[&quot;graph_inspector.py\nnodes, edges, metadata&quot;]
+        SA[&quot;shape_analyzer.py\ntensor shapes&quot;]
+        NC2[&quot;node_counter.py\nop distribution, charts&quot;]
+    end
+
+    subgraph OPT[&quot;src/graph_optimizer/&quot;]
+        OP[&quot;optimization_pipeline.py\n4 ORT levels&quot;]
+        CF2[&quot;constant_folder.py\nfold analysis&quot;]
+        FA[&quot;fusion_analyzer.py\npattern detection&quot;]
+    end
+
+    subgraph INF[&quot;src/inference_engine/&quot;]
+        OI[&quot;ort_inference.py\nInferenceSession&quot;]
+        BM[&quot;benchmark.py\nlatency, throughput&quot;]
+        EP[&quot;execution_providers.py\nEP selection&quot;]
+    end
+
+    ONNX_MODELS[&quot;outputs/models/\n  cnn_model.onnx\n  sklearn_pipeline.onnx\n  optimized_*.onnx&quot;]
+    CHARTS[&quot;outputs/models/\n  *.png charts&quot;]
+    LOGS[&quot;logs/\n  onnx_optimizations.log&quot;]
+
+    EXP --&gt; ONNX_MODELS
+    ONNX_MODELS --&gt; ANA
+    ONNX_MODELS --&gt; OPT
+    OPT --&gt; ONNX_MODELS
+    ONNX_MODELS --&gt; INF
+    ANA --&gt; CHARTS
+    INF --&gt; LOGS
+    OPT --&gt; LOGS
+    ANA --&gt; LOGS
+</div></div>
+
+        
+        <nav class="post-nav">
+            <a href="concepts.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">ONNX Concepts and Graph Optimization</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

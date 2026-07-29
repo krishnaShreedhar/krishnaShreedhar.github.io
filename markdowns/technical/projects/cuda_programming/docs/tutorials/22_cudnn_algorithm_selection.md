@@ -1,5 +1,17 @@
-# Tutorial 22: cuDNN Algorithm Selection
-
+---
+title: "Tutorial 22: cuDNN Algorithm Selection"
+subtitle: "See `src/tutorials/22_cudnn_algorithm_selection/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-12-21
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/22_cudnn_algorithm_selection.html"
+---
 ## Concept
 
 See `src/tutorials/22_cudnn_algorithm_selection/main.cu` for detailed inline comments explaining

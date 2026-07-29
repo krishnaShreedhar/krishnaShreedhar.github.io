@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Data Collection &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Data collection is the process of gathering, sourcing, and labeling the raw data that forms the foundation of ML training datasets. The diversity, volume, and q">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Data Collection</span>
+        </div>
+        <h1 class="post-title">Data Collection</h1>
+        <p class="post-subtitle">Data collection is the process of gathering, sourcing, and labeling the raw data that forms the foundation of ML training datasets. The diversity, volume, and quality of collected data determines the ceiling of model...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-11-27</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2 active"><a href="01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Data collection is the process of gathering, sourcing, and labeling the raw data that forms the foundation of ML training datasets. The diversity, volume, and quality of collected data determines the ceiling of model performance — no training algorithm or architecture can overcome a fundamentally biased, limited, or mislabeled dataset.</p>
+<h2>Data Source Taxonomy</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Sources[Data Collection Sources]
+        subgraph Organic[Organic First-Party Data]
+            Logs[User Activity Logs\nclicks, searches, purchases\npayment events\nsupport tickets]
+            Transactions[Transactional Data\norder history\npayment records\nuser account data]
+            Telemetry[Product Telemetry\nerror logs\nperformance metrics\nfeature usage events]
+        end
+
+        subgraph Labeled[Human-Labeled Data]
+            Expert[Expert Annotation\nradiologists labeling X-rays\nlawyers labeling contracts\nhigh cost - high quality]
+            Crowd[Crowdsourced Annotation\nAmazon Mechanical Turk\nScale AI Labelbox\nlower cost - variable quality]
+            HITL[Human-in-the-Loop\nmodel pre-labels\nhuman reviews and corrects\nefficient for high-volume tasks]
+        end
+
+        subgraph Synthetic[Synthetic and Augmented Data]
+            SyntheticGen[Synthetic Generation\nGANs for images\nLLMs for text\nsimulators for RL environments]
+            Augmentation[Data Augmentation\nimage flips rotations crops\ntext back-translation\naudio pitch shifting]
+            DataMix[Mixing Real and Synthetic\naugment rare classes\nbalance imbalanced datasets]
+        end
+
+        subgraph External[External and Public Data]
+            OpenDatasets[Public Datasets\nImageNet COCO CommonCrawl\nWikipedia GitHub code\nHuggingFace datasets]
+            ThirdParty[Third-Party Data\ncommercial data providers\nweather, demographics\nfinancial market data]
+        end
+    end
+</div></div>
+<h2>Data Labeling Pipeline</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph LabelingPipeline[Data Labeling Workflow]
+        Raw[Raw Unlabeled Examples\nN = 100000 items]
+
+        ActiveLearn[Active Learning Selection\nselect most informative examples\nuncertainty sampling\nsmall sample: 1000 items]
+
+        Prelabel[Model Pre-labeling\ncurrent model generates candidate labels\nreduces annotator work by 60-80%]
+
+        Assign[Annotation Assignment\ndistribute to annotators\nconcurrent assignment\n3 annotators per item]
+
+        Annotate[Human Annotation\nannotators review and label\nusing annotation tool\nLabel Studio Prodigy Scale AI]
+
+        QA[Quality Assurance\ninter-annotator agreement\nIAA Cohen Kappa\nresolve disagreements\ndiscard low-agreement items]
+
+        Labeled[Labeled Dataset\nN = 800 high-quality examples\nremaining 200 discarded or reannotated]
+
+        Raw --&gt; ActiveLearn --&gt; Prelabel --&gt; Assign --&gt; Annotate --&gt; QA --&gt; Labeled
+    end
+
+    style Labeled fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>Label Quality and Weak Supervision</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph WeakSupervision[Weak Supervision with Snorkel]
+        Unlabeled[Large Unlabeled Dataset\n1M examples]
+
+        subgraph LFs[Labeling Functions - LFs]
+            LF1[LF1: Regex pattern\nif text contains fraud keywords\nreturn FRAUD]
+            LF2[LF2: Heuristic rule\nif amount greater than 10000 USD\nreturn SUSPICIOUS]
+            LF3[LF3: External model\npretrained fraud classifier\nconfidence threshold]
+            LF4[LF4: Knowledge base lookup\nknown fraudulent merchant IDs\nreturn FRAUD]
+        end
+
+        LabelModel[Label Model\nSnorkel or majority vote\naggregates LF outputs\nestimates LF accuracy\nproduces probabilistic labels]
+
+        DiscriminativeModel[Train Discriminative Model\non probabilistic labels\nlearns to generalize beyond LFs]
+
+        Unlabeled --&gt; LF1 &amp; LF2 &amp; LF3 &amp; LF4 --&gt; LabelModel --&gt; DiscriminativeModel
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Data Flywheel</strong>: The virtuous cycle where more users generate more data, enabling training better models, which improve the product, attracting more users. Building the data flywheel is one of the most important strategic decisions in ML-powered products — it creates compounding competitive advantage over time. Collect data by design: log everything useful, instrument product actions as implicit labels.</p>
+</li>
+<li><p><strong>Implicit vs Explicit Labels</strong>: Explicit labels require human annotation (expensive, slow). Implicit labels come from user behavior — a click signals relevance in search, a purchase signals interest in recommendations, a fraud report labels a transaction. Implicit labels are abundant and cheap but noisy (a non-click doesn't mean irrelevance — the item may not have been seen). Design the product to collect high-quality implicit labels.</p>
+</li>
+<li><p><strong>Inter-Annotator Agreement (IAA)</strong>: A measure of how consistently different human annotators label the same examples. Cohen's Kappa &gt; 0.8 indicates strong agreement; &lt; 0.6 indicates the labeling task is ambiguous. Low IAA signals that the labeling guidelines are unclear or the task is inherently subjective. Fix guidelines before scaling annotation — scaling a broken annotation process multiplies garbage.</p>
+</li>
+<li><p><strong>Active Learning</strong>: Selectively choosing which unlabeled examples to annotate based on model uncertainty. Instead of randomly sampling 1,000 examples from 1M unlabeled items, active learning selects the 1,000 examples the current model is most uncertain about — maximizing the information gained per annotation dollar. Reduces labeled data requirements by 5-10x for many tasks.</p>
+</li>
+<li><p><strong>Data Augmentation</strong>: Programmatically creating new training examples from existing ones. For images: random crops, flips, color jitter, Mixup, CutMix. For text: synonym replacement, back-translation, paraphrase generation. For tabular data: SMOTE for class imbalance. Augmentation is most valuable for small datasets or rare classes, and must preserve the label (a horizontally flipped cat is still a cat; an augmented fraud transaction must still represent fraud).</p>
+</li>
+<li><p><strong>Weak Supervision (Snorkel)</strong>: Using noisy, heuristic labeling functions (regexes, rules, weak classifiers) to label large datasets programmatically. Individual labeling functions are imprecise, but combining many using a learned label model produces reliable probabilistic labels for training. Enables labeling millions of examples without human annotation. Best for tasks with existing domain heuristics.</p>
+</li>
+<li><p><strong>Synthetic Data</strong>: Generating artificial training examples using generative models, simulations, or rule-based systems. Useful for rare events (catastrophic failure scenarios in autonomous driving), privacy-sensitive data (synthetic patient records), and augmenting class-imbalanced datasets. Synthetic data quality must be validated — a generative model can produce plausible but systematically wrong examples.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Collection Strategy</th>
+  <th>Cost</th>
+  <th>Volume</th>
+  <th>Quality</th>
+  <th>Label Noise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Expert annotation</td>
+  <td>Very High</td>
+  <td>Low</td>
+  <td>Very High</td>
+  <td>Very Low</td>
+</tr>
+<tr>
+  <td>Crowdsourced annotation</td>
+  <td>Medium</td>
+  <td>Medium</td>
+  <td>Medium</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Implicit feedback</td>
+  <td>Very Low</td>
+  <td>Very High</td>
+  <td>Noisy</td>
+  <td>High</td>
+</tr>
+<tr>
+  <td>Weak supervision</td>
+  <td>Low</td>
+  <td>Very High</td>
+  <td>Medium</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Synthetic data</td>
+  <td>Low</td>
+  <td>Very High</td>
+  <td>Task-dependent</td>
+  <td>Low if careful</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Expert annotation</strong>: Medical imaging, legal documents, scientific data — tasks where domain expertise is required for correct labeling and errors are costly</li>
+<li><strong>Crowdsourced annotation</strong>: General object detection, sentiment classification — tasks clear enough for non-experts with quality controlled by redundancy and IAA filtering</li>
+<li><strong>Implicit feedback</strong>: Recommendation, search, ad click prediction — tasks where user behavior is the label and scale is essential</li>
+<li><strong>Weak supervision</strong>: When labeled data is scarce but domain rules exist and scaling annotation is too slow — get a model working quickly with weak labels, refine with targeted expert annotation</li>
+<li><strong>Synthetic data</strong>: Class imbalance correction, data augmentation for small datasets, privacy-preserving training data generation</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Data Engineering for ML</span></a>
+            <a href="02_data_preprocessing.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Data Preprocessing</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

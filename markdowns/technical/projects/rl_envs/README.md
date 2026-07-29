@@ -1,5 +1,16 @@
-# RL Environments — Educational Reinforcement Learning Tutorials
-
+---
+title: "RL Environments — Educational Reinforcement Learning Tutorials"
+subtitle: "A collection of 10 reinforcement learning algorithm implementations built for educational purposes. Each algorithm is minimal, well-documented, and tied to a concrete use case. All hyper-parameters live in YAML..."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-10-27
+reading_time: 3
+tags:
+  - rl-envs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/index.html"
+---
 A collection of 10 reinforcement learning algorithm implementations built for
 educational purposes. Each algorithm is minimal, well-documented, and tied to a
 concrete use case. All hyper-parameters live in YAML config files; there are no

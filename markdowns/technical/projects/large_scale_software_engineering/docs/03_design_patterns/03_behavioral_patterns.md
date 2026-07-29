@@ -1,5 +1,17 @@
-# Behavioral Patterns
-
+---
+title: "Behavioral Patterns"
+subtitle: "Behavioral design patterns describe how objects interact and distribute responsibilities. They focus on algorithms, responsibility assignment, and communication patterns between objects — making the collaboration..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-02
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/03_design_patterns/03_behavioral_patterns.html"
+---
 Behavioral design patterns describe how objects interact and distribute responsibilities. They focus on algorithms, responsibility assignment, and communication patterns between objects — making the collaboration between objects flexible and extensible.
 
 ## Strategy Pattern

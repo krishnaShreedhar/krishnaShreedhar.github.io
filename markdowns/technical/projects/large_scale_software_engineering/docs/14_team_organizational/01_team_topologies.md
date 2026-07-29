@@ -1,5 +1,17 @@
-# Team Topologies
-
+---
+title: "Team Topologies"
+subtitle: "Team Topologies (Matthew Skelton and Manuel Pais) provides a framework for organizing teams to optimize software delivery flow. It identifies four fundamental team types and three interaction modes, with the goal of..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-08-26
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/14_team_organizational/01_team_topologies.html"
+---
 Team Topologies (Matthew Skelton and Manuel Pais) provides a framework for organizing teams to optimize software delivery flow. It identifies four fundamental team types and three interaction modes, with the goal of reducing cognitive load and enabling fast, independent delivery.
 
 ## Four Team Types

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SmallVLM — Minimal Vision-Language Model Tutorial &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A from-scratch, explainable implementation of a small Vision-Language Model (VLM) for **image captioning**, built entirely with PyTorch. The goal is to understa">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">SmallVLM — Minimal Vision-Language Model Tutorial</span>
+        </div>
+        <h1 class="post-title">SmallVLM — Minimal Vision-Language Model Tutorial</h1>
+        <p class="post-subtitle">A from-scratch, explainable implementation of a small Vision-Language Model (VLM) for **image captioning**, built entirely with PyTorch. The goal is to understand every design decision rather than to achieve...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-03-16</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">model-architectures</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">SmallVLM — Minimal Vision-Language Model Tutorial</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">SmallVLM — Minimal Vision-Language Model Tutorial</a></li><li class="project-nav__lvl-1"><a href="docs/architecture.html">SmallVLM Architecture</a></li><li class="project-nav__lvl-1"><a href="docs/training_pipeline.html">Training Pipeline</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A from-scratch, explainable implementation of a small Vision-Language Model (VLM) for <strong>image captioning</strong>, built entirely with PyTorch. The goal is to understand every design decision rather than to achieve state-of-the-art results.</p>
+<hr />
+<h2>What you'll learn</h2>
+<ul>
+<li>How patch embeddings turn a 224×224 image into 196 discrete tokens</li>
+<li>How a ViT encoder contextualises those tokens with self-attention</li>
+<li>How a two-layer MLP bridges vision and language representation spaces</li>
+<li>How a GPT-style decoder generates captions word-by-word using cross-attention to image features</li>
+<li>How to pre-train, fine-tune, and align a VLM with RL (REINFORCE)</li>
+<li>Three decoding strategies: greedy, beam search, nucleus sampling</li>
+<li>Hyperparameter search with Optuna</li>
+</ul>
+<hr />
+<h2>Architecture at a glance</h2>
+<pre><code>Image (B,3,224,224)
+  → ViT Vision Encoder (6 layers, 384 dim)  →  patch_tokens (B,196,384)
+  → MLP Projection (384→768→384)            →  proj_tokens  (B,196,384)
+                                                     ↓ cross-attention
+Text tokens (B,T)
+  → GPT Decoder (6 layers, 384 dim)
+  → LM Head (384→50257)                     →  logits (B,T,50257)
+</code></pre>
+<p>Total parameters: ~22M<br />
+Full architecture explainer: <a href="docs/architecture.html"><code>docs/architecture.md</code></a></p>
+<hr />
+<h2>Project structure</h2>
+<pre><code>model_architectures/
+├── src/
+│   ├── model/
+│   │   ├── config.py           # ModelConfig dataclass
+│   │   ├── vision_encoder.py   # ViT encoder
+│   │   ├── projection.py       # MLP connector
+│   │   ├── language_decoder.py # GPT decoder with cross-attention
+│   │   └── vlm.py              # SmallVLM top-level module
+│   ├── data/
+│   │   ├── dataset.py          # HuggingFace-backed image-caption dataset
+│   │   ├── transforms.py       # Train / val image augmentations
+│   │   └── collator.py         # Batch collation
+│   ├── training/
+│   │   ├── trainer.py          # BaseTrainer (DDP, BF16, checkpointing)
+│   │   ├── pretrain.py         # Stage 1: pre-training entry point
+│   │   ├── finetune.py         # Stage 2: fine-tuning entry point
+│   │   └── rl_sft_trainer.py   # Stage 3: SFT / REINFORCE entry point
+│   ├── inference/
+│   │   └── generator.py        # Greedy / beam search / nucleus sampling
+│   ├── tuning/
+│   │   └── hyperparameter_tuning.py  # Optuna HPT
+│   └── utils/
+│       ├── logging_utils.py    # Structured logger factory
+│       └── config_utils.py     # YAML loading and merging
+├── configs/
+│   ├── model.yaml              # Architecture hyperparameters
+│   ├── pretrain.yaml           # Pre-training settings
+│   ├── finetune.yaml           # Fine-tuning settings
+│   ├── rl_sft.yaml             # RL / SFT settings
+│   ├── inference.yaml          # Inference settings
+│   └── tuning.yaml             # Optuna search space
+├── docs/
+│   ├── architecture.md         # Detailed architecture walkthrough
+│   ├── training_pipeline.md    # Training stages explained
+│   └── diagrams/
+│       ├── vlm_architecture.mmd   # Mermaid architecture diagram
+│       └── training_flow.mmd      # Mermaid training pipeline diagram
+├── docker/
+│   ├── Dockerfile              # nvidia/cuda:13.0.1-devel-ubuntu22.04 base
+│   ├── .env                    # Environment variable template
+│   └── docker-compose.yml      # Services: pretrain, finetune, rl_sft, inference, tuning
+└── pyproject.toml
+</code></pre>
+<hr />
+<h2>Quick start</h2>
+<h3>1. Build and start the container</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker
+cp .env .env.local          # fill in DATA_DIR, OUTPUT_DIR, WANDB_API_KEY
+docker compose build
+</code></pre></div>
+<h3>2. Pre-train</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">docker compose run pretrain
+</code></pre></div>
+<p>Equivalent bare-metal command (from project root):</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">torchrun --nproc_per_node=2 -m src.training.pretrain
+</code></pre></div>
+<h3>3. Fine-tune</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">docker compose run finetune
+</code></pre></div>
+<h3>4. RL or SFT alignment</h3>
+<p>Edit <code>configs/rl_sft.yaml</code> → set <code>mode: rl</code> or <code>mode: sft</code>, then:</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">docker compose run rl_sft
+</code></pre></div>
+<h3>5. Generate captions</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">docker compose run inference
+</code></pre></div>
+<h3>6. Tune hyperparameters</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">docker compose run tuning
+</code></pre></div>
+<hr />
+<h2>Configuration</h2>
+<p>All constants and hyperparameters are in <code>configs/</code>. No command-line arguments — edit the YAML files instead.</p>
+<hr />
+<h2>GPU requirements</h2>
+<table>
+<thead>
+<tr>
+  <th>Stage</th>
+  <th>GPUs</th>
+  <th>Approx. VRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Pre-training</td>
+  <td>2× H200</td>
+  <td>~40 GB/GPU</td>
+</tr>
+<tr>
+  <td>Fine-tuning</td>
+  <td>2× H200</td>
+  <td>~30 GB/GPU</td>
+</tr>
+<tr>
+  <td>RL / SFT</td>
+  <td>2× H200</td>
+  <td>~35 GB/GPU</td>
+</tr>
+<tr>
+  <td>Inference</td>
+  <td>1× H200</td>
+  <td>~5 GB</td>
+</tr>
+<tr>
+  <td>HPT (per trial)</td>
+  <td>1× H200</td>
+  <td>~10 GB</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Documentation</h2>
+<table>
+<thead>
+<tr>
+  <th>Document</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="docs/architecture.html"><code>docs/architecture.md</code></a></td>
+  <td>Detailed component walkthrough with tensor shapes</td>
+</tr>
+<tr>
+  <td><a href="docs/training_pipeline.html"><code>docs/training_pipeline.md</code></a></td>
+  <td>Training stage descriptions and algorithms</td>
+</tr>
+<tr>
+  <td><code>docs/diagrams/vlm_architecture.mmd</code></td>
+  <td>Mermaid data-flow diagram</td>
+</tr>
+<tr>
+  <td><code>docs/diagrams/training_flow.mmd</code></td>
+  <td>Mermaid training pipeline diagram</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/architecture.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">SmallVLM Architecture</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

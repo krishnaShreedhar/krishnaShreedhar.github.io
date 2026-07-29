@@ -1,5 +1,17 @@
-# RL Environments — Project Plan
-
+---
+title: "RL Environments — Project Plan"
+subtitle: "This project provides 10 minimal, educational reinforcement learning algorithm tutorials implemented in Python with PyTorch. Each algorithm:"
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-07-03
+reading_time: 5
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/plan.html"
+---
 ## Overview
 
 This project provides 10 minimal, educational reinforcement learning algorithm

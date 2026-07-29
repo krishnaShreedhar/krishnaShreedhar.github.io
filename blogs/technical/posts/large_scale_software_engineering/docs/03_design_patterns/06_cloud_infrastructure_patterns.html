@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cloud Infrastructure Patterns &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Cloud infrastructure patterns are architectural patterns specifically designed for cloud-native systems, addressing elasticity, resilience, observability, and c">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Cloud Infrastructure Patterns</span>
+        </div>
+        <h1 class="post-title">Cloud Infrastructure Patterns</h1>
+        <p class="post-subtitle">Cloud infrastructure patterns are architectural patterns specifically designed for cloud-native systems, addressing elasticity, resilience, observability, and cost efficiency at scale. They represent proven solutions...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-06-18</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2 active"><a href="06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Cloud infrastructure patterns are architectural patterns specifically designed for cloud-native systems, addressing elasticity, resilience, observability, and cost efficiency at scale. They represent proven solutions for operating stateless and stateful workloads in cloud environments.</p>
+<h2>Retry with Exponential Backoff</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Request[Make Request to Service] --&gt; Try[Attempt Call]
+    Try --&gt;|Success| Return[Return Result]
+    Try --&gt;|Transient Failure| Check{Retries\nexhausted?}
+    Check --&gt;|No| Wait[Wait: base * 2^attempt\n+ jitter]
+    Wait --&gt; Try
+    Check --&gt;|Yes| Fail[Raise Exception\nreturn error]
+
+    subgraph BackoffTable[Backoff Schedule]
+        B1[Attempt 1: wait 1s +- jitter]
+        B2[Attempt 2: wait 2s +- jitter]
+        B3[Attempt 3: wait 4s +- jitter]
+        B4[Attempt 4: wait 8s +- jitter]
+        B5[Max retries reached]
+    end
+</div></div>
+<h2>Health Endpoint Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    LB[Load Balancer] --&gt;|GET /health/live| Pod[Service Instance]
+    K8s[Kubernetes Kubelet] --&gt;|GET /health/ready| Pod
+    Monitor[Monitoring System] --&gt;|GET /health/details| Pod
+
+    subgraph HealthEndpoints[Health Check Endpoints]
+        Liveness[/health/live\nIs process alive?\nRestarts if unhealthy]
+        Readiness[/health/ready\nCan serve traffic?\nRemoved from LB if unhealthy]
+        Startup[/health/startup\nInitialization complete?\nDelays liveness checks]
+        Deep[/health/details\nDependency status\nDB, cache, queue connectivity]
+    end
+
+    Pod --&gt; Liveness &amp; Readiness &amp; Startup &amp; Deep
+
+    style Liveness fill:#dcfce7,stroke:#16a34a
+    style Readiness fill:#dbeafe,stroke:#2563eb
+    style Deep fill:#fef3c7,stroke:#d97706
+</div></div>
+<h2>Blue-Green Deployment</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    LB[Load Balancer / DNS]
+
+    subgraph Blue[Blue - Current Production v1.0]
+        B1[Instance 1 v1.0]
+        B2[Instance 2 v1.0]
+        B3[Instance 3 v1.0]
+    end
+
+    subgraph Green[Green - New Version v1.1]
+        G1[Instance 1 v1.1]
+        G2[Instance 2 v1.1]
+        G3[Instance 3 v1.1]
+    end
+
+    LB --&gt;|100% traffic| Blue
+    LB -. -&gt;|0% - switch here| Green
+
+    DB[(Shared Database\nSchema compatible)]
+    Blue --&gt; DB
+    Green --&gt; DB
+
+    Rollback[Instant Rollback:\nSwitch LB back to Blue]
+
+    style Blue fill:#dbeafe,stroke:#2563eb
+    style Green fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Canary Deployment</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    LB[Load Balancer]
+
+    subgraph Stable[Stable - v1.0 - 95% traffic]
+        S1[Instance v1.0]
+        S2[Instance v1.0]
+        S3[Instance v1.0]
+    end
+
+    subgraph Canary[Canary - v1.1 - 5% traffic]
+        C1[Instance v1.1]
+    end
+
+    LB --&gt;|95%| Stable
+    LB --&gt;|5%| Canary
+
+    Monitor[Canary Analysis\nerror rate\nlatency p99\nbusiness metrics]
+
+    Canary --&gt; Monitor
+    Monitor --&gt;|metrics OK| Promote[Promote to 100%]
+    Monitor --&gt;|metrics bad| Rollback[Rollback to 0%]
+
+    style Canary fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    style Monitor fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Strangler Fig Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph Phase1[Phase 1: Add Facade]
+        Client1[Client] --&gt; Facade1[Facade/Proxy]
+        Facade1 --&gt; Monolith1[Legacy Monolith]
+    end
+
+    subgraph Phase2[Phase 2: Extract Features]
+        Client2[Client] --&gt; Facade2[Facade/Proxy]
+        Facade2 --&gt;|/api/orders| OrderSvc[New Order Service]
+        Facade2 --&gt;|other routes| Monolith2[Shrinking Monolith]
+    end
+
+    subgraph Phase3[Phase 3: Complete Migration]
+        Client3[Client] --&gt; Facade3[API Gateway]
+        Facade3 --&gt; SvcA[Service A]
+        Facade3 --&gt; SvcB[Service B]
+        Facade3 --&gt; SvcC[Service C]
+        Monolith3[Monolith Retired]
+    end
+
+    Phase1 --&gt; Phase2 --&gt; Phase3
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Retry with Exponential Backoff and Jitter</strong>: Automatically retry failed transient operations, increasing the wait time between retries exponentially to avoid thundering herd. Jitter (random variation) prevents synchronized retry storms when many clients retry simultaneously. Crucial for resilience against temporary service unavailability.</p>
+</li>
+<li><p><strong>Health Endpoint Monitoring</strong>: Services expose standardized health check endpoints that load balancers and orchestrators use to determine service health. Liveness probes determine if a process should be restarted; readiness probes determine if it should receive traffic. Deep health checks expose dependency status.</p>
+</li>
+<li><p><strong>Blue-Green Deployment</strong>: Maintains two identical production environments (blue = current, green = new). Traffic is switched from blue to green atomically, enabling instant rollback by switching back. Requires double the infrastructure during the switch window but eliminates deployment downtime.</p>
+</li>
+<li><p><strong>Canary Deployment</strong>: Gradually rolls out a new version to a small percentage of traffic while monitoring metrics. If metrics are acceptable, traffic percentage increases incrementally until the canary receives 100%. If metrics degrade, traffic is rolled back. Reduces blast radius of bad deployments.</p>
+</li>
+<li><p><strong>Throttling Pattern</strong>: Controls the rate of resource consumption to protect services from overload. Unlike rate limiting (which protects the service from abuse), throttling gracefully degrades under load by queuing excess requests or returning HTTP 429.</p>
+</li>
+<li><p><strong>Valet Key Pattern</strong>: Issues a temporary, scoped credential (token, SAS URL) to allow clients to access a specific resource directly without routing through the application server. Common for large file uploads to object storage — the application grants a signed S3/GCS URL, and the client uploads directly.</p>
+</li>
+<li><p><strong>Strangler Fig Pattern</strong>: Gradually replaces a legacy system by routing new functionality to new services while keeping old functionality in the legacy system. The legacy system is &quot;strangled&quot; over time as more functionality moves out. Named after the strangler fig vine that grows around a host tree.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Pattern</th>
+  <th>Benefit</th>
+  <th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Retry + Backoff</td>
+  <td>Resilience to transient failures</td>
+  <td>Increased tail latency for failed operations</td>
+</tr>
+<tr>
+  <td>Health Endpoints</td>
+  <td>Automatic unhealthy instance removal</td>
+  <td>Must implement and maintain health checks</td>
+</tr>
+<tr>
+  <td>Blue-Green</td>
+  <td>Zero-downtime deployment</td>
+  <td>Double infrastructure cost during switch</td>
+</tr>
+<tr>
+  <td>Canary</td>
+  <td>Low blast radius for bad deploys</td>
+  <td>Slow rollout, complex traffic management</td>
+</tr>
+<tr>
+  <td>Strangler Fig</td>
+  <td>Safe incremental migration</td>
+  <td>Long-running partial migration state</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Retry + Backoff</strong>: All external service calls and database operations — make it the default</li>
+<li><strong>Health Endpoints</strong>: All containerized services deployed in Kubernetes or behind load balancers</li>
+<li><strong>Blue-Green</strong>: When zero-downtime deployment and instant rollback are requirements</li>
+<li><strong>Canary</strong>: When deploying high-risk changes to large user bases where gradual exposure reduces risk</li>
+<li><strong>Strangler Fig</strong>: When migrating a monolith to microservices incrementally without a big-bang rewrite</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="05_distributed_systems_patterns.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Distributed Systems Patterns</span></a>
+            <a href="../04_communication_protocols/index.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Communication Protocols</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

@@ -1,5 +1,17 @@
-# Consistency and Transactions
-
+---
+title: "Consistency and Transactions"
+subtitle: "Consistency and transactions are the mechanisms that ensure data remains correct and coherent in the face of concurrent access and partial failures. Understanding ACID vs. BASE, isolation levels, and distributed..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-11
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/05_data_management/02_consistency_transactions.html"
+---
 Consistency and transactions are the mechanisms that ensure data remains correct and coherent in the face of concurrent access and partial failures. Understanding ACID vs. BASE, isolation levels, and distributed transaction patterns is fundamental to building correct data-driven systems.
 
 ## ACID Properties

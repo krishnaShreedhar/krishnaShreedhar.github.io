@@ -1,5 +1,17 @@
-# Service-to-Service Communication Patterns
-
+---
+title: "Service-to-Service Communication Patterns"
+subtitle: "Service-to-service communication patterns address how microservices discover each other, authenticate to each other, and communicate reliably. These patterns form the operational foundation of distributed service..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-17
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/04_communication_protocols/04_service_to_service_patterns.html"
+---
 Service-to-service communication patterns address how microservices discover each other, authenticate to each other, and communicate reliably. These patterns form the operational foundation of distributed service architectures.
 
 ## Service Discovery

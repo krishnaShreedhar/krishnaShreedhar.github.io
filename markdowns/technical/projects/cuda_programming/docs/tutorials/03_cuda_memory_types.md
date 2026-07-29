@@ -1,5 +1,17 @@
-# Tutorial 03: CUDA Memory Types
-
+---
+title: "Tutorial 03: CUDA Memory Types"
+subtitle: "See `src/tutorials/03_cuda_memory_types/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-03-30
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/03_cuda_memory_types.html"
+---
 ## Concept
 
 See `src/tutorials/03_cuda_memory_types/main.cu` for detailed inline comments explaining

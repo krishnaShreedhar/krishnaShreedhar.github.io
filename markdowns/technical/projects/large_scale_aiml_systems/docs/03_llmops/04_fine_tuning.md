@@ -1,5 +1,17 @@
-# Fine-Tuning LLMs
-
+---
+title: "Fine-Tuning LLMs"
+subtitle: "Fine-tuning adapts a pre-trained language model to a specific task or domain by continuing training on curated task-specific data. Unlike prompting which works within the frozen model's capabilities, fine-tuning..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-08-07
+reading_time: 5
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/03_llmops/04_fine_tuning.html"
+---
 Fine-tuning adapts a pre-trained language model to a specific task or domain by continuing training on curated task-specific data. Unlike prompting which works within the frozen model's capabilities, fine-tuning modifies model weights to internalize new behavior, output formats, or domain knowledge. The decision of when to fine-tune vs use RAG vs prompt engineer is one of the most important architectural decisions in LLM system design.
 
 ## Fine-Tuning Approaches

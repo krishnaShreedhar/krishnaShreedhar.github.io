@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>01 — Q-Learning &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Q-Learning is a **model-free, off-policy, tabular** reinforcement learning algorithm introduced by Watkins (1989). It learns the optimal action-value function Q">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">01 — Q-Learning</span>
+        </div>
+        <h1 class="post-title">01 — Q-Learning</h1>
+        <p class="post-subtitle">Q-Learning is a **model-free, off-policy, tabular** reinforcement learning algorithm introduced by Watkins (1989). It learns the optimal action-value function Q*(s, a) directly from transitions, without a model of...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-06-08</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2 active"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Concept</h2>
+<p>Q-Learning is a <strong>model-free, off-policy, tabular</strong> reinforcement learning
+algorithm introduced by Watkins (1989). It learns the optimal action-value
+function Q*(s, a) directly from transitions, without a model of the
+environment.</p>
+<p>The Q-function answers: <em>&quot;What is the expected discounted return if I take
+action a in state s and then act optimally afterwards?&quot;</em></p>
+<hr />
+<h2>Bellman Optimality Equation</h2>
+<p>The Bellman optimality equation defines the recursive relationship:</p>
+<pre><code>Q*(s, a) = E[ r + gamma * max_a' Q*(s', a') ]
+</code></pre>
+<p>Q-Learning approximates this by iterating the TD(0) update:</p>
+<pre><code>Q[s, a] &lt;- Q[s, a] + alpha * (r + gamma * max_a' Q[s', a'] - Q[s, a])
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               TD target (bootstrapped estimate)
+</code></pre>
+<p>The quantity <code>(r + gamma * max_a' Q[s', a'] - Q[s, a])</code> is the <strong>TD error</strong>
+— the difference between what we expected and what we actually observed.</p>
+<hr />
+<h2>Convergence Guarantee</h2>
+<p>Under the following conditions, Q-Learning converges to Q* with probability 1:</p>
+<ol>
+<li>All (state, action) pairs are visited infinitely often.</li>
+<li>Learning rates satisfy the Robbins-Monro conditions:<ul>
+<li>sum of alpha_t = infinity</li>
+<li>sum of alpha_t^2 &lt; infinity</li>
+</ul>
+</li>
+<li>Rewards are bounded.</li>
+</ol>
+<p>In practice, a fixed small alpha (e.g. 0.1) works well for small problems.</p>
+<hr />
+<h2>Epsilon-Greedy Exploration</h2>
+<p>Since Q-Learning is off-policy, it can use any exploration strategy. We use
+<strong>epsilon-greedy</strong>:</p>
+<ul>
+<li>With probability epsilon: choose a random action (explore).</li>
+<li>With probability (1 - epsilon): choose argmax_a Q[s, a] (exploit).</li>
+</ul>
+<p>Epsilon is decayed multiplicatively after each step:</p>
+<pre><code>epsilon &lt;- max(epsilon_end, epsilon * epsilon_decay)
+</code></pre>
+<p>This trades exploration early in training for exploitation as the Q-table matures.</p>
+<hr />
+<h2>Use Case: GridWorld Path Planning</h2>
+<p>The agent navigates a 10x10 grid from a random start cell to a random goal
+cell while avoiding obstacles.</p>
+<p><strong>State</strong>: integer cell index (row * N + col), range [0, N*N - 1].<br />
+<strong>Actions</strong>: 0=up, 1=down, 2=left, 3=right.<br />
+<strong>Q-table shape</strong>: [100, 4] (for a 10x10 grid).</p>
+<p>Because the state space is small (100 cells), a tabular Q-table is exact and
+efficient. No neural network is needed.</p>
+<hr />
+<h2>Flow Diagram</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    A([Start Episode]) --&gt; B[Reset GridWorld]
+    B --&gt; C[Observe state s]
+    C --&gt; D{Epsilon-greedy}
+    D --&gt;|random| E[Random action a]
+    D --&gt;|greedy| F[&quot;a = argmax Q[s, :]&quot;]
+    E --&gt; G[Execute action in env]
+    F --&gt; G
+    G --&gt; H[&quot;Receive r, s', done&quot;]
+    H --&gt; I[&quot;TD error = r + gamma * max Q[s',:] - Q[s,a]&quot;]
+    I --&gt; J[&quot;Q[s,a] += alpha * TD_error&quot;]
+    J --&gt; K[Decay epsilon]
+    K --&gt; L{done?}
+    L --&gt;|No| C
+    L --&gt;|Yes| M[Log episode]
+    M --&gt; N{Max episodes?}
+    N --&gt;|No| A
+    N --&gt;|Yes| O([End Training])
+</div></div>
+<hr />
+<h2>Key Config Parameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Location</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>training.alpha</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Learning rate (TD step size)</td>
+</tr>
+<tr>
+  <td><code>training.gamma</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Discount factor [0, 1]</td>
+</tr>
+<tr>
+  <td><code>training.epsilon_start</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Initial exploration rate</td>
+</tr>
+<tr>
+  <td><code>training.epsilon_end</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Minimum exploration rate</td>
+</tr>
+<tr>
+  <td><code>training.epsilon_decay</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Multiplicative decay per step</td>
+</tr>
+<tr>
+  <td><code>training.max_episodes</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Total training episodes</td>
+</tr>
+<tr>
+  <td><code>network.n_states</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Q-table rows (= grid_size^2)</td>
+</tr>
+<tr>
+  <td><code>network.n_actions</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Q-table columns (= 4)</td>
+</tr>
+<tr>
+  <td><code>env.grid_size</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Grid side length N</td>
+</tr>
+<tr>
+  <td><code>env.num_obstacles</code></td>
+  <td><code>01_q_learning.yaml</code></td>
+  <td>Number of obstacle cells</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Expected Learning Curve</h2>
+<ul>
+<li><strong>Episodes 0–200</strong>: high epsilon; agent explores randomly; rewards are
+strongly negative (many wall collisions, rarely reaches goal).</li>
+<li><strong>Episodes 200–800</strong>: epsilon decays; agent starts exploiting learned paths;
+mean episode reward rises toward 0 and then positive.</li>
+<li><strong>Episodes 800–2000</strong>: epsilon near <code>epsilon_end</code>; agent reliably finds the
+goal; mean reward converges near <code>reward_goal - step_penalty * path_length</code>.</li>
+</ul>
+<p>A well-trained Q-Learning agent on a 10x10 grid with 10 obstacles typically
+achieves a mean episode reward of 7–9 (out of a maximum of 10).</p>
+<hr />
+<h2>Limitations vs DQN</h2>
+<p>| Aspect | Q-Learning | DQN |
+|--------|-----------|-----|
+| State space | Must be small and discrete | Can be large, continuous |
+| Generalisation | None (table lookup only) | Neural network generalises |
+| Memory | O(|S| * |A|) table | O(network params + buffer) |
+| Scalability | Does not scale | Scales to Atari, robotics |
+| Convergence | Proven (with conditions) | Empirical; can diverge |
+| Training speed | Very fast on CPU | Requires GPU for large problems |</p>
+<p>Q-Learning is the ideal starting point for understanding RL fundamentals.
+Use DQN when the state space cannot fit in a table.</p>
+
+        
+        <nav class="post-nav">
+            <a href="../plan.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">RL Environments — Project Plan</span></a>
+            <a href="02_dqn.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">02 — Deep Q-Network (DQN)</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fine-Tuning LLMs &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Fine-tuning adapts a pre-trained language model to a specific task or domain by continuing training on curated task-specific data. Unlike prompting which works ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Fine-Tuning LLMs</span>
+        </div>
+        <h1 class="post-title">Fine-Tuning LLMs</h1>
+        <p class="post-subtitle">Fine-tuning adapts a pre-trained language model to a specific task or domain by continuing training on curated task-specific data. Unlike prompting which works within the frozen model's capabilities, fine-tuning...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-07</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2 active"><a href="04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Fine-tuning adapts a pre-trained language model to a specific task or domain by continuing training on curated task-specific data. Unlike prompting which works within the frozen model's capabilities, fine-tuning modifies model weights to internalize new behavior, output formats, or domain knowledge. The decision of when to fine-tune vs use RAG vs prompt engineer is one of the most important architectural decisions in LLM system design.</p>
+<h2>Fine-Tuning Approaches</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Methods[Fine-Tuning Method Spectrum]
+        subgraph FullFT[Full Fine-Tuning]
+            Full[Update all model weights\nMaximum adaptation\nRequires large GPU cluster\n70B model: 8x A100 80GB minimum\nRisk of catastrophic forgetting]
+            style Full fill:#fee2e2,stroke:#dc2626
+        end
+
+        subgraph PEFT[Parameter-Efficient Fine-Tuning]
+            LoRA[LoRA - Low-Rank Adaptation\nFreeze base model\nAdd small trainable rank matrices\nto attention layers\nTypically rank r=8 to 64\nTrains 0.1-1% of parameters]
+            QLoRA[QLoRA - Quantized LoRA\nQuantize base model to 4-bit\nApply LoRA on quantized model\n70B model fine-tunable on 2x A100\nNear-full-FT quality at fraction of cost]
+            style LoRA fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+            style QLoRA fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        end
+
+        subgraph Alignment[Alignment Techniques]
+            SFT[Supervised Fine-Tuning\nInstruction-response pairs\nTeaches desired behavior and format]
+            RLHF[RLHF - Reinforcement Learning\nfrom Human Feedback\nTrain reward model on human preferences\noptimize policy with PPO\nExpensive and complex]
+            DPO[DPO - Direct Preference Optimization\nSimpler alternative to RLHF\nTrain on preference pairs chosen vs rejected\nNo separate reward model]
+        end
+    end
+</div></div>
+<h2>LoRA Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph LoRADiagram[LoRA Parameter Injection]
+        Input[Input Activations\ndim: d]
+
+        subgraph FrozenPath[Frozen Base Model Path]
+            W[Original Weight Matrix W\ndim: d x d\nFROZEN - no gradient updates]
+        end
+
+        subgraph LoRAPath[LoRA Path - Trainable]
+            A[Matrix A\ndim: d x r\nrandom init\nrank r much less than d]
+            B[Matrix B\ndim: r x d\nzero init\nso delta-W starts at zero]
+            AB[A times B\nLow-rank update\ndelta-W of rank r]
+        end
+
+        Output[Output = W times x plus alpha divided by r times A times B times x\nalpha: scaling hyperparameter]
+
+        Input --&gt; W --&gt; Output
+        Input --&gt; A --&gt; B --&gt; AB --&gt; Output
+    end
+</div></div>
+<h2>Fine-Tuning Pipeline</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph FTPipeline[Fine-Tuning Pipeline]
+        Decision[Decision: Fine-Tune vs RAG\nFine-tune if: format/style not achievable by prompting\nRAG if: knowledge base is dynamic or large]
+
+        DataCuration[Dataset Curation\n1000-100000 instruction-response pairs\nHigh quality over quantity\nDiverse coverage of task variants\nValidation split 10-20%]
+
+        BaseModel[Select Base Model\nLlama 3.1 8B or 70B\nMistral 7B\nPhi-3 medium\nbased on capability and cost]
+
+        Train[QLoRA Training\nhyperparams: lr=2e-4\nbatch=4-16 grad accumulation\nepochs=1-3\nuse bf16 precision]
+
+        Eval[Evaluate on Held-Out Set\ncompare to baseline - base model with prompt\ncheck for regression on general capabilities]
+
+        Merge[Merge LoRA Adapters\ninto base model weights\nfor efficient serving\nor serve adapter separately]
+
+        Deploy[Deploy Fine-Tuned Model\nto inference infrastructure]
+
+        Decision --&gt; DataCuration --&gt; BaseModel --&gt; Train --&gt; Eval --&gt; Merge --&gt; Deploy
+    end
+
+    style DataCuration fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    style Deploy fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>LoRA (Low-Rank Adaptation)</strong>: Instead of modifying the full weight matrices (which are huge — a 7B model has billions of parameters), LoRA adds small trainable rank decomposition matrices alongside frozen original weights. The effective weight update W + delta-W where delta-W = AB is constrained to rank r. This makes fine-tuning feasible on modest hardware and prevents catastrophic forgetting of the base model's general capabilities.</p>
+</li>
+<li><p><strong>QLoRA</strong>: Combines 4-bit quantization of the base model with LoRA adapters. The base model is quantized to 4-bit (NF4 format) and kept frozen. LoRA adapters are trained in bf16. This reduces the GPU memory required to fine-tune a 70B model from 8+ A100s (full FT) to 2 A100s — a 4x memory reduction. Accuracy is near-identical to full fine-tuning in most benchmarks.</p>
+</li>
+<li><p><strong>Instruction Tuning</strong>: Fine-tuning on (instruction, response) pairs to teach a model to follow instructions reliably. The base pre-trained model knows a lot but doesn't know to behave helpfully. Instruction tuning (SFT on curated instruction-following datasets) produces the difference between a raw language model and a useful assistant.</p>
+</li>
+<li><p><strong>RLHF (Reinforcement Learning from Human Feedback)</strong>: The technique used by OpenAI, Anthropic, and others to align LLMs with human preferences. Step 1: Collect human preferences (humans rank multiple model outputs). Step 2: Train a reward model on these preferences. Step 3: Fine-tune the LLM using PPO (Proximal Policy Optimization) to maximize the reward model's score. RLHF is expensive and complex but produces highly aligned models.</p>
+</li>
+<li><p><strong>DPO (Direct Preference Optimization)</strong>: A simpler alignment technique that directly optimizes on preference pairs (chosen vs rejected response) without a separate reward model or RL training. DPO reformulates the RLHF objective into a classification loss on preference pairs, making it much more stable and computationally efficient. Most teams doing alignment today use DPO or its variants.</p>
+</li>
+<li><p><strong>Data Quality over Quantity</strong>: For fine-tuning, 1,000 high-quality, diverse, and correctly formatted instruction-response pairs typically outperforms 100,000 noisy or redundant pairs. Dataset curation — filtering, deduplicating, and quality-checking examples — is more important than collecting more data.</p>
+</li>
+<li><p><strong>Catastrophic Forgetting</strong>: When fine-tuning on a narrow dataset causes the model to lose its general capabilities (common knowledge, language fluency, instruction-following). Mitigations: LoRA/PEFT (modifies only a fraction of parameters), mixing in general instruction-following data during fine-tuning, and evaluating on general benchmarks alongside task-specific metrics.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Approach</th>
+  <th>Cost</th>
+  <th>Flexibility</th>
+  <th>Capability Gain</th>
+  <th>Serving Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Prompt engineering</td>
+  <td>Very Low</td>
+  <td>High</td>
+  <td>Limited</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>RAG</td>
+  <td>Low</td>
+  <td>High</td>
+  <td>Knowledge extension</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>LoRA fine-tuning</td>
+  <td>Medium</td>
+  <td>Medium</td>
+  <td>Style and format</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Full fine-tuning</td>
+  <td>Very High</td>
+  <td>Low</td>
+  <td>Maximum</td>
+  <td>High</td>
+</tr>
+<tr>
+  <td>RLHF</td>
+  <td>Highest</td>
+  <td>Low</td>
+  <td>Alignment</td>
+  <td>High</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Prompt engineering first</strong>: Always the starting point — exhausts the free option before paying for fine-tuning</li>
+<li><strong>RAG</strong>: When the model needs access to specific up-to-date or proprietary knowledge — faster iteration than fine-tuning and knowledge can be updated without retraining</li>
+<li><strong>LoRA fine-tuning</strong>: When the required output format or behavior cannot be achieved by prompting (JSON schemas with specific conventions, domain-specific writing style, coding in obscure languages), or when inference cost at scale justifies replacing large API calls with a smaller fine-tuned model</li>
+<li><strong>Full fine-tuning</strong>: Rarely justified for most teams — only when PEFT doesn't achieve required quality and compute budget allows</li>
+<li><strong>DPO over RLHF</strong>: Default for alignment when preference data is available — same quality as RLHF with significantly less engineering complexity</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="03_llm_evaluation.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">LLM Evaluation</span></a>
+            <a href="../04_data_engineering_for_ml/index.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Data Engineering for ML</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

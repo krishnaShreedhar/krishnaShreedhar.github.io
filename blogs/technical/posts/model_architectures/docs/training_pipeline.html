@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Training Pipeline &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Pre-training → Fine-tuning → SFT or RL → Inference ↑ Hyperparameter Tuning (feeds best config back to Stage 1)">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Training Pipeline</span>
+        </div>
+        <h1 class="post-title">Training Pipeline</h1>
+        <p class="post-subtitle">Pre-training → Fine-tuning → SFT or RL → Inference ↑ Hyperparameter Tuning (feeds best config back to Stage 1)</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-09</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">model-architectures</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">SmallVLM — Minimal Vision-Language Model Tutorial</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">SmallVLM — Minimal Vision-Language Model Tutorial</a></li><li class="project-nav__lvl-1"><a href="architecture.html">SmallVLM Architecture</a></li><li class="project-nav__lvl-1 active"><a href="training_pipeline.html">Training Pipeline</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Stage overview</h2>
+<pre><code>Pre-training → Fine-tuning → SFT or RL → Inference
+                 ↑
+        Hyperparameter Tuning (feeds best config back to Stage 1)
+</code></pre>
+<p>All stages run on 2× NVIDIA H200 GPUs via PyTorch DDP (<code>torchrun --nproc_per_node=2</code>).</p>
+<hr />
+<h2>Stage 1 — Pre-training (<code>src/training/pretrain.py</code>)</h2>
+<p><strong>Goal:</strong> Learn vision-language alignment on a large, noisy dataset.</p>
+<p><strong>Dataset:</strong> Conceptual Captions 3M (<code>conceptual_captions</code> on HuggingFace Hub).</p>
+<p><strong>Loss:</strong> Standard cross-entropy next-token prediction (teacher-forcing).</p>
+<p><strong>Key settings</strong> (see <code>configs/pretrain.yaml</code>):</p>
+<table>
+<thead>
+<tr>
+  <th>Param</th>
+  <th>Value</th>
+  <th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>LR</td>
+  <td>1e-4</td>
+  <td>AdamW with cosine decay</td>
+</tr>
+<tr>
+  <td>Effective batch</td>
+  <td>256</td>
+  <td>64/GPU × 2 steps accum × 2 GPUs</td>
+</tr>
+<tr>
+  <td>BF16</td>
+  <td>true</td>
+  <td>H200 native BF16 tensor cores</td>
+</tr>
+<tr>
+  <td>Warmup</td>
+  <td>2000 steps</td>
+  <td>Stabilises early training</td>
+</tr>
+<tr>
+  <td>Epochs</td>
+  <td>30</td>
+  <td>Large noisy dataset needs more passes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optimizer:</strong> AdamW with parameter-group weight decay: biases and LayerNorm parameters are exempt from weight decay.</p>
+<p><strong>Scheduler:</strong> Cosine annealing with linear warmup, decaying to 10% of peak LR.</p>
+<hr />
+<h2>Stage 2 — Fine-tuning (<code>src/training/finetune.py</code>)</h2>
+<p><strong>Goal:</strong> Adapt the pre-trained model to a high-quality captioning dataset.</p>
+<p><strong>Dataset:</strong> COCO Captions 2017 (<code>coco_captions</code> on HuggingFace Hub, ~120k training images, 5 captions each).</p>
+<p><strong>Key difference from pre-training:</strong> The vision encoder trains at 10× lower LR (<code>vision_encoder_lr_scale: 0.1</code>) to prevent catastrophic forgetting of visual representations.</p>
+<p><strong>Key settings</strong> (see <code>configs/finetune.yaml</code>):</p>
+<table>
+<thead>
+<tr>
+  <th>Param</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>LR</td>
+  <td>2e-5</td>
+</tr>
+<tr>
+  <td>Vision encoder LR</td>
+  <td>2e-6</td>
+</tr>
+<tr>
+  <td>Effective batch</td>
+  <td>256</td>
+</tr>
+<tr>
+  <td>Epochs</td>
+  <td>10</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Stage 3a — SFT (<code>src/training/rl_sft_trainer.py</code>, <code>mode: sft</code>)</h2>
+<p>Supervised fine-tuning on a curated subset. Structurally identical to Stage 2 but with a lower LR (5e-6) and dedicated config section. Use this stage to specialise the model on a specific caption style or domain.</p>
+<hr />
+<h2>Stage 3b — RL with REINFORCE (<code>src/training/rl_sft_trainer.py</code>, <code>mode: rl</code>)</h2>
+<p><strong>Goal:</strong> Optimise non-differentiable caption quality metrics (CIDEr, BLEU-4) directly.</p>
+<p><strong>Algorithm:</strong> REINFORCE with a running-mean variance-reduction baseline.</p>
+<p><strong>Per-step procedure:</strong></p>
+<ol>
+<li><strong>Rollout:</strong> For each image in the batch, sample <code>K=4</code> candidate captions using nucleus sampling (temperature=1.0, top-p=0.9).</li>
+<li><strong>Reward:</strong> Score each candidate with CIDEr (or BLEU-4) against the ground-truth captions.</li>
+<li><strong>Advantage:</strong> <code>A = reward − baseline</code> where baseline is an exponential moving average of past rewards.</li>
+<li><strong>Policy gradient loss:</strong> <code>L_PG = −mean(A × log_prob_of_sampled_tokens)</code></li>
+<li><strong>KL penalty:</strong> <code>L_KL = KL(π_θ ‖ π_ref)</code> — penalises divergence from the frozen reference model copy loaded at init. Prevents reward hacking.</li>
+<li><strong>Entropy bonus:</strong> <code>L_ent = −H(π_θ)</code> — encourages exploration to avoid caption collapse.</li>
+</ol>
+<p><strong>Total loss:</strong></p>
+<pre><code>L = L_PG + kl_coeff × L_KL − entropy_coeff × L_ent
+</code></pre>
+<hr />
+<h2>Stage 4 — Inference (<code>src/inference/generator.py</code>)</h2>
+<p>Three decoding strategies:</p>
+<table>
+<thead>
+<tr>
+  <th>Strategy</th>
+  <th>Description</th>
+  <th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Greedy</strong></td>
+  <td>argmax at every step</td>
+  <td>Fastest; lowest quality</td>
+</tr>
+<tr>
+  <td><strong>Beam search</strong></td>
+  <td>Keep top-K partial sequences</td>
+  <td>Best for deterministic evaluation (e.g., CIDEr benchmark)</td>
+</tr>
+<tr>
+  <td><strong>Nucleus sampling</strong></td>
+  <td>Top-p / top-k with temperature</td>
+  <td>Diversity; also used for RL rollouts</td>
+</tr>
+</tbody>
+</table>
+<p>All three strategies are implemented with <code>@torch.no_grad()</code> and are GPU-accelerated. Beam search processes one image at a time for readability; batch beam search can be added as an optimisation.</p>
+<hr />
+<h2>Stage 5 — Hyperparameter Tuning (<code>src/tuning/hyperparameter_tuning.py</code>)</h2>
+<p>Uses <strong>Optuna</strong> with a <strong>MedianPruner</strong> to search over:</p>
+<ul>
+<li>Learning rate (log-uniform 1e-5 to 5e-4)</li>
+<li>Batch size (16 / 32 / 64)</li>
+<li>Number of encoder/decoder layers (4–8)</li>
+<li>Hidden dimension (256 / 384 / 512)</li>
+<li>Dropout (0.0–0.2)</li>
+<li>Weight decay (log-uniform 1e-4 to 1e-1)</li>
+<li>Warmup steps (100–2000)</li>
+</ul>
+<p>Each trial runs for 3 epochs on 20k training samples. The pruner stops unpromising trials after the first epoch. Results are stored in an SQLite database for resumption across sessions.</p>
+<hr />
+<h2>Distributed training</h2>
+<p>All multi-GPU stages use <strong>PyTorch DDP</strong> launched with <code>torchrun</code>. Key points:</p>
+<ul>
+<li><code>DistributedSampler</code> ensures each GPU sees a non-overlapping subset of the data.</li>
+<li>Gradient synchronisation happens automatically via DDP's all-reduce.</li>
+<li>Logging, checkpointing, and WandB calls are gated on <code>rank == 0</code>.</li>
+<li><code>ipc: host</code> in docker-compose enables shared-memory for DataLoader workers.</li>
+</ul>
+<hr />
+<h2>Checkpointing</h2>
+<p>A checkpoint is saved every <code>save_interval</code> steps and at the end of each epoch. The checkpoint with the lowest validation loss is also saved as <code>checkpoint_best.pt</code>. The last <code>keep_last_n_checkpoints</code> checkpoints are retained; older ones are removed to save disk space.</p>
+
+        
+        <nav class="post-nav">
+            <a href="architecture.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">SmallVLM Architecture</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

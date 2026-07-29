@@ -1,5 +1,17 @@
-# LLM Evaluation
-
+---
+title: "LLM Evaluation"
+subtitle: "LLM evaluation is the systematic measurement of language model output quality across dimensions like accuracy, faithfulness, coherence, and safety. Unlike traditional ML evaluation with clear numerical metrics (AUC,..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-10-23
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/03_llmops/03_llm_evaluation.html"
+---
 LLM evaluation is the systematic measurement of language model output quality across dimensions like accuracy, faithfulness, coherence, and safety. Unlike traditional ML evaluation with clear numerical metrics (AUC, F1), LLM evaluation is inherently multi-dimensional and often requires LLMs themselves as judges — because the space of correct outputs is vast and rubric-based human evaluation is expensive to scale.
 
 ## Evaluation Dimensions

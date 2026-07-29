@@ -1,5 +1,17 @@
-# Security Engineering
-
+---
+title: "Security Engineering"
+subtitle: "Security engineering applies engineering discipline to protecting systems from unauthorized access, data breaches, and service disruption. Security must be designed in from the start — retrofitting security is..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-04
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/08_security_engineering/index.html"
+---
 Security engineering applies engineering discipline to protecting systems from unauthorized access, data breaches, and service disruption. Security must be designed in from the start — retrofitting security is expensive and incomplete.
 
 ## Overview

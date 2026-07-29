@@ -1,5 +1,17 @@
-# Cloud Infrastructure Patterns
-
+---
+title: "Cloud Infrastructure Patterns"
+subtitle: "Cloud infrastructure patterns are architectural patterns specifically designed for cloud-native systems, addressing elasticity, resilience, observability, and cost efficiency at scale. They represent proven solutions..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-18
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/03_design_patterns/06_cloud_infrastructure_patterns.html"
+---
 Cloud infrastructure patterns are architectural patterns specifically designed for cloud-native systems, addressing elasticity, resilience, observability, and cost efficiency at scale. They represent proven solutions for operating stateless and stateful workloads in cloud environments.
 
 ## Retry with Exponential Backoff

@@ -1,5 +1,17 @@
-# Consensus Algorithms
-
+---
+title: "Consensus Algorithms"
+subtitle: "Consensus algorithms enable a distributed cluster of nodes to agree on a single value or sequence of values, even in the presence of node failures. Consensus is the foundation of replicated state machines,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-18
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/12_distributed_systems_theory/02_consensus_algorithms.html"
+---
 Consensus algorithms enable a distributed cluster of nodes to agree on a single value or sequence of values, even in the presence of node failures. Consensus is the foundation of replicated state machines, distributed locks, leader election, and linearizable databases.
 
 ## Raft Consensus Overview

@@ -1,5 +1,17 @@
-# Microservices Architecture
-
+---
+title: "Microservices Architecture"
+subtitle: "Microservices decompose a system into small, independently deployable services — each owning a bounded domain, its own data store, and its own release lifecycle. The approach enables team autonomy and fine-grained..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-28
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/02_microservices_architecture.html"
+---
 Microservices decompose a system into small, independently deployable services — each owning a bounded domain, its own data store, and its own release lifecycle. The approach enables team autonomy and fine-grained scaling at the cost of significant distributed systems complexity.
 
 ## Architecture Diagrams

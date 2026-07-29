@@ -1,5 +1,17 @@
-# Tutorial 05: Shared Memory & Bank Conflicts
-
+---
+title: "Tutorial 05: Shared Memory & Bank Conflicts"
+subtitle: "See `src/tutorials/05_shared_memory_bank_conflicts/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-11-26
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/05_shared_memory_bank_conflicts.html"
+---
 ## Concept
 
 See `src/tutorials/05_shared_memory_bank_conflicts/main.cu` for detailed inline comments explaining

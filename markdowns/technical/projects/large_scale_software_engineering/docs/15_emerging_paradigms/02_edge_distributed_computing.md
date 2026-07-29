@@ -1,5 +1,17 @@
-# Edge and Distributed Computing
-
+---
+title: "Edge and Distributed Computing"
+subtitle: "Edge computing moves computation closer to where data is generated and consumed — end users, IoT devices, and geographically distributed systems. This reduces latency dramatically and enables new application patterns..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-01
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/15_emerging_paradigms/02_edge_distributed_computing.html"
+---
 Edge computing moves computation closer to where data is generated and consumed — end users, IoT devices, and geographically distributed systems. This reduces latency dramatically and enables new application patterns that were impossible when all computation was centralized.
 
 ## Edge Compute Hierarchy

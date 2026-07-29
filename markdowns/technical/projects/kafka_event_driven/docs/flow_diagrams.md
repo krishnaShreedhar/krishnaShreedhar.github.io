@@ -1,5 +1,17 @@
-# Kafka Event-Driven Architecture — Flow Diagrams
-
+---
+title: "Kafka Event-Driven Architecture — Flow Diagrams"
+subtitle: "flowchart TD subgraph EventStore [\"EventStore (append-only log)\"] E1[\"v1: UserRegistered\n{email: alice@example.com}\"] E2[\"v2: EmailVerified\n{verified_by: email_link}\"] E3[\"v3: ProfileUpdated\n{display_name: Alice..."
+category: technical
+project: kafka_event_driven
+project_title: "Kafka Event-Driven Architecture — Demonstration Project"
+date: 2025-01-24
+reading_time: 4
+tags:
+  - kafka-event-driven
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/kafka_event_driven/docs/flow_diagrams.html"
+---
 ## 1. Event Sourcing — State Reconstruction
 
 ```mermaid

@@ -1,5 +1,16 @@
-# Large Scale Software Engineering
-
+---
+title: "Large Scale Software Engineering"
+subtitle: "A comprehensive reference covering the core concepts, paradigms, patterns, and practices required to design, build, and operate large-scale software systems. This documentation spans architectural thinking,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-19
+reading_time: 2
+tags:
+  - large-scale-software-engineering
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/index.html"
+---
 A comprehensive reference covering the core concepts, paradigms, patterns, and practices required to design, build, and operate large-scale software systems. This documentation spans architectural thinking, engineering principles, distributed systems theory, and modern operational practices.
 
 ## Scope

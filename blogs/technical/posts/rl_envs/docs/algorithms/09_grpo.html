@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GRPO — Group Relative Policy Optimization &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Group Relative Policy Optimization (GRPO) [DeepSeek-AI, 2024] is the reinforcement learning algorithm at the core of DeepSeek-R1, the model that demonstrated st">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">GRPO — Group Relative Policy Optimization</span>
+        </div>
+        <h1 class="post-title">GRPO — Group Relative Policy Optimization</h1>
+        <p class="post-subtitle">Group Relative Policy Optimization (GRPO) [DeepSeek-AI, 2024] is the reinforcement learning algorithm at the core of DeepSeek-R1, the model that demonstrated strong reasoning capability in large language models....</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-02-09</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2 active"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p><strong>Use case:</strong> VLM / LLM fine-tuning (e.g. DeepSeek-R1)<br />
+<strong>Type:</strong> On-policy, critic-free policy gradient<br />
+<strong>Action space:</strong> Discrete (response tokens / choices)</p>
+<hr />
+<h2>Overview</h2>
+<p>Group Relative Policy Optimization (GRPO) [DeepSeek-AI, 2024] is the reinforcement learning
+algorithm at the core of DeepSeek-R1, the model that demonstrated strong reasoning capability
+in large language models. GRPO's central innovation is <strong>eliminating the critic network</strong> —
+instead, it estimates policy advantages purely by comparing a group of G sampled outputs for
+the same input prompt.</p>
+<p>This makes GRPO memory-efficient and avoids the instability of training a separate value
+network on high-dimensional LLM state spaces.</p>
+<hr />
+<h2>Motivation: Why Eliminate the Critic?</h2>
+<p>In standard PPO, a learned value function <code>V(s)</code> provides the baseline for advantage estimation:</p>
+<pre><code>A_PPO(s,a) = Q(s,a) - V(s)
+</code></pre>
+<p>For LLMs/VLMs, training <code>V(s)</code> requires an additional model of comparable size to the policy.
+This doubles memory usage and adds training instability.</p>
+<p>GRPO replaces the per-state value baseline with a <strong>group-level reward baseline</strong>:</p>
+<pre><code>A_i = (r_i - mean(r_1, ..., r_G)) / (std(r_1, ..., r_G) + eps)
+</code></pre>
+<p>This works because:</p>
+<ol>
+<li>For the <em>same input</em>, different outputs have different qualities. The mean is a natural baseline.</li>
+<li>Normalising by group std makes advantage scale-invariant across reward functions.</li>
+<li>No additional network is needed — the baseline is statistical.</li>
+</ol>
+<hr />
+<h2>Connection to DeepSeek-R1</h2>
+<p>DeepSeek-R1 applies GRPO to fine-tune a language model for chain-of-thought reasoning:</p>
+<ol>
+<li>For each math problem (state), generate G candidate solutions (responses).</li>
+<li>Verify each solution against the ground-truth answer → binary reward {0, 1}.</li>
+<li>Compute group-relative advantages from the G rewards.</li>
+<li>Update the policy with a clipped objective + KL penalty to a reference model.</li>
+</ol>
+<p>The result is a model that improves its own reasoning through self-play — no human annotation
+or reward model is required beyond a verifiable reward signal.</p>
+<hr />
+<h2>Group-Relative Advantage Formula</h2>
+<p>Given G responses <code>{a_1, ..., a_G}</code> for a single state <code>s</code>, with rewards <code>{r_1, ..., r_G}</code>:</p>
+<pre><code>mean_r = (1/G) * sum_i r_i
+std_r  = sqrt( (1/G) * sum_i (r_i - mean_r)^2 )
+A_i    = (r_i - mean_r) / (std_r + eps)
+</code></pre>
+<p>Properties:</p>
+<ul>
+<li>Sum of advantages within a group is zero (zero-mean normalisation)</li>
+<li>Better-than-average responses get positive advantage</li>
+<li>Worse-than-average responses get negative advantage</li>
+<li>Independent of absolute reward scale</li>
+</ul>
+<hr />
+<h2>Policy Update: Clipped Objective + KL Penalty</h2>
+<p>GRPO uses the PPO clipped surrogate objective applied to group advantages:</p>
+<pre><code>ratio_i   = pi_theta(a_i | s) / pi_theta_old(a_i | s)
+clip_obj_i = min( ratio_i * A_i, clip(ratio_i, 1-eps, 1+eps) * A_i )
+L_clip     = -mean_i( clip_obj_i )
+</code></pre>
+<p>Plus a KL penalty between the updated policy and a frozen reference policy:</p>
+<pre><code>KL_approx = mean( log pi_ref(a|s) - log pi_theta(a|s) )
+L_total   = L_clip + kl_coef * KL_approx
+</code></pre>
+<p>The reference policy is the initial (pre-fine-tuning) checkpoint, preventing the policy
+from drifting into degenerate outputs during training.</p>
+<hr />
+<h2>Comparison to PPO</h2>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>PPO</th>
+  <th>GRPO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Advantage estimation</td>
+  <td>GAE with learned V(s)</td>
+  <td>Group-relative normalisation</td>
+</tr>
+<tr>
+  <td>Critic network</td>
+  <td>Required</td>
+  <td>Not needed</td>
+</tr>
+<tr>
+  <td>Memory cost</td>
+  <td>2x policy size</td>
+  <td>1x policy size</td>
+</tr>
+<tr>
+  <td>Exploration</td>
+  <td>Entropy bonus (optional)</td>
+  <td>Group sampling diversity</td>
+</tr>
+<tr>
+  <td>Baseline variance</td>
+  <td>Low (with good V)</td>
+  <td>Medium (depends on G)</td>
+</tr>
+<tr>
+  <td>LLM applicability</td>
+  <td>Expensive</td>
+  <td>Natural fit</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>VLM Fine-tuning Use Case</h2>
+<p>In the tutorial <code>vlm_env</code>, the state is a question embedding (128D) and actions are
+candidate answers (4 choices). The GRPO agent:</p>
+<ol>
+<li>Generates G=8 candidate answers for each question</li>
+<li>Receives rewards (+1.0 correct, -0.5 wrong) for each</li>
+<li>Computes group-relative advantages</li>
+<li>Updates via clipped policy gradient with KL regularisation to the initial policy</li>
+</ol>
+<p>This mimics how DeepSeek-R1 learns to reason: generating multiple hypotheses, rewarding
+those that lead to correct verified answers, and updating the policy accordingly.</p>
+<hr />
+<h2>Training Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Q([Question / State s]) --&gt; GS[Generate G responses\ncollect_group]
+    GS --&gt; |a_1...a_G| RM[Reward signal\n r_1...r_G]
+    RM --&gt; AD[Group-relative\nadvantage\nA_i = r_i - mean / std]
+    AD --&gt; BUF[Buffer\nstate, action, A_i, old_log_prob]
+    BUF --&gt; UPD[Policy update\nn_epochs over buffer]
+    UPD --&gt; CL[Clipped loss\nL_clip]
+    UPD --&gt; KL[KL penalty\nvs reference policy]
+    CL --&gt; TL[Total loss]
+    KL --&gt; TL
+    TL --&gt; |gradient step| PI([Updated policy pi_theta])
+    PI --&gt; |next episode| Q
+</div></div>
+<hr />
+<h2>KL Penalty Purpose</h2>
+<p>The KL penalty <code>kl_coef * KL(pi_ref || pi_theta)</code> serves two roles:</p>
+<ol>
+<li><strong>Safety</strong>: Prevents the policy from forgetting how to generate grammatical / coherent text
+by staying close to the base model.</li>
+<li><strong>Stability</strong>: Limits how much the policy changes per update, analogous to a trust region
+but computed analytically rather than as a constraint.</li>
+</ol>
+<p>For the tutorial discrete case, KL is approximated as:</p>
+<pre><code>KL ≈ mean( log pi_ref(a|s) - log pi_new(a|s) )
+</code></pre>
+<p>This is the reverse KL direction and is unbiased when averaged over many samples.</p>
+<hr />
+<h2>Key Hyperparameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Default</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>learning_rate</code></td>
+  <td>1e-4</td>
+  <td>Policy network learning rate</td>
+</tr>
+<tr>
+  <td><code>group_size</code></td>
+  <td>8</td>
+  <td>G: responses per question per data collection step</td>
+</tr>
+<tr>
+  <td><code>clip_epsilon</code></td>
+  <td>0.2</td>
+  <td>PPO clipping range</td>
+</tr>
+<tr>
+  <td><code>n_epochs</code></td>
+  <td>1</td>
+  <td>Policy update epochs per update() call</td>
+</tr>
+<tr>
+  <td><code>kl_coef</code></td>
+  <td>0.04</td>
+  <td>Coefficient for KL penalty</td>
+</tr>
+<tr>
+  <td><code>batch_size</code></td>
+  <td>64</td>
+  <td>Mini-batch size during policy update</td>
+</tr>
+<tr>
+  <td><code>hidden_dims</code></td>
+  <td>[256,128]</td>
+  <td>Policy MLP layer sizes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>References</h2>
+<ul>
+<li>DeepSeek-AI (2025). <em>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via
+Reinforcement Learning.</em> arXiv:2501.12948.</li>
+<li>Shao, Z. et al. (2024). <em>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in
+Open Language Models.</em> arXiv:2402.03300.</li>
+<li>Schulman, J. et al. (2017). <em>Proximal Policy Optimization Algorithms.</em> arXiv:1707.06347.</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="08_sac.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">SAC — Soft Actor-Critic</span></a>
+            <a href="10_dreamer.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Dreamer V2 — World Models for Model-Based RL</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

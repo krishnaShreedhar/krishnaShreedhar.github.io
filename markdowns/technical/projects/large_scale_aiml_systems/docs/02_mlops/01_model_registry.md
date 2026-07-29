@@ -1,5 +1,17 @@
-# Model Registry
-
+---
+title: "Model Registry"
+subtitle: "A model registry is a centralized versioned store for trained ML models — the equivalent of a software artifact repository (like Docker Hub or PyPI) for ML models. It tracks model versions, their metadata (training..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-04-22
+reading_time: 3
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/02_mlops/01_model_registry.html"
+---
 A model registry is a centralized versioned store for trained ML models — the equivalent of a software artifact repository (like Docker Hub or PyPI) for ML models. It tracks model versions, their metadata (training data, hyperparameters, evaluation metrics), lifecycle stage, and deployment lineage, enabling teams to manage model promotion and rollback systematically.
 
 ## Model Registry Architecture

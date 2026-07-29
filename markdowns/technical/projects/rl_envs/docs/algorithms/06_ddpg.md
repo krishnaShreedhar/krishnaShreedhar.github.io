@@ -1,5 +1,17 @@
-# DDPG — Deep Deterministic Policy Gradient
-
+---
+title: "DDPG — Deep Deterministic Policy Gradient"
+subtitle: "Standard policy gradient methods work with **stochastic policies** π(a|s) and require integration over the action space. For high-dimensional continuous actions this integral becomes computationally intractable."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-02-27
+reading_time: 3
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/06_ddpg.html"
+---
 ## Deterministic Policy Gradient Theorem
 
 Standard policy gradient methods work with **stochastic policies** π(a|s) and

@@ -1,5 +1,17 @@
-# A/B Testing for ML Models
-
+---
+title: "A/B Testing for ML Models"
+subtitle: "A/B testing for ML models is the controlled online experiment that determines whether a new model (the challenger) produces better business outcomes than the current production model (the champion) when exposed to..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-09-08
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/02_mlops/05_ab_testing.html"
+---
 A/B testing for ML models is the controlled online experiment that determines whether a new model (the challenger) produces better business outcomes than the current production model (the champion) when exposed to real user traffic. Unlike offline evaluation on historical data, A/B testing captures causal impact on live user behavior — the only evaluation that truly answers whether a new model improves the product.
 
 ## A/B Test Architecture for ML

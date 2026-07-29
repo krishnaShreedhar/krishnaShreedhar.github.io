@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>The Three Pillars of Observability &middot; Shreedhar Kodate</title>
+    <meta name="description" content="The three pillars of observability — metrics, traces, and logs — provide complementary views into system behaviour. Metrics answer "what is wrong"; traces answe">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">The Three Pillars of Observability</span>
+        </div>
+        <h1 class="post-title">The Three Pillars of Observability</h1>
+        <p class="post-subtitle">The three pillars of observability — metrics, traces, and logs — provide complementary views into system behaviour. Metrics answer "what is wrong"; traces answer "where is it wrong"; logs answer "why is it wrong"....</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-10-28</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2 active"><a href="01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>The three pillars of observability — metrics, traces, and logs — provide complementary views into system behaviour. Metrics answer &quot;what is wrong&quot;; traces answer &quot;where is it wrong&quot;; logs answer &quot;why is it wrong&quot;. Together they enable effective production debugging and monitoring.</p>
+<h2>Three Pillars Overview</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Metrics[Metrics - What is happening]
+        M1[Numeric time-series data]
+        M2[Aggregated - not per request]
+        M3[Low cardinality labels]
+        M4[Prometheus Datadog CloudWatch]
+        M5[Use for: alerting dashboards capacity]
+    end
+
+    subgraph Traces[Traces - Where is it happening]
+        T1[Per-request call trees]
+        T2[Spans with timing and metadata]
+        T3[Distributed across services]
+        T4[Jaeger Zipkin Tempo DatadogAPM]
+        T5[Use for: latency debugging bottlenecks]
+    end
+
+    subgraph Logs[Logs - Why it happened]
+        L1[Timestamped event records]
+        L2[High cardinality details]
+        L3[Structured JSON preferred]
+        L4[Elasticsearch Splunk Loki CloudWatch]
+        L5[Use for: root cause debugging errors]
+    end
+
+    Alert[Alert fires:\np99 latency elevated] --&gt; Metrics
+    Metrics --&gt; Traces
+    Traces --&gt; Logs
+
+    style Metrics fill:#dbeafe,stroke:#2563eb
+    style Traces fill:#fef3c7,stroke:#d97706
+    style Logs fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Metrics Types</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph MetricTypes[Prometheus Metric Types]
+        Counter[Counter\nMonotonically increasing\nHTTP requests total\nErrors total\nBytes processed]
+        Gauge[Gauge\nCan go up or down\nActive connections\nMemory usage\nQueue depth]
+        Histogram[Histogram\nObservation distribution\nRequest duration in buckets\nle 0.1 le 0.5 le 1.0 le inf]
+        Summary[Summary\nPre-computed percentiles\nLess flexible than histogram]
+    end
+
+    Counter --&gt; Use1[Rate queries: rate in 5m]
+    Gauge --&gt; Use2[Current value: memory_used_bytes]
+    Histogram --&gt; Use3[Percentile queries: histogram_quantile 0.99]
+</div></div>
+<h2>Distributed Tracing</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Trace[Distributed Trace: order placement]
+        Root[HTTP POST /orders\nSpan: 350ms total]
+
+        subgraph AuthSpan[Auth Validation: 15ms]
+            AuthDetail[Validate JWT\nCheck permissions]
+        end
+
+        subgraph DBSpan[Database Write: 45ms]
+            DBDetail[INSERT INTO orders\nPostgres primary]
+        end
+
+        subgraph PaySpan[Payment Service: 280ms]
+            PayDetail[gRPC call\nCharge credit card]
+            subgraph ExtSpan[Stripe API: 240ms]
+                ExtDetail[External HTTP call\nP99 bottleneck here]
+            end
+        end
+
+        Root --&gt; AuthSpan &amp; DBSpan &amp; PaySpan
+        PaySpan --&gt; ExtSpan
+    end
+
+    style ExtSpan fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+</div></div>
+<h2>Context Propagation</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Client
+    participant SvcA
+    participant SvcB
+    participant SvcC
+
+    Client-&gt;&gt;SvcA: HTTP Request\nno trace context
+    SvcA-&gt;&gt;SvcA: Generate trace_id: abc123\nspan_id: span1
+    SvcA-&gt;&gt;SvcB: HTTP Request\ntraceparent: 00-abc123-span1-01
+    SvcB-&gt;&gt;SvcB: New span: span2\nparent: span1
+    SvcB-&gt;&gt;SvcC: HTTP Request\ntraceparent: 00-abc123-span2-01
+    SvcC-&gt;&gt;SvcC: New span: span3\nparent: span2
+    SvcC--&gt;&gt;SvcB: Response
+    SvcB--&gt;&gt;SvcA: Response
+    SvcA--&gt;&gt;Client: Response
+
+    Note over SvcA,SvcC: All spans share trace_id: abc123\nLinked by parent-child span relationships
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Metrics</strong>: Numeric measurements aggregated over time, stored as time-series. Low storage cost — aggregation discards individual request details. Excellent for alerting (threshold-based and SLO burn rate), capacity planning, and dashboard visualization. Prometheus is the standard open-source system; the OpenMetrics format enables interoperability.</p>
+</li>
+<li><p><strong>Counter</strong>: A metric that only increases. Represents cumulative totals (total requests, total errors, total bytes). To find the rate, use the rate() or irate() function. Counters reset to zero on service restart.</p>
+</li>
+<li><p><strong>Gauge</strong>: A metric that can increase or decrease. Represents current state (active connections, memory usage, queue depth, temperature). Use directly for current-value dashboards.</p>
+</li>
+<li><p><strong>Histogram</strong>: Records observations (request durations, response sizes) in configurable buckets. Enables server-side percentile calculation via histogram_quantile. More flexible than summaries for cross-dimensional aggregation. The recommended metric type for latency measurement.</p>
+</li>
+<li><p><strong>Distributed Trace</strong>: A collection of spans representing a single request's journey through a distributed system. Each span records an operation (HTTP call, DB query, cache lookup) with its start time, duration, and metadata. Spans are linked by parent-child relationships, forming a tree rooted at the entry point.</p>
+</li>
+<li><p><strong>Trace Sampling</strong>: Tracing every request at high throughput is expensive. Sampling strategies: head-based (decide to trace at entry point based on probability), tail-based (decide after the request completes, keeping traces that show errors or high latency). Tail-based sampling with OpenTelemetry Collector is the most powerful approach.</p>
+</li>
+<li><p><strong>OpenTelemetry (OTel)</strong>: A CNCF project providing vendor-neutral APIs, SDKs, and collector for metrics, traces, and logs. Instrument code once with OTel; route telemetry to any backend (Jaeger, Prometheus, Datadog, Honeycomb). The standard for modern observability instrumentation.</p>
+</li>
+<li><p><strong>Correlation ID</strong>: A unique identifier attached to every request at the entry point (API gateway or first service). Propagated in HTTP headers to all downstream services. Stored in every log line. Enables correlating logs across services for a single request.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Pillar</th>
+  <th>Detail Level</th>
+  <th>Storage Cost</th>
+  <th>Query Speed</th>
+  <th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Metrics</td>
+  <td>Low (aggregated)</td>
+  <td>Low</td>
+  <td>Fast</td>
+  <td>Alerting, dashboards</td>
+</tr>
+<tr>
+  <td>Traces</td>
+  <td>Medium (per request)</td>
+  <td>Medium</td>
+  <td>Medium</td>
+  <td>Latency debugging</td>
+</tr>
+<tr>
+  <td>Logs</td>
+  <td>High (per event)</td>
+  <td>High</td>
+  <td>Slow</td>
+  <td>Root cause analysis</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Start with metrics</strong>: Set up Prometheus + Grafana for all services before anything else</li>
+<li><strong>Add traces</strong>: When debugging &quot;why is this endpoint slow&quot; becomes frequent — traces show where time is spent</li>
+<li><strong>Improve logs</strong>: Move from unstructured text to structured JSON with correlation IDs for searchable logs</li>
+<li><strong>Use all three</strong>: Production incidents typically require all three: metrics detect the problem, traces localize it, logs explain it</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Observability and Monitoring</span></a>
+            <a href="02_monitoring_approaches.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Monitoring Approaches</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

@@ -1,5 +1,17 @@
-# The Twelve-Factor App
-
+---
+title: "The Twelve-Factor App"
+subtitle: "The Twelve-Factor App is a methodology for building software-as-a-service applications that are portable, scalable, and maintainable. Formalized by Heroku engineers based on patterns from deploying thousands of..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-12
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/10_devops_infrastructure/05_twelve_factor_app.html"
+---
 The Twelve-Factor App is a methodology for building software-as-a-service applications that are portable, scalable, and maintainable. Formalized by Heroku engineers based on patterns from deploying thousands of applications, these twelve factors remain the canonical guide for cloud-native application design.
 
 ## The Twelve Factors

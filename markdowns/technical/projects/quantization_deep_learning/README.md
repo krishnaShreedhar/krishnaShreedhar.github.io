@@ -1,5 +1,16 @@
-# Deep Learning Quantization
-
+---
+title: "Deep Learning Quantization"
+subtitle: "A comprehensive project illustrating deep learning quantization concepts through minimal working code examples, visualizations, mermaid diagrams, and extensive documentation."
+category: technical
+project: quantization_deep_learning
+project_title: "Deep Learning Quantization"
+date: 2025-12-22
+reading_time: 4
+tags:
+  - quantization-deep-learning
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/quantization_deep_learning/index.html"
+---
 A comprehensive project illustrating deep learning quantization concepts through minimal working code examples, visualizations, mermaid diagrams, and extensive documentation.
 
 ## Overview

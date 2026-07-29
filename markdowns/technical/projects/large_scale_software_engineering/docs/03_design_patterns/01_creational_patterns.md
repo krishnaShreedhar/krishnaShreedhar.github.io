@@ -1,5 +1,17 @@
-# Creational Patterns
-
+---
+title: "Creational Patterns"
+subtitle: "Creational design patterns abstract the object creation process, making it more flexible and decoupled from the concrete classes being instantiated. They allow systems to be independent of how objects are created,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-04-05
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/03_design_patterns/01_creational_patterns.html"
+---
 Creational design patterns abstract the object creation process, making it more flexible and decoupled from the concrete classes being instantiated. They allow systems to be independent of how objects are created, composed, and represented.
 
 ## Pattern Overview

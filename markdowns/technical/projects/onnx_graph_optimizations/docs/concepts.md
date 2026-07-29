@@ -1,5 +1,17 @@
-# ONNX Concepts and Graph Optimization
-
+---
+title: "ONNX Concepts and Graph Optimization"
+subtitle: "This document explains core ONNX concepts with diagrams, tables, and worked examples. Every diagram is rendered as a Mermaid block so it displays natively in GitHub, GitLab, and most modern Markdown viewers."
+category: technical
+project: onnx_graph_optimizations
+project_title: "ONNX Graph Optimizations"
+date: 2025-12-29
+reading_time: 6
+tags:
+  - onnx-graph-optimizations
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/onnx_graph_optimizations/docs/concepts.html"
+---
 This document explains core ONNX concepts with diagrams, tables, and worked examples.
 Every diagram is rendered as a Mermaid block so it displays natively in GitHub, GitLab,
 and most modern Markdown viewers.

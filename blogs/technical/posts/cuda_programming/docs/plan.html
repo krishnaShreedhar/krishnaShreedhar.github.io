@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CUDA & cuDNN Tutorial Implementation Plan &middot; Shreedhar Kodate</title>
+    <meta name="description" content="25 standalone tutorials covering the full GPU programming stack, from fundamental execution model concepts through advanced library usage and profiling. Each tu">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">CUDA & cuDNN Tutorial Implementation Plan</span>
+        </div>
+        <h1 class="post-title">CUDA & cuDNN Tutorial Implementation Plan</h1>
+        <p class="post-subtitle">25 standalone tutorials covering the full GPU programming stack, from fundamental execution model concepts through advanced library usage and profiling. Each tutorial is a self-contained CUDA C++ program built from...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-09-07</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">cuda-programming</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">CUDA & cuDNN Programming Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">CUDA & cuDNN Programming Tutorials</a></li><li class="project-nav__lvl-1 active"><a href="plan.html">CUDA & cuDNN Tutorial Implementation Plan</a></li><li class="project-nav__lvl-2"><a href="tutorials/01_threads_blocks_grids.html">Tutorial 01: Threads, Blocks & Grids</a></li><li class="project-nav__lvl-2"><a href="tutorials/02_warps_simt.html">Tutorial 02: Warps & SIMT</a></li><li class="project-nav__lvl-2"><a href="tutorials/03_cuda_memory_types.html">Tutorial 03: CUDA Memory Types</a></li><li class="project-nav__lvl-2"><a href="tutorials/04_memory_coalescing.html">Tutorial 04: Memory Coalescing</a></li><li class="project-nav__lvl-2"><a href="tutorials/05_shared_memory_bank_conflicts.html">Tutorial 05: Shared Memory & Bank Conflicts</a></li><li class="project-nav__lvl-2"><a href="tutorials/06_thread_synchronization.html">Tutorial 06: Thread Synchronization</a></li><li class="project-nav__lvl-2"><a href="tutorials/07_occupancy.html">Tutorial 07: Occupancy</a></li><li class="project-nav__lvl-2"><a href="tutorials/08_cuda_streams.html">Tutorial 08: CUDA Streams</a></li><li class="project-nav__lvl-2"><a href="tutorials/09_cuda_events_timing.html">Tutorial 09: CUDA Events & Timing</a></li><li class="project-nav__lvl-2"><a href="tutorials/10_unified_memory.html">Tutorial 10: Unified Memory</a></li><li class="project-nav__lvl-2"><a href="tutorials/11_pinned_memory.html">Tutorial 11: Pinned Memory</a></li><li class="project-nav__lvl-2"><a href="tutorials/12_atomic_operations.html">Tutorial 12: Atomic Operations</a></li><li class="project-nav__lvl-2"><a href="tutorials/13_parallel_reduction.html">Tutorial 13: Parallel Reduction</a></li><li class="project-nav__lvl-2"><a href="tutorials/14_warp_shuffle.html">Tutorial 14: Warp Shuffle Intrinsics</a></li><li class="project-nav__lvl-2"><a href="tutorials/15_tiled_matmul.html">Tutorial 15: Tiled Matrix Multiplication</a></li><li class="project-nav__lvl-2"><a href="tutorials/16_tensor_cores_wmma.html">Tutorial 16: Tensor Cores & WMMA</a></li><li class="project-nav__lvl-2"><a href="tutorials/17_cutlass.html">Tutorial 17: CUTLASS</a></li><li class="project-nav__lvl-2"><a href="tutorials/18_ptx_sass.html">Tutorial 18: PTX & SASS</a></li><li class="project-nav__lvl-2"><a href="tutorials/19_nsight_profiling.html">Tutorial 19: Nsight Profiling</a></li><li class="project-nav__lvl-2"><a href="tutorials/20_cublas.html">Tutorial 20: cuBLAS</a></li><li class="project-nav__lvl-2"><a href="tutorials/21_cudnn_descriptors.html">Tutorial 21: cuDNN Handles & Descriptors</a></li><li class="project-nav__lvl-2"><a href="tutorials/22_cudnn_algorithm_selection.html">Tutorial 22: cuDNN Algorithm Selection</a></li><li class="project-nav__lvl-2"><a href="tutorials/23_cudnn_workspace.html">Tutorial 23: cuDNN Workspace Memory</a></li><li class="project-nav__lvl-2"><a href="tutorials/24_cudnn_fused_ops.html">Tutorial 24: cuDNN Fused Operations</a></li><li class="project-nav__lvl-2"><a href="tutorials/25_cuda_graphs.html">Tutorial 25: CUDA Graphs</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Overview</h2>
+<p>25 standalone tutorials covering the full GPU programming stack, from fundamental
+execution model concepts through advanced library usage and profiling.
+Each tutorial is a self-contained CUDA C++ program built from YAML config,
+with extensive logging and ablation experiments.</p>
+<h2>Concept Groupings</h2>
+<h3>Group 1: Execution Model (Tutorials 01–02)</h3>
+<p><strong>Motivation</strong>: Before optimizing anything, understand how work is organized on the GPU.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>01</td>
+  <td>Threads, Blocks &amp; Grids</td>
+  <td>Hierarchy maps to hardware (threads → SM lanes, blocks → SM)</td>
+</tr>
+<tr>
+  <td>02</td>
+  <td>Warps &amp; SIMT</td>
+  <td>32 threads execute lockstep; divergence serializes both paths</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Learning path</strong>: Start here. These fundamentals affect every optimization decision.</p>
+<p><strong>Code structure</strong>: Vector addition (01) and branch-cost measurement (02).</p>
+<hr />
+<h3>Group 2: Memory Hierarchy (Tutorials 03–05)</h3>
+<p><strong>Motivation</strong>: GPU performance is nearly always memory-bound. The memory hierarchy
+determines achievable bandwidth and latency.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>03</td>
+  <td>Memory Types</td>
+  <td>Register &gt; Shared &gt; L2 &gt; Global; know when to use each</td>
+</tr>
+<tr>
+  <td>04</td>
+  <td>Memory Coalescing</td>
+  <td>32-thread warp should issue one 128-byte transaction</td>
+</tr>
+<tr>
+  <td>05</td>
+  <td>Bank Conflicts</td>
+  <td>32 shared-memory banks; same bank from two threads = serialized</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Learning path</strong>: Understand access patterns before writing any kernel.
+Measure bandwidth for each memory type. Apply coalescing and bank-conflict
+analysis to your kernels.</p>
+<hr />
+<h3>Group 3: Concurrency &amp; Synchronization (Tutorials 06–09)</h3>
+<p><strong>Motivation</strong>: GPUs hide latency through massive parallelism, but coordination
+is required for correctness and performance measurement.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>06</td>
+  <td>Thread Synchronization</td>
+  <td><code>__syncthreads()</code> is a block barrier; warps within a block can diverge</td>
+</tr>
+<tr>
+  <td>07</td>
+  <td>Occupancy</td>
+  <td>More resident warps = more latency hiding; not always the bottleneck</td>
+</tr>
+<tr>
+  <td>08</td>
+  <td>CUDA Streams</td>
+  <td>Overlap H2D copy, kernel, D2H copy across separate copy engines</td>
+</tr>
+<tr>
+  <td>09</td>
+  <td>Events &amp; Timing</td>
+  <td>CPU chrono includes launch overhead; GPU events give kernel-only time</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Group 4: Memory Allocation Strategies (Tutorials 10–11)</h3>
+<p><strong>Motivation</strong>: How memory is allocated affects H2D/D2H bandwidth and page-fault
+behavior.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>10</td>
+  <td>Unified Memory</td>
+  <td>Demand paging → page faults; prefetch + advise eliminates most</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>Pinned Memory</td>
+  <td>Skips bounce buffer; doubles H2D/D2H bandwidth on average</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Group 5: Parallel Patterns (Tutorials 12–14)</h3>
+<p><strong>Motivation</strong>: Core algorithmic building blocks for GPU programming.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>12</td>
+  <td>Atomic Operations</td>
+  <td>Global atomics serialize; private smem histogram then merge</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td>Parallel Reduction</td>
+  <td>Naive → optimized (no divergence) → warp shuffle</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>Warp Shuffle</td>
+  <td>Register-level exchange; no shared mem, no bank conflicts</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Group 6: GEMM Optimization (Tutorials 15–17)</h3>
+<p><strong>Motivation</strong>: GEMM is the core operation of deep learning. Understanding the
+optimization stack from naive → tiled → Tensor Core → CUTLASS → cuBLAS
+builds intuition for all matrix ops.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>15</td>
+  <td>Tiled MatMul</td>
+  <td>Shared memory tiles reduce global memory traffic by TILE×</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td>Tensor Cores WMMA</td>
+  <td>FP16 MMA in warp instruction; 5–10× FP32 CUDA cores</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td>CUTLASS</td>
+  <td>Template-level control over tile sizes, epilogue, pipelining</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Group 7: Advanced &amp; Profiling (Tutorials 18–19, 25)</h3>
+<p><strong>Motivation</strong>: Production-quality GPU code requires low-level control and
+systematic profiling.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>18</td>
+  <td>PTX &amp; SASS</td>
+  <td>Inspect compiler output; <code>#pragma unroll</code> + inline PTX for ILP</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td>Nsight Profiling</td>
+  <td>NVTX annotations; key Nsight Compute metrics</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td>CUDA Graphs</td>
+  <td>Amortize launch overhead; single graph launch replaces N API calls</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Group 8: CUDA Libraries (Tutorials 20–24)</h3>
+<p><strong>Motivation</strong>: Production code uses cuBLAS and cuDNN rather than hand-written kernels.
+Understanding the descriptor/algorithm/workspace model enables correct usage
+and systematic performance tuning.</p>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Concept</th>
+  <th>Key Insight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>20</td>
+  <td>cuBLAS</td>
+  <td><code>cublasSgemm</code>, TF32 math mode, column-major convention</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td>cuDNN Descriptors</td>
+  <td>Handle, tensor, filter, conv descriptors; layout matters</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td>cuDNN Algorithm Selection</td>
+  <td><code>cudnnFindConvolutionForwardAlgorithm</code> benchmarks all algos</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td>cuDNN Workspace</td>
+  <td>More workspace = faster algorithm; explicit budget control</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td>cuDNN Fused Ops</td>
+  <td>Conv+Bias+ReLU in one kernel; halves bandwidth for this pattern</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Build Order</h2>
+<p>All tutorials are independent. Build with:</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cmake -S . -B build -DCUTLASS_DIR=/workspace/cutlass
+cmake --build build --target all_tutorials -j$(nproc)
+</code></pre></div>
+<h2>Configuration System</h2>
+<p>All parameters flow from YAML — no CLI arguments.</p>
+<pre><code>configs/global.yaml                      # shared defaults
+configs/tutorials/NN_name.yaml           # per-tutorial overrides
+</code></pre>
+<p>Config loading uses <code>ConfigLoader::from_file()</code> with <code>merge_defaults()</code>.</p>
+<h2>Logging</h2>
+<p>All output goes to <code>logs/&lt;tutorial_name&gt;.log</code> and stdout simultaneously.
+Log level is controlled per-tutorial via the YAML <code>logging.level</code> key.
+Format: <code>[YYYY-MM-DD HH:MM:SS.mmm] [LEVEL  ] [tutorial_name] message</code></p>
+<h2>Expected Hardware</h2>
+<ul>
+<li>GPU: NVIDIA H200 (sm_90) — 1 or 2 GPUs</li>
+<li>Memory: 80–141 GB HBM3 per GPU</li>
+<li>Peak FP16 Tensor Core: ~1979 TFLOPS (dense)</li>
+<li>Peak HBM bandwidth: ~3350 GB/s</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">CUDA & cuDNN Programming Tutorials</span></a>
+            <a href="tutorials/01_threads_blocks_grids.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Tutorial 01: Threads, Blocks & Grids</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

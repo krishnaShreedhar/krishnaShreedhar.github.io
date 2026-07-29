@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PPO — Proximal Policy Optimization &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Policy gradient methods suffer from a fundamental instability: a single bad gradient step can collapse the policy into a degenerate distribution, and on-policy ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">PPO — Proximal Policy Optimization</span>
+        </div>
+        <h1 class="post-title">PPO — Proximal Policy Optimization</h1>
+        <p class="post-subtitle">Policy gradient methods suffer from a fundamental instability: a single bad gradient step can collapse the policy into a degenerate distribution, and on-policy data collection means the collapsed policy generates all...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-15</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2 active"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Motivation: Trust Region Without the Constraint</h2>
+<p>Policy gradient methods suffer from a fundamental instability: a single bad
+gradient step can collapse the policy into a degenerate distribution, and
+on-policy data collection means the collapsed policy generates all future data,
+making recovery impossible.</p>
+<p><strong>Trust Region Policy Optimization (TRPO)</strong> addresses this by constraining each
+update to stay within a KL-divergence ball:</p>
+<pre><code>max  E[r_t(θ) · A_t]   subject to   KL[π_old || π_new] ≤ δ
+</code></pre>
+<p>But TRPO requires computing the Fisher Information Matrix, making it expensive.</p>
+<p><strong>PPO replaces the KL constraint with a clipped objective</strong> — simpler, faster,
+and nearly as stable:</p>
+<pre><code>L_clip(θ) = E[ min( r_t(θ)·A_t,  clip(r_t(θ), 1-ε, 1+ε)·A_t ) ]
+</code></pre>
+<p>where <code>r_t(θ) = π_θ(a|s) / π_old(a|s)</code> is the probability ratio.</p>
+<p>The <code>min</code> and <code>clip</code> together prevent large updates: if the ratio strays far
+from 1, the objective stops improving, acting as an implicit trust region.</p>
+<hr />
+<h2>Clip Objective: Mathematical Intuition</h2>
+<p>For a positive advantage (<code>A_t &gt; 0</code>, action was good):</p>
+<ul>
+<li>We want to increase <code>π(a|s)</code>, so <code>r_t &gt; 1</code>.</li>
+<li>Clip prevents ratio from exceeding <code>1 + ε</code> → limits how much we increase.</li>
+</ul>
+<p>For a negative advantage (<code>A_t &lt; 0</code>, action was bad):</p>
+<ul>
+<li>We want to decrease <code>π(a|s)</code>, so <code>r_t &lt; 1</code>.</li>
+<li>Clip prevents ratio from going below <code>1 - ε</code> → limits how much we decrease.</li>
+</ul>
+<pre><code>r_t values:    0.5    0.8    1.0    1.2    1.5    2.0
+                 ↕             ↕             ↕
+clip range:  [1-ε=0.8 ─────── 1.0 ─────── 1+ε=1.2]
+</code></pre>
+<p>Values outside the clip range are treated as constants — their gradient is zero —
+so the policy cannot move too far in a single update.</p>
+<hr />
+<h2>Generalized Advantage Estimation (GAE)</h2>
+<p>GAE (Schulman et al. 2016) interpolates between TD(0) (low variance, high bias)
+and Monte Carlo returns (high variance, zero bias) via the parameter <code>λ</code>:</p>
+<pre><code>δ_t    = r_t + γ·V(s_{t+1})·(1-done_t) - V(s_t)   ← TD residual
+A_t^GAE = δ_t + (γλ)·δ_{t+1} + (γλ)²·δ_{t+2} + ...
+</code></pre>
+<p>Computed efficiently backwards:</p>
+<pre><code>A_t = δ_t + γλ(1-done_t)·A_{t+1}
+</code></pre>
+<table>
+<thead>
+<tr>
+  <th>λ value</th>
+  <th>Bias</th>
+  <th>Variance</th>
+  <th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>λ = 0</td>
+  <td>High</td>
+  <td>Low</td>
+  <td>TD(0) advantage</td>
+</tr>
+<tr>
+  <td>λ = 1</td>
+  <td>Zero</td>
+  <td>High</td>
+  <td>Full MC advantage</td>
+</tr>
+<tr>
+  <td>λ = 0.95</td>
+  <td>Low</td>
+  <td>Low</td>
+  <td>Typical sweet spot</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Mini-Batch Update Cycle</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    A[&quot;Collect\nn_steps transitions\nwith π_old&quot;] --&gt; B[&quot;Compute\nGAE advantages\n&amp; returns&quot;]
+    B --&gt; C[&quot;Normalize\nadvantages\n(A-mean)/std&quot;]
+    C --&gt; D[&quot;Shuffle\ninto mini-batches\nbatch_size=32&quot;]
+    D --&gt; E[&quot;For each mini-batch:\nCompute clip loss\n+ value loss\n+ entropy bonus&quot;]
+    E --&gt; F{Epoch &lt; n_epochs?}
+    F -- Yes --&gt; D
+    F -- No --&gt; G[&quot;Clear buffer\nRepeat&quot;]
+    G --&gt; A
+</div></div>
+<p>Each rollout of <code>n_steps</code> transitions is reused for <code>n_epochs</code> epochs of
+mini-batch gradient updates. This is what distinguishes PPO from A2C
+(which uses each rollout only once).</p>
+<hr />
+<h2>Full PPO Objective</h2>
+<pre><code>L(θ) = L_clip(θ) - c_v · MSE(V(s), G_t) + c_H · H(π)
+</code></pre>
+<table>
+<thead>
+<tr>
+  <th>Term</th>
+  <th>Coefficient</th>
+  <th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>L_clip</code></td>
+  <td>1.0</td>
+  <td>Clipped policy gradient</td>
+</tr>
+<tr>
+  <td>Value loss</td>
+  <td>c_v = 0.5</td>
+  <td>Critic accuracy</td>
+</tr>
+<tr>
+  <td>Entropy bonus</td>
+  <td>c_H = 0.01</td>
+  <td>Exploration encouragement</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>VLM Finetuning Use Case (RLHF Connection)</h2>
+<p>PPO is the backbone algorithm of <strong>InstructGPT</strong> and many RLHF pipelines:</p>
+<pre><code>Prompt p → LLM π_θ → Response y → Reward Model r(p, y) → PPO update
+</code></pre>
+<p>This tutorial environment models the same structure:</p>
+<table>
+<thead>
+<tr>
+  <th>Production RLHF</th>
+  <th>Tutorial VLMEnv</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Tokenized prompt</td>
+  <td>128-dim question embedding</td>
+</tr>
+<tr>
+  <td>Full token sequence</td>
+  <td>Single choice index (0-3)</td>
+</tr>
+<tr>
+  <td>Reward model score</td>
+  <td>+1.0 (correct) / -0.5 (wrong)</td>
+</tr>
+<tr>
+  <td>LLM being fine-tuned</td>
+  <td>Small MLP policy</td>
+</tr>
+<tr>
+  <td>KL penalty to ref model</td>
+  <td>Entropy bonus (approximate analogue)</td>
+</tr>
+</tbody>
+</table>
+<p>The key connection: PPO prevents the policy from collapsing to always picking
+choice 0 (mode collapse), just as it prevents an LLM from generating repetitive
+or degenerate text.</p>
+<hr />
+<h2>Key Hyperparameters and Their Effect</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Default</th>
+  <th>Too High</th>
+  <th>Too Low</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>clip_epsilon</code></td>
+  <td>0.2</td>
+  <td>Large policy swings → unstable</td>
+  <td>Very slow learning</td>
+</tr>
+<tr>
+  <td><code>n_epochs</code></td>
+  <td>4</td>
+  <td>Overfitting old data → diverge</td>
+  <td>Underutilising rollout</td>
+</tr>
+<tr>
+  <td><code>gae_lambda</code></td>
+  <td>0.95</td>
+  <td>High variance advantages</td>
+  <td>Biased advantages</td>
+</tr>
+<tr>
+  <td><code>learning_rate</code></td>
+  <td>3e-4</td>
+  <td>Unstable updates</td>
+  <td>Very slow convergence</td>
+</tr>
+<tr>
+  <td><code>n_steps</code></td>
+  <td>128</td>
+  <td>Delayed updates, staleness</td>
+  <td>High update overhead</td>
+</tr>
+<tr>
+  <td><code>entropy_coef</code></td>
+  <td>0.01</td>
+  <td>Policy stays random</td>
+  <td>Premature convergence</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>approx_kl</code> metric logged during updates is the key diagnostic: values
+consistently above 0.05 suggest <code>clip_epsilon</code> or <code>learning_rate</code> is too high.</p>
+<hr />
+<h2>Comparison to A2C</h2>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>A2C</th>
+  <th>PPO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Data reuse</td>
+  <td>None (1 pass)</td>
+  <td>n_epochs passes per rollout</td>
+</tr>
+<tr>
+  <td>Stability mechanism</td>
+  <td>Gradient clipping</td>
+  <td>Clipped surrogate objective</td>
+</tr>
+<tr>
+  <td>Advantage estimate</td>
+  <td>n-step returns</td>
+  <td>GAE (lower variance)</td>
+</tr>
+<tr>
+  <td>Computation/update</td>
+  <td>Lower</td>
+  <td>Higher (multiple epochs)</td>
+</tr>
+<tr>
+  <td>Sample efficiency</td>
+  <td>Moderate</td>
+  <td>Higher</td>
+</tr>
+<tr>
+  <td>Typical use</td>
+  <td>Fast prototyping</td>
+  <td>Production RL, RLHF</td>
+</tr>
+</tbody>
+</table>
+<p>PPO is generally preferred over A2C when sample efficiency matters (real-world
+rollouts are expensive) or when stability is critical (LLM finetuning).</p>
+
+        
+        <nav class="post-nav">
+            <a href="04_a2c.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">A2C — Advantage Actor-Critic</span></a>
+            <a href="06_ddpg.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">DDPG — Deep Deterministic Policy Gradient</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

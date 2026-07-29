@@ -1,5 +1,17 @@
-# Tutorial 20: cuBLAS
-
+---
+title: "Tutorial 20: cuBLAS"
+subtitle: "See `src/tutorials/20_cublas/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-07-11
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/20_cublas.html"
+---
 ## Concept
 
 See `src/tutorials/20_cublas/main.cu` for detailed inline comments explaining

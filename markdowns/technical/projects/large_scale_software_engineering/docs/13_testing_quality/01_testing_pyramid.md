@@ -1,5 +1,17 @@
-# The Testing Pyramid
-
+---
+title: "The Testing Pyramid"
+subtitle: "The testing pyramid describes the optimal distribution of test types by count and purpose. Many fast, cheap unit tests form the base; fewer, slower integration tests form the middle; a small number of end-to-end..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-07
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/13_testing_quality/01_testing_pyramid.html"
+---
 The testing pyramid describes the optimal distribution of test types by count and purpose. Many fast, cheap unit tests form the base; fewer, slower integration tests form the middle; a small number of end-to-end tests form the top. This distribution maximizes feedback speed while ensuring broad coverage.
 
 ## Testing Pyramid

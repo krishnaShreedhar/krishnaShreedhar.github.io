@@ -1,5 +1,17 @@
-# Software Engineering Principles
-
+---
+title: "Software Engineering Principles"
+subtitle: "Software engineering principles are the foundational rules and heuristics that guide the design of code at all levels — from individual functions to entire system modules. Mastery of these principles separates..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-22
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/02_software_engineering_principles/index.html"
+---
 Software engineering principles are the foundational rules and heuristics that guide the design of code at all levels — from individual functions to entire system modules. Mastery of these principles separates software that is easy to change, test, and understand from code that accrues technical debt.
 
 ## Overview

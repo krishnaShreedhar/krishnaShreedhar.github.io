@@ -1,5 +1,17 @@
-# Training Pipeline
-
+---
+title: "Training Pipeline"
+subtitle: "Pre-training → Fine-tuning → SFT or RL → Inference ↑ Hyperparameter Tuning (feeds best config back to Stage 1)"
+category: technical
+project: model_architectures
+project_title: "SmallVLM — Minimal Vision-Language Model Tutorial"
+date: 2025-12-09
+reading_time: 3
+tags:
+  - model-architectures
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/model_architectures/docs/training_pipeline.html"
+---
 ## Stage overview
 
 ```

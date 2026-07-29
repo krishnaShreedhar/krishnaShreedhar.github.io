@@ -1,5 +1,17 @@
-# DevOps and Infrastructure
-
+---
+title: "DevOps and Infrastructure"
+subtitle: "DevOps bridges the gap between software development and operations by automating the delivery pipeline, standardizing infrastructure through code, and fostering a culture of shared responsibility for production..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-09
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/10_devops_infrastructure/index.html"
+---
 DevOps bridges the gap between software development and operations by automating the delivery pipeline, standardizing infrastructure through code, and fostering a culture of shared responsibility for production systems. Modern DevOps practices dramatically accelerate the feedback loop from code commit to production.
 
 ## Overview

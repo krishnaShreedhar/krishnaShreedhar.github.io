@@ -1,5 +1,17 @@
-# Flow Diagrams — Pandas & PySpark
-
+---
+title: "Flow Diagrams — Pandas & PySpark"
+subtitle: "From user code to task execution — showing how transformations and actions produce stages and tasks."
+category: technical
+project: pandas_pyspark
+project_title: "Pandas & PySpark — Concepts & Examples"
+date: 2025-09-02
+reading_time: 4
+tags:
+  - pandas-pyspark
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/pandas_pyspark/docs/flow_diagrams.html"
+---
 ## 1. Spark Job Execution Flow
 
 From user code to task execution — showing how transformations and actions produce stages and tasks.

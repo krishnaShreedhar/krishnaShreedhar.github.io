@@ -1,5 +1,17 @@
-# Event-Driven Architecture
-
+---
+title: "Event-Driven Architecture"
+subtitle: "Event-Driven Architecture (EDA) structures a system around the production, detection, and reaction to events. Components communicate by publishing and subscribing to events rather than invoking each other directly,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-11
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/03_event_driven_architecture.html"
+---
 Event-Driven Architecture (EDA) structures a system around the production, detection, and reaction to events. Components communicate by publishing and subscribing to events rather than invoking each other directly, enabling loose temporal and spatial coupling between producers and consumers.
 
 ## Architecture Diagrams

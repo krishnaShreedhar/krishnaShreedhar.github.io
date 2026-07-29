@@ -1,5 +1,17 @@
-# Testing and Quality
-
+---
+title: "Testing and Quality"
+subtitle: "Testing is the practice of verifying that software behaves correctly. Quality engineering goes beyond finding bugs — it designs systems that are inherently verifiable, instruments code for testability, and creates..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-26
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/13_testing_quality/index.html"
+---
 Testing is the practice of verifying that software behaves correctly. Quality engineering goes beyond finding bugs — it designs systems that are inherently verifiable, instruments code for testability, and creates feedback loops that catch regressions before they reach users.
 
 ## Overview

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Pandas & PySpark — Core Concepts &middot; Shreedhar Kodate</title>
+    <meta name="description" content="graph TD subgraph Driver["Driver Process"] SC[SparkContext / SparkSession] DAG[DAG Scheduler] TS[Task Scheduler] end">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Pandas & PySpark — Core Concepts</span>
+        </div>
+        <h1 class="post-title">Pandas & PySpark — Core Concepts</h1>
+        <p class="post-subtitle">graph TD subgraph Driver["Driver Process"] SC[SparkContext / SparkSession] DAG[DAG Scheduler] TS[Task Scheduler] end</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-03-05</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">pandas-pyspark</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Pandas & PySpark — Concepts & Examples</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Pandas & PySpark — Concepts & Examples</a></li><li class="project-nav__lvl-1 active"><a href="concepts.html">Pandas & PySpark — Core Concepts</a></li><li class="project-nav__lvl-1"><a href="flow_diagrams.html">Flow Diagrams — Pandas & PySpark</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>1. PySpark Cluster Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Driver[&quot;Driver Process&quot;]
+        SC[SparkContext / SparkSession]
+        DAG[DAG Scheduler]
+        TS[Task Scheduler]
+    end
+
+    subgraph ClusterManager[&quot;Cluster Manager (YARN / K8s / Standalone)&quot;]
+        CM[Resource Negotiator]
+    end
+
+    subgraph Executor1[&quot;Executor 1 (Worker Node)&quot;]
+        T1A[Task]
+        T1B[Task]
+        CACHE1[Block Manager / Cache]
+    end
+
+    subgraph Executor2[&quot;Executor 2 (Worker Node)&quot;]
+        T2A[Task]
+        T2B[Task]
+        CACHE2[Block Manager / Cache]
+    end
+
+    subgraph Executor3[&quot;Executor 3 (Worker Node)&quot;]
+        T3A[Task]
+        T3B[Task]
+        CACHE3[Block Manager / Cache]
+    end
+
+    SC --&gt;|submits job| DAG
+    DAG --&gt;|builds stages| TS
+    TS --&gt;|requests resources| CM
+    CM --&gt;|allocates containers| Executor1
+    CM --&gt;|allocates containers| Executor2
+    CM --&gt;|allocates containers| Executor3
+    TS --&gt;|sends tasks| T1A
+    TS --&gt;|sends tasks| T1B
+    TS --&gt;|sends tasks| T2A
+    TS --&gt;|sends tasks| T2B
+    TS --&gt;|sends tasks| T3A
+    TS --&gt;|sends tasks| T3B
+    T1A --&gt;|shuffle write| CACHE2
+    T2A --&gt;|shuffle write| CACHE3
+    T1A &amp; T1B &amp; T2A &amp; T2B &amp; T3A &amp; T3B --&gt;|results| SC
+
+    style Driver fill:#2d3748,color:#fff
+    style ClusterManager fill:#2b6cb0,color:#fff
+    style Executor1 fill:#276749,color:#fff
+    style Executor2 fill:#276749,color:#fff
+    style Executor3 fill:#276749,color:#fff
+</div></div>
+<p><strong>Key roles:</strong></p>
+<ul>
+<li><strong>Driver</strong>: the process running your Python script. Owns the SparkContext, constructs the DAG, and coordinates execution.</li>
+<li><strong>DAG Scheduler</strong>: breaks the logical plan into <em>stages</em> separated by shuffle boundaries.</li>
+<li><strong>Task Scheduler</strong>: allocates individual <em>tasks</em> (one per partition) to executor slots.</li>
+<li><strong>Cluster Manager</strong>: negotiates physical resources (YARN / Kubernetes / Spark Standalone).</li>
+<li><strong>Executor</strong>: JVM process that runs tasks and stores cached RDD/DataFrame partitions in its Block Manager.</li>
+</ul>
+<hr />
+<h2>2. Catalyst Optimizer Pipeline</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph User[&quot;User Code&quot;]
+        DF[&quot;df.filter(...).groupBy(...).agg(...)&quot;]
+    end
+
+    subgraph Catalyst[&quot;Catalyst Optimizer&quot;]
+        ULP[&quot;Unresolved\nLogical Plan&quot;]
+        ALP[&quot;Analyzed\nLogical Plan\n(catalog lookup)&quot;]
+        OLP[&quot;Optimized\nLogical Plan\n(predicate pushdown,\ncolumn pruning,\nconstant folding)&quot;]
+        PP[&quot;Physical Plans\n(multiple candidates)&quot;]
+        BPP[&quot;Best Physical Plan\n(cost model selection)&quot;]
+    end
+
+    subgraph Tungsten[&quot;Tungsten Engine&quot;]
+        CG[&quot;Whole-stage\nCode Generation&quot;]
+        EX[&quot;Execution\n(RDD DAG)&quot;]
+    end
+
+    DF --&gt; ULP --&gt; ALP --&gt; OLP --&gt; PP --&gt; BPP --&gt; CG --&gt; EX
+
+    style User fill:#2d3748,color:#fff
+    style Catalyst fill:#2b6cb0,color:#fff
+    style Tungsten fill:#276749,color:#fff
+</div></div>
+<p><strong>Optimisation rules applied:</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Rule</th>
+  <th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Predicate Pushdown</td>
+  <td>Move <code>.filter()</code> as close to data source as possible</td>
+</tr>
+<tr>
+  <td>Column Pruning</td>
+  <td>Only read columns referenced downstream</td>
+</tr>
+<tr>
+  <td>Constant Folding</td>
+  <td>Evaluate <code>1 + 1</code> at plan time</td>
+</tr>
+<tr>
+  <td>Join Reordering</td>
+  <td>Place smaller table on the build side</td>
+</tr>
+<tr>
+  <td>Broadcast Join</td>
+  <td>Auto-broadcast tables smaller than <code>autoBroadcastJoinThreshold</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Pandas Memory Model</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Process[&quot;Python Process (single machine)&quot;]
+        DF_OBJ[&quot;DataFrame Object\n(Python heap)&quot;]
+
+        subgraph Blocks[&quot;Block Manager (internal)&quot;]
+            direction LR
+            B1[&quot;float64 block\n[revenue, discount_pct]\n(contiguous NumPy array)&quot;]
+            B2[&quot;int64 block\n[units, salesperson_id]\n(contiguous NumPy array)&quot;]
+            B3[&quot;object block\n[region, product]\n(Python object pointers)&quot;]
+            B4[&quot;datetime64 block\n[timestamp]&quot;]
+        end
+
+        IDX[&quot;Index\n(RangeIndex / DatetimeIndex)&quot;]
+    end
+
+    DF_OBJ --&gt; B1 &amp; B2 &amp; B3 &amp; B4 &amp; IDX
+
+    style Process fill:#2d3748,color:#fff
+    style Blocks fill:#2b6cb0,color:#fff
+</div></div>
+<p><strong>Memory optimisation strategies:</strong></p>
+<ol>
+<li><strong>Category dtype</strong>: replaces repeated string objects with integer codes + a small lookup table. Saves up to 90% for low-cardinality columns.</li>
+<li><strong>Numeric downcast</strong>: <code>int64</code> (8 bytes) -&gt; <code>int8</code> (1 byte) when range allows. <code>float64</code> -&gt; <code>float32</code>.</li>
+<li><strong>Chunked reading</strong>: process large files in <code>chunksize</code> slices to avoid loading everything into RAM.</li>
+<li><strong>Copy-on-write (pandas ≥ 2.0)</strong>: slices share memory until mutated, reducing unnecessary copies.</li>
+</ol>
+<hr />
+<h2>4. Pandas vs PySpark vs Polars — Comparison Table</h2>
+<table>
+<thead>
+<tr>
+  <th>Concept</th>
+  <th>Pandas</th>
+  <th>PySpark</th>
+  <th>Polars</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Execution model</strong></td>
+  <td>Eager (immediate)</td>
+  <td>Lazy (DAG, action triggers)</td>
+  <td>Eager default / <code>.lazy()</code> available</td>
+</tr>
+<tr>
+  <td><strong>Scale</strong></td>
+  <td>Single machine</td>
+  <td>Distributed cluster</td>
+  <td>Single machine (multi-threaded)</td>
+</tr>
+<tr>
+  <td><strong>Memory</strong></td>
+  <td>NumPy blocks (mutable)</td>
+  <td>Immutable partitioned RDDs</td>
+  <td>Apache Arrow columnar (immutable)</td>
+</tr>
+<tr>
+  <td><strong>Backend language</strong></td>
+  <td>Python / NumPy (C)</td>
+  <td>Python API → JVM (Scala/Java)</td>
+  <td>Python API → Rust</td>
+</tr>
+<tr>
+  <td><strong>GroupBy</strong></td>
+  <td><code>df.groupby().agg()</code></td>
+  <td><code>df.groupBy().agg()</code></td>
+  <td><code>df.group_by().agg()</code></td>
+</tr>
+<tr>
+  <td><strong>Window functions</strong></td>
+  <td><code>df.rolling()</code> / <code>expanding()</code></td>
+  <td><code>Window.partitionBy()</code></td>
+  <td><code>pl.col(...).rolling_mean()</code></td>
+</tr>
+<tr>
+  <td><strong>Join</strong></td>
+  <td><code>df.merge(other)</code></td>
+  <td><code>df.join(other)</code></td>
+  <td><code>df.join(other)</code></td>
+</tr>
+<tr>
+  <td><strong>UDFs</strong></td>
+  <td>Native Python</td>
+  <td>Python UDF (slow) / Pandas UDF (fast)</td>
+  <td>Native Rust expressions</td>
+</tr>
+<tr>
+  <td><strong>SQL</strong></td>
+  <td><code>pandasql</code> / DuckDB</td>
+  <td><code>spark.sql(...)</code></td>
+  <td><code>pl.SQLContext</code></td>
+</tr>
+<tr>
+  <td><strong>Schema</strong></td>
+  <td>Inferred, loose</td>
+  <td><code>StructType</code>, strict</td>
+  <td>Inferred / declared, strict</td>
+</tr>
+<tr>
+  <td><strong>Streaming</strong></td>
+  <td>No</td>
+  <td>Structured Streaming</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td><strong>Serialisation</strong></td>
+  <td>Pickle / CSV / Parquet</td>
+  <td>Kryo / Parquet / ORC</td>
+  <td>IPC / Parquet / CSV</td>
+</tr>
+<tr>
+  <td><strong>Best for</strong></td>
+  <td>&lt; 1 GB, exploration</td>
+  <td>&gt; 1 GB, distributed ETL / ML</td>
+  <td>&lt; 50 GB, fast local transforms</td>
+</tr>
+<tr>
+  <td><strong>Installation</strong></td>
+  <td><code>pip install pandas</code></td>
+  <td><code>pip install pyspark</code></td>
+  <td><code>pip install polars</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5. Key API Cross-Reference</h2>
+<div class="mermaid-wrap"><div class="mermaid">mindmap
+  root((Data Operations))
+    Filtering
+      Pandas: df[mask]
+      Pandas: df.query()
+      PySpark: df.filter(F.col() &gt; x)
+      Polars: df.filter(pl.col() &gt; x)
+    GroupBy
+      Pandas: groupby().agg()
+      Pandas: groupby().transform()
+      PySpark: groupBy().agg()
+      Polars: group_by().agg()
+    Windows
+      Pandas: rolling / ewm / expanding
+      PySpark: Window.partitionBy().orderBy()
+      Polars: rolling_mean / over()
+    Joins
+      Pandas: merge(how=inner/left/right/outer)
+      PySpark: join(how=inner/left/right/outer)
+      PySpark: broadcast(df)
+      Polars: join(how=...)
+    Reshaping
+      Pandas: melt / pivot / stack / unstack
+      PySpark: stack / unpivot
+      Polars: melt / pivot
+    IO
+      CSV: read_csv / spark.read.csv / pl.read_csv
+      Parquet: read_parquet / spark.read.parquet / pl.read_parquet
+      JSON: read_json / spark.read.json / pl.read_json
+</div></div>
+<hr />
+<h2>6. When to Use Which Framework</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([&quot;Data processing task&quot;]) --&gt; Q1{&quot;Data size?&quot;}
+    Q1 --&gt;|&quot;&lt; 1 GB&quot;| Q2{&quot;Need speed\nover familiarity?&quot;}
+    Q1 --&gt;|&quot;1 GB – 100 GB&quot;| Q3{&quot;On a cluster?&quot;}
+    Q1 --&gt;|&quot;&gt; 100 GB&quot;| PYSPARK([&quot;PySpark\n(distributed)&quot;])
+
+    Q2 --&gt;|Yes| POLARS([&quot;Polars\n(Rust, fast, local)&quot;])
+    Q2 --&gt;|No| PANDAS([&quot;Pandas\n(mature ecosystem)&quot;])
+
+    Q3 --&gt;|Yes| PYSPARK
+    Q3 --&gt;|No| Q4{&quot;CPU-bound\ntransformations?&quot;}
+    Q4 --&gt;|Yes| POLARS
+    Q4 --&gt;|No| PANDAS
+
+    style PANDAS fill:#4C72B0,color:#fff
+    style PYSPARK fill:#DD8452,color:#fff
+    style POLARS fill:#55A868,color:#fff
+</div></div>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Pandas & PySpark — Concepts & Examples</span></a>
+            <a href="flow_diagrams.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Flow Diagrams — Pandas & PySpark</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

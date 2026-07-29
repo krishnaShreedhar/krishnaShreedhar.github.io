@@ -1,5 +1,17 @@
-# Module 3 — Parallelism: DDP & FSDP on 2× H200
-
+---
+title: "Module 3 — Parallelism: DDP & FSDP on 2× H200"
+subtitle: "This module demonstrates two complementary parallelism strategies for scaling Transformer training across both H200 GPUs connected via NVLink."
+category: technical
+project: gpu_acceleration
+project_title: "GPU Acceleration — Transformer Tutorials"
+date: 2025-04-05
+reading_time: 3
+tags:
+  - gpu-acceleration
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/gpu_acceleration/docs/03_parallelism.html"
+---
 ## Overview
 
 This module demonstrates two complementary parallelism strategies for

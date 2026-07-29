@@ -1,5 +1,17 @@
-# Serverless Architecture
-
+---
+title: "Serverless Architecture"
+subtitle: "Serverless architecture abstracts away server management entirely — developers deploy functions or backend services without provisioning infrastructure. Execution is triggered by events and billed per invocation,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-04-27
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/04_serverless_architecture.html"
+---
 Serverless architecture abstracts away server management entirely — developers deploy functions or backend services without provisioning infrastructure. Execution is triggered by events and billed per invocation, enabling near-infinite scale with zero idle cost, at the expense of runtime constraints and cold-start latency.
 
 ## Architecture Diagrams

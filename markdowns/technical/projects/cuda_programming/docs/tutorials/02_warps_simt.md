@@ -1,5 +1,17 @@
-# Tutorial 02: Warps & SIMT
-
+---
+title: "Tutorial 02: Warps & SIMT"
+subtitle: "See `src/tutorials/02_warps_simt/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-08-04
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/02_warps_simt.html"
+---
 ## Concept
 
 See `src/tutorials/02_warps_simt/main.cu` for detailed inline comments explaining

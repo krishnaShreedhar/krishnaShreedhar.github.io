@@ -1,5 +1,17 @@
-# Index: Large Scale AI/ML Systems
-
+---
+title: "Index: Large Scale AI/ML Systems"
+subtitle: "Complete table of contents for the Large Scale AI/ML Systems reference."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-01-27
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/00_index.html"
+---
 Complete table of contents for the Large Scale AI/ML Systems reference.
 
 ## Sections and Files

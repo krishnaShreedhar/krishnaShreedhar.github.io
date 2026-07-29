@@ -1,5 +1,17 @@
-# Data Validation
-
+---
+title: "Data Validation"
+subtitle: "Data validation is the automated process of testing whether incoming data meets defined quality expectations before it enters ML training pipelines or serves as model inputs. Without systematic data validation, data..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-05-01
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/04_data_engineering_for_ml/04_data_validation.html"
+---
 Data validation is the automated process of testing whether incoming data meets defined quality expectations before it enters ML training pipelines or serves as model inputs. Without systematic data validation, data quality issues propagate silently through the ML pipeline — producing models trained on garbage data or serving predictions based on corrupted features, often without any error signal.
 
 ## Data Validation Architecture

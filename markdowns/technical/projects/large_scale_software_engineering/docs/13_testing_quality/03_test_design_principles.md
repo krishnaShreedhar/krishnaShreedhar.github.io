@@ -1,5 +1,17 @@
-# Test Design Principles
-
+---
+title: "Test Design Principles"
+subtitle: "Good tests are not just \"tests that pass\" — they are tests that clearly express intent, fail precisely when something is wrong, and are easy to maintain. Test design principles provide the vocabulary and heuristics..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-28
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/13_testing_quality/03_test_design_principles.html"
+---
 Good tests are not just "tests that pass" — they are tests that clearly express intent, fail precisely when something is wrong, and are easy to maintain. Test design principles provide the vocabulary and heuristics for writing tests that remain valuable as the codebase evolves.
 
 ## FIRST Properties of Good Tests

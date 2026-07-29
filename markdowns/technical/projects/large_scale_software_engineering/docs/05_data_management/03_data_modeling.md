@@ -1,5 +1,17 @@
-# Data Modeling
-
+---
+title: "Data Modeling"
+subtitle: "Data modeling is the process of designing the structure and relationships of data for storage and retrieval. Good data models balance normalization (preventing redundancy) with denormalization (optimizing for access..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-05-04
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/05_data_management/03_data_modeling.html"
+---
 Data modeling is the process of designing the structure and relationships of data for storage and retrieval. Good data models balance normalization (preventing redundancy) with denormalization (optimizing for access patterns), and evolve with the system without costly migrations.
 
 ## Entity-Relationship Modeling

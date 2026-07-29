@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Execution Flow Diagrams &middot; Shreedhar Kodate</title>
+    <meta name="description" content="sequenceDiagram participant Main as Main Thread participant Exec as ThreadPoolExecutor participant W1 as Worker Thread 1 participant W2 as Worker Thread 2 parti">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Execution Flow Diagrams</span>
+        </div>
+        <h1 class="post-title">Execution Flow Diagrams</h1>
+        <p class="post-subtitle">sequenceDiagram participant Main as Main Thread participant Exec as ThreadPoolExecutor participant W1 as Worker Thread 1 participant W2 as Worker Thread 2 participant W3 as Worker Thread 3 participant Q as Internal...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-07-12</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">python-engg-tmplates</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Python Engineering Patterns</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Python Engineering Patterns</a></li><li class="project-nav__lvl-1"><a href="concepts.html">Python Engineering Patterns – Concept Reference</a></li><li class="project-nav__lvl-1 active"><a href="flow_diagrams.html">Execution Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <hr />
+<h2>1. Thread Pool Execution Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Main as Main Thread
+    participant Exec as ThreadPoolExecutor
+    participant W1 as Worker Thread 1
+    participant W2 as Worker Thread 2
+    participant W3 as Worker Thread 3
+    participant Q as Internal Work Queue
+
+    Main-&gt;&gt;Exec: __enter__() – create pool (max_workers=N)
+    Exec-&gt;&gt;W1: spawn thread
+    Exec-&gt;&gt;W2: spawn thread
+    Exec-&gt;&gt;W3: spawn thread
+
+    loop For each task
+        Main-&gt;&gt;Exec: submit(fn, arg_i)
+        Exec-&gt;&gt;Q: enqueue Future
+    end
+
+    Q-&gt;&gt;W1: dequeue task-0
+    Q-&gt;&gt;W2: dequeue task-1
+    Q-&gt;&gt;W3: dequeue task-2
+    Note over W1,W3: Threads execute concurrently
+
+    W1--&gt;&gt;Main: future-0.set_result()
+    W3--&gt;&gt;Main: future-2.set_result()
+    W2--&gt;&gt;Main: future-1.set_result()
+    Note over Main: as_completed() yields futures in\ncompletion order (not submission order)
+
+    Main-&gt;&gt;Exec: __exit__() – join all threads
+</div></div>
+<p><strong>Key points:</strong></p>
+<ul>
+<li><code>as_completed()</code> yields futures as they finish, allowing progressive result
+processing without waiting for the slowest task.</li>
+<li>Worker threads are reused across tasks (no thread creation overhead per task).</li>
+<li><code>max_workers</code> controls the concurrency limit; set to <code>cpu_count()</code> for
+CPU-bound, higher for I/O-bound workloads.</li>
+</ul>
+<hr />
+<h2>2. Asyncio Event Loop Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph &quot;Event Loop (single OS thread)&quot;
+        EL([Event Loop starts])
+        RQ[Ready Queue\ncoroutines to run]
+        IO[I/O Selector\nepoll / kqueue]
+        CB[Callback Queue\nI/O completions]
+
+        EL --&gt; RQ
+        RQ --&gt;|&quot;pop next coroutine&quot;| Run[Resume coroutine\nat await point]
+        Run --&gt;|&quot;hits await asyncio.sleep\nor await network&quot;| Suspend[Suspend coroutine\nregister with selector]
+        Suspend --&gt; IO
+        IO --&gt;|&quot;I/O ready&quot;| CB
+        CB --&gt;|&quot;schedule resumption&quot;| RQ
+        Run --&gt;|&quot;coroutine returns&quot;| Done[Result available\nfuture.set_result()]
+    end
+
+    App[&quot;asyncio.gather(\n  coro_1(), coro_2(), ...\n)&quot;] --&gt; EL
+    Done --&gt; App
+</div></div>
+<p><strong>Cooperative multitasking:</strong> A coroutine runs until it hits an <code>await</code>
+expression. At that point it suspends and the event loop picks the next
+ready coroutine. This is why <code>asyncio</code> can handle thousands of concurrent
+I/O operations with a single OS thread – no context-switch overhead.</p>
+<p><strong>asyncio.TaskGroup (Python 3.11+):</strong></p>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Main
+    participant TG as TaskGroup
+    participant T1 as Task 1
+    participant T2 as Task 2
+    participant T3 as Task 3
+
+    Main-&gt;&gt;TG: async with TaskGroup() as tg:
+    Main-&gt;&gt;TG: tg.create_task(coro1)
+    TG-&gt;&gt;T1: schedule
+    Main-&gt;&gt;TG: tg.create_task(coro2)
+    TG-&gt;&gt;T2: schedule
+    Main-&gt;&gt;TG: tg.create_task(coro3)
+    TG-&gt;&gt;T3: schedule
+
+    T1--&gt;&gt;TG: done
+    T3--&gt;&gt;TG: done
+    T2--&gt;&gt;TG: done
+
+    Note over TG: All tasks done → exit __aexit__
+    TG--&gt;&gt;Main: results via task.result()
+</div></div>
+<p>If <strong>any</strong> task raises an exception, <code>TaskGroup</code> cancels the remaining tasks
+and propagates the error as an <code>ExceptionGroup</code>.</p>
+<hr />
+<h2>3. Retry Decorator – Full Decision Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">stateDiagram-v2
+    [*] --&gt; Attempt1 : Call decorated function
+
+    Attempt1 --&gt; Success : Returns value
+    Success --&gt; [*] : Return result
+
+    Attempt1 --&gt; Error1 : Raises exception
+    Error1 --&gt; Retryable1 : Is exception retryable?
+    Retryable1 --&gt; Raise1 : No → re-raise
+    Raise1 --&gt; [*]
+
+    Retryable1 --&gt; MaxCheck1 : Yes
+    MaxCheck1 --&gt; Raise2 : attempt == max_attempts
+    Raise2 --&gt; [*]
+
+    MaxCheck1 --&gt; Wait1 : attempt &lt; max_attempts
+    Wait1 --&gt; Attempt2 : sleep(backoff * 2^0 [+ jitter])
+
+    Attempt2 --&gt; Success2 : Returns value
+    Success2 --&gt; [*] : Return result
+
+    Attempt2 --&gt; Error2 : Raises exception
+    Error2 --&gt; MaxCheck2 : Is retryable?
+    MaxCheck2 --&gt; Raise3 : attempt == max_attempts
+    Raise3 --&gt; [*]
+
+    MaxCheck2 --&gt; Wait2 : sleep(backoff * 2^1 [+ jitter])
+    Wait2 --&gt; AttemptN : ...
+
+    AttemptN --&gt; FinalRaise : Still failing after max_attempts
+    FinalRaise --&gt; [*]
+</div></div>
+<p><strong>Backoff formula:</strong></p>
+<pre><code>wait = backoff_factor × 2^(attempt - 1)
+if jitter:
+    wait += uniform(0, wait)   # spreads retries ±100%
+</code></pre>
+<table>
+<thead>
+<tr>
+  <th>attempt</th>
+  <th>backoff=2.0, no jitter</th>
+  <th>backoff=2.0, jitter range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>2.0 s</td>
+  <td>2.0 – 4.0 s</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>4.0 s</td>
+  <td>4.0 – 8.0 s</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>8.0 s</td>
+  <td>8.0 – 16.0 s</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. Production Service Startup / Shutdown Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+    subgraph STARTUP [&quot;Service Startup&quot;]
+        direction TB
+        S1[&quot;Read config.yaml\nValidate required keys&quot;] --&gt; S2
+        S2[&quot;Configure logging\nRotatingFileHandler + QueueHandler&quot;] --&gt; S3
+        S3[&quot;Install signal handlers\nsignal.signal(SIGTERM, handler)\nsignal.signal(SIGINT, handler)&quot;] --&gt; S4
+        S4[&quot;Initialise MetricsRegistry\nregister counters / gauges / histograms&quot;] --&gt; S5
+        S5[&quot;Set GC thresholds\ngc.set_threshold(1000, 10, 10)&quot;] --&gt; S6
+        S6[&quot;Log startup event\nService READY&quot;]
+    end
+
+    subgraph RUNNING [&quot;Main Processing Loop&quot;]
+        direction TB
+        R1{shutdown_requested?} --&gt;|No| R2
+        R2[&quot;Pop next batch\n(batch_size from config)&quot;] --&gt; R3
+        R3[&quot;_process_batch(batch)\nfor each record:&quot;] --&gt; R4
+        R4{&quot;_validate_record\npasses?&quot;} --&gt;|Yes| R5
+        R4 --&gt;|No| R6[&quot;log.warning + metrics.errors++&quot;]
+        R5[&quot;_process_record\ntransform / enrich&quot;] --&gt; R7
+        R7[&quot;metrics.processed++\nmetrics.latency.observe(ms)&quot;] --&gt; R8
+        R8{&quot;Processed %\nbatch_size×10 == 0?&quot;} --&gt;|Yes| R9[&quot;gc.collect()&quot;]
+        R9 --&gt; R1
+        R8 --&gt;|No| R1
+        R6 --&gt; R1
+    end
+
+    subgraph SHUTDOWN [&quot;Graceful Shutdown&quot;]
+        direction TB
+        G1[&quot;Complete current batch\n(no mid-batch abort)&quot;] --&gt; G2
+        G2[&quot;QueueListener.stop()\nflush log queue&quot;] --&gt; G3
+        G3[&quot;MetricsRegistry.log_report()\nfinal metrics snapshot&quot;] --&gt; G4
+        G4[&quot;gc.collect()\nfinal sweep&quot;] --&gt; G5
+        G5[&quot;log.info: Service stopped\nProcess exits 0&quot;]
+    end
+
+    subgraph SIGNALS [&quot;OS Signals&quot;]
+        SIG[&quot;SIGTERM / SIGINT&quot;] --&gt; SF[&quot;_handle_shutdown_signal\nshutdown_requested = True&quot;]
+    end
+
+    STARTUP --&gt; RUNNING
+    RUNNING --&gt;|&quot;shutdown_requested=True&quot;| SHUTDOWN
+    SF -.-&gt;|&quot;sets flag&quot;| R1
+</div></div>
+<p><strong>Graceful shutdown guarantees:</strong></p>
+<ol>
+<li>The current batch completes – no partial writes.</li>
+<li>Log records in the queue are flushed before the process exits.</li>
+<li>Final metrics are logged for post-mortem analysis.</li>
+<li>Exit code is <code>0</code> for clean shutdown, non-zero for unhandled exceptions.</li>
+</ol>
+<hr />
+<h2>5. Async Producer / Consumer Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant P as Producer coroutine
+    participant Q as asyncio.Queue
+    participant C1 as Consumer 1
+    participant C2 as Consumer 2
+
+    P-&gt;&gt;Q: await put(&quot;item-000&quot;)
+    P-&gt;&gt;Q: await put(&quot;item-001&quot;)
+    C1-&gt;&gt;Q: await get() → &quot;item-000&quot;
+    C2-&gt;&gt;Q: await get() → &quot;item-001&quot;
+    P-&gt;&gt;Q: await put(&quot;item-002&quot;)
+    C1--&gt;&gt;Q: task_done()
+    C1-&gt;&gt;Q: await get() → &quot;item-002&quot;
+    P-&gt;&gt;Q: await put(None)  [sentinel]
+    C2--&gt;&gt;Q: task_done()
+    C2-&gt;&gt;Q: await get() → None [sentinel]
+    C2-&gt;&gt;Q: await put(None)  [re-queue for C1]
+    C2--&gt;&gt;C2: break loop
+    C1-&gt;&gt;Q: await get() → None
+    C1--&gt;&gt;C1: break loop
+    Note over P,C2: All done; gather() returns
+</div></div>
+<p><strong>Sentinel re-queueing pattern:</strong> When a consumer receives <code>None</code> (the
+sentinel), it immediately puts <code>None</code> back before exiting. This ensures
+every consumer eventually receives the termination signal, regardless of
+how many consumers share the queue.</p>
+<hr />
+<h2>6. Shared Memory Flow (multiprocessing)</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Main [&quot;Main Process&quot;]
+        SM[&quot;SharedMemory.create()\nshm.name='psm_abc123'&quot;]
+        Write[&quot;Write array → shm.buf&quot;]
+    end
+
+    subgraph Workers [&quot;Worker Processes (spawn)&quot;]
+        W1[&quot;Process 1\nSharedMemory(name='psm_abc123')\nread slice [0:500]&quot;]
+        W2[&quot;Process 2\nSharedMemory(name='psm_abc123')\nread slice [500:1000]&quot;]
+    end
+
+    subgraph Collect [&quot;Result Collection&quot;]
+        Pool[&quot;Pool.map() collects\npartial sums&quot;]
+        Total[&quot;sum(partial_sums)&quot;]
+    end
+
+    SM --&gt; Write
+    Write --&gt;|&quot;OS shared page&quot;| W1
+    Write --&gt;|&quot;OS shared page&quot;| W2
+    W1 --&gt;|&quot;partial_sum_1&quot;| Pool
+    W2 --&gt;|&quot;partial_sum_2&quot;| Pool
+    Pool --&gt; Total
+</div></div>
+<p><strong>Zero-copy:</strong> Worker processes map the same physical memory pages. No
+serialisation (pickle) occurs for the shared buffer – only the small result
+values are pickled back to the main process.</p>
+
+        
+        <nav class="post-nav">
+            <a href="concepts.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Python Engineering Patterns – Concept Reference</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

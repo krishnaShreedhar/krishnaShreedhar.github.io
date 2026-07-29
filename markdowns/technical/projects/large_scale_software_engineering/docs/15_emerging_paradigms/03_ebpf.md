@@ -1,5 +1,17 @@
-# eBPF (Extended Berkeley Packet Filter)
-
+---
+title: "eBPF (Extended Berkeley Packet Filter)"
+subtitle: "eBPF is a revolutionary kernel technology that allows safely running sandboxed programs in the Linux kernel without modifying kernel source code or loading kernel modules. It enables powerful observability,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-20
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/15_emerging_paradigms/03_ebpf.html"
+---
 eBPF is a revolutionary kernel technology that allows safely running sandboxed programs in the Linux kernel without modifying kernel source code or loading kernel modules. It enables powerful observability, networking, and security capabilities with minimal overhead.
 
 ## eBPF Architecture

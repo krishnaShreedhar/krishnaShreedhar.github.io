@@ -1,5 +1,17 @@
-# Service-Oriented Architecture (SOA)
-
+---
+title: "Service-Oriented Architecture (SOA)"
+subtitle: "Service-Oriented Architecture organizes software as a collection of interoperable services that communicate via standardized protocols, typically over an Enterprise Service Bus. SOA predates microservices and..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-11
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/05_soa.html"
+---
 Service-Oriented Architecture organizes software as a collection of interoperable services that communicate via standardized protocols, typically over an Enterprise Service Bus. SOA predates microservices and emphasizes reusability, enterprise integration, and formal service contracts over fine-grained decomposition.
 
 ## Architecture Diagrams

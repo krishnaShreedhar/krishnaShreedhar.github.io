@@ -1,5 +1,17 @@
-# Tutorial 10: Unified Memory
-
+---
+title: "Tutorial 10: Unified Memory"
+subtitle: "See `src/tutorials/10_unified_memory/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-08-15
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/10_unified_memory.html"
+---
 ## Concept
 
 See `src/tutorials/10_unified_memory/main.cu` for detailed inline comments explaining

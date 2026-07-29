@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Probability & Statistics &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A self-contained educational project illustrating core Probability and Statistics concepts through minimal, runnable Python code and SQL analytics. Designed so ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Probability & Statistics</span>
+        </div>
+        <h1 class="post-title">Probability & Statistics</h1>
+        <p class="post-subtitle">A self-contained educational project illustrating core Probability and Statistics concepts through minimal, runnable Python code and SQL analytics. Designed so a practitioner can read the source, understand the...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-02-14</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">probability-statistics</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Probability & Statistics</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">Probability & Statistics</a></li><li class="project-nav__lvl-1"><a href="docs/concepts.html">Probability & Statistics: Core Concepts</a></li><li class="project-nav__lvl-1"><a href="docs/flow_diagrams.html">Flow Diagrams: Statistical Analysis Pipelines</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A self-contained educational project illustrating core Probability and Statistics concepts through minimal, runnable Python code and SQL analytics. Designed so a practitioner can read the source, understand the algorithm, and immediately apply it to real data.</p>
+<hr />
+<h2>Concepts Covered</h2>
+<h3>Descriptive Statistics (<code>src/descriptive_stats/</code>)</h3>
+<ul>
+<li><strong>Central tendency</strong>: arithmetic mean, median, mode, trimmed mean, geometric mean, harmonic mean</li>
+<li><strong>Spread</strong>: variance, standard deviation, IQR, MAD, coefficient of variation</li>
+<li><strong>Shape</strong>: skewness (Pearson), excess kurtosis</li>
+<li><strong>Percentiles</strong>: P10, P25, P50, P75, P90, P95, P99</li>
+<li><strong>Distribution fitting</strong>: Normal, Log-Normal, Gamma, Exponential, Beta — ranked by AIC</li>
+<li><strong>Goodness-of-fit</strong>: Kolmogorov-Smirnov test</li>
+<li><strong>Visualisations</strong>: histograms with fitted PDFs, QQ plots, empirical vs. theoretical CDFs</li>
+</ul>
+<h3>Hypothesis Testing (<code>src/hypothesis_testing/</code>)</h3>
+<ul>
+<li><strong>One-sample t-test</strong>: compare sample mean to known value</li>
+<li><strong>Two-sample Welch's t-test</strong>: compare two groups without equal-variance assumption</li>
+<li><strong>Chi-squared test of independence</strong>: categorical association</li>
+<li><strong>Mann-Whitney U test</strong>: non-parametric two-sample test</li>
+<li><strong>Two-proportion z-test</strong>: A/B testing for conversion rates</li>
+<li><strong>Bootstrap confidence intervals</strong>: percentile method, B=10,000 iterations</li>
+<li><strong>Power analysis</strong>: sample size calculation for t-test and z-test</li>
+<li><strong>Multiple testing correction</strong>: Bonferroni (FWER) and Benjamini-Hochberg (FDR)</li>
+<li><strong>Effect sizes</strong>: Cohen's d, Cohen's h, Cramér's V, rank-biserial correlation</li>
+</ul>
+<h3>Bayesian Analysis (<code>src/bayesian_analysis/</code>)</h3>
+<ul>
+<li><strong>Beta-Binomial model</strong>: conjugate prior for conversion rate A/B testing</li>
+<li><strong>Bayesian updating</strong>: sequential posterior updates with each observation</li>
+<li><strong>Monte Carlo sampling</strong>: P(B &gt; A) and lift distribution with 100,000 samples</li>
+<li><strong>Expected loss</strong>: risk-minimisation decision criterion</li>
+<li><strong>Credible intervals</strong>: vs. frequentist confidence intervals (coverage comparison)</li>
+<li><strong>Prior sensitivity</strong>: effect of vague vs. informative priors</li>
+<li><strong>Normal-Normal and Gamma-Poisson conjugacy</strong>: for continuous and count data</li>
+</ul>
+<h3>SQL Analytics (<code>src/sql_analytics/</code>)</h3>
+<ul>
+<li><strong>Descriptive stats SQL</strong>: <code>PERCENTILE_CONT</code>, <code>STDDEV_SAMP</code>, <code>VAR_SAMP</code>, <code>SKEWNESS</code>, <code>KURTOSIS</code></li>
+<li><strong>Window functions</strong>: <code>PERCENT_RANK</code>, <code>CUME_DIST</code>, <code>NTILE</code>, <code>RANK</code>, <code>DENSE_RANK</code></li>
+<li><strong>Z-score normalisation</strong>: in SQL with outlier flagging</li>
+<li><strong>IQR outlier detection</strong>: Tukey's fences entirely in SQL</li>
+<li><strong>Histogram buckets</strong>: <code>WIDTH_BUCKET</code> for equal-width binning</li>
+<li><strong>Grouped statistics</strong>: per-category descriptive stats</li>
+<li><strong>Funnel analysis</strong>: step-by-step conversion and drop-off rates</li>
+<li><strong>Cohort retention</strong>: weekly retention matrix</li>
+<li><strong>Linear regression</strong>: <code>REGR_SLOPE</code>, <code>REGR_INTERCEPT</code>, <code>REGR_R2</code>, <code>CORR</code></li>
+</ul>
+<hr />
+<h2>Project Structure</h2>
+<pre><code>probability_statistics/
+    src/
+        notebooks/
+            statistics_demo.ipynb       # Full workflow demo
+        descriptive_stats/
+            statistics_calculator.py    # Mean, median, spread, shape
+            distribution_analyzer.py    # Distribution fitting and visualisation
+        hypothesis_testing/
+            test_runner.py              # t-tests, chi-squared, z-test, bootstrap, MTC
+            power_analysis.py           # Sample size and power curves
+        bayesian_analysis/
+            bayesian_ab_test.py         # Beta-Binomial A/B testing
+            conjugate_priors.py         # Conjugate prior families
+        sql_analytics/
+            sql_statistics.py           # DuckDB SQL statistical queries
+    docs/
+        concepts.md                     # Theory + mermaid diagrams
+        flow_diagrams.md                # Pipeline flow diagrams
+    docker/
+        Dockerfile
+        docker-compose.yml
+        requirements.txt
+    outputs/                            # Generated plots (auto-created)
+    logs/                               # Log files (auto-created)
+    config.yaml                         # All constants and hyperparameters
+    pyproject.toml
+    README.md
+</code></pre>
+<hr />
+<h2>Usage</h2>
+<p>All configuration is in <code>config.yaml</code>. No command-line arguments.</p>
+<h3>Run individual modules directly</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># From the project root (probability_statistics/)
+
+# Descriptive statistics
+python src/descriptive_stats/statistics_calculator.py
+python src/descriptive_stats/distribution_analyzer.py
+
+# Hypothesis testing
+python src/hypothesis_testing/test_runner.py
+python src/hypothesis_testing/power_analysis.py
+
+# Bayesian analysis
+python src/bayesian_analysis/bayesian_ab_test.py
+python src/bayesian_analysis/conjugate_priors.py
+
+# SQL analytics (DuckDB)
+python src/sql_analytics/sql_statistics.py
+</code></pre></div>
+<h3>Run via Jupyter notebook</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd src/notebooks
+jupyter notebook statistics_demo.ipynb
+</code></pre></div>
+<h3>Run via Docker</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker
+
+# Build image
+docker-compose build
+
+# Run SQL analytics demo
+docker-compose run probability_statistics
+
+# Run descriptive stats
+docker-compose run descriptive_stats
+
+# Run hypothesis testing
+docker-compose run hypothesis_testing
+
+# Run Bayesian A/B test
+docker-compose run bayesian_ab
+
+# Start Jupyter server (access at http://localhost:8888)
+docker-compose up jupyter
+</code></pre></div>
+<hr />
+<h2>Configuration (<code>config.yaml</code>)</h2>
+<p>All hyperparameters and constants live in <code>config.yaml</code>. Key sections:</p>
+<table>
+<thead>
+<tr>
+  <th>Section</th>
+  <th>Key Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>logging</code></td>
+  <td><code>level</code>, <code>log_file</code>, <code>max_bytes</code>, <code>backup_count</code></td>
+</tr>
+<tr>
+  <td><code>data</code></td>
+  <td><code>sample_size</code>, <code>random_seed</code>, <code>output_dir</code></td>
+</tr>
+<tr>
+  <td><code>descriptive_stats</code></td>
+  <td><code>trimmed_mean_pct</code>, <code>percentiles</code>, <code>distribution_bins</code></td>
+</tr>
+<tr>
+  <td><code>hypothesis_testing</code></td>
+  <td><code>alpha</code>, <code>power</code>, <code>bootstrap_iterations</code>, <code>effect_size</code>, <code>baseline_rate</code></td>
+</tr>
+<tr>
+  <td><code>bayesian_ab</code></td>
+  <td><code>prior_alpha</code>, <code>prior_beta</code>, <code>monte_carlo_samples</code>, <code>credible_interval</code></td>
+</tr>
+<tr>
+  <td><code>sql_analytics</code></td>
+  <td><code>database</code>, <code>histogram_bins</code>, <code>iqr_multiplier</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Outputs</h2>
+<p>All plots are saved to <code>outputs/</code> as PNG files:</p>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>histogram_fit_*.png</code></td>
+  <td>Histogram with best-fit distribution PDF</td>
+</tr>
+<tr>
+  <td><code>qq_plot_*.png</code></td>
+  <td>Normal QQ plot</td>
+</tr>
+<tr>
+  <td><code>ecdf_*.png</code></td>
+  <td>Empirical vs. theoretical CDF</td>
+</tr>
+<tr>
+  <td><code>multi_dist_*.png</code></td>
+  <td>Top-N distribution fits comparison</td>
+</tr>
+<tr>
+  <td><code>power_vs_n_ttest.png</code></td>
+  <td>Power curves by sample size</td>
+</tr>
+<tr>
+  <td><code>power_vs_effect_size_ttest.png</code></td>
+  <td>Power curves by effect size</td>
+</tr>
+<tr>
+  <td><code>sample_size_heatmap.png</code></td>
+  <td>Required n for (alpha, power) grid</td>
+</tr>
+<tr>
+  <td><code>bayesian_posteriors_*.png</code></td>
+  <td>Beta posterior distributions</td>
+</tr>
+<tr>
+  <td><code>mc_lift_dist_*.png</code></td>
+  <td>Monte Carlo lift distribution</td>
+</tr>
+<tr>
+  <td><code>sequential_ab_*.png</code></td>
+  <td>Sequential P(B&gt;A) over time</td>
+</tr>
+<tr>
+  <td><code>beta_binomial_priors.png</code></td>
+  <td>Prior sensitivity analysis</td>
+</tr>
+<tr>
+  <td><code>sequential_updating.png</code></td>
+  <td>Sequential Bayesian updating</td>
+</tr>
+<tr>
+  <td><code>notebook_*.png</code></td>
+  <td>Plots from the Jupyter notebook</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Key References</h2>
+<ul>
+<li>Cohen, J. (1988). <em>Statistical Power Analysis for the Behavioral Sciences</em> (2nd ed.)</li>
+<li>Gelman, A., et al. (2013). <em>Bayesian Data Analysis</em> (3rd ed.)</li>
+<li>VanderPlas, J. (2016). <em>Python Data Science Handbook</em> (NumPy, SciPy, Pandas)</li>
+<li>Kohavi, R., et al. (2020). <em>Trustworthy Online Controlled Experiments</em> (A/B testing)</li>
+<li>DuckDB Documentation: <a href="https://duckdb.org/docs/sql/functions/aggregates">https://duckdb.org/docs/sql/functions/aggregates</a></li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/concepts.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Probability & Statistics: Core Concepts</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

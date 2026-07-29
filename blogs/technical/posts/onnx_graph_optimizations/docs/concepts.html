@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ONNX Concepts and Graph Optimization &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This document explains core ONNX concepts with diagrams, tables, and worked examples. Every diagram is rendered as a Mermaid block so it displays natively in Gi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">ONNX Concepts and Graph Optimization</span>
+        </div>
+        <h1 class="post-title">ONNX Concepts and Graph Optimization</h1>
+        <p class="post-subtitle">This document explains core ONNX concepts with diagrams, tables, and worked examples. Every diagram is rendered as a Mermaid block so it displays natively in GitHub, GitLab, and most modern Markdown viewers.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-29</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>6 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">onnx-graph-optimizations</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">ONNX Graph Optimizations</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">ONNX Graph Optimizations</a></li><li class="project-nav__lvl-1 active"><a href="concepts.html">ONNX Concepts and Graph Optimization</a></li><li class="project-nav__lvl-1"><a href="flow_diagrams.html">ONNX Optimization Pipeline - Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>This document explains core ONNX concepts with diagrams, tables, and worked examples.
+Every diagram is rendered as a Mermaid block so it displays natively in GitHub, GitLab,
+and most modern Markdown viewers.</p>
+<hr />
+<h2>1. The ONNX Ecosystem</h2>
+<p>ONNX (Open Neural Network Exchange) is an open standard that decouples model training
+from deployment.  A model trained in any supported framework can be exported to a single
+<code>.onnx</code> file and executed on any compliant runtime across diverse hardware.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Frameworks[&quot;Training Frameworks&quot;]
+        direction TB
+        PT[&quot;PyTorch&quot;]
+        TF[&quot;TensorFlow / Keras&quot;]
+        SK[&quot;scikit-learn\n(via skl2onnx)&quot;]
+        PX[&quot;PaddlePaddle&quot;]
+        MX[&quot;MXNet&quot;]
+    end
+
+    subgraph ONNX[&quot;ONNX Standard&quot;]
+        direction TB
+        SPEC[&quot;ONNX Opset Spec\n(standardised ops)&quot;]
+        GRAPH[&quot;onnx.ModelProto\n(.onnx file)&quot;]
+        CHECK[&quot;onnx.checker\nonnx.shape_inference&quot;]
+    end
+
+    subgraph Runtimes[&quot;Inference Runtimes&quot;]
+        direction TB
+        ORT[&quot;ONNX Runtime (ORT)&quot;]
+        TRT[&quot;TensorRT\n(NVIDIA)&quot;]
+        OV[&quot;OpenVINO\n(Intel)&quot;]
+        COREML[&quot;Core ML\n(Apple)&quot;]
+        TVM[&quot;Apache TVM&quot;]
+    end
+
+    subgraph Hardware[&quot;Target Hardware&quot;]
+        direction TB
+        CPU[&quot;CPU\n(x86 / ARM)&quot;]
+        NVGPU[&quot;NVIDIA GPU\n(CUDA)&quot;]
+        INTELHW[&quot;Intel CPU/iGPU\n(VNNI, AMX)&quot;]
+        APPLE[&quot;Apple Silicon\n(Neural Engine)&quot;]
+        EDGE[&quot;Edge / MCU\n(ONNX Runtime Mobile)&quot;]
+    end
+
+    PT --&gt; ONNX
+    TF --&gt; ONNX
+    SK --&gt; ONNX
+    PX --&gt; ONNX
+    MX --&gt; ONNX
+
+    ONNX --&gt; ORT
+    ONNX --&gt; TRT
+    ONNX --&gt; OV
+    ONNX --&gt; COREML
+    ONNX --&gt; TVM
+
+    ORT --&gt; CPU
+    ORT --&gt; NVGPU
+    TRT --&gt; NVGPU
+    OV --&gt; INTELHW
+    COREML --&gt; APPLE
+    ORT --&gt; EDGE
+</div></div>
+<hr />
+<h2>2. ONNX Graph Structure</h2>
+<p>An ONNX model is a <strong>directed acyclic graph (DAG)</strong>.  Every element has a precise role:</p>
+<table>
+<thead>
+<tr>
+  <th>Element</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Node</strong></td>
+  <td>An operator (Conv, Relu, MatMul …). Has typed inputs/outputs.</td>
+</tr>
+<tr>
+  <td><strong>Edge</strong></td>
+  <td>A named tensor flowing between nodes.</td>
+</tr>
+<tr>
+  <td><strong>Initializer</strong></td>
+  <td>A constant tensor (weight, bias). Stored in the model file.</td>
+</tr>
+<tr>
+  <td><strong>Graph Input</strong></td>
+  <td>External data fed at runtime (e.g., image batch).</td>
+</tr>
+<tr>
+  <td><strong>Graph Output</strong></td>
+  <td>Results returned to the caller.</td>
+</tr>
+<tr>
+  <td><strong>value_info</strong></td>
+  <td>Shape/type annotations on intermediate tensors (added by shape inference).</td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Inputs[&quot;Graph Inputs&quot;]
+        IN[&quot;input\n[batch, 1, 28, 28]&quot;]
+    end
+
+    subgraph Initializers[&quot;Initializers (Weights)&quot;]
+        W1[&quot;conv1.weight\n[32, 1, 3, 3]&quot;]
+        B1[&quot;conv1.bias\n[32]&quot;]
+        BNW[&quot;bn1.weight / bias / mean / var&quot;]
+        W2[&quot;conv2.weight\n[64, 32, 3, 3]&quot;]
+        FC1W[&quot;fc1.weight  [128, 1024]&quot;]
+        FC2W[&quot;fc2.weight  [10, 128]&quot;]
+    end
+
+    subgraph Nodes[&quot;Operator Nodes&quot;]
+        C1[&quot;Conv\n(stride=1, pad=1)&quot;]
+        BN1[&quot;BatchNormalization\n(ε=1e-5)&quot;]
+        R1[&quot;Relu&quot;]
+        C2[&quot;Conv\n(stride=1, pad=1)&quot;]
+        BN2[&quot;BatchNormalization&quot;]
+        R2[&quot;Relu&quot;]
+        POOL[&quot;GlobalAveragePool&quot;]
+        FL[&quot;Flatten&quot;]
+        FC1[&quot;Gemm&quot;]
+        R3[&quot;Relu&quot;]
+        FC2[&quot;Gemm&quot;]
+    end
+
+    subgraph Outputs[&quot;Graph Outputs&quot;]
+        OUT[&quot;output\n[batch, 10]&quot;]
+    end
+
+    IN --&gt; C1
+    W1 --&gt; C1
+    B1 --&gt; C1
+    C1 --&gt; BN1
+    BNW --&gt; BN1
+    BN1 --&gt; R1
+    R1 --&gt; C2
+    W2 --&gt; C2
+    C2 --&gt; BN2
+    BN2 --&gt; R2
+    R2 --&gt; POOL
+    POOL --&gt; FL
+    FL --&gt; FC1
+    FC1W --&gt; FC1
+    FC1 --&gt; R3
+    R3 --&gt; FC2
+    FC2W --&gt; FC2
+    FC2 --&gt; OUT
+</div></div>
+<hr />
+<h2>3. ORT Optimization Pipeline</h2>
+<p>ONNX Runtime applies graph-level optimizations before running any inference.
+The four levels are cumulative — each higher level includes all optimizations from lower levels.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    RAW[&quot;Raw ONNX Graph\n(exported from framework)&quot;]
+
+    L0[&quot;ORT_DISABLE_ALL\nNo optimizations\nFast session init\nDebug-friendly&quot;]
+    L1[&quot;ORT_ENABLE_BASIC\n+ Constant folding\n+ Identity elimination\n+ Slice elimination\n+ Redundant node removal&quot;]
+    L2[&quot;ORT_ENABLE_EXTENDED\n+ Conv+BN folding (→ fewer nodes)\n+ Conv+BN+Relu fusion\n+ Gelu fusion\n+ LayerNorm fusion\n+ Attention fusion (transformers)&quot;]
+    L3[&quot;ORT_ENABLE_ALL\n+ Layout optimization\n(NCHW → NHWC or NCHWc\nfor accelerator efficiency)\n+ Provider-specific kernels&quot;]
+
+    OPT[&quot;Optimized ONNX Graph\n(saved via optimized_model_filepath)&quot;]
+
+    RAW --&gt; L0
+    L0 --&gt; L1
+    L1 --&gt; L2
+    L2 --&gt; L3
+    L3 --&gt; OPT
+</div></div>
+<h3>Optimization Level Reference Table</h3>
+<table>
+<thead>
+<tr>
+  <th>Level</th>
+  <th style="text-align:center">Constant Folding</th>
+  <th style="text-align:center">Redundant Elimination</th>
+  <th style="text-align:center">Op Fusion</th>
+  <th style="text-align:center">Layout Opt</th>
+  <th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>ORT_DISABLE_ALL</code></td>
+  <td style="text-align:center">-</td>
+  <td style="text-align:center">-</td>
+  <td style="text-align:center">-</td>
+  <td style="text-align:center">-</td>
+  <td>Debugging, profiling raw graph</td>
+</tr>
+<tr>
+  <td><code>ORT_ENABLE_BASIC</code></td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">-</td>
+  <td style="text-align:center">-</td>
+  <td>Minimal safe optimisation</td>
+</tr>
+<tr>
+  <td><code>ORT_ENABLE_EXTENDED</code></td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">-</td>
+  <td>Production CPU inference</td>
+</tr>
+<tr>
+  <td><code>ORT_ENABLE_ALL</code></td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">Yes</td>
+  <td style="text-align:center">Yes</td>
+  <td>Maximum throughput (EP-specific)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. Operator Fusion Patterns</h2>
+<p>Fusion merges multiple small kernels into one, eliminating intermediate tensor writes and
+reducing kernel-launch overhead.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Before[&quot;Before Fusion (3 nodes, 2 intermediate tensors)&quot;]
+        direction TB
+        C[&quot;Conv\nnode&quot;]
+        BN[&quot;BatchNorm\nnode&quot;]
+        RL[&quot;Relu\nnode&quot;]
+        T1([&quot; tensor_a &quot;])
+        T2([&quot; tensor_b &quot;])
+        C --&gt; T1 --&gt; BN --&gt; T2 --&gt; RL
+    end
+
+    subgraph After[&quot;After Fusion (1 node, 0 intermediate tensors)&quot;]
+        direction TB
+        FUSED[&quot;ConvBatchNormRelu\n(single fused kernel)\nBN weights absorbed\ninto Conv parameters&quot;]
+    end
+
+    Before -- &quot;ORT_ENABLE_EXTENDED&quot; --&gt; After
+</div></div>
+<h3>BatchNorm Folding - What Happens Mathematically</h3>
+<p>BatchNorm at inference (running statistics, not per-batch) computes:</p>
+<pre><code>y = (x - mean) / sqrt(var + ε) * γ + β
+</code></pre>
+<p>This is a linear transform that can be folded into the preceding Conv:</p>
+<pre><code>W_fused = W_conv * (γ / sqrt(var + ε))
+b_fused = b_conv * (γ / sqrt(var + ε)) + β - mean * (γ / sqrt(var + ε))
+</code></pre>
+<p>After folding: <code>y = W_fused * x + b_fused</code> — one fewer node, no intermediate tensor.</p>
+<h3>Common Fusion Patterns</h3>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph CNN[&quot;CNN Fusions (ORT_ENABLE_EXTENDED)&quot;]
+        P1[&quot;Conv + BatchNorm + Relu → ConvBatchNormRelu&quot;]
+        P2[&quot;Conv + BatchNorm → ConvBatchNorm&quot;]
+        P3[&quot;MatMul + Add → Gemm (or FusedMatMul)&quot;]
+    end
+
+    subgraph Transformer[&quot;Transformer Fusions (onnxruntime.transformers)&quot;]
+        T1[&quot;QKV MatMuls + Softmax + projection → MultiHeadAttention&quot;]
+        T2[&quot;Div + Erf + Add + Mul + Mul → FastGelu&quot;]
+        T3[&quot;ReduceMean + Sub + Pow + … → LayerNormalization&quot;]
+        T4[&quot;Embedding + Position + LayerNorm → EmbedLayerNormalization&quot;]
+    end
+</div></div>
+<hr />
+<h2>5. Execution Provider Selection Flow</h2>
+<p>ORT selects operators for each EP in priority order.  Unsupported ops fall through
+to the next provider in the list (ultimately always CPU).</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([Inference Request])
+
+    Q1{&quot;CUDA EP\navailable?&quot;}
+    Q2{&quot;Op supported\nby CUDA EP?&quot;}
+    Q3{&quot;TensorRT EP\navailable?&quot;}
+    Q4{&quot;Op supported\nby TRT?&quot;}
+    CPU[&quot;CPUExecutionProvider\n(always available)&quot;]
+    CUDA[&quot;CUDAExecutionProvider\n(NVIDIA GPU)&quot;]
+    TRT[&quot;TensorrtExecutionProvider\n(NVIDIA TensorRT)&quot;]
+
+    RESULT([Output Tensor])
+
+    START --&gt; Q3
+    Q3 -- Yes --&gt; Q4
+    Q3 -- No  --&gt; Q1
+    Q4 -- Yes --&gt; TRT --&gt; RESULT
+    Q4 -- No  --&gt; Q1
+    Q1 -- Yes --&gt; Q2
+    Q1 -- No  --&gt; CPU --&gt; RESULT
+    Q2 -- Yes --&gt; CUDA --&gt; RESULT
+    Q2 -- No  --&gt; CPU --&gt; RESULT
+</div></div>
+<h3>Execution Provider Reference Table</h3>
+<table>
+<thead>
+<tr>
+  <th>EP</th>
+  <th>Package</th>
+  <th>Hardware</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>CPUExecutionProvider</code></td>
+  <td><code>onnxruntime</code></td>
+  <td>Any CPU</td>
+  <td>Always available. Uses MLAS.</td>
+</tr>
+<tr>
+  <td><code>CUDAExecutionProvider</code></td>
+  <td><code>onnxruntime-gpu</code></td>
+  <td>NVIDIA GPU</td>
+  <td>Requires CUDA + cuDNN.</td>
+</tr>
+<tr>
+  <td><code>TensorrtExecutionProvider</code></td>
+  <td><code>onnxruntime-gpu</code></td>
+  <td>NVIDIA GPU</td>
+  <td>Best throughput; requires TensorRT.</td>
+</tr>
+<tr>
+  <td><code>ROCmExecutionProvider</code></td>
+  <td><code>onnxruntime-rocm</code></td>
+  <td>AMD GPU</td>
+  <td>Requires ROCm stack.</td>
+</tr>
+<tr>
+  <td><code>CoreMLExecutionProvider</code></td>
+  <td><code>onnxruntime</code></td>
+  <td>Apple Silicon</td>
+  <td>macOS / iOS. Neural Engine delegate.</td>
+</tr>
+<tr>
+  <td><code>OpenVINOExecutionProvider</code></td>
+  <td><code>onnxruntime-openvino</code></td>
+  <td>Intel CPU/GPU/VPU</td>
+  <td>Requires OpenVINO toolkit.</td>
+</tr>
+<tr>
+  <td><code>DirectMLExecutionProvider</code></td>
+  <td><code>onnxruntime-directml</code></td>
+  <td>Windows GPU</td>
+  <td>DirectX 12. Windows only.</td>
+</tr>
+<tr>
+  <td><code>QNNExecutionProvider</code></td>
+  <td><code>onnxruntime-qnn</code></td>
+  <td>Qualcomm NPU</td>
+  <td>Snapdragon NPU / HTP.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. ONNX Opset Versioning</h2>
+<p>An opset version specifies which set of operator definitions the model uses.
+Higher opsets add new operators and may change semantics of existing ones.</p>
+<div class="mermaid-wrap"><div class="mermaid">timeline
+    title ONNX Opset History (selected)
+    Opset 9  : BatchNorm inference mode stabilised
+    Opset 11 : Resize / Range / Cumsum added
+    Opset 13 : Quantisation operators (QLinearConv, etc.)
+    Opset 14 : Trilu, Identity upgrade
+    Opset 15 : Optional / OptionalGetElement
+    Opset 16 : ScatterElements, Greedy decoding
+    Opset 17 : STFT, LayerNorm as first-class op
+    Opset 18 : Pad / Resize / LpPool updates
+    Opset 19 : AveragePool / Dequantize updates
+    Opset 20 : IsInf / IsNaN upgrades, DFT
+    Opset 21 : Flatten / Identity upgrade (current stable)
+</div></div>
+<p><strong>Rule of thumb</strong>: use <code>opset_version=17</code> for broad ORT compatibility.
+PyTorch <code>torch.onnx.export</code> supports up to the current opset automatically.</p>
+<hr />
+<h2>7. Key ONNX Python APIs</h2>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">import onnx
+import onnx.shape_inference
+
+# Load a model
+model = onnx.load(&quot;model.onnx&quot;)
+
+# Structural validation (raises on error)
+onnx.checker.check_model(model)
+
+# Shape inference — fills value_info for all intermediate tensors
+model = onnx.shape_inference.infer_shapes(model)
+
+# Inspect the graph
+graph = model.graph
+for node in graph.node:
+    print(node.op_type, node.input, node.output)
+
+# Inspect initializers (weights)
+for init in graph.initializer:
+    print(init.name, list(init.dims))
+
+# Access input/output shapes
+for vi in graph.input:
+    for dim in vi.type.tensor_type.shape.dim:
+        print(dim.dim_value or dim.dim_param)
+</code></pre></div>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">import onnxruntime as ort
+
+# Create a session with optimization
+opts = ort.SessionOptions()
+opts.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL
+opts.optimized_model_filepath = &quot;optimized.onnx&quot;
+
+session = ort.InferenceSession(&quot;model.onnx&quot;, sess_options=opts,
+                                providers=[&quot;CPUExecutionProvider&quot;])
+# Run inference
+outputs = session.run(None, {&quot;input&quot;: input_array})
+</code></pre></div>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">ONNX Graph Optimizations</span></a>
+            <a href="flow_diagrams.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">ONNX Optimization Pipeline - Flow Diagrams</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

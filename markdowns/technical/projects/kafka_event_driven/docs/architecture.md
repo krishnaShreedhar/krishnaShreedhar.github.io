@@ -1,5 +1,17 @@
-# Kafka Event-Driven Architecture — System Architecture
-
+---
+title: "Kafka Event-Driven Architecture — System Architecture"
+subtitle: "This project demonstrates Kafka and event-driven architecture concepts using a fully in-memory mock broker.  The mock broker faithfully reproduces the partition model, consumer group offsets, and lag mechanics of a..."
+category: technical
+project: kafka_event_driven
+project_title: "Kafka Event-Driven Architecture — Demonstration Project"
+date: 2025-04-02
+reading_time: 4
+tags:
+  - kafka-event-driven
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/kafka_event_driven/docs/architecture.html"
+---
 ## Overview
 
 This project demonstrates Kafka and event-driven architecture concepts using

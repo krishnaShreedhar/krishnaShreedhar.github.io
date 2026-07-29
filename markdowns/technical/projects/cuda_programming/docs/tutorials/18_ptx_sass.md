@@ -1,5 +1,17 @@
-# Tutorial 18: PTX & SASS
-
+---
+title: "Tutorial 18: PTX & SASS"
+subtitle: "See `src/tutorials/18_ptx_sass/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-10-16
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/18_ptx_sass.html"
+---
 ## Concept
 
 See `src/tutorials/18_ptx_sass/main.cu` for detailed inline comments explaining

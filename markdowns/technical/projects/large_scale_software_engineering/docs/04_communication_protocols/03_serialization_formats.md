@@ -1,5 +1,17 @@
-# Serialization Formats
-
+---
+title: "Serialization Formats"
+subtitle: "Serialization converts in-memory data structures into a format suitable for storage or transmission. The choice of format affects payload size, serialization speed, schema evolution safety, human readability, and..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-24
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/04_communication_protocols/03_serialization_formats.html"
+---
 Serialization converts in-memory data structures into a format suitable for storage or transmission. The choice of format affects payload size, serialization speed, schema evolution safety, human readability, and cross-language compatibility.
 
 ## Format Comparison Overview

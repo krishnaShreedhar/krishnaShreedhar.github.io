@@ -1,5 +1,17 @@
-# Engineering Culture
-
+---
+title: "Engineering Culture"
+subtitle: "Engineering culture is the set of shared values, behaviors, and practices that shape how a team builds software. Culture determines whether engineers raise problems early or hide them, whether they take appropriate..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-24
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/14_team_organizational/02_engineering_culture.html"
+---
 Engineering culture is the set of shared values, behaviors, and practices that shape how a team builds software. Culture determines whether engineers raise problems early or hide them, whether they take appropriate risks or avoid all change, and whether the team improves continuously or repeats the same mistakes.
 
 ## Psychological Safety

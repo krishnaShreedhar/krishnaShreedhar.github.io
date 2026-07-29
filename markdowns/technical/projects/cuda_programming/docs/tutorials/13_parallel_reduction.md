@@ -1,5 +1,17 @@
-# Tutorial 13: Parallel Reduction
-
+---
+title: "Tutorial 13: Parallel Reduction"
+subtitle: "See `src/tutorials/13_parallel_reduction/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-05-10
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/13_parallel_reduction.html"
+---
 ## Concept
 
 See `src/tutorials/13_parallel_reduction/main.cu` for detailed inline comments explaining

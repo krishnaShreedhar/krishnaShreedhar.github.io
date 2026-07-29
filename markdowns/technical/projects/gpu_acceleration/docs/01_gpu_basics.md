@@ -1,5 +1,17 @@
-# Module 1 — GPU Basics: Memory & Data Transfer
-
+---
+title: "Module 1 — GPU Basics: Memory & Data Transfer"
+subtitle: "This module teaches the mechanics of GPU memory management and CPU↔GPU data movement — the foundation every GPU-accelerated workload is built on."
+category: technical
+project: gpu_acceleration
+project_title: "GPU Acceleration — Transformer Tutorials"
+date: 2025-05-04
+reading_time: 3
+tags:
+  - gpu-acceleration
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/gpu_acceleration/docs/01_gpu_basics.html"
+---
 ## Overview
 
 This module teaches the mechanics of GPU memory management and CPU↔GPU data

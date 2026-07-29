@@ -1,5 +1,16 @@
-# Kafka Event-Driven Architecture — Demonstration Project
-
+---
+title: "Kafka Event-Driven Architecture — Demonstration Project"
+subtitle: "A self-contained, runnable illustration of Apache Kafka concepts and event-driven design patterns.  Every module uses an in-memory mock broker (`MockKafkaBroker`) so no external services are required."
+category: technical
+project: kafka_event_driven
+project_title: "Kafka Event-Driven Architecture — Demonstration Project"
+date: 2025-09-14
+reading_time: 3
+tags:
+  - kafka-event-driven
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/kafka_event_driven/index.html"
+---
 A self-contained, runnable illustration of Apache Kafka concepts and
 event-driven design patterns.  Every module uses an in-memory mock broker
 (`MockKafkaBroker`) so no external services are required.

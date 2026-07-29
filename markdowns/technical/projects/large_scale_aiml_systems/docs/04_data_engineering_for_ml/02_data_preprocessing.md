@@ -1,5 +1,17 @@
-# Data Preprocessing
-
+---
+title: "Data Preprocessing"
+subtitle: "Data preprocessing transforms raw, messy collected data into clean, consistent numerical representations that ML algorithms can learn from. Preprocessing decisions — how to handle missing values, how to encode..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-06-04
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/04_data_engineering_for_ml/02_data_preprocessing.html"
+---
 Data preprocessing transforms raw, messy collected data into clean, consistent numerical representations that ML algorithms can learn from. Preprocessing decisions — how to handle missing values, how to encode categoricals, how to scale features, how to split data — directly affect model accuracy, training stability, and the validity of offline evaluation metrics.
 
 ## Preprocessing Pipeline

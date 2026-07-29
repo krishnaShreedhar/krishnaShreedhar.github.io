@@ -1,5 +1,17 @@
-# Replication and Partitioning
-
+---
+title: "Replication and Partitioning"
+subtitle: "Replication copies data across multiple nodes for fault tolerance and read scaling. Partitioning (sharding) distributes data across nodes to scale writes and storage beyond a single machine. These two techniques are..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-05-06
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/05_data_management/05_replication_partitioning.html"
+---
 Replication copies data across multiple nodes for fault tolerance and read scaling. Partitioning (sharding) distributes data across nodes to scale writes and storage beyond a single machine. These two techniques are often combined and are the foundation of all distributed database systems.
 
 ## Replication Topologies

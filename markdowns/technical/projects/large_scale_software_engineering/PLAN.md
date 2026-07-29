@@ -1,5 +1,16 @@
-# Plan: Large Scale Software Engineering Documentation
-
+---
+title: "Plan: Large Scale Software Engineering Documentation"
+subtitle: "Build a self-contained, comprehensive reference for large-scale software engineering that can serve as a study guide, design aid, and onboarding resource for engineers working on complex distributed systems."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-06
+reading_time: 2
+tags:
+  - large-scale-software-engineering
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/PLAN.html"
+---
 ## Objective
 
 Build a self-contained, comprehensive reference for large-scale software engineering that can serve as a study guide, design aid, and onboarding resource for engineers working on complex distributed systems.

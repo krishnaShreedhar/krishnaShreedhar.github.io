@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CI/CD Pipelines &middot; Shreedhar Kodate</title>
+    <meta name="description" content="CI/CD (Continuous Integration / Continuous Delivery) pipelines automate the path from code commit to production deployment, providing fast feedback on code qual">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">CI/CD Pipelines</span>
+        </div>
+        <h1 class="post-title">CI/CD Pipelines</h1>
+        <p class="post-subtitle">CI/CD (Continuous Integration / Continuous Delivery) pipelines automate the path from code commit to production deployment, providing fast feedback on code quality and enabling safe, frequent releases. Well-designed...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-11</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2 active"><a href="01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>CI/CD (Continuous Integration / Continuous Delivery) pipelines automate the path from code commit to production deployment, providing fast feedback on code quality and enabling safe, frequent releases. Well-designed pipelines are the foundation of high-velocity software delivery.</p>
+<h2>CI/CD Pipeline Stages</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    Commit[Code Commit\ngit push] --&gt; CI[Continuous Integration]
+
+    subgraph CI[CI - Validate Code]
+        Lint[Lint and\nFormat Check]
+        UnitTest[Unit Tests]
+        IntTest[Integration Tests]
+        Security[Security Scan\nSAST SCA]
+        Build[Build Artifact\nDocker image]
+        Lint --&gt; UnitTest --&gt; IntTest --&gt; Security --&gt; Build
+    end
+
+    CI --&gt; CD[Continuous Delivery]
+
+    subgraph CD[CD - Deploy Code]
+        Dev[Deploy to Dev\nautomatically]
+        Staging[Deploy to Staging\nautomatically]
+        ProdApprove[Manual Approval\nfor Production]
+        Prod[Deploy to Production\ncanary or blue-green]
+        Dev --&gt; Staging --&gt; ProdApprove --&gt; Prod
+    end
+
+    style CI fill:#dbeafe,stroke:#2563eb
+    style CD fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>GitHub Actions Pipeline</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Triggers[Trigger Events]
+        PR[Pull Request\nrun CI]
+        Main[Push to main\nrun CI + deploy staging]
+        Tag[Git Tag v1.x.x\ndeploy production]
+    end
+
+    subgraph Jobs[Pipeline Jobs]
+        Test[test job\nmatrix: py3.10 py3.11 py3.12\nunit and integration tests]
+        Scan[security job\nSemgrep Snyk trivy]
+        Build[build job\nDocker build\npush to ECR]
+        DeployStaging[deploy-staging job\nhelm upgrade staging]
+        DeployProd[deploy-prod job\nrequires: manual approval\nhelm upgrade production]
+    end
+
+    PR --&gt; Test &amp; Scan
+    Main --&gt; Test &amp; Scan --&gt; Build --&gt; DeployStaging
+    Tag --&gt; Build --&gt; DeployProd
+
+    style Test fill:#dbeafe,stroke:#2563eb
+    style DeployProd fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Deployment Strategies</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Recreate[Recreate - Downtime]
+        R1[Stop all v1] --&gt; R2[Start all v2]
+        RNote[Simplest\nDowntime required\nFast]
+        style RNote fill:#fee2e2,stroke:#dc2626
+    end
+
+    subgraph RollingUpdate[Rolling Update - No Downtime]
+        RU1[v1 x4] --&gt; RU2[v1 x3 v2 x1] --&gt; RU3[v1 x2 v2 x2] --&gt; RU4[v2 x4]
+        RUNote[Kubernetes default\nNo downtime\nRollback possible]
+        style RUNote fill:#dbeafe,stroke:#2563eb
+    end
+
+    subgraph BlueGreen[Blue-Green - Instant Switch]
+        BG1[Blue v1: 100% traffic]
+        BG2[Green v2: 0% traffic, fully deployed]
+        BG3[Switch: Green v2: 100%\nBlue v1: standby for rollback]
+        BG1 --&gt; BG2 --&gt; BG3
+        BGNote[Zero downtime\nInstant rollback\nDouble resources during switch]
+        style BGNote fill:#fef3c7,stroke:#d97706
+    end
+
+    subgraph Canary[Canary - Gradual]
+        C1[v1: 95%, v2: 5%]
+        C2[v1: 80%, v2: 20%]
+        C3[v1: 0%, v2: 100%]
+        C1 --&gt; C2 --&gt; C3
+        CNote[Low blast radius\nMetrics-gated rollout\nSlow]
+        style CNote fill:#dcfce7,stroke:#16a34a
+    end
+</div></div>
+<h2>Feature Flags</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Code[Feature Code\nif flag.enabled checkout_v2\n  new_checkout_flow\nelse\n  old_checkout_flow]
+
+    FlagService[Feature Flag Service\nLaunchDarkly Split.io\nor self-hosted Unleash]
+
+    subgraph Rules[Flag Targeting Rules]
+        R1[Employees only: 100%]
+        R2[Beta users: 20%]
+        R3[US region: 50%]
+        R4[Everyone: 0%]
+    end
+
+    Code --&gt; FlagService
+    FlagService --&gt; Rules
+
+    Benefits[Benefits:\nDeploy without releasing\nA/B testing\nInstant kill switch\nGradual rollout\nPermission-based access]
+
+    style FlagService fill:#fef3c7,stroke:#d97706,stroke-width:2px
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Continuous Integration (CI)</strong>: Every code change is automatically built, tested, and validated. The goal: detect integration problems early when they are cheap to fix. CI requires: fast tests (under 10 minutes for PR builds), high test coverage, and a single main branch as the source of truth.</p>
+</li>
+<li><p><strong>Continuous Delivery (CD)</strong>: Every validated code change is automatically deployable to production at any time. In continuous deployment (a stricter form), every change that passes CI is automatically deployed to production without human approval.</p>
+</li>
+<li><p><strong>Pipeline as Code</strong>: CI/CD pipeline configuration is stored in the repository alongside the code it builds (e.g., <code>.github/workflows/</code>, <code>Jenkinsfile</code>, <code>.gitlab-ci.yml</code>). Changes to the pipeline go through code review and version control.</p>
+</li>
+<li><p><strong>Build Matrix</strong>: Running tests across multiple configurations simultaneously (Python 3.10, 3.11, 3.12; Ubuntu and macOS). Parallelizes testing to find compatibility issues without sequential overhead.</p>
+</li>
+<li><p><strong>Rolling Deployment</strong>: The default Kubernetes deployment strategy. New pods are started gradually while old pods are terminated, maintaining a minimum number of ready pods throughout. Requires the application to be backward-compatible (new code running alongside old code during the transition).</p>
+</li>
+<li><p><strong>Feature Flags</strong>: Decouple deployment from release. Code is deployed to production but hidden behind a flag. The flag is then gradually enabled for subsets of users (internal users, beta users, geographic segments) independent of code deployments. Enables instant rollback by disabling the flag without a code change.</p>
+</li>
+<li><p><strong>Deployment Verification</strong>: After deployment, automated checks verify the deployment succeeded: health endpoint responds, error rate hasn't increased, key metrics remain within SLO. If checks fail, automatic rollback triggers. This reduces MTTR for bad deployments.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Strategy</th>
+  <th>Downtime</th>
+  <th>Rollback Speed</th>
+  <th>Resource Cost</th>
+  <th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Recreate</td>
+  <td>Yes</td>
+  <td>Fast</td>
+  <td>Low</td>
+  <td>High</td>
+</tr>
+<tr>
+  <td>Rolling</td>
+  <td>No</td>
+  <td>Medium (re-roll)</td>
+  <td>Low</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Blue-Green</td>
+  <td>No</td>
+  <td>Instant</td>
+  <td>Double</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Canary</td>
+  <td>No</td>
+  <td>Instant (flag off)</td>
+  <td>Low</td>
+  <td>Lowest</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Rolling</strong>: Default for stateless services — zero downtime with minimal resource overhead</li>
+<li><strong>Blue-Green</strong>: Database schema migrations, major version upgrades where rollback must be instant</li>
+<li><strong>Canary</strong>: High-risk changes to large user bases — algorithmic changes, pricing changes, major UX changes</li>
+<li><strong>Feature flags</strong>: Always — for any change that can be wrapped in a flag, decouple deployment from release</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">DevOps and Infrastructure</span></a>
+            <a href="02_containerization_orchestration.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Containerization and Orchestration</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

@@ -1,5 +1,17 @@
-# The Three Pillars of Observability
-
+---
+title: "The Three Pillars of Observability"
+subtitle: "The three pillars of observability — metrics, traces, and logs — provide complementary views into system behaviour. Metrics answer \"what is wrong\"; traces answer \"where is it wrong\"; logs answer \"why is it wrong\"...."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-28
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/09_observability_monitoring/01_three_pillars.html"
+---
 The three pillars of observability — metrics, traces, and logs — provide complementary views into system behaviour. Metrics answer "what is wrong"; traces answer "where is it wrong"; logs answer "why is it wrong". Together they enable effective production debugging and monitoring.
 
 ## Three Pillars Overview

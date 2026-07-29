@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ray Engineering – Flow Diagrams &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Detailed step-by-step flow diagrams for every major execution path in the project.  Each diagram is paired with an explanation of the decision points and data t">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Ray Engineering – Flow Diagrams</span>
+        </div>
+        <h1 class="post-title">Ray Engineering – Flow Diagrams</h1>
+        <p class="post-subtitle">Detailed step-by-step flow diagrams for every major execution path in the project.  Each diagram is paired with an explanation of the decision points and data transformations involved.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-03-26</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">ray-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Ray Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Ray Engineering</a></li><li class="project-nav__lvl-1"><a href="architecture.html">Ray Engineering – Architecture Reference</a></li><li class="project-nav__lvl-1 active"><a href="flow_diagrams.html">Ray Engineering – Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Detailed step-by-step flow diagrams for every major execution path in the
+project.  Each diagram is paired with an explanation of the decision points
+and data transformations involved.</p>
+<hr />
+<h2>1. Task Execution Flow</h2>
+<p>How a single <code>@ray.remote</code> task travels from Python submission to result
+retrieval.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    A([Driver calls\nfn.remote&amp;#40;args&amp;#41;]) --&gt; B[Driver process\nserialises arguments\nvia Apache Arrow]
+    B --&gt; C{Are args\nObjectRefs?}
+    C --&gt;|Yes – zero-copy| D[Pass ObjectRef ID\nto scheduler]
+    C --&gt;|No – raw data| E[Store args in\nlocal Plasma Store\nGet ObjectRef]
+    E --&gt; D
+    D --&gt; F[GCS Scheduler\nmatches task to\navailable worker slot]
+    F --&gt; G{Worker on\nsame node?}
+    G --&gt;|Yes| H[Read args from\nlocal shared memory\nzero-copy mmap]
+    G --&gt;|No| I[Transfer object\nvia network to\nremote Plasma Store]
+    I --&gt; H
+    H --&gt; J[Worker process\nexecutes fn&amp;#40;args&amp;#41;]
+    J --&gt; K[Serialise return value\nstore in local Plasma]
+    K --&gt; L[Return ObjectRef\nto Driver]
+    L --&gt; M([Driver calls\nray.get&amp;#40;ref&amp;#41;])
+    M --&gt; N{Object on\nsame node?}
+    N --&gt;|Yes| O[Read from local\nPlasma Store\nzero-copy]
+    N --&gt;|No| P[Fetch object\nover network]
+    P --&gt; O
+    O --&gt; Q([Python object\nreturned to Driver])
+</div></div>
+<h3>Key performance observations</h3>
+<ul>
+<li>Arguments that are already <code>ObjectRef</code>s skip serialisation entirely.</li>
+<li>For same-node communication, plasma shared memory avoids any copy.</li>
+<li><code>ray.wait()</code> lets you process results as they finish rather than blocking
+on the slowest task.</li>
+</ul>
+<hr />
+<h2>2. Ray Data Preprocessing Pipeline Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph Input
+        RAW[&quot;Raw Data Source\n(CSV / Parquet / Pandas)&quot;]
+    end
+
+    RAW --&gt; CREATE[&quot;ray.data.from_pandas&amp;#40;df&amp;#41;\nor read_parquet&amp;#40;path&amp;#41;\nPartitioned into N Blocks&quot;]
+
+    subgraph LazyTransforms[&quot;Lazy Transform Chain&quot;]
+        CREATE --&gt; T1[&quot;.map_batches&amp;#40;normalise_batch&amp;#41;\nbatch_format=numpy\nRun in parallel Ray tasks&quot;]
+        T1 --&gt; T2[&quot;.map_batches&amp;#40;add_interaction_features&amp;#41;\nDerive new columns\nRun in parallel Ray tasks&quot;]
+        T2 --&gt; T3[&quot;.filter&amp;#40;predicate&amp;#41;\n&amp;#40;optional&amp;#41;\nRow-level filtering&quot;]
+    end
+
+    T3 --&gt; SPLIT[&quot;.split_at_indices&amp;#40;[train_size]&amp;#41;\nProduces train_ds, val_ds&quot;]
+
+    subgraph Training
+        SPLIT --&gt; SH0[&quot;Shard 0 → Worker 0\niter_torch_batches&amp;#40;&amp;#41;&quot;]
+        SPLIT --&gt; SH1[&quot;Shard 1 → Worker 1\niter_torch_batches&amp;#40;&amp;#41;&quot;]
+        SH0 --&gt; EP0[&quot;Training epoch\nfor batch in shard:&quot;]
+        SH1 --&gt; EP1[&quot;Training epoch\nfor batch in shard:&quot;]
+    end
+
+    subgraph Inspection
+        SPLIT --&gt;|.take_batch&amp;#40;5&amp;#41;| SAMPLE[&quot;Sample batch\nfor logging / EDA&quot;]
+    end
+</div></div>
+<h3>Execution model</h3>
+<p>Each <code>.map_batches()</code> call is <strong>not</strong> executed immediately.  Ray Data builds
+an execution plan and runs it lazily when data is consumed.  This allows the
+runtime to fuse adjacent transforms, reducing memory pressure.</p>
+<hr />
+<h2>3. Distributed Training Pipeline Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Start([Driver: TorchTrainer.fit&amp;#40;&amp;#41;]) --&gt; SC[&quot;ScalingConfig\nnum_workers=2\nuse_gpu=false&quot;]
+    SC --&gt; SPAWN[&quot;Ray spawns N worker processes\nOne per training replica&quot;]
+
+    subgraph Worker[&quot;Each Worker Process (rank r)&quot;]
+        SPAWN --&gt; INIT[&quot;Initialise process group\ntorch.distributed.init_process_group&amp;#40;&amp;#41;\n&amp;#40;via prepare_model&amp;#41;&quot;]
+        INIT --&gt; MODEL[&quot;Build BinaryClassifier&amp;#40;&amp;#41;\nprepare_model&amp;#40;&amp;#41; → DDP wrap&quot;]
+        MODEL --&gt; CKPT{Checkpoint\nexists?}
+        CKPT --&gt;|Yes| RESTORE[&quot;Restore model weights\noptimiser state\nstart_epoch&quot;]
+        CKPT --&gt;|No| EPOCH0[&quot;Start from epoch 0&quot;]
+        RESTORE --&gt; LOOP
+        EPOCH0 --&gt; LOOP
+
+        subgraph LOOP[&quot;Training Loop (per epoch)&quot;]
+            L1[&quot;model.train&amp;#40;&amp;#41;&quot;]
+            L1 --&gt; L2[&quot;for batch in loader:&quot;]
+            L2 --&gt; L3[&quot;optimizer.zero_grad&amp;#40;&amp;#41;&quot;]
+            L3 --&gt; L4[&quot;outputs = model&amp;#40;X&amp;#41;&quot;]
+            L4 --&gt; L5[&quot;loss = BCELoss&amp;#40;outputs, y&amp;#41;&quot;]
+            L5 --&gt; L6[&quot;loss.backward&amp;#40;&amp;#41;\n← AllReduce gradient sync ←&quot;]
+            L6 --&gt; L7[&quot;optimizer.step&amp;#40;&amp;#41;&quot;]
+            L7 --&gt; L2
+        end
+
+        LOOP --&gt; REPORT[&quot;ray.train.report&amp;#40;\n  metrics={loss, accuracy},\n  checkpoint=Checkpoint&amp;#41;&quot;]
+        REPORT --&gt; NEXTEPOCH{More\nepochs?}
+        NEXTEPOCH --&gt;|Yes| LOOP
+        NEXTEPOCH --&gt;|No| DONE
+    end
+
+    REPORT --&gt; CKM[&quot;CheckpointManager\nKeep top-K by accuracy&quot;]
+    DONE --&gt; RESULT([ResultGrid returned\nto Driver])
+</div></div>
+<hr />
+<h2>4. Hyperparameter Optimisation Search Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([Tuner.fit&amp;#40;&amp;#41;]) --&gt; INIT_SEARCH[&quot;OptunaSearch initialises\nTPE surrogate model&quot;]
+
+    INIT_SEARCH --&gt; SAMPLE[&quot;Sample N configs\nfrom param_space:\n  lr: loguniform\n  hidden_dim: choice\n  dropout: uniform\n  batch_size: choice&quot;]
+
+    SAMPLE --&gt; LAUNCH[&quot;Launch Trial 0..N-1\nin parallel\n&amp;#40;bounded by cluster CPUs&amp;#41;&quot;]
+
+    subgraph TrialLoop[&quot;Per Trial&quot;]
+        T_INIT[&quot;Receive config from Optuna&quot;]
+        T_INIT --&gt; T_TRAIN[&quot;TorchTrainer._trainable_loop&amp;#40;&amp;#41;\nEpoch 1&quot;]
+        T_TRAIN --&gt; T_REPORT[&quot;ray.train.report&amp;#40;accuracy=...&amp;#41;&quot;]
+        T_REPORT --&gt; ASHA{ASHAScheduler:\nepoch &gt;= grace_period?}
+        ASHA --&gt;|&quot;accuracy in\nbottom 1/r&quot;| PRUNE[&quot;Trial STOPPED\n&amp;#40;early stopping&amp;#41;&quot;]
+        ASHA --&gt;|&quot;Passes threshold&quot;| MORE{More\nepochs?}
+        MORE --&gt;|Yes| T_TRAIN
+        MORE --&gt;|No| COMPLETE[&quot;Trial COMPLETED\nReport final metrics&quot;]
+    end
+
+    LAUNCH --&gt; TrialLoop
+    COMPLETE --&gt; UPDATE[&quot;OptunaSearch updates\nTPE model with\n(config, accuracy) pair&quot;]
+    UPDATE --&gt; MORETRI{Budget\nexhausted?}
+    MORETRI --&gt;|No| SAMPLE
+    MORETRI --&gt;|Yes| GRID[&quot;ResultGrid\n.get_best_result&amp;#40;&amp;#41;\n.get_dataframe&amp;#40;&amp;#41;&quot;]
+    PRUNE --&gt; UPDATE
+    GRID --&gt; END([Best config + checkpoint\nreturned to Driver])
+</div></div>
+<h3>ASHA scheduler internals</h3>
+<p>ASHA (Asynchronous Successive Halving Algorithm) works in rungs:</p>
+<ol>
+<li>All trials run for <code>grace_period</code> epochs.</li>
+<li>The bottom <code>1 - 1/reduction_factor</code> fraction are stopped.</li>
+<li>Survivors run to the next rung (grace_period × reduction_factor epochs).</li>
+<li>Repeat until <code>max_t</code> epochs.</li>
+</ol>
+<p>This gives near-optimal exploration-exploitation trade-off while running
+fully asynchronously – fast trials do not wait for slow ones.</p>
+<hr />
+<h2>5. Ray Serve Request Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant C as HTTP Client
+    participant Proxy as Ray Serve Proxy
+    participant IP as InferencePipeline&lt;br/&gt;(ingress replica)
+    participant PP as Preprocessor&lt;br/&gt;(replica 0 or 1)
+    participant BC as BatchClassifier&lt;br/&gt;(replica 0 or 1)
+    participant BQ as @serve.batch queue
+
+    C-&gt;&gt;Proxy: POST /predict {features: [...]}
+    Proxy-&gt;&gt;IP: route to InferencePipeline
+
+    IP-&gt;&gt;PP: preprocessor.preprocess.remote(raw_features)
+    Note over PP: Z-score normalisation
+    PP--&gt;&gt;IP: normalised_features
+
+    IP-&gt;&gt;BC: classifier.predict.remote(normalised_features)
+    BC-&gt;&gt;BQ: enqueue single sample
+
+    Note over BQ: Wait up to batch_wait_timeout_s&lt;br/&gt;or until max_batch_size reached
+    BQ-&gt;&gt;BC: _batched_predict([sample_0, ..., sample_k])
+
+    Note over BC: torch.no_grad()&lt;br/&gt;model(tensor_batch)
+    BC--&gt;&gt;IP: {probability, predicted_class, confidence}
+
+    IP--&gt;&gt;Proxy: {request_id, prediction, elapsed_ms}
+    Proxy--&gt;&gt;C: HTTP 200 JSON response
+</div></div>
+<h3>Batching dynamics</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Concurrent[&quot;Concurrent Requests&quot;]
+        R0[&quot;Request 0&quot;]
+        R1[&quot;Request 1&quot;]
+        R2[&quot;Request 2&quot;]
+        R3[&quot;Request 3&quot;]
+    end
+
+    subgraph BatchQueue[&quot;@serve.batch queue&quot;]
+        BQ[&quot;Accumulate until\nmax_batch_size=32\nor timeout=50ms&quot;]
+    end
+
+    R0 --&gt; BQ
+    R1 --&gt; BQ
+    R2 --&gt; BQ
+    R3 --&gt; BQ
+
+    BQ --&gt;|&quot;Batch [R0,R1,R2,R3]&quot;| INF[&quot;model(tensor_batch)\n4 samples in 1 forward pass&quot;]
+
+    INF --&gt; RES0[&quot;Result 0&quot;]
+    INF --&gt; RES1[&quot;Result 1&quot;]
+    INF --&gt; RES2[&quot;Result 2&quot;]
+    INF --&gt; RES3[&quot;Result 3&quot;]
+</div></div>
+<p><strong>Throughput benefit</strong>: a single GPU forward pass over 32 samples is
+significantly faster than 32 individual forward passes due to parallelism
+in matrix multiplication.  <code>@serve.batch</code> delivers this automatically
+without changing the single-sample API contract seen by callers.</p>
+<hr />
+<h2>6. Object Store Fan-Out Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    DRIVER[&quot;Driver&quot;]
+    DATA[&quot;large_array\n= np.random.normal&amp;#40;size=100_000&amp;#41;&quot;]
+    PUT[&quot;ref = ray.put&amp;#40;large_array&amp;#41;\n─ Serialise ONCE\n─ Store in Plasma\n─ Return ObjectRef&quot;]
+
+    DRIVER --&gt; DATA --&gt; PUT
+
+    PUT --&gt;|&quot;Ref passed&quot;| T0[&quot;Task 0\nray.get&amp;#40;ref&amp;#41; – mmap&quot;]
+    PUT --&gt;|&quot;Ref passed&quot;| T1[&quot;Task 1\nray.get&amp;#40;ref&amp;#41; – mmap&quot;]
+    PUT --&gt;|&quot;Ref passed&quot;| T2[&quot;Task 2\nray.get&amp;#40;ref&amp;#41; – mmap&quot;]
+    PUT --&gt;|&quot;Ref passed&quot;| T3[&quot;Task 3\nray.get&amp;#40;ref&amp;#41; – mmap&quot;]
+
+    subgraph PlasmaStore[&quot;Plasma (Shared Memory)&quot;]
+        BUF[&quot;Single buffer\n400 KB\nref-counted&quot;]
+    end
+
+    PUT --&gt; BUF
+    T0 -. zero-copy read .-&gt; BUF
+    T1 -. zero-copy read .-&gt; BUF
+    T2 -. zero-copy read .-&gt; BUF
+    T3 -. zero-copy read .-&gt; BUF
+
+    ANTI[&quot;Anti-Pattern:\nTask.remote&amp;#40;large_array&amp;#41;\n× 4 times\n→ 4 × serialise + store&quot;]
+    ANTI -.-&gt;|&quot;Avoid this&quot;| T0
+</div></div>
+
+        
+        <nav class="post-nav">
+            <a href="architecture.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Ray Engineering – Architecture Reference</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

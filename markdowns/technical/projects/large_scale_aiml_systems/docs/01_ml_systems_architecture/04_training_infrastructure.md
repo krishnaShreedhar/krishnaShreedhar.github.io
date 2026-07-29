@@ -1,5 +1,17 @@
-# Training Infrastructure
-
+---
+title: "Training Infrastructure"
+subtitle: "Training infrastructure encompasses the hardware, scheduling, and tooling needed to run ML training jobs efficiently at scale. Well-designed training infrastructure maximizes GPU utilization, minimizes queue wait..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-06-02
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/01_ml_systems_architecture/04_training_infrastructure.html"
+---
 Training infrastructure encompasses the hardware, scheduling, and tooling needed to run ML training jobs efficiently at scale. Well-designed training infrastructure maximizes GPU utilization, minimizes queue wait times, provides experiment isolation, and enables rapid iteration from experimentation to production-scale training runs.
 
 ## GPU Cluster Architecture

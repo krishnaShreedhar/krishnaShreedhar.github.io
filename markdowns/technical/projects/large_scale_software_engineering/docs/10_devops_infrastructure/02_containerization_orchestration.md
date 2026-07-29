@@ -1,5 +1,17 @@
-# Containerization and Orchestration
-
+---
+title: "Containerization and Orchestration"
+subtitle: "Containers package applications with their dependencies into portable, isolated units. Container orchestration (Kubernetes) manages the scheduling, scaling, networking, and lifecycle of containers at scale."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-24
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/10_devops_infrastructure/02_containerization_orchestration.html"
+---
 Containers package applications with their dependencies into portable, isolated units. Container orchestration (Kubernetes) manages the scheduling, scaling, networking, and lifecycle of containers at scale.
 
 ## Docker Architecture

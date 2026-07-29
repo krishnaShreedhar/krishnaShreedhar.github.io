@@ -1,5 +1,17 @@
-# Scaling ML Systems
-
+---
+title: "Scaling ML Systems"
+subtitle: "Scaling ML systems addresses the engineering challenges that emerge when models, datasets, and traffic grow beyond what a single machine or naive distributed approach can handle. Scaling in ML spans four dimensions:..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-02-22
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/05_scaling_ml_systems/index.html"
+---
 Scaling ML systems addresses the engineering challenges that emerge when models, datasets, and traffic grow beyond what a single machine or naive distributed approach can handle. Scaling in ML spans four dimensions: training (data and model parallelism for trillion-parameter models), inference (throughput optimization and KV-cache management), serving (handling millions of requests per second), and data (managing petabyte-scale datasets).
 
 ## Overview

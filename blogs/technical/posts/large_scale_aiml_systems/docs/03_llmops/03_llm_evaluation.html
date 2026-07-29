@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LLM Evaluation &middot; Shreedhar Kodate</title>
+    <meta name="description" content="LLM evaluation is the systematic measurement of language model output quality across dimensions like accuracy, faithfulness, coherence, and safety. Unlike tradi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">LLM Evaluation</span>
+        </div>
+        <h1 class="post-title">LLM Evaluation</h1>
+        <p class="post-subtitle">LLM evaluation is the systematic measurement of language model output quality across dimensions like accuracy, faithfulness, coherence, and safety. Unlike traditional ML evaluation with clear numerical metrics (AUC,...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-10-23</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2 active"><a href="03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>LLM evaluation is the systematic measurement of language model output quality across dimensions like accuracy, faithfulness, coherence, and safety. Unlike traditional ML evaluation with clear numerical metrics (AUC, F1), LLM evaluation is inherently multi-dimensional and often requires LLMs themselves as judges — because the space of correct outputs is vast and rubric-based human evaluation is expensive to scale.</p>
+<h2>Evaluation Dimensions</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Dimensions[LLM Output Quality Dimensions]
+        Correctness[Correctness - Factual Accuracy\nDoes the answer match ground truth?\nAre stated facts verifiable?\nNo hallucinations?]
+
+        Faithfulness[Faithfulness - RAG Specific\nDoes the answer only use\ninformation from the provided context?\nNo information invented beyond context?]
+
+        Relevance[Relevance\nDoes the answer address\nthe actual question asked?\nNo off-topic digressions?]
+
+        Coherence[Coherence\nIs the response logically structured?\nDoes it flow well?\nNo internal contradictions?]
+
+        Safety[Safety and Alignment\nRefuses harmful requests?\nNo toxic or biased outputs?\nFollows system prompt constraints?]
+
+        Groundedness[Groundedness\nCan claims be traced\nto specific source documents?\nAre citations accurate?]
+    end
+</div></div>
+<h2>Evaluation Methods</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Methods[Evaluation Method Hierarchy]
+        subgraph Automated[Automated Metrics]
+            BLEU[BLEU and ROUGE\nN-gram overlap with reference\nWorks for translation and summarization\nPoor for open-ended generation]
+            BERTScore[BERTScore\nEmbedding similarity with reference\nCaptures semantic similarity\nbetter than n-gram overlap]
+            ExactMatch[Exact Match and F1\nFor extractive QA\nAnswer is a span from context\nClear ground truth exists]
+        end
+
+        subgraph LLMJudge[LLM-as-Judge]
+            PointScore[Pointwise Scoring\nJudge LLM rates single response\n1-5 scale on each dimension\nScalable but biased toward its own outputs]
+            PairwiseComp[Pairwise Comparison\nJudge LLM chooses between\ntwo responses: A or B\nMore reliable than absolute scoring]
+            Reference[Reference-Based Judge\nJudge compares response to gold answer\nReduces hallucination in judge itself]
+        end
+
+        subgraph Human[Human Evaluation]
+            Crowdsource[Crowdsourced Rating\nMTurk, Prolific\nScales but lower consistency]
+            Expert[Expert Annotation\nDomain experts\nHigh quality but expensive\ngold standard]
+        end
+    end
+</div></div>
+<h2>RAG-Specific Evaluation with RAGAS</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph RAGAS[RAGAS Evaluation Framework]
+        Query[User Question]
+        Context[Retrieved Context\nfrom vector store]
+        Answer[Generated Answer]
+        GroundTruth[Ground Truth Answer\noptional]
+
+        subgraph Metrics[RAGAS Metrics]
+            ContextPrec[Context Precision\nAre retrieved chunks relevant?\nSignal-to-noise in retrieval]
+            ContextRecall[Context Recall\nDoes retrieved context contain\nall information needed to answer?\nRequires ground truth]
+            Faithfulness[Faithfulness\nIs the answer grounded\nin the retrieved context?\nLLM-as-judge]
+            AnswerRel[Answer Relevance\nDoes the answer address\nthe question asked?\nLLM-as-judge]
+        end
+
+        Query &amp; Context --&gt; ContextPrec &amp; Faithfulness &amp; AnswerRel
+        Context &amp; GroundTruth --&gt; ContextRecall
+        Answer --&gt; Faithfulness &amp; AnswerRel
+    end
+
+    style Faithfulness fill:#fef3c7,stroke:#d97706
+    style ContextPrec fill:#dbeafe,stroke:#2563eb
+</div></div>
+<h2>Evaluation Pipeline</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph EvalPipeline[LLM Evaluation Pipeline]
+        EvalSet[Evaluation Dataset\n100-500 question-answer pairs\nrepresentative of production queries\nlabeled by domain experts]
+
+        RunInference[Run Inference\nfor each question in eval set\ncollect model responses]
+
+        AutoMetrics[Automated Metrics\nBERTScore for semantic similarity\nexact match for factual QA]
+
+        LLMJudge[LLM Judge Evaluation\nGPT-4 or Claude as judge\nscores each response on rubric\nchecks faithfulness and correctness]
+
+        HumanSample[Human Review Sample\n10-20% of eval set\ncalibrates LLM judge quality]
+
+        Dashboard[Evaluation Dashboard\naggregate scores per dimension\nregression detection\ncomparison between versions]
+
+        EvalSet --&gt; RunInference --&gt; AutoMetrics &amp; LLMJudge
+        LLMJudge --&gt; HumanSample --&gt; Dashboard
+        AutoMetrics --&gt; Dashboard
+    end
+
+    style Dashboard fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>LLM-as-Judge</strong>: Using a powerful LLM (GPT-4, Claude) to evaluate the outputs of another LLM. The judge is given a rubric (scoring criteria) and the response to evaluate. Scales to large evaluation sets unlike human annotation, but has known biases: judges tend to prefer longer responses, responses in their own style, and responses from models in the same family. Calibrate with human annotations to understand judge reliability.</p>
+</li>
+<li><p><strong>Hallucination</strong>: LLMs generating plausible-sounding but factually incorrect information — names, dates, statistics, citations that do not exist. Hallucination is the primary quality failure mode for LLMs in factual applications. Mitigation: RAG (ground responses in documents), low temperature, structured output with fact verification, and faithfulness evaluation to catch it.</p>
+</li>
+<li><p><strong>Evaluation Dataset Curation</strong>: The quality of evaluation depends entirely on the quality of the evaluation dataset. Good eval sets are: representative of production traffic (not just easy cases), include adversarial examples (tricky or ambiguous questions), have clear correct answers (or rubrics for subjective dimensions), and are regularly refreshed as the use case evolves.</p>
+</li>
+<li><p><strong>Benchmark Suites</strong>: Standardized evaluation sets for comparing LLMs: MMLU (massive multitask language understanding — academic knowledge), HumanEval (code generation), TruthfulQA (truthfulness on tricky questions), MT-Bench (multi-turn conversation quality), HellaSwag (commonsense reasoning). Use industry benchmarks for capability assessment; use custom eval sets for application-specific performance.</p>
+</li>
+<li><p><strong>Regression Testing</strong>: Running the evaluation pipeline on every model or prompt change to catch regressions before deployment. The eval pipeline should be integrated into CI/CD — a new model or prompt version only advances to production if it matches or exceeds the baseline eval scores. Maintains quality as systems evolve.</p>
+</li>
+<li><p><strong>Evaluation vs Observation</strong>: Offline evaluation (on an eval set) measures quality in controlled conditions. Online observation (monitoring production outputs) measures quality on real traffic. Both are needed — offline evals catch regressions before deployment, online observation catches distribution shifts and edge cases that eval sets don't cover.</p>
+</li>
+<li><p><strong>Positional Bias in Pairwise Evaluation</strong>: When asking an LLM judge to compare response A vs response B, judges systematically prefer the response presented first. Mitigate by evaluating each pair twice with order reversed and flagging inconsistencies.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Evaluation Method</th>
+  <th>Scale</th>
+  <th>Cost</th>
+  <th>Reliability</th>
+  <th>Latency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>N-gram metrics (BLEU)</td>
+  <td>Very High</td>
+  <td>Very Low</td>
+  <td>Low for open-ended</td>
+  <td>Instant</td>
+</tr>
+<tr>
+  <td>BERTScore</td>
+  <td>High</td>
+  <td>Low</td>
+  <td>Medium</td>
+  <td>Fast</td>
+</tr>
+<tr>
+  <td>LLM-as-judge</td>
+  <td>High</td>
+  <td>Medium</td>
+  <td>High (with calibration)</td>
+  <td>Slow</td>
+</tr>
+<tr>
+  <td>Human expert</td>
+  <td>Low</td>
+  <td>Very High</td>
+  <td>Highest</td>
+  <td>Very Slow</td>
+</tr>
+<tr>
+  <td>Human crowdsource</td>
+  <td>Medium</td>
+  <td>High</td>
+  <td>Medium</td>
+  <td>Slow</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Automated metrics (BLEU/ROUGE)</strong>: Only for tasks with clear reference outputs — translation, summarization where multiple phrasings of the correct answer are acceptable</li>
+<li><strong>LLM-as-judge</strong>: Default for open-ended generation — fast, scalable, and accurate when calibrated against human judgments</li>
+<li><strong>Human evaluation</strong>: Ground truth baseline for calibrating LLM judges, for high-stakes decisions, and for final launch approval</li>
+<li><strong>RAGAS</strong>: Any RAG system — it provides component-level diagnostics (is it a retrieval problem or a generation problem?) that aggregate metrics miss</li>
+<li><strong>Continuous eval in CI/CD</strong>: Always — evaluation without deployment gates allows quality to silently regress</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="02_rag_systems.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">RAG Systems</span></a>
+            <a href="04_fine_tuning.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Fine-Tuning LLMs</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

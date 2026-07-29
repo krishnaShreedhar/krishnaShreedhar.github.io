@@ -1,5 +1,17 @@
-# GRPO — Group Relative Policy Optimization
-
+---
+title: "GRPO — Group Relative Policy Optimization"
+subtitle: "Group Relative Policy Optimization (GRPO) [DeepSeek-AI, 2024] is the reinforcement learning algorithm at the core of DeepSeek-R1, the model that demonstrated strong reasoning capability in large language models...."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-02-09
+reading_time: 4
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/09_grpo.html"
+---
 **Use case:** VLM / LLM fine-tuning (e.g. DeepSeek-R1)  
 **Type:** On-policy, critic-free policy gradient  
 **Action space:** Discrete (response tokens / choices)

@@ -1,5 +1,17 @@
-# Architectural Paradigms
-
+---
+title: "Architectural Paradigms"
+subtitle: "An architectural paradigm is the fundamental organizing structure of a software system — it defines how components are decomposed, how they communicate, and how the system evolves. Choosing the right paradigm is one..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-22
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/index.html"
+---
 An architectural paradigm is the fundamental organizing structure of a software system — it defines how components are decomposed, how they communicate, and how the system evolves. Choosing the right paradigm is one of the most consequential and costly-to-reverse decisions in system design.
 
 ## Overview

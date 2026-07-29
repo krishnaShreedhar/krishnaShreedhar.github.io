@@ -1,5 +1,17 @@
-# Space-Based Architecture
-
+---
+title: "Space-Based Architecture"
+subtitle: "Space-Based Architecture (SBA) eliminates the database as a bottleneck by distributing both processing and data across an in-memory data grid. All processing units share a common \"space\" (distributed tuple store),..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-01-17
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/07_space_based_architecture.html"
+---
 Space-Based Architecture (SBA) eliminates the database as a bottleneck by distributing both processing and data across an in-memory data grid. All processing units share a common "space" (distributed tuple store), enabling elastic scale-out with near-linear throughput improvements — the architecture was designed specifically for high-concurrency applications with unpredictable load spikes.
 
 ## Architecture Diagrams

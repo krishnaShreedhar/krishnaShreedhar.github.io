@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Network Protocols &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Network protocols are the foundational rules governing how data is transmitted across networks. Understanding protocol behaviour — connection establishment, flo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Network Protocols</span>
+        </div>
+        <h1 class="post-title">Network Protocols</h1>
+        <p class="post-subtitle">Network protocols are the foundational rules governing how data is transmitted across networks. Understanding protocol behaviour — connection establishment, flow control, encryption negotiation, and congestion...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-16</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2 active"><a href="05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Network protocols are the foundational rules governing how data is transmitted across networks. Understanding protocol behaviour — connection establishment, flow control, encryption negotiation, and congestion management — enables engineers to diagnose performance problems and make informed infrastructure decisions.</p>
+<h2>Protocol Stack</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph ApplicationLayer[Application Layer L7]
+        HTTP[HTTP/1.1 / HTTP/2 / HTTP/3]
+        gRPC[gRPC over HTTP/2]
+        DNS[DNS]
+        SMTP[SMTP / IMAP]
+    end
+
+    subgraph TransportLayer[Transport Layer L4]
+        TCP[TCP\nReliable, ordered, connection-oriented]
+        UDP[UDP\nUnreliable, connectionless, low overhead]
+        QUIC[QUIC\nUDP-based, built-in TLS, multiplexing]
+    end
+
+    subgraph NetworkLayer[Network Layer L3]
+        IP[IP - IPv4 / IPv6\nRouting, fragmentation]
+        ICMP[ICMP\nPing, Traceroute]
+        BGP[BGP\nInter-AS routing]
+    end
+
+    subgraph DataLink[Data Link Layer L2]
+        ETH[Ethernet]
+        WiFi[802.11 WiFi]
+    end
+
+    HTTP &amp; gRPC &amp; DNS --&gt; TCP &amp; QUIC
+    TCP &amp; UDP &amp; QUIC --&gt; IP
+    IP --&gt; ETH &amp; WiFi
+</div></div>
+<h2>TCP Connection Lifecycle</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Client
+    participant Server
+
+    Note over Client,Server: Three-Way Handshake (Connection Establishment)
+    Client-&gt;&gt;Server: SYN (seq=x)
+    Server--&gt;&gt;Client: SYN-ACK (seq=y, ack=x+1)
+    Client-&gt;&gt;Server: ACK (ack=y+1)
+    Note over Client,Server: Connection Established - 1.5 RTT cost
+
+    Client-&gt;&gt;Server: HTTP Request (data)
+    Server--&gt;&gt;Client: HTTP Response (data)
+
+    Note over Client,Server: Four-Way Handshake (Teardown)
+    Client-&gt;&gt;Server: FIN
+    Server--&gt;&gt;Client: ACK
+    Server--&gt;&gt;Client: FIN
+    Client-&gt;&gt;Server: ACK
+</div></div>
+<h2>HTTP Version Evolution</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph HTTP11[HTTP/1.1]
+        H11[Text protocol\nOne request per connection\nHead-of-line blocking\nKeep-alive: limited pipelining]
+        style H11 fill:#fee2e2,stroke:#dc2626
+    end
+
+    subgraph HTTP2[HTTP/2]
+        H2[Binary protocol\nMultiplexed streams\nHeader compression - HPACK\nServer push\nSingle TCP connection\nTCP-level HOL still present]
+        style H2 fill:#fef3c7,stroke:#d97706
+    end
+
+    subgraph HTTP3[HTTP/3 - QUIC]
+        H3[QUIC over UDP\n0-RTT resumption\nStream-level loss recovery\nNo TCP HOL blocking\nBuilt-in TLS 1.3\nConnection migration]
+        style H3 fill:#dcfce7,stroke:#16a34a
+    end
+
+    HTTP11 --&gt;|2015| HTTP2 --&gt;|2022| HTTP3
+</div></div>
+<h2>TLS Handshake</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Client
+    participant Server
+
+    Note over Client,Server: TLS 1.3 Handshake (1-RTT)
+    Client-&gt;&gt;Server: ClientHello\n(supported ciphers, key_share)
+    Server--&gt;&gt;Client: ServerHello + Certificate\n(selected cipher, server key_share, finished)
+    Note over Client: Verify certificate\nDerive session keys
+    Client-&gt;&gt;Server: Finished + HTTP Request
+    Server--&gt;&gt;Client: HTTP Response
+    Note over Client,Server: Total: 1 RTT after TCP connect
+</div></div>
+<h2>DNS Resolution Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Browser[Browser] --&gt;|1. cache miss| Resolver[Local DNS Resolver\n/etc/resolv.conf]
+    Resolver --&gt;|2. recursive query| Root[Root Nameserver\n13 root servers]
+    Root --&gt;|3. referral: .com TLD| Resolver
+    Resolver --&gt;|4. query .com TLD| TLD[TLD Nameserver\n.com servers]
+    TLD --&gt;|5. referral: example.com NS| Resolver
+    Resolver --&gt;|6. query authoritative| Auth[Authoritative Nameserver\nexample.com]
+    Auth --&gt;|7. A record: 93.184.216.34| Resolver
+    Resolver --&gt;|8. cached + returned| Browser
+
+    style Auth fill:#dcfce7,stroke:#16a34a
+    style Resolver fill:#dbeafe,stroke:#2563eb
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>TCP (Transmission Control Protocol)</strong>: Provides reliable, ordered, error-checked delivery of bytes over a network. Uses a three-way handshake for connection establishment (1.5 RTT overhead), sliding window flow control, and congestion control algorithms (CUBIC, BBR). TCP guarantees ordering within a connection but causes head-of-line blocking — a lost packet stalls all subsequent data.</p>
+</li>
+<li><p><strong>UDP (User Datagram Protocol)</strong>: Connectionless, unreliable protocol with minimal overhead. No handshake, no ordering guarantees, no flow control. Suitable for latency-sensitive applications (gaming, VoIP, DNS queries) where an occasional lost packet is preferable to the latency of retransmission.</p>
+</li>
+<li><p><strong>QUIC</strong>: A transport protocol built over UDP, developed by Google and standardized by IETF as the foundation for HTTP/3. Provides: 0-RTT connection resumption, stream-level multiplexing (no TCP head-of-line blocking), built-in TLS 1.3, and connection migration (changing IP without reconnecting). Solves the fundamental limitations of HTTP/2 over TCP.</p>
+</li>
+<li><p><strong>TLS (Transport Layer Security)</strong>: Cryptographic protocol providing encryption, authentication, and integrity for network communications. TLS 1.3 (current standard) simplified the handshake to 1-RTT, removed weak cipher suites, and made forward secrecy mandatory. TLS 1.2 is still widely deployed but deprecated.</p>
+</li>
+<li><p><strong>HTTP/2 Multiplexing</strong>: Multiple HTTP streams share a single TCP connection, eliminating the HTTP/1.1 requirement to open 6+ parallel connections per domain. Each stream is independent — a request for <code>/api/users</code> and <code>/api/orders</code> can be in-flight simultaneously. However, a lost TCP packet blocks all HTTP/2 streams (TCP head-of-line blocking).</p>
+</li>
+<li><p><strong>DNS (Domain Name System)</strong>: The hierarchical, distributed naming system that maps domain names to IP addresses. Resolution traverses root nameservers, TLD nameservers, and authoritative nameservers. DNS caching (controlled by TTL) is critical for performance — a TTL of 60s means every hostname lookup may add 60s to propagation time for changes.</p>
+</li>
+<li><p><strong>BGP (Border Gateway Protocol)</strong>: The routing protocol that exchanges reachability information between autonomous systems (ISPs, cloud providers). BGP route advertisements determine how traffic flows across the internet. BGP misconfigurations (route leaks, hijacks) can cause large-scale internet outages.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Protocol</th>
+  <th>Reliability</th>
+  <th>Latency</th>
+  <th>Throughput</th>
+  <th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>TCP</td>
+  <td>Guaranteed</td>
+  <td>Higher (handshake)</td>
+  <td>Limited by window</td>
+  <td>Web, databases, file transfer</td>
+</tr>
+<tr>
+  <td>UDP</td>
+  <td>None</td>
+  <td>Lowest</td>
+  <td>Unlimited</td>
+  <td>Gaming, VoIP, DNS, streaming</td>
+</tr>
+<tr>
+  <td>QUIC/HTTP3</td>
+  <td>Guaranteed</td>
+  <td>Low (0-RTT)</td>
+  <td>High (no HOL)</td>
+  <td>Modern web, mobile</td>
+</tr>
+<tr>
+  <td>TLS 1.3</td>
+  <td>Encrypted</td>
+  <td>1-RTT overhead</td>
+  <td>Minimal impact</td>
+  <td>All secure communications</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>TCP</strong>: All reliable data transfer where ordering and delivery guarantees are required</li>
+<li><strong>UDP</strong>: Latency-critical applications where some loss is tolerable and retransmission adds more cost than benefit</li>
+<li><strong>QUIC/HTTP3</strong>: New client-server applications targeting modern browsers and mobile clients</li>
+<li><strong>TLS 1.3</strong>: All production communication — there is no valid reason to use older TLS versions in new systems</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="04_service_to_service_patterns.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Service-to-Service Communication Patterns</span></a>
+            <a href="../05_data_management/index.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Data Management</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

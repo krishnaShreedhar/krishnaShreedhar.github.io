@@ -1,5 +1,17 @@
-# Reliability Concepts
-
+---
+title: "Reliability Concepts"
+subtitle: "Reliability engineering provides a structured vocabulary and measurement framework for reasoning about system dependability. SLIs, SLOs, and error budgets transform vague reliability aspirations into measurable,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-26
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/07_reliability_resilience/01_reliability_concepts.html"
+---
 Reliability engineering provides a structured vocabulary and measurement framework for reasoning about system dependability. SLIs, SLOs, and error budgets transform vague reliability aspirations into measurable, actionable engineering targets.
 
 ## SLI, SLO, SLA Hierarchy

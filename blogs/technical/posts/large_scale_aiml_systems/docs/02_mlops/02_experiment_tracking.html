@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Experiment Tracking &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Experiment tracking is the practice of logging, organizing, and comparing ML training runs — capturing hyperparameters, metrics, and artifacts to make experimen">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Experiment Tracking</span>
+        </div>
+        <h1 class="post-title">Experiment Tracking</h1>
+        <p class="post-subtitle">Experiment tracking is the practice of logging, organizing, and comparing ML training runs — capturing hyperparameters, metrics, and artifacts to make experimentation reproducible and comparable. Without systematic...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-06-11</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2 active"><a href="02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Experiment tracking is the practice of logging, organizing, and comparing ML training runs — capturing hyperparameters, metrics, and artifacts to make experimentation reproducible and comparable. Without systematic tracking, ML development degenerates into &quot;notebook chaos&quot; where promising experiments are lost, results cannot be reproduced, and teams repeat work.</p>
+<h2>Experiment Tracking Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph TrainingCode[Training Code]
+        Init[mlflow.start_run\nor wandb.init\nbegin experiment session]
+        LogParams[Log Parameters\nlearning_rate 0.001\nbatch_size 32\nmodel_type transformer]
+        LogMetrics[Log Metrics per Step\ntrain_loss epoch 1 0.42\nval_loss epoch 1 0.38\nAUC epoch 1 0.84]
+        LogArtifacts[Log Artifacts\nconfusion matrix plot\nfeature importance chart\nmodel checkpoint]
+        End[End Run\nmark completed or failed]
+
+        Init --&gt; LogParams --&gt; LogMetrics --&gt; LogArtifacts --&gt; End
+    end
+
+    subgraph TrackingServer[Tracking Server]
+        RunDB[Run Database\nPostgres or SQLite\nparams metrics tags]
+        ArtifactStore[Artifact Store\nS3 or GCS\nplots models datasets]
+        UI[Experiment UI\ncompare runs\nvisualize metrics\nsearch and filter]
+
+        RunDB &lt;--&gt; UI
+        ArtifactStore &lt;--&gt; UI
+    end
+
+    TrainingCode --&gt; TrackingServer
+
+    style TrackingServer fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+</div></div>
+<h2>Experiment Comparison Workflow</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph HPOSweep[Hyperparameter Sweep]
+        Baseline[Baseline Run\nlr=0.01 batch=32\nAUC=0.831]
+        Run2[Run 2\nlr=0.001 batch=64\nAUC=0.847]
+        Run3[Run 3\nlr=0.0001 batch=128\nAUC=0.839]
+        Run4[Run 4\nlr=0.001 batch=32\nAUC=0.851]
+        RunN[Run N\n...]
+    end
+
+    subgraph Analysis[Experiment Analysis]
+        Compare[Compare Runs in UI\nplot val_AUC vs lr\nfind best config]
+        Best[Best Run Identified\nRun 4: lr=0.001 batch=32\nAUC=0.851]
+        Tag[Tag as Candidate\nbest_of_sweep=true\npromote to registry]
+    end
+
+    Baseline &amp; Run2 &amp; Run3 &amp; Run4 &amp; RunN --&gt; Compare --&gt; Best --&gt; Tag
+
+    style Best fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>Run Metadata Structure</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph RunStructure[Experiment Run Components]
+        Run[Experiment Run\nrun_id: unique UUID\nexperiment_id: group of runs\nstatus: RUNNING FINISHED FAILED]
+
+        Params[Parameters\nFixed at start\nlearning_rate: 0.001\nbatch_size: 32\nmodel_arch: resnet50\nNOT updated during training]
+
+        Metrics[Metrics\nUpdated during training\ntrain_loss: logged per step\nval_accuracy: logged per epoch\nsupport min max last mean]
+
+        Tags[Tags\nfree-form key-value\nteam: fraud-ml\nowner: alice\ndata_version: v47]
+
+        Artifacts[Artifacts\nfiles and directories\nmodel weights\nplots and visualizations\ntraining dataset sample]
+
+        Run --&gt; Params &amp; Metrics &amp; Tags &amp; Artifacts
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Run</strong>: The atomic unit of experiment tracking — a single training execution with its own parameters, metrics, artifacts, and status. Runs are grouped into experiments (a named collection of related runs). Every run should be tagged with the git commit hash of the training code to ensure reproducibility.</p>
+</li>
+<li><p><strong>Parameters vs Metrics</strong>: Parameters are inputs set before training (hyperparameters, model architecture, dataset version) — logged once at run start and immutable. Metrics are outputs produced during training (loss, accuracy, AUC) — logged at each step or epoch and tracked as time series. This distinction enables metric-based search and comparison across runs.</p>
+</li>
+<li><p><strong>Artifact Logging</strong>: Files produced by the run — model checkpoints, evaluation plots, feature importance charts, sample predictions. Artifacts are stored in blob storage (S3/GCS) and linked to the run. Well-logged artifacts make experiments self-documenting — someone reviewing a run six months later can see exactly what the model learned.</p>
+</li>
+<li><p><strong>Experiment</strong>: A named container grouping related runs — e.g., &quot;fraud-model-v3-hyperparameter-search&quot; or &quot;recommendation-architecture-comparison&quot;. Good experiment naming conventions make the tracking system navigable as the number of runs grows to thousands.</p>
+</li>
+<li><p><strong>MLflow</strong>: Open-source experiment tracking with tracking server (SQLite or Postgres backend), artifact store (S3/GCS/HDFS), and web UI. Widely adopted, self-hostable, integrates with model registry. MLflow autolog automatically captures parameters and metrics from supported libraries (scikit-learn, PyTorch, TensorFlow).</p>
+</li>
+<li><p><strong>Weights and Biases (W&amp;B)</strong>: Managed SaaS experiment tracking with richer visualization, team collaboration features, and built-in hyperparameter sweeps (W&amp;B Sweeps). Better UX than MLflow but requires sending data to a third-party service. Preferred by research teams and startups where managed infrastructure is acceptable.</p>
+</li>
+<li><p><strong>Reproducibility</strong>: A run is reproducible if given the same code (git commit), data (dataset version), and parameters (logged hyperparameters), the same model can be retrained. Achieving true reproducibility also requires fixing random seeds and CUDA determinism flags, but these interact with performance — deterministic mode reduces GPU throughput.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Tool</th>
+  <th>Self-Hosted</th>
+  <th>Visualization</th>
+  <th>Team Features</th>
+  <th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>MLflow (self-hosted)</td>
+  <td>Yes</td>
+  <td>Basic</td>
+  <td>Limited</td>
+  <td>Free</td>
+</tr>
+<tr>
+  <td>MLflow (Managed)</td>
+  <td>No</td>
+  <td>Basic</td>
+  <td>Medium</td>
+  <td>Paid</td>
+</tr>
+<tr>
+  <td>Weights and Biases</td>
+  <td>No</td>
+  <td>Excellent</td>
+  <td>Excellent</td>
+  <td>Free tier + paid</td>
+</tr>
+<tr>
+  <td>Neptune.ai</td>
+  <td>No</td>
+  <td>Good</td>
+  <td>Good</td>
+  <td>Paid</td>
+</tr>
+<tr>
+  <td>Custom scripts + S3</td>
+  <td>Yes</td>
+  <td>None</td>
+  <td>None</td>
+  <td>Very Low</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>MLflow</strong>: Teams running their own infrastructure who need a free, self-hostable solution that integrates tightly with the MLflow ecosystem (experiment + registry in one system)</li>
+<li><strong>W&amp;B</strong>: Research teams and startups where rich visualization and collaboration features are valued over data residency requirements</li>
+<li><strong>Autolog</strong>: Enable MLflow or W&amp;B autolog for standard frameworks — it captures 80% of what you need with zero additional code</li>
+<li><strong>Custom tags</strong>: Always tag runs with <code>git_commit</code>, <code>data_version</code>, and <code>owner</code> at minimum — enables filtering and reproducing results months later without documentation</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="01_model_registry.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Model Registry</span></a>
+            <a href="03_drift_detection.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Drift Detection</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

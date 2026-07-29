@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Data Validation &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Data validation is the automated process of testing whether incoming data meets defined quality expectations before it enters ML training pipelines or serves as">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Data Validation</span>
+        </div>
+        <h1 class="post-title">Data Validation</h1>
+        <p class="post-subtitle">Data validation is the automated process of testing whether incoming data meets defined quality expectations before it enters ML training pipelines or serves as model inputs. Without systematic data validation, data...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-05-01</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2 active"><a href="04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Data validation is the automated process of testing whether incoming data meets defined quality expectations before it enters ML training pipelines or serves as model inputs. Without systematic data validation, data quality issues propagate silently through the ML pipeline — producing models trained on garbage data or serving predictions based on corrupted features, often without any error signal.</p>
+<h2>Data Validation Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph ValidationPipeline[Data Validation in ML Pipelines]
+        DataSource[Data Source\nbatch job completes\nstage: raw data ingested]
+
+        SchemaCheck[Schema Validation\nColumn names and types match\nRequired columns present\nNo unexpected columns added or dropped]
+
+        StatCheck[Statistical Validation\nrow count within expected range\nmissing rate below threshold\nmean and std within N sigma of baseline\nno new categorical values appeared]
+
+        DistCheck[Distribution Check\nKS test against reference dataset\nPSI below 0.2 for each feature\nno anomalous spikes in value counts]
+
+        Pass{All\nchecks\npass?}
+
+        ProceedTrain[Proceed to Training\ndata validated and trusted]
+        Halt[Halt Pipeline\nAlert data engineering team\nlog failing checks\ndo not train on bad data]
+
+        DataSource --&gt; SchemaCheck --&gt; StatCheck --&gt; DistCheck --&gt; Pass
+        Pass --&gt;|Yes| ProceedTrain
+        Pass --&gt;|No| Halt
+    end
+
+    style ProceedTrain fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    style Halt fill:#fee2e2,stroke:#dc2626,stroke-width:2px
+</div></div>
+<h2>Great Expectations Suite</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph GE[Great Expectations Validation]
+        subgraph Expectations[Expectation Suite Definition]
+            E1[expect_column_to_exist\npurchase_amount\nuser_id\ntimestamp]
+            E2[expect_column_values_to_be_between\npurchase_amount: min=0 max=100000]
+            E3[expect_column_values_to_not_be_null\nuser_id: mostly=True threshold=0.99]
+            E4[expect_column_values_to_be_in_set\nstatus: pending confirmed cancelled]
+            E5[expect_table_row_count_to_be_between\nmin=100000 max=10000000]
+            E6[expect_column_mean_to_be_between\npurchase_amount: min=40 max=120]
+        end
+
+        Checkpoint[Checkpoint\nbinds expectations to data asset\nruns validation on new data batch\nproduces validation result]
+
+        DataDocs[Data Docs\nHTML report of all validation results\nexpectation vs observed values\naccessible to team]
+
+        Expectations --&gt; Checkpoint --&gt; DataDocs
+    end
+</div></div>
+<h2>Data Contract Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph DataContracts[Data Contracts Between Teams]
+        Producer[Data Producer Team\nengineering or data warehouse]
+        Consumer[ML Team\nconsumer of data]
+
+        Contract[Data Contract\nSchema: columns types constraints\nFreshness: updated every 2 hours\nVolume: 50k to 200k rows per batch\nQuality SLAs: missing rate less than 1%\nnew categorical values require 24h notice]
+
+        Producer --&gt;|publishes| Contract
+        Consumer --&gt;|subscribes to and enforces| Contract
+
+        Violation[Contract Violation\nproducer changes schema\nwithout notice]
+        Alert[Automated Alert\nvalidation fails\npipeline halted\nproducer notified]
+
+        Violation --&gt; Alert
+
+        style Contract fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+        style Alert fill:#fee2e2,stroke:#dc2626
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Schema Validation</strong>: Verifying that the data structure matches expectations — correct column names, correct data types, no unexpected columns added or required columns removed. Schema changes (renaming a column, changing a type from int to float) can silently break downstream ML pipelines that rely on specific column names and types. Schema validation catches these changes at the point of data arrival, not after training produces a bad model.</p>
+</li>
+<li><p><strong>Statistical Validation</strong>: Checking that data statistics (row count, missing rates, means, standard deviations, value distributions) fall within expected ranges established from historical baseline data. Sudden drops in row count indicate upstream pipeline failures; spikes in missing rates indicate data collection issues; distribution shifts indicate data quality problems or schema changes.</p>
+</li>
+<li><p><strong>Great Expectations</strong>: The most widely adopted open-source data validation library for Python. Expectations are assertions about data (e.g., &quot;column X should be non-null 99% of the time&quot;, &quot;column Y should be between 0 and 100&quot;). Expectation suites are generated from profiling historical data and stored as JSON, then run as checkpoints in data pipelines to validate new batches.</p>
+</li>
+<li><p><strong>Data Contracts</strong>: Formal agreements between data producers (teams that generate data) and data consumers (ML teams that use it) specifying schema, freshness requirements, volume ranges, and quality SLAs. Data contracts shift ownership of data quality to the producer — they must notify consumers before breaking changes and maintain quality SLAs. Breaking a data contract triggers automated alerts.</p>
+</li>
+<li><p><strong>Expectation Suite Generation</strong>: Great Expectations can automatically profile a representative dataset and generate a baseline expectation suite. These auto-generated expectations provide a starting point — review and tune them (many defaults are too strict or too lenient) before using in production validation. Key expectations to always include: row count bounds, null rate thresholds, value range constraints, and cardinality checks for categoricals.</p>
+</li>
+<li><p><strong>Alerting on Validation Failure</strong>: Validation without alerting is useless — the pipeline must halt and notify the team when validation fails. Alerting must go to the team that owns the data (not just the ML team), with enough context to diagnose the issue: which expectations failed, observed values vs expected ranges, and the data batch identifier. Validation failures should block model training runs, not be silently logged.</p>
+</li>
+<li><p><strong>Serving-Time Validation</strong>: Validation should also run on inference requests in production — checking that incoming feature values match the training data distribution. A feature value outside the training range (e.g., a purchase amount 100x the training maximum) indicates the model is extrapolating and the prediction should be flagged as unreliable or returned with a lower confidence score.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Validation Approach</th>
+  <th>Coverage</th>
+  <th>Overhead</th>
+  <th>Catch Rate</th>
+  <th>Team Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>No validation</td>
+  <td>None</td>
+  <td>None</td>
+  <td>0%</td>
+  <td>None</td>
+</tr>
+<tr>
+  <td>Schema only</td>
+  <td>Low</td>
+  <td>Very Low</td>
+  <td>~50% of issues</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Schema + statistics</td>
+  <td>Medium</td>
+  <td>Low</td>
+  <td>~80% of issues</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Full GE suite + contracts</td>
+  <td>High</td>
+  <td>Medium</td>
+  <td>~95% of issues</td>
+  <td>High</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Schema validation</strong>: Always — minimum viable validation with near-zero overhead. Every ML pipeline should validate schema before any computation.</li>
+<li><strong>Statistical validation</strong>: Any production ML pipeline — catches upstream data quality issues before they corrupt a training run</li>
+<li><strong>Great Expectations</strong>: Recommended for teams with multiple data sources feeding multiple models — centralized expectation management and Data Docs reporting</li>
+<li><strong>Data contracts</strong>: When the data producer is a separate team — formal contracts prevent surprise schema changes that break ML pipelines. Essential in large organizations with clear data platform and ML platform separation</li>
+<li><strong>Serving-time validation</strong>: High-stakes applications (fraud detection, healthcare, finance) where out-of-distribution inputs can produce dangerous predictions</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="03_feature_engineering.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Feature Engineering</span></a>
+            <a href="../05_scaling_ml_systems/index.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Scaling ML Systems</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

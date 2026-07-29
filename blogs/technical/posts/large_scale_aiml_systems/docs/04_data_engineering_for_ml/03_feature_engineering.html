@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Feature Engineering &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Feature engineering is the process of transforming raw data into informative representations — features — that capture the signals most predictive of the target">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Feature Engineering</span>
+        </div>
+        <h1 class="post-title">Feature Engineering</h1>
+        <p class="post-subtitle">Feature engineering is the process of transforming raw data into informative representations — features — that capture the signals most predictive of the target variable. Good feature engineering encodes domain...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-10-22</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2 active"><a href="03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Feature engineering is the process of transforming raw data into informative representations — features — that capture the signals most predictive of the target variable. Good feature engineering encodes domain knowledge about what makes examples similar or different, enabling models to learn faster and generalize better. In tabular ML, feature engineering often has a larger impact on model performance than model architecture selection.</p>
+<h2>Feature Engineering Taxonomy</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Taxonomy[Feature Engineering Categories]
+        subgraph Aggregation[Aggregation Features - Window Functions]
+            Agg1[User spend in last 7 days\nCount of orders in last 30 days\nAverage session duration in last 7 days\nStd of transaction amounts in last month]
+            Agg2[Require time-window aggregation\nComputed at specific point in time\nMost powerful for behavioral ML]
+        end
+
+        subgraph Interaction[Interaction Features]
+            Int1[Feature crosses\nprice_per_unit = price divided by quantity\nclick_through_rate = clicks divided by impressions\ndays_since_last_purchase\ndistance_to_nearest_store]
+            Int2[Encode domain relationships\nbetween pairs or groups of features]
+        end
+
+        subgraph Temporal[Temporal and Cyclical Features]
+            Temp1[Time since last event\nhour of day sin and cos\nday of week sin and cos\nmonth of year sin and cos\nis_weekend is_holiday]
+            Temp2[Cyclical encoding with sin and cos\nprevents discontinuity at midnight\nor year boundaries]
+        end
+
+        subgraph Embedding[Embedding Features]
+            Emb1[Entity embeddings\nfor categorical IDs\nuser_id mapped to 32-dim vector\nlearned from collaborative filtering\nor LLM embeddings of text fields]
+        end
+    end
+</div></div>
+<h2>Time-Window Aggregation Design</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph WindowFeatures[Window Aggregation Feature Engineering]
+        subgraph RawEvents[Raw Event Log]
+            E1[2024-01-15 12:00 user_123 purchase amount=45.99]
+            E2[2024-01-14 09:30 user_123 purchase amount=12.50]
+            E3[2024-01-10 15:45 user_123 purchase amount=89.00]
+            E4[2023-12-20 11:00 user_123 purchase amount=200.00]
+        end
+
+        subgraph WindowDefs[Feature Window Definitions]
+            W7d[7-day window\nsum: 58.49\ncount: 2\navg: 29.24\nmax: 45.99]
+            W30d[30-day window\nsum: 147.49\ncount: 3\navg: 49.16\nmax: 89.00]
+            W90d[90-day window\nsum: 347.49\ncount: 4\navg: 86.87\nmax: 200.00]
+        end
+
+        AsOfDate[As-of: 2024-01-15 13:00\nPoint-in-time correct\nno future data included]
+
+        RawEvents --&gt; AsOfDate --&gt; W7d &amp; W30d &amp; W90d
+    end
+
+    style AsOfDate fill:#fef3c7,stroke:#d97706,stroke-width:2px
+</div></div>
+<h2>Feature Selection Methods</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph FeatureSelection[Feature Selection Approaches]
+        subgraph Filter[Filter Methods]
+            F1[Univariate Statistical Tests\ncorrelation with target\nchi-squared for categoricals\nspearman rank correlation\nfast - no model required]
+        end
+
+        subgraph Wrapper[Wrapper Methods]
+            W1[Recursive Feature Elimination\nRFE with cross-validation\ntrain model iteratively\nremove least important features\nExpensive but accurate]
+        end
+
+        subgraph Embedded[Embedded Methods - During Training]
+            E1[Tree Feature Importance\nXGBoost SHAP values\nL1 Lasso regularization\nAttention weights in transformers]
+            style E1 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        end
+
+        subgraph Ablation[Ablation Studies]
+            A1[Remove feature\ntrain without it\nmeasure performance delta\nquantifies each feature's value]
+        end
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Window Aggregations</strong>: Computing statistics (sum, count, mean, std, min, max) over a rolling time window anchored to each observation's timestamp. These are among the most predictive features in behavioral ML tasks — &quot;how much did this user spend in the last 7 days&quot; is more predictive of fraud than &quot;how much did they spend ever&quot;. Must be computed point-in-time correctly to avoid label leakage.</p>
+</li>
+<li><p><strong>Feature Crosses</strong>: Creating new features by combining two or more existing features. Examples: price-to-income ratio, click-through rate (clicks/impressions), days-since-last-purchase. Feature crosses encode domain knowledge about relationships between variables that the model cannot easily learn from the individual features alone, especially for linear models that cannot learn interactions without explicit feature crosses.</p>
+</li>
+<li><p><strong>Cyclical Encoding</strong>: Hour-of-day, day-of-week, and month-of-year are cyclical — hour 23 is similar to hour 0, but raw integer encoding puts them far apart. Encoding cyclical features as sin and cos projections (sin(2π * hour/24), cos(2π * hour/24)) preserves the cyclical relationship. Critical for time-series and behavioral features.</p>
+</li>
+<li><p><strong>Target Encoding</strong>: Replacing a categorical value with the mean of the target variable for that category (e.g., replace merchant_id with the average fraud rate for that merchant). Very powerful for high-cardinality categoricals, but must be computed with cross-validation on training folds to prevent target leakage (the category's own label would inflate its encoding).</p>
+</li>
+<li><p><strong>Entity Embeddings</strong>: Representing high-cardinality categorical entities (user IDs, product IDs, merchant IDs) as dense learned vectors rather than one-hot or target encodings. Embeddings can capture complex relationships — users who prefer similar products are nearby in embedding space. Can be pre-trained from collaborative filtering, LLM text descriptions, or learned jointly with the prediction model.</p>
+</li>
+<li><p><strong>SHAP Values (SHapley Additive exPlanations)</strong>: A game-theoretic method for attributing each feature's contribution to a model's prediction. SHAP values are model-agnostic and satisfy desirable fairness properties. They explain individual predictions (&quot;the model predicted fraud because of high_amount = +0.3, new_device = +0.2, low_history = +0.1&quot;) and aggregate to feature importance rankings. Essential for model debugging and stakeholder communication.</p>
+</li>
+<li><p><strong>Feature Drift</strong>: The statistical properties of features in production changing from what they were during training (covariate shift). Monitor feature distributions (mean, std, PSI) in production relative to the training set. Feature drift is the leading cause of silent model performance degradation.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Feature Type</th>
+  <th>Predictive Power</th>
+  <th>Computation Cost</th>
+  <th>Interpretability</th>
+  <th>Risk of Leakage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Raw features</td>
+  <td>Low</td>
+  <td>Very Low</td>
+  <td>High</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Window aggregations</td>
+  <td>Very High</td>
+  <td>Medium</td>
+  <td>High</td>
+  <td>High (if not PIT)</td>
+</tr>
+<tr>
+  <td>Feature crosses</td>
+  <td>High</td>
+  <td>Low</td>
+  <td>Medium</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Entity embeddings</td>
+  <td>High</td>
+  <td>High (training)</td>
+  <td>Low</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Target encoding</td>
+  <td>High</td>
+  <td>Low</td>
+  <td>Medium</td>
+  <td>High (without cross-val)</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Window aggregations</strong>: Any behavioral prediction task (fraud, churn, recommendation, credit risk) — they are almost always the highest-signal features</li>
+<li><strong>Cyclical encoding</strong>: Any feature encoding time-of-day, day-of-week, or other periodic variables — always use sin/cos rather than raw integers</li>
+<li><strong>Target encoding</strong>: High-cardinality categoricals (more than ~50 unique values) where one-hot creates too many dimensions</li>
+<li><strong>SHAP values</strong>: During model development for feature selection, debugging, and stakeholder explanation; in production for monitoring individual prediction explanations and detecting model drift</li>
+<li><strong>Entity embeddings</strong>: Recommendation systems, ad targeting, any system where entity IDs are primary keys with millions of unique values</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="02_data_preprocessing.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Data Preprocessing</span></a>
+            <a href="04_data_validation.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Data Validation</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

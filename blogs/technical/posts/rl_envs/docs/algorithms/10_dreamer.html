@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dreamer V2 — World Models for Model-Based RL &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Dreamer V2 [Hafner et al., 2020] learns a compact latent world model from environment interactions, then trains an actor-critic policy **entirely in imagination">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Dreamer V2 — World Models for Model-Based RL</span>
+        </div>
+        <h1 class="post-title">Dreamer V2 — World Models for Model-Based RL</h1>
+        <p class="post-subtitle">Dreamer V2 [Hafner et al., 2020] learns a compact latent world model from environment interactions, then trains an actor-critic policy **entirely in imagination** — inside the learned model — without additional real...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-10-12</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2 active"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p><strong>Use case:</strong> Autonomous vehicle control<br />
+<strong>Type:</strong> Model-based RL, latent dynamics, imagination-based actor-critic<br />
+<strong>Action space:</strong> Continuous</p>
+<hr />
+<h2>Overview</h2>
+<p>Dreamer V2 [Hafner et al., 2020] learns a compact latent world model from environment
+interactions, then trains an actor-critic policy <strong>entirely in imagination</strong> — inside the
+learned model — without additional real environment rollouts. This separation of world model
+learning from policy optimisation gives Dreamer exceptional data efficiency compared to
+model-free methods.</p>
+<hr />
+<h2>World Models: Core Idea</h2>
+<p>Instead of learning a policy directly from raw experience, Dreamer learns:</p>
+<ol>
+<li>A <strong>world model</strong> that predicts latent dynamics, rewards, and episode termination</li>
+<li>An <strong>actor-critic</strong> that is trained on <em>imagined</em> trajectories generated by the world model</li>
+</ol>
+<p>The world model enables the agent to &quot;think ahead&quot; in latent space — thousands of imagination
+steps for every real step taken in the environment.</p>
+<hr />
+<h2>RSSM Architecture</h2>
+<p>The Recurrent State Space Model (RSSM) is the heart of the world model. It maintains a
+two-part latent state:</p>
+<pre><code>h_t  (deterministic): GRU hidden state — captures long-range temporal dependencies
+z_t  (stochastic):    Gaussian latent  — captures the current scene uncertainty
+</code></pre>
+<p>The RSSM defines three distributions:</p>
+<pre><code>Transition prior:    p(z_t | h_t)            — imagination: predict next z from h
+Posterior:           q(z_t | h_t, embed_t)   — training: infer z from real observation
+Recurrent update:    h_t = GRU(h_{t-1}, z_{t-1}, a_{t-1})
+</code></pre>
+<p>The prior is used during imagination (no real observations). The posterior is used during
+world model training (conditions on encoded real observations). The two are trained to agree
+via a KL divergence loss.</p>
+<hr />
+<h2>Full Model Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Real Experience
+        O([obs_t]) --&gt; ENC[ObsEncoder\nobs -&gt; embed]
+        ENC --&gt; POST[Posterior q\nh,embed -&gt; mean,logvar]
+        POST --&gt; Z([z_t sampled])
+    end
+
+    subgraph RSSM Recurrent
+        PREV_H([h_{t-1}]) --&gt; GRU[GRU cell]
+        PREV_Z([z_{t-1}]) --&gt; GRU
+        PREV_A([a_{t-1}]) --&gt; GRU
+        GRU --&gt; H([h_t])
+    end
+
+    subgraph World Model Losses
+        H --&gt; PRIOR[Prior p\nh -&gt; mean,logvar]
+        PRIOR --&gt;|KL loss| POST
+        H --&gt; DEC[ObsDecoder\nh,z -&gt; obs_recon]
+        Z --&gt; DEC
+        DEC --&gt;|Recon loss| O
+        H --&gt; RP[RewardPredictor\nh,z -&gt; r_hat]
+        Z --&gt; RP
+        H --&gt; CP[ContinuePredictor\nh,z -&gt; done_logit]
+        Z --&gt; CP
+    end
+
+    subgraph Imagination
+        H --&gt; IM[imagine horizon steps\nusing actor]
+        Z --&gt; IM
+        IM --&gt; AR([Imagined rewards])
+        IM --&gt; AV([Imagined values])
+        AR --&gt; LR[Lambda returns]
+        AV --&gt; LR
+        LR --&gt; ACT[Actor loss]
+        LR --&gt; CRIT[Critic loss]
+    end
+</div></div>
+<hr />
+<h2>Latent Dynamics Learning</h2>
+<p>The world model is trained with four loss components:</p>
+<h3>1. KL Divergence Loss (with Free Nats)</h3>
+<p>Aligns the posterior (which sees real observations) with the prior (which does not):</p>
+<pre><code>KL_t = KL( q(z_t | h_t, embed_t) || p(z_t | h_t) )
+L_KL = kl_scale * max( mean(KL_t) - free_nats, 0 )
+</code></pre>
+<p><strong>Free nats</strong>: The <code>free_nats</code> threshold (default 3.0 nats) allows the model to use the
+posterior freely up to that information budget before being penalised. This prevents the
+prior from over-constraining the posterior early in training.</p>
+<h3>2. Reconstruction Loss</h3>
+<p>Ensures the latent state retains enough information to reconstruct observations:</p>
+<pre><code>L_recon = MSE( ObsDecoder(h_t, z_t), obs_t )
+</code></pre>
+<h3>3. Reward Prediction Loss</h3>
+<pre><code>L_reward = MSE( RewardPredictor(h_t, z_t), r_t )
+</code></pre>
+<h3>4. Continue Prediction Loss</h3>
+<pre><code>L_continue = BCE( ContinuePredictor(h_t, z_t), 1 - done_t )
+</code></pre>
+<p>Total world model loss:</p>
+<pre><code>L_WM = L_KL + L_recon + L_reward + L_continue
+</code></pre>
+<hr />
+<h2>Imagination-Based Actor-Critic</h2>
+<p>After one world model update, Dreamer trains the actor and critic entirely in latent space:</p>
+<ol>
+<li>Start from posterior states <code>{(h_t, z_t)}</code> collected during world model training</li>
+<li>Unroll the RSSM for <code>horizon</code> steps using the current actor (no real environment needed):<pre><code>a_tau = actor(h_tau, z_tau)
+h_{tau+1} = GRU(h_tau, z_tau, a_tau)
+z_{tau+1} ~ prior(h_{tau+1})
+r_tau, done_tau = reward_predictor(h_tau, z_tau), continue_predictor(h_tau, z_tau)
+</code></pre>
+</li>
+<li>Compute <strong>lambda returns</strong> from imagined rewards and critic values:<pre><code>G_t^lambda = r_t + gamma * cont_t * [(1-lambda)*V(h_{t+1},z_{t+1}) + lambda * G_{t+1}^lambda]
+</code></pre>
+</li>
+<li>Actor loss: maximise lambda returns</li>
+<li>Critic loss: MSE between critic predictions and lambda return targets</li>
+</ol>
+<hr />
+<h2>Lambda Returns</h2>
+<p>Lambda returns interpolate between 1-step TD (lambda=0) and Monte Carlo (lambda=1):</p>
+<pre><code>G_t^lambda = (1-lambda) * sum_{n=1}^{H-t} lambda^{n-1} * G_t^n  +  lambda^{H-t-1} * G_t^H
+</code></pre>
+<p>In practice, computed recursively backwards through the imagined trajectory:</p>
+<pre><code>G_H = r_H + gamma * cont_H * V_{H+1}
+G_t = r_t + gamma * cont_t * ((1-lambda)*V_{t+1} + lambda*G_{t+1})
+</code></pre>
+<hr />
+<h2>Comparison to Model-Free Approaches (Data Efficiency)</h2>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>SAC/TD3 (model-free)</th>
+  <th>Dreamer (model-based)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Policy gradient from</td>
+  <td>Real experience only</td>
+  <td>Imagined trajectories</td>
+</tr>
+<tr>
+  <td>Real env steps per update</td>
+  <td>1</td>
+  <td>1 (+ H imagination steps)</td>
+</tr>
+<tr>
+  <td>Data efficiency</td>
+  <td>Medium</td>
+  <td>Very high</td>
+</tr>
+<tr>
+  <td>World model error risk</td>
+  <td>None</td>
+  <td>Compounding model error</td>
+</tr>
+<tr>
+  <td>Memory</td>
+  <td>Replay buffer</td>
+  <td>Replay buffer + WM</td>
+</tr>
+<tr>
+  <td>Suitable for</td>
+  <td>Dense rewards</td>
+  <td>Sparse/dense rewards</td>
+</tr>
+</tbody>
+</table>
+<p>In practice, Dreamer achieves human-level performance on Atari with 200x fewer environment
+interactions than model-free methods.</p>
+<hr />
+<h2>Autonomous Vehicle Use Case</h2>
+<p>For the <code>VehicleEnv</code>, Dreamer learns a latent model of 2D vehicle dynamics, obstacle
+positions, and proximity to goal. After training the world model on ~500 real episodes,
+the actor-critic trains on imagined rollouts where the vehicle &quot;mentally simulates&quot; thousands
+of navigation trajectories per real step.</p>
+<p>Key advantages over SAC in this setting:</p>
+<ul>
+<li>Sparse goal reward (only +10 on success) is easier to propagate through imagination</li>
+<li>The RSSM can learn to represent obstacle proximity implicitly in <code>z_t</code></li>
+<li>The agent can reason about long-horizon planning (horizon=15) without excessive real rollouts</li>
+</ul>
+<hr />
+<h2>Key Hyperparameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Default</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>world_model_lr</code></td>
+  <td>6e-4</td>
+  <td>World model learning rate</td>
+</tr>
+<tr>
+  <td><code>actor_lr</code></td>
+  <td>8e-5</td>
+  <td>Actor learning rate (lower — imagination is noisy)</td>
+</tr>
+<tr>
+  <td><code>critic_lr</code></td>
+  <td>2e-4</td>
+  <td>Critic learning rate</td>
+</tr>
+<tr>
+  <td><code>gamma</code></td>
+  <td>0.997</td>
+  <td>Discount factor (higher than SAC for long horizons)</td>
+</tr>
+<tr>
+  <td><code>lambda_</code></td>
+  <td>0.95</td>
+  <td>Lambda for multi-step returns</td>
+</tr>
+<tr>
+  <td><code>horizon</code></td>
+  <td>15</td>
+  <td>Imagination rollout length</td>
+</tr>
+<tr>
+  <td><code>seq_len</code></td>
+  <td>50</td>
+  <td>Sequence length sampled for world model training</td>
+</tr>
+<tr>
+  <td><code>batch_size</code></td>
+  <td>16</td>
+  <td>Number of sequences per world model update</td>
+</tr>
+<tr>
+  <td><code>kl_scale</code></td>
+  <td>1.0</td>
+  <td>Weight on the KL divergence loss</td>
+</tr>
+<tr>
+  <td><code>free_nats</code></td>
+  <td>3.0</td>
+  <td>KL penalty threshold (nats)</td>
+</tr>
+<tr>
+  <td><code>latent_dim</code></td>
+  <td>32</td>
+  <td>Stochastic latent z dimensionality</td>
+</tr>
+<tr>
+  <td><code>hidden_dim</code></td>
+  <td>200</td>
+  <td>GRU and prior/posterior hidden size</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>References</h2>
+<ul>
+<li>Hafner, D., Lillicrap, T., Norouzi, M., &amp; Ba, J. (2020). <em>Mastering Atari with Discrete
+World Models (Dreamer V2).</em> ICLR 2021. arXiv:2010.02193.</li>
+<li>Hafner, D. et al. (2019). <em>Dream to Control: Learning Behaviors by Latent Imagination
+(Dreamer V1).</em> ICLR 2020. arXiv:1912.01603.</li>
+<li>Hafner, D. et al. (2023). <em>Mastering Diverse Domains through World Models (Dreamer V3).</em>
+arXiv:2301.04104.</li>
+<li>Deng, F. et al. (2021). <em>Latent Space Imagination for Efficient Reinforcement Learning.</em></li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="09_grpo.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">GRPO — Group Relative Policy Optimization</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

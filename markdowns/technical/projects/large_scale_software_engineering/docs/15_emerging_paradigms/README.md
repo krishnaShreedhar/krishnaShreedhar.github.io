@@ -1,5 +1,17 @@
-# Emerging Paradigms
-
+---
+title: "Emerging Paradigms"
+subtitle: "Emerging paradigms represent the leading edge of software engineering practice — new approaches that are reshaping how we build, deploy, and operate systems. Understanding these trends early provides competitive..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-01
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/15_emerging_paradigms/index.html"
+---
 Emerging paradigms represent the leading edge of software engineering practice — new approaches that are reshaping how we build, deploy, and operate systems. Understanding these trends early provides competitive advantage and prepares engineers for the systems they will maintain.
 
 ## Overview

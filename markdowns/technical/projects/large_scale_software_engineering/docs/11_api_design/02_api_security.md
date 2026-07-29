@@ -1,5 +1,17 @@
-# API Security
-
+---
+title: "API Security"
+subtitle: "API security protects endpoints from unauthorized access, abuse, and attacks. Every public API is a potential attack surface. Security must be implemented at multiple layers — authentication, authorization, input..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-20
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/11_api_design/02_api_security.html"
+---
 API security protects endpoints from unauthorized access, abuse, and attacks. Every public API is a potential attack surface. Security must be implemented at multiple layers — authentication, authorization, input validation, rate limiting, and transport security.
 
 ## API Security Layers

@@ -1,5 +1,17 @@
-# Python Engineering Patterns – Concept Reference
-
+---
+title: "Python Engineering Patterns – Concept Reference"
+subtitle: "This document explains when and why to use each pattern, illustrated with Mermaid diagrams."
+category: technical
+project: python_engg_tmplates
+project_title: "Python Engineering Patterns"
+date: 2025-12-22
+reading_time: 5
+tags:
+  - python-engg-tmplates
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/python_engg_tmplates/docs/concepts.html"
+---
 This document explains when and why to use each pattern, illustrated with
 Mermaid diagrams.
 

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Kafka Event-Driven Architecture — Demonstration Project &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A self-contained, runnable illustration of Apache Kafka concepts and event-driven design patterns.  Every module uses an in-memory mock broker (`MockKafkaBroker">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Kafka Event-Driven Architecture — Demonstration Pr</span>
+        </div>
+        <h1 class="post-title">Kafka Event-Driven Architecture — Demonstration Project</h1>
+        <p class="post-subtitle">A self-contained, runnable illustration of Apache Kafka concepts and event-driven design patterns.  Every module uses an in-memory mock broker (`MockKafkaBroker`) so no external services are required.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-09-14</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">kafka-event-driven</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Kafka Event-Driven Architecture — Demonstration Project</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">Kafka Event-Driven Architecture — Demonstration Project</a></li><li class="project-nav__lvl-1"><a href="docs/architecture.html">Kafka Event-Driven Architecture — System Architecture</a></li><li class="project-nav__lvl-1"><a href="docs/flow_diagrams.html">Kafka Event-Driven Architecture — Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A self-contained, runnable illustration of Apache Kafka concepts and
+event-driven design patterns.  Every module uses an in-memory mock broker
+(<code>MockKafkaBroker</code>) so no external services are required.</p>
+<hr />
+<h2>Kafka Concepts Covered</h2>
+<table>
+<thead>
+<tr>
+  <th>Concept</th>
+  <th>Where demonstrated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Topics, partitions, offsets</td>
+  <td><code>src/kafka_core/mock_kafka.py</code></td>
+</tr>
+<tr>
+  <td>Producer with delivery callbacks</td>
+  <td><code>src/kafka_core/producer.py</code></td>
+</tr>
+<tr>
+  <td>Consumer group offset management</td>
+  <td><code>src/kafka_core/consumer.py</code></td>
+</tr>
+<tr>
+  <td>Manual commit / at-least-once delivery</td>
+  <td><code>src/kafka_core/consumer.py</code></td>
+</tr>
+<tr>
+  <td>Consumer lag computation</td>
+  <td><code>src/kafka_core/mock_kafka.py</code></td>
+</tr>
+<tr>
+  <td>Topic administration</td>
+  <td><code>src/kafka_core/topic_manager.py</code></td>
+</tr>
+<tr>
+  <td>Dead Letter Queue (DLQ)</td>
+  <td><code>src/event_patterns/dlq_handler.py</code></td>
+</tr>
+<tr>
+  <td>In-Sync Replicas (ISR) concept</td>
+  <td><code>docs/architecture.md</code></td>
+</tr>
+<tr>
+  <td>Idempotent producers</td>
+  <td><code>config.yaml</code> (<code>enable_idempotence: true</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>Event-Driven Patterns</h2>
+<table>
+<thead>
+<tr>
+  <th>Pattern</th>
+  <th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Event Sourcing</td>
+  <td><code>src/event_patterns/event_sourcing.py</code></td>
+</tr>
+<tr>
+  <td>Saga (with compensation)</td>
+  <td><code>src/event_patterns/saga_orchestrator.py</code></td>
+</tr>
+<tr>
+  <td>Transactional Outbox</td>
+  <td><code>src/event_patterns/outbox_pattern.py</code></td>
+</tr>
+<tr>
+  <td>Dead Letter Queue + Exponential Backoff</td>
+  <td><code>src/event_patterns/dlq_handler.py</code></td>
+</tr>
+</tbody>
+</table>
+<h2>ML Pipeline Components</h2>
+<table>
+<thead>
+<tr>
+  <th>Component</th>
+  <th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Real-time feature computation</td>
+  <td><code>src/ml_pipeline/feature_pipeline.py</code></td>
+</tr>
+<tr>
+  <td>Online model inference</td>
+  <td><code>src/ml_pipeline/model_inference.py</code></td>
+</tr>
+<tr>
+  <td>Hash-based A/B routing</td>
+  <td><code>src/ml_pipeline/ab_routing.py</code></td>
+</tr>
+<tr>
+  <td>PSI drift detection</td>
+  <td><code>src/ml_pipeline/monitoring.py</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Streaming Analytics</h2>
+<table>
+<thead>
+<tr>
+  <th>Component</th>
+  <th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Tumbling windows</td>
+  <td><code>src/streaming_analytics/windowed_aggregation.py</code></td>
+</tr>
+<tr>
+  <td>Session windows</td>
+  <td><code>src/streaming_analytics/windowed_aggregation.py</code></td>
+</tr>
+<tr>
+  <td>Welford online statistics</td>
+  <td><code>src/streaming_analytics/event_processor.py</code></td>
+</tr>
+<tr>
+  <td>Consumer lag tracking</td>
+  <td><code>src/streaming_analytics/event_processor.py</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Project Structure</h2>
+<pre><code>kafka_event_driven/
+├── config.yaml                        # All constants and hyperparameters
+├── pyproject.toml
+├── README.md
+├── src/
+│   ├── kafka_core/
+│   │   ├── mock_kafka.py              # In-memory broker (topics/partitions/offsets)
+│   │   ├── producer.py                # Serialisation, delivery callbacks
+│   │   ├── consumer.py                # Poll loop, manual commit, DLQ routing
+│   │   └── topic_manager.py           # Topic lifecycle management
+│   ├── event_patterns/
+│   │   ├── event_sourcing.py          # Append-only log, state reconstruction
+│   │   ├── saga_orchestrator.py       # Choreography Saga + compensation
+│   │   ├── outbox_pattern.py          # Transactional outbox relay
+│   │   └── dlq_handler.py             # DLQ with exponential backoff
+│   ├── ml_pipeline/
+│   │   ├── feature_pipeline.py        # Kafka → rolling features → feature store
+│   │   ├── model_inference.py         # Features → model → predictions topic
+│   │   ├── ab_routing.py              # Hash-based A/B model routing
+│   │   └── monitoring.py              # PSI drift detection on predictions
+│   ├── streaming_analytics/
+│   │   ├── windowed_aggregation.py    # Tumbling and session windows
+│   │   └── event_processor.py        # Welford stats, consumer lag tracking
+│   └── notebooks/                     # Jupyter notebooks (empty placeholder)
+├── docs/
+│   ├── architecture.md                # Mermaid diagrams, concept explanations
+│   └── flow_diagrams.md               # Detailed flow diagrams
+└── docker/
+    ├── Dockerfile
+    ├── docker-compose.yml             # Zookeeper + Kafka + app services
+    └── requirements.txt
+</code></pre>
+<hr />
+<h2>Running with Mock Broker (default, no dependencies)</h2>
+<p>The mock broker is enabled by default (<code>kafka.use_mock: true</code> in <code>config.yaml</code>).
+Simply add the <code>src/</code> directory to <code>PYTHONPATH</code> and run any module directly.</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd projects/kafka_event_driven
+export PYTHONPATH=$PWD/src
+
+# Run individual module demos
+python src/kafka_core/mock_kafka.py
+python src/kafka_core/producer.py
+python src/kafka_core/consumer.py
+python src/kafka_core/topic_manager.py
+
+python src/event_patterns/event_sourcing.py
+python src/event_patterns/saga_orchestrator.py
+python src/event_patterns/outbox_pattern.py
+python src/event_patterns/dlq_handler.py
+
+python src/ml_pipeline/feature_pipeline.py
+python src/ml_pipeline/model_inference.py
+python src/ml_pipeline/ab_routing.py
+python src/ml_pipeline/monitoring.py
+
+python src/streaming_analytics/windowed_aggregation.py
+python src/streaming_analytics/event_processor.py
+</code></pre></div>
+<p>Logs are written to <code>logs/kafka_event_driven.log</code> (JSON format, rotating).</p>
+<hr />
+<h2>Running with Real Kafka</h2>
+<ol>
+<li>Set <code>kafka.use_mock: false</code> in <code>config.yaml</code>.</li>
+<li>Start Kafka with Docker Compose:</li>
+</ol>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd projects/kafka_event_driven
+docker compose -f docker/docker-compose.yml up -d zookeeper kafka
+</code></pre></div>
+<ol start="3">
+<li>Wait for Kafka to be healthy, then run the app:</li>
+</ol>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">export PYTHONPATH=$PWD/src
+python src/streaming_analytics/event_processor.py
+</code></pre></div>
+<p>Or run the full Docker stack:</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">docker compose -f docker/docker-compose.yml up --build
+</code></pre></div>
+<hr />
+<h2>Configuration</h2>
+<p>All tuneable parameters live in <code>config.yaml</code>.  Key settings:</p>
+<div class="code-wrapper"><span class="code-lang">yaml</span><pre><code class="language-yaml">kafka:
+  use_mock: true          # Switch to false for real Kafka
+
+ml_pipeline:
+  model_v2_traffic_pct: 20    # % of users routed to challenger model
+
+event_patterns:
+  dlq_max_retries: 3          # Max retries before quarantine
+  dlq_backoff_base_s: 2.0     # Exponential backoff base (2^retry_count seconds)
+
+streaming:
+  lag_alert_threshold: 1000   # Consumer lag count triggering warning
+  num_events_to_generate: 200 # Events produced in streaming demo
+</code></pre></div>
+<hr />
+<h2>Logging</h2>
+<p>All modules write structured JSON logs to <code>logs/kafka_event_driven.log</code> using
+a <code>RotatingFileHandler</code> (100 MB per file, 5 backup files).  Console output
+mirrors the file.</p>
+<p>Log record format:</p>
+<div class="code-wrapper"><span class="code-lang">json</span><pre><code class="language-json">{
+  &quot;timestamp&quot;: &quot;2026-06-04T12:00:00&quot;,
+  &quot;level&quot;: &quot;INFO&quot;,
+  &quot;logger&quot;: &quot;kafka_core.mock_kafka&quot;,
+  &quot;message&quot;: &quot;Topic created: name='user_events', partitions=4&quot;
+}
+</code></pre></div>
+<p>Log level is configurable via <code>logging.level</code> in <code>config.yaml</code> (DEBUG, INFO, WARNING, ERROR).</p>
+<hr />
+<h2>Design Principles</h2>
+<ul>
+<li><strong>SOLID</strong>: Each class has one responsibility; dependencies are injected via constructor.</li>
+<li><strong>No fallbacks</strong>: If a topic does not exist, an exception is raised rather than silently creating it.</li>
+<li><strong>YAML-driven configuration</strong>: No hardcoded constants in source files.</li>
+<li><strong>Extensive logging</strong>: Every state change, produce, consume, commit, and error is logged.</li>
+<li><strong>Standalone</strong>: Zero imports from other projects in this repository.</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/architecture.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Kafka Event-Driven Architecture — System Architecture</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

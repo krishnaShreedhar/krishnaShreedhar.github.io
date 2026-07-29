@@ -1,5 +1,17 @@
-# Tutorial 12: Atomic Operations
-
+---
+title: "Tutorial 12: Atomic Operations"
+subtitle: "See `src/tutorials/12_atomic_operations/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-09-17
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/12_atomic_operations.html"
+---
 ## Concept
 
 See `src/tutorials/12_atomic_operations/main.cu` for detailed inline comments explaining

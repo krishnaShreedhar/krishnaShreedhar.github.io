@@ -1,5 +1,17 @@
-# Module 2 — Transformer Training on GPU
-
+---
+title: "Module 2 — Transformer Training on GPU"
+subtitle: "This module implements a complete Transformer training loop from scratch, showing exactly how data and model tensors flow through the GPU."
+category: technical
+project: gpu_acceleration
+project_title: "GPU Acceleration — Transformer Tutorials"
+date: 2025-01-12
+reading_time: 2
+tags:
+  - gpu-acceleration
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/gpu_acceleration/docs/02_transformer_training.html"
+---
 ## Overview
 
 This module implements a complete Transformer training loop from scratch,

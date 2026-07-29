@@ -1,5 +1,17 @@
-# Tutorial 01: Threads, Blocks & Grids
-
+---
+title: "Tutorial 01: Threads, Blocks & Grids"
+subtitle: "CUDA organizes parallel work in a three-level hierarchy:"
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-12-20
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/01_threads_blocks_grids.html"
+---
 ## Concept
 
 CUDA organizes parallel work in a three-level hierarchy:

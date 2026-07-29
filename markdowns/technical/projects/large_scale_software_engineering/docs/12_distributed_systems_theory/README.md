@@ -1,5 +1,17 @@
-# Distributed Systems Theory
-
+---
+title: "Distributed Systems Theory"
+subtitle: "Distributed systems theory provides the mathematical and theoretical foundations for reasoning about distributed computation. Understanding these theorems and models is essential for making correct claims about..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-08-10
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/12_distributed_systems_theory/index.html"
+---
 Distributed systems theory provides the mathematical and theoretical foundations for reasoning about distributed computation. Understanding these theorems and models is essential for making correct claims about consistency, availability, and correctness in systems that span multiple nodes.
 
 ## Overview

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Model Parallelism &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Model parallelism distributes different parts of a neural network across multiple GPUs when the model is too large to fit on a single device even with parameter">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Model Parallelism</span>
+        </div>
+        <h1 class="post-title">Model Parallelism</h1>
+        <p class="post-subtitle">Model parallelism distributes different parts of a neural network across multiple GPUs when the model is too large to fit on a single device even with parameter sharding. While data parallelism scales by processing...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-24</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2 active"><a href="02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Model parallelism distributes different parts of a neural network across multiple GPUs when the model is too large to fit on a single device even with parameter sharding. While data parallelism scales by processing more data simultaneously, model parallelism scales by partitioning the model itself — dividing layers, splitting weight matrices across devices, or routing to specialized expert subnetworks.</p>
+<h2>Model Parallelism Strategies</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph MPStrategies[Model Parallelism Overview]
+        subgraph TensorP[Tensor Parallelism - Intra-Layer]
+            TP1[Split individual weight matrices\ncolumn-wise or row-wise\nacross N GPUs\nEach GPU computes a slice of each layer]
+            TP2[Requires all-reduce within each layer\nhigh communication frequency\nbest with NVLink not cross-node\nMegatron-LM]
+        end
+
+        subgraph PipeP[Pipeline Parallelism - Inter-Layer]
+            PP1[Assign consecutive layers to GPUs\nGPU 0: layers 1-8\nGPU 1: layers 9-16\nGPU 2: layers 17-24\nGPU 3: layers 25-32]
+            PP2[Micro-batching to hide pipeline bubble\nGPX PipeDream schedule\nGPipe schedule]
+        end
+
+        subgraph SeqP[Sequence Parallelism]
+            SP1[Split sequence dimension\nacross GPUs\nReduces activation memory\nfor long context training\nUsed with tensor parallelism]
+        end
+
+        subgraph MoE[Mixture of Experts]
+            MOE1[Sparse gating: route each token\nto top-2 of N expert networks\nOnly activated experts compute\nScales parameters without\nscaling FLOPs linearly]
+        end
+    end
+</div></div>
+<h2>Tensor Parallelism in Transformers</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph TensorParallel[Tensor Parallelism for MLP Block]
+        Input[Input X\ndim: seq_len x hidden_dim]
+
+        subgraph GPU0[GPU 0]
+            W0[W1 column slice 0\nGELU activation\nW2 row slice 0\npartial output Y0]
+        end
+
+        subgraph GPU1[GPU 1]
+            W1M[W1 column slice 1\nGELU activation\nW2 row slice 1\npartial output Y1]
+        end
+
+        AllReduce2[All-Reduce\nsum partial outputs\nY = Y0 plus Y1\nfull output restored]
+
+        Output[Full Output Y\ndim: seq_len x hidden_dim]
+
+        Input --&gt; GPU0 &amp; GPU1
+        GPU0 --&gt; AllReduce2
+        GPU1 --&gt; AllReduce2
+        AllReduce2 --&gt; Output
+    end
+
+    style AllReduce2 fill:#fef3c7,stroke:#d97706
+</div></div>
+<h2>Pipeline Parallelism with Micro-batching</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph PipelineSchedule[Pipeline Schedule - GPipe Style]
+        subgraph Devices[Device Assignment]
+            D0[GPU 0\nLayers 1-8\nEmbedding + early transformer blocks]
+            D1[GPU 1\nLayers 9-16\nMiddle transformer blocks]
+            D2[GPU 2\nLayers 17-24\nLater transformer blocks]
+            D3[GPU 3\nLayers 25-32\nFinal blocks + LM head]
+        end
+
+        subgraph Bubble[Pipeline Bubble Problem]
+            Prob[Without micro-batching:\nGPU1 idle while GPU0 runs forward\nGPU2 idle while GPU0 and GPU1 run\nGPU utilization: low]
+        end
+
+        subgraph Solution[Micro-batch Solution]
+            Sol[Split mini-batch into M micro-batches\nGPU1 processes micro-batch 1\nwhile GPU0 processes micro-batch 2\nPipeline bubble: 1 divided by M fraction of time\nM=8 gives 87.5% efficiency]
+            style Sol fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        end
+    end
+</div></div>
+<h2>Mixture of Experts (MoE) Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph MoEArch[Mixture of Experts Architecture]
+        Input2[Token Representation\nafter attention layer]
+
+        Router[Gating Network\nlearned softmax router\nselects top-2 experts\nfor each token]
+
+        subgraph Experts[Expert Pool - 64 experts]
+            E1[Expert 1\nFeed-Forward Network]
+            E2[Expert 2]
+            Edots[...]
+            E8[Expert 8]
+            Emore[...]
+        end
+
+        Combine[Weighted Sum\nactivation weighted\nby router softmax scores]
+
+        Output2[Token Output\nnext layer input]
+
+        Input2 --&gt; Router
+        Router --&gt;|route token to top-2| E1 &amp; E2 &amp; E8
+        E1 &amp; E2 &amp; E8 --&gt; Combine --&gt; Output2
+    end
+
+    style Router fill:#fef3c7,stroke:#d97706,stroke-width:2px
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Tensor Parallelism (TP)</strong>: Splitting individual weight matrices within a single transformer layer across multiple GPUs. For a linear layer Y=XW, the weight matrix W is split column-wise — each GPU computes a partial output, then an all-reduce sums the partial outputs to produce the full result. Requires communication on every layer's output, making it communication-intensive — best suited for NVLink-connected GPUs on the same node. Megatron-LM pioneered this approach for training GPT-3 scale models.</p>
+</li>
+<li><p><strong>Pipeline Parallelism (PP)</strong>: Assigning consecutive groups of transformer layers to different GPUs. The forward pass produces activations at GPU boundary points, which are transmitted to the next GPU. Without scheduling tricks, this creates a &quot;pipeline bubble&quot; where most GPUs are idle. Micro-batching (GPipe) and interleaved schedules (PipeDream) reduce the bubble to less than 10% of total time with M=8+ micro-batches.</p>
+</li>
+<li><p><strong>3D Parallelism</strong>: Combining data parallelism, tensor parallelism, and pipeline parallelism simultaneously — the approach used by Megatron-LM and DeepSpeed to train the largest models. Tensor parallel within a node (high-bandwidth NVLink), pipeline parallel across nodes, data parallel across pipeline replicas. Each dimension is tuned to maximize hardware utilization given the specific network topology.</p>
+</li>
+<li><p><strong>Mixture of Experts (MoE)</strong>: A sparse scaling approach where a transformer's feed-forward layers are replaced by N experts (separate FFN networks) plus a learned router. Each token is routed to the top-2 experts for computation. The total parameter count scales with N, but the FLOPs per token only increase by ~2 (routing adds overhead, but only 2 of N experts are activated). Enables building models with 100B+ parameters that compute at the cost of a much smaller dense model. Used by Mixtral, GPT-4 (reported), and Switch Transformer.</p>
+</li>
+<li><p><strong>Expert Parallelism</strong>: Placing different MoE experts on different GPUs for distributed serving of MoE models. Each GPU specializes in a subset of experts. Requires routing tokens across GPUs (all-to-all collective) to reach the correct expert. The all-to-all communication overhead is the main constraint on scaling expert parallelism.</p>
+</li>
+<li><p><strong>Load Balancing in MoE</strong>: A key challenge — the router must distribute tokens roughly equally across experts to avoid some GPUs being overloaded while others are idle. Auxiliary load balancing loss terms encourage the router to maintain balanced routing. Without load balancing, MoE models can collapse to using only 2-3 experts (&quot;expert collapse&quot;).</p>
+</li>
+<li><p><strong>Activation Memory in Pipeline Parallelism</strong>: Pipeline parallel stages must retain activations for the backward pass until their gradient is computed. With many micro-batches in flight, activation memory can become the bottleneck. Gradient checkpointing (recomputing activations during backward) trades compute for memory and is commonly combined with pipeline parallelism.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Strategy</th>
+  <th>Communication Volume</th>
+  <th>GPU Utilization</th>
+  <th>Memory Efficiency</th>
+  <th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Tensor Parallel</td>
+  <td>High (per layer)</td>
+  <td>High</td>
+  <td>High</td>
+  <td>Complex</td>
+</tr>
+<tr>
+  <td>Pipeline Parallel</td>
+  <td>Low</td>
+  <td>Medium (bubble)</td>
+  <td>Very High</td>
+  <td>Very Complex</td>
+</tr>
+<tr>
+  <td>MoE</td>
+  <td>Medium (all-to-all)</td>
+  <td>High</td>
+  <td>Excellent</td>
+  <td>Very Complex</td>
+</tr>
+<tr>
+  <td>FSDP alone</td>
+  <td>Medium (per step)</td>
+  <td>High</td>
+  <td>Very High</td>
+  <td>Medium</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Tensor parallelism</strong>: Training models where a single layer's weight matrix exceeds GPU memory, or to reduce per-GPU memory with fast NVLink interconnect</li>
+<li><strong>Pipeline parallelism</strong>: Very deep models (100+ layers) spread across multiple nodes where tensor parallelism's communication overhead is too high for cross-node links</li>
+<li><strong>3D parallelism</strong>: Training frontier LLMs (100B+ parameters) — the only practical approach at this scale, combining all three strategies</li>
+<li><strong>MoE architecture</strong>: When parameter count must scale beyond compute budget — MoE provides capacity at dense model compute cost. Excellent for LLM pretraining at scale</li>
+<li><strong>Sequence parallelism</strong>: Long-context training (32K+ tokens) where attention activations become the memory bottleneck, combined with tensor parallelism</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="01_distributed_training.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Distributed Training</span></a>
+            <a href="03_inference_optimization.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Inference Optimization</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

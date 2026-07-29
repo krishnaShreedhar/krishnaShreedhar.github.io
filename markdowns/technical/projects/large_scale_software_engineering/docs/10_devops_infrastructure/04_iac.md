@@ -1,5 +1,17 @@
-# Infrastructure as Code (IaC)
-
+---
+title: "Infrastructure as Code (IaC)"
+subtitle: "Infrastructure as Code manages and provisions computing infrastructure through machine-readable configuration files rather than manual processes. IaC enables version-controlled, repeatable, auditable infrastructure..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-07
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/10_devops_infrastructure/04_iac.html"
+---
 Infrastructure as Code manages and provisions computing infrastructure through machine-readable configuration files rather than manual processes. IaC enables version-controlled, repeatable, auditable infrastructure that can be treated with the same engineering discipline as application code.
 
 ## IaC Approaches

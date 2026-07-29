@@ -1,5 +1,17 @@
-# Authentication and Authorization
-
+---
+title: "Authentication and Authorization"
+subtitle: "Authentication (AuthN) verifies identity — who are you? Authorization (AuthZ) verifies permission — what are you allowed to do? These are distinct concerns that must be carefully designed for security, usability, and..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-08
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/08_security_engineering/02_authentication_authorization.html"
+---
 Authentication (AuthN) verifies identity — who are you? Authorization (AuthZ) verifies permission — what are you allowed to do? These are distinct concerns that must be carefully designed for security, usability, and maintainability.
 
 ## OAuth 2.0 and OIDC Flow

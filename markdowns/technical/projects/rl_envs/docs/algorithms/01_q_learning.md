@@ -1,5 +1,17 @@
-# 01 — Q-Learning
-
+---
+title: "01 — Q-Learning"
+subtitle: "Q-Learning is a **model-free, off-policy, tabular** reinforcement learning algorithm introduced by Watkins (1989). It learns the optimal action-value function Q*(s, a) directly from transitions, without a model of..."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-06-08
+reading_time: 3
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/01_q_learning.html"
+---
 ## Concept
 
 Q-Learning is a **model-free, off-policy, tabular** reinforcement learning

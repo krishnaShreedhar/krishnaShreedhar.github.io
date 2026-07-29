@@ -1,5 +1,17 @@
-# Ray Engineering – Architecture Reference
-
+---
+title: "Ray Engineering – Architecture Reference"
+subtitle: "Comprehensive architectural diagrams and explanatory text covering every major Ray subsystem implemented in this project."
+category: technical
+project: ray_engineering
+project_title: "Ray Engineering"
+date: 2025-01-02
+reading_time: 5
+tags:
+  - ray-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/ray_engineering/docs/architecture.html"
+---
 Comprehensive architectural diagrams and explanatory text covering every
 major Ray subsystem implemented in this project.
 

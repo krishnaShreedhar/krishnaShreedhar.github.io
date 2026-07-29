@@ -1,5 +1,17 @@
-# Database Paradigms
-
+---
+title: "Database Paradigms"
+subtitle: "The database landscape has fragmented dramatically — no single paradigm fits all workloads. Understanding the data model, query capabilities, and operational characteristics of each paradigm is essential for matching..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-30
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/05_data_management/01_database_paradigms.html"
+---
 The database landscape has fragmented dramatically — no single paradigm fits all workloads. Understanding the data model, query capabilities, and operational characteristics of each paradigm is essential for matching storage technology to access patterns.
 
 ## Database Taxonomy

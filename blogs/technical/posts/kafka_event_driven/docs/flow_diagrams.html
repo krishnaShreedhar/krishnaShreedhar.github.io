@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Kafka Event-Driven Architecture — Flow Diagrams &middot; Shreedhar Kodate</title>
+    <meta name="description" content="flowchart TD subgraph EventStore ["EventStore (append-only log)"] E1["v1: UserRegistered
+{email: alice@example.com}"] E2["v2: EmailVerified
+{verified_by: email_">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Kafka Event-Driven Architecture — Flow Diagrams</span>
+        </div>
+        <h1 class="post-title">Kafka Event-Driven Architecture — Flow Diagrams</h1>
+        <p class="post-subtitle">flowchart TD subgraph EventStore ["EventStore (append-only log)"] E1["v1: UserRegistered
+{email: alice@example.com}"] E2["v2: EmailVerified
+{verified_by: email_link}"] E3["v3: ProfileUpdated
+{display_name: Alice...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-01-24</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">kafka-event-driven</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Kafka Event-Driven Architecture — Demonstration Project</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Kafka Event-Driven Architecture — Demonstration Project</a></li><li class="project-nav__lvl-1"><a href="architecture.html">Kafka Event-Driven Architecture — System Architecture</a></li><li class="project-nav__lvl-1 active"><a href="flow_diagrams.html">Kafka Event-Driven Architecture — Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>1. Event Sourcing — State Reconstruction</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph EventStore [&quot;EventStore (append-only log)&quot;]
+        E1[&quot;v1: UserRegistered\n{email: alice@example.com}&quot;]
+        E2[&quot;v2: EmailVerified\n{verified_by: email_link}&quot;]
+        E3[&quot;v3: ProfileUpdated\n{display_name: Alice Smith}&quot;]
+        E4[&quot;v4: ProfileUpdated\n{bio: Senior ML engineer}&quot;]
+        E1 --&gt; E2 --&gt; E3 --&gt; E4
+    end
+
+    subgraph Replay [&quot;replay_state(aggregate_id)&quot;]
+        S0[&quot;initial_state = {}&quot;]
+        S1[&quot;state after v1:\n{email: alice, status: pending}&quot;]
+        S2[&quot;state after v2:\n{email_verified: true, status: active}&quot;]
+        S3[&quot;state after v3:\n{display_name: Alice Smith}&quot;]
+        S4[&quot;state after v4:\n{bio: Senior ML engineer}&quot;]
+        S0 --&gt; S1 --&gt; S2 --&gt; S3 --&gt; S4
+    end
+
+    E1 -.apply handler.-&gt; S1
+    E2 -.apply handler.-&gt; S2
+    E3 -.apply handler.-&gt; S3
+    E4 -.apply handler.-&gt; S4
+
+    subgraph PointInTime [&quot;Point-in-Time Restore&quot;]
+        PIT[&quot;replay_state(up_to_version=2)\nreturns state after EmailVerified&quot;]
+    end
+
+    E2 -.-&gt; PIT
+</div></div>
+<hr />
+<h2>2. Outbox Relay — Guaranteed At-Least-Once Delivery</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Application [&quot;Application (single transaction)&quot;]
+        DomainWrite[&quot;Write domain record\ne.g. UPDATE orders SET status='created'&quot;]
+        OutboxWrite[&quot;INSERT INTO outbox\n(topic, key, value, published=false)&quot;]
+        DomainWrite -.same TX.-&gt; OutboxWrite
+    end
+
+    subgraph OutboxRelay [&quot;OutboxRelay (background thread)&quot;]
+        Poll[&quot;get_unpublished(limit=100)&quot;]
+        Publish[&quot;producer.produce(topic, key, value)&quot;]
+        Mark[&quot;mark_published(entry_id)&quot;]
+        Poll --&gt; Publish --&gt; Mark
+        Mark -.loop every poll_interval_s.-&gt; Poll
+    end
+
+    subgraph Kafka
+        Topic[&quot;Kafka Topic&quot;]
+    end
+
+    OutboxWrite --&gt; Poll
+    Publish --&gt; Topic
+
+    style DomainWrite fill:#d4edda
+    style OutboxWrite fill:#d4edda
+    style Publish fill:#cce5ff
+    style Topic fill:#cce5ff
+</div></div>
+<p><strong>Crash scenarios handled:</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Crash point</th>
+  <th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Before OutboxWrite</td>
+  <td>Domain TX rolled back → no event</td>
+</tr>
+<tr>
+  <td>After OutboxWrite, before Publish</td>
+  <td>Relay picks up on restart → event published</td>
+</tr>
+<tr>
+  <td>After Publish, before Mark</td>
+  <td>Relay republishes → at-least-once (idempotent consumers handle dedup)</td>
+</tr>
+<tr>
+  <td>After Mark</td>
+  <td>Happy path completed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. DLQ Retry with Exponential Backoff</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Consume[&quot;Consumer.poll()&quot;] --&gt; Process{&quot;Process\nMessage&quot;}
+    Process -- success --&gt; Commit[&quot;commit()&quot;]
+    Process -- failure --&gt; DLQ[&quot;route_to_dlq(msg, error)&quot;]
+    Commit --&gt; NextMsg[&quot;next message&quot;]
+
+    DLQ --&gt; AddToDLQ[&quot;DLQHandler.add_to_dlq()\nretry_count=0\nnext_retry_at = now + 2^0&quot;]
+
+    subgraph DLQLoop [&quot;DLQHandler.process_dlq() — periodic&quot;]
+        Ready{&quot;is_ready_for_retry?&quot;}
+        Retry[&quot;Re-process message&quot;]
+        Success[&quot;Remove from DLQ ✓&quot;]
+        ReQueue[&quot;Increment retry_count\nnext_retry_at = now + 2^retry_count\nRe-queue&quot;]
+        Quarantine[&quot;Quarantine\n(retry_count &gt;= max_retries)&quot;]
+
+        Ready -- Yes --&gt; Retry
+        Ready -- No --&gt; SkipForNow[&quot;Skip (still in backoff)&quot;]
+        Retry -- success --&gt; Success
+        Retry -- failure, retries remaining --&gt; ReQueue
+        Retry -- failure, max retries hit --&gt; Quarantine
+    end
+
+    AddToDLQ --&gt; Ready
+
+    style DLQ fill:#fff3cd
+    style Quarantine fill:#f8d7da
+    style Success fill:#d4edda
+</div></div>
+<p><strong>Backoff schedule (backoff_base=2.0, max_retries=3):</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Retry</th>
+  <th>Delay before retry</th>
+  <th>Total wait</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>0 → 1</td>
+  <td>2^0 = 1s</td>
+  <td>1s</td>
+</tr>
+<tr>
+  <td>1 → 2</td>
+  <td>2^1 = 2s</td>
+  <td>3s</td>
+</tr>
+<tr>
+  <td>2 → 3</td>
+  <td>2^2 = 4s</td>
+  <td>7s</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>QUARANTINE</td>
+  <td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. ML Inference Pipeline</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Events [&quot;Event Stream&quot;]
+        UE[&quot;Topic: user_events\nclick / purchase / view&quot;]
+    end
+
+    subgraph FeaturePipeline
+        FP_C[&quot;MockKafkaConsumer\ngroup: feature-pipeline&quot;]
+        FP_U[&quot;FeatureStore.update()\nclick_count, purchase_count,\nsession_count, last_event_ts&quot;]
+        FP_FS[&quot;FeatureStore\n(in-memory dict)&quot;]
+        FP_C --&gt; FP_U --&gt; FP_FS
+    end
+
+    subgraph InferencePipeline
+        IP_C[&quot;MockKafkaConsumer\ngroup: inference-pipeline&quot;]
+        IP_F[&quot;FeatureStore.get(user_id)&quot;]
+        IP_M[&quot;MockModel.predict(features)\nscore = sigmoid(w·x + b)&quot;]
+        IP_P[&quot;MockKafkaProducer\nproduce(predictions)&quot;]
+        IP_C --&gt; IP_F --&gt; IP_M --&gt; IP_P
+    end
+
+    subgraph MonitoringPipeline
+        MP_C[&quot;MockKafkaConsumer\ngroup: monitoring-pipeline&quot;]
+        MP_PSI[&quot;DriftDetector.compute_psi()\nreference vs current scores&quot;]
+        MP_A[&quot;PSI Alert if PSI ≥ 0.10&quot;]
+        MP_C --&gt; MP_PSI --&gt; MP_A
+    end
+
+    UE --&gt; FP_C
+    UE --&gt; IP_C
+    FP_FS --&gt; IP_F
+    IP_P --&gt; MP_C
+
+    style UE fill:#e2f0fb
+    style MP_A fill:#fff3cd
+</div></div>
+<hr />
+<h2>5. A/B Model Routing Decision Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Event[&quot;Incoming Event\n{user_id: 'user-042'}&quot;] --&gt; Hash
+
+    subgraph ABRouter
+        Hash[&quot;MD5(user_id.encode())\ntake first 4 bytes as uint32\nbucket = uint32 % 100&quot;]
+        Compare{&quot;bucket &lt; model_v2_traffic_pct\n(e.g. 20)?&quot;}
+        Hash --&gt; Compare
+    end
+
+    Compare -- Yes: bucket 0–19 --&gt; V2[&quot;Model v2\n(challenger, 20%)&quot;]
+    Compare -- No: bucket 20–99 --&gt; V1[&quot;Model v1\n(control, 80%)&quot;]
+
+    V1 --&gt; Score[&quot;Prediction Score&quot;]
+    V2 --&gt; Score
+
+    Score --&gt; Produce[&quot;produce(predictions, user_id, score, model_id)&quot;]
+
+    subgraph Properties
+        P1[&quot;Deterministic:\nsame user_id → same model every time&quot;]
+        P2[&quot;Configurable:\nchange model_v2_traffic_pct in config.yaml&quot;]
+        P3[&quot;Stateless:\nno session storage or sticky routing required&quot;]
+    end
+</div></div>
+<hr />
+<h2>6. Consumer Group and Offset Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Topic [&quot;Topic: user_events (4 partitions)&quot;]
+        P0[&quot;P0: [0,1,2,3,4]\nHWM=5&quot;]
+        P1[&quot;P1: [0,1,2]\nHWM=3&quot;]
+        P2[&quot;P2: [0,1,2,3]\nHWM=4&quot;]
+        P3[&quot;P3: [0,1]\nHWM=2&quot;]
+    end
+
+    subgraph ConsumerGroup [&quot;Consumer Group: feature-pipeline&quot;]
+        CG_O[&quot;Committed offsets:\nP0→3, P1→3, P2→2, P3→0&quot;]
+        LAG[&quot;Lag:\nP0=2, P1=0, P2=2, P3=2\nTotal=6&quot;]
+        CG_O --&gt; LAG
+    end
+
+    subgraph PollLoop
+        Poll[&quot;poll() → round-robin\nacross assigned partitions&quot;]
+        Process[&quot;process message&quot;]
+        Commit[&quot;commit() → advance\ncommitted offset&quot;]
+        Poll --&gt; Process --&gt; Commit --&gt; Poll
+    end
+
+    P0 --&gt; CG_O
+    P1 --&gt; CG_O
+    P2 --&gt; CG_O
+    P3 --&gt; CG_O
+
+    style LAG fill:#fff3cd
+</div></div>
+<hr />
+<h2>7. PSI Drift Detection Computation</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Ref[&quot;Reference Scores\n(training distribution)\nn=200 samples&quot;]
+    Cur[&quot;Current Scores\n(production window)\nn=100 samples&quot;]
+
+    Ref --&gt; Bin1[&quot;Bin into 10 equal buckets\n[0.0, 0.1), [0.1, 0.2), ..., [0.9, 1.0]&quot;]
+    Cur --&gt; Bin2[&quot;Bin into same 10 buckets&quot;]
+
+    Bin1 --&gt; Pct1[&quot;ref_pct_i = count_i / total_ref&quot;]
+    Bin2 --&gt; Pct2[&quot;cur_pct_i = count_i / total_cur&quot;]
+
+    Pct1 --&gt; PSI_Formula[&quot;PSI = Σ (cur_pct_i - ref_pct_i)\n     × ln(cur_pct_i / ref_pct_i)&quot;]
+    Pct2 --&gt; PSI_Formula
+
+    PSI_Formula --&gt; Classify{&quot;PSI value?&quot;}
+    Classify -- &quot;&lt; 0.10&quot; --&gt; Stable[&quot;Stable ✓\nNo action needed&quot;]
+    Classify -- &quot;0.10 – 0.25&quot; --&gt; Moderate[&quot;Moderate Drift ⚠\nInvestigate&quot;]
+    Classify -- &quot;&gt; 0.25&quot; --&gt; Major[&quot;Major Drift ✗\nRetrain model&quot;]
+
+    style Stable fill:#d4edda
+    style Moderate fill:#fff3cd
+    style Major fill:#f8d7da
+</div></div>
+<hr />
+<h2>8. Windowing — Tumbling vs Session</h2>
+<div class="mermaid-wrap"><div class="mermaid">gantt
+    title Event Timeline: Tumbling (300s) vs Session (30s gap)
+    dateFormat X
+    axisFormat %s
+
+    section User A
+    Tumbling Window 0   :0, 300
+    Tumbling Window 1   :300, 300
+
+    section Session Windows (User A)
+    Session 1 (3 events)  :active, 10, 60
+    Session 2 (2 events)  :active, 200, 40
+    Session 3 (4 events)  :active, 350, 100
+</div></div>
+<p><strong>Key differences:</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>Tumbling Window</th>
+  <th>Session Window</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Duration</td>
+  <td>Fixed (e.g. 300s)</td>
+  <td>Variable (activity-based)</td>
+</tr>
+<tr>
+  <td>Boundaries</td>
+  <td>Clock-aligned</td>
+  <td>Inactivity-driven</td>
+</tr>
+<tr>
+  <td>Use case</td>
+  <td>Time-series metrics</td>
+  <td>User behaviour grouping</td>
+</tr>
+<tr>
+  <td>Memory</td>
+  <td>O(window_size)</td>
+  <td>O(active_sessions)</td>
+</tr>
+<tr>
+  <td>Ordering</td>
+  <td>Requires event timestamps</td>
+  <td>Requires event timestamps</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="architecture.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Kafka Event-Driven Architecture — System Architecture</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

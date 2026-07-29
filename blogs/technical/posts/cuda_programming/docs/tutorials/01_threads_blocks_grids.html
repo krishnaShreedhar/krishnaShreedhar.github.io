@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial 01: Threads, Blocks & Grids &middot; Shreedhar Kodate</title>
+    <meta name="description" content="CUDA organizes parallel work in a three-level hierarchy:">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Tutorial 01: Threads, Blocks & Grids</span>
+        </div>
+        <h1 class="post-title">Tutorial 01: Threads, Blocks & Grids</h1>
+        <p class="post-subtitle">CUDA organizes parallel work in a three-level hierarchy:</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-20</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>1 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">cuda-programming</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">CUDA & cuDNN Programming Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">CUDA & cuDNN Programming Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">CUDA & cuDNN Tutorial Implementation Plan</a></li><li class="project-nav__lvl-2 active"><a href="01_threads_blocks_grids.html">Tutorial 01: Threads, Blocks & Grids</a></li><li class="project-nav__lvl-2"><a href="02_warps_simt.html">Tutorial 02: Warps & SIMT</a></li><li class="project-nav__lvl-2"><a href="03_cuda_memory_types.html">Tutorial 03: CUDA Memory Types</a></li><li class="project-nav__lvl-2"><a href="04_memory_coalescing.html">Tutorial 04: Memory Coalescing</a></li><li class="project-nav__lvl-2"><a href="05_shared_memory_bank_conflicts.html">Tutorial 05: Shared Memory & Bank Conflicts</a></li><li class="project-nav__lvl-2"><a href="06_thread_synchronization.html">Tutorial 06: Thread Synchronization</a></li><li class="project-nav__lvl-2"><a href="07_occupancy.html">Tutorial 07: Occupancy</a></li><li class="project-nav__lvl-2"><a href="08_cuda_streams.html">Tutorial 08: CUDA Streams</a></li><li class="project-nav__lvl-2"><a href="09_cuda_events_timing.html">Tutorial 09: CUDA Events & Timing</a></li><li class="project-nav__lvl-2"><a href="10_unified_memory.html">Tutorial 10: Unified Memory</a></li><li class="project-nav__lvl-2"><a href="11_pinned_memory.html">Tutorial 11: Pinned Memory</a></li><li class="project-nav__lvl-2"><a href="12_atomic_operations.html">Tutorial 12: Atomic Operations</a></li><li class="project-nav__lvl-2"><a href="13_parallel_reduction.html">Tutorial 13: Parallel Reduction</a></li><li class="project-nav__lvl-2"><a href="14_warp_shuffle.html">Tutorial 14: Warp Shuffle Intrinsics</a></li><li class="project-nav__lvl-2"><a href="15_tiled_matmul.html">Tutorial 15: Tiled Matrix Multiplication</a></li><li class="project-nav__lvl-2"><a href="16_tensor_cores_wmma.html">Tutorial 16: Tensor Cores & WMMA</a></li><li class="project-nav__lvl-2"><a href="17_cutlass.html">Tutorial 17: CUTLASS</a></li><li class="project-nav__lvl-2"><a href="18_ptx_sass.html">Tutorial 18: PTX & SASS</a></li><li class="project-nav__lvl-2"><a href="19_nsight_profiling.html">Tutorial 19: Nsight Profiling</a></li><li class="project-nav__lvl-2"><a href="20_cublas.html">Tutorial 20: cuBLAS</a></li><li class="project-nav__lvl-2"><a href="21_cudnn_descriptors.html">Tutorial 21: cuDNN Handles & Descriptors</a></li><li class="project-nav__lvl-2"><a href="22_cudnn_algorithm_selection.html">Tutorial 22: cuDNN Algorithm Selection</a></li><li class="project-nav__lvl-2"><a href="23_cudnn_workspace.html">Tutorial 23: cuDNN Workspace Memory</a></li><li class="project-nav__lvl-2"><a href="24_cudnn_fused_ops.html">Tutorial 24: cuDNN Fused Operations</a></li><li class="project-nav__lvl-2"><a href="25_cuda_graphs.html">Tutorial 25: CUDA Graphs</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Concept</h2>
+<p>CUDA organizes parallel work in a three-level hierarchy:</p>
+<pre><code>Grid
+ └── Block (shares shared memory, can __syncthreads)
+      └── Thread (one GPU lane, threadIdx / blockIdx)
+</code></pre>
+<p>Global thread ID (1D): <code>idx = blockIdx.x * blockDim.x + threadIdx.x</code></p>
+<h2>Key APIs</h2>
+<table>
+<thead>
+<tr>
+  <th>API</th>
+  <th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>&lt;&lt;&lt;grid, block&gt;&gt;&gt;</code></td>
+  <td>Launch kernel with given grid/block dims</td>
+</tr>
+<tr>
+  <td><code>blockIdx.x</code></td>
+  <td>Block index within grid</td>
+</tr>
+<tr>
+  <td><code>threadIdx.x</code></td>
+  <td>Thread index within block</td>
+</tr>
+<tr>
+  <td><code>blockDim.x</code></td>
+  <td>Threads per block</td>
+</tr>
+<tr>
+  <td><code>gridDim.x</code></td>
+  <td>Blocks per grid</td>
+</tr>
+</tbody>
+</table>
+<h2>Execution Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    A[Host: main] --&gt; B[cudaMalloc / cudaMemcpy H2D]
+    B --&gt; C{Ablation loop over block_dims}
+    C --&gt; D[Compute grid_dim = ceil N / block_dim]
+    D --&gt; E[vector_add_kernel &lt;&lt;&lt;grid_dim, block_dim&gt;&gt;&gt;]
+    E --&gt; F[cudaEventRecord start/stop]
+    F --&gt; G[Compute mean time &amp; bandwidth GB/s]
+    G --&gt; H{More block_dims?}
+    H -- Yes --&gt; C
+    H -- No --&gt; I[Correctness check vs CPU]
+    I --&gt; J[Log summary table]
+    J --&gt; K[cudaFree / exit]
+</div></div>
+<h2>Ablation Results (placeholder)</h2>
+<table>
+<thead>
+<tr>
+  <th>block_dim</th>
+  <th>grid_dim</th>
+  <th>mean_ms</th>
+  <th>GB/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>32</td>
+  <td>32768</td>
+  <td>TBD</td>
+  <td>TBD</td>
+</tr>
+<tr>
+  <td>64</td>
+  <td>16384</td>
+  <td>TBD</td>
+  <td>TBD</td>
+</tr>
+<tr>
+  <td>128</td>
+  <td>8192</td>
+  <td>TBD</td>
+  <td>TBD</td>
+</tr>
+<tr>
+  <td>256</td>
+  <td>4096</td>
+  <td>TBD</td>
+  <td>TBD</td>
+</tr>
+<tr>
+  <td>512</td>
+  <td>2048</td>
+  <td>TBD</td>
+  <td>TBD</td>
+</tr>
+</tbody>
+</table>
+<h2>What to Observe in Nsight Compute</h2>
+<ul>
+<li><code>sm__throughput.avg.pct_of_peak_sustained_active</code> — SM utilization</li>
+<li><code>l1tex__t_bytes_pipe_lsu_mem_global_op_ld.sum</code> — global load bytes</li>
+<li><code>dram__bytes.sum</code> — HBM traffic (should equal ~3 × N × 4 bytes)</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="../plan.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">CUDA & cuDNN Tutorial Implementation Plan</span></a>
+            <a href="02_warps_simt.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Tutorial 02: Warps & SIMT</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Probability & Statistics: Core Concepts &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This document covers the foundational statistical concepts implemented in this project, with diagrams, formal definitions, and practical intuition.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Probability & Statistics: Core Concepts</span>
+        </div>
+        <h1 class="post-title">Probability & Statistics: Core Concepts</h1>
+        <p class="post-subtitle">This document covers the foundational statistical concepts implemented in this project, with diagrams, formal definitions, and practical intuition.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-18</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>8 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">probability-statistics</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Probability & Statistics</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Probability & Statistics</a></li><li class="project-nav__lvl-1 active"><a href="concepts.html">Probability & Statistics: Core Concepts</a></li><li class="project-nav__lvl-1"><a href="flow_diagrams.html">Flow Diagrams: Statistical Analysis Pipelines</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>This document covers the foundational statistical concepts implemented in this project,
+with diagrams, formal definitions, and practical intuition.</p>
+<hr />
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#central-limit-theorem">Central Limit Theorem</a></li>
+<li><a href="#p-values-and-significance">P-values and Significance</a></li>
+<li><a href="#confidence-intervals">Confidence Intervals</a></li>
+<li><a href="#bayesian-vs-frequentist">Bayesian vs. Frequentist Statistics</a></li>
+<li><a href="#hypothesis-testing-decision-tree">Statistical Hypothesis Testing Decision Tree</a></li>
+<li><a href="#bayesian-updating-process">Bayesian Updating Process</a></li>
+<li><a href="#ab-test-analysis-workflow">A/B Test Analysis Workflow</a></li>
+<li><a href="#descriptive-statistics-reference">Descriptive Statistics Reference</a></li>
+<li><a href="#effect-sizes">Effect Sizes</a></li>
+<li><a href="#multiple-testing-problem">Multiple Testing Problem</a></li>
+</ol>
+<hr />
+<h2>Central Limit Theorem</h2>
+<p><strong>Definition</strong>: For independent, identically distributed (i.i.d.) random variables X₁, X₂, ..., Xₙ with mean μ and finite variance σ², the standardised sample mean converges in distribution to the standard normal:</p>
+<pre><code>√n · (X̄ - μ) / σ  →  N(0, 1)  as n → ∞
+</code></pre>
+<p><strong>Practical implication</strong>: Even if the underlying data is skewed (e.g., revenue, wait times), the <strong>sampling distribution of the mean</strong> becomes approximately normal for n ≥ 30, enabling parametric t-tests and z-tests.</p>
+<p><strong>When CLT breaks down</strong>:</p>
+<ul>
+<li>Heavy-tailed distributions with infinite variance (Cauchy distribution)</li>
+<li>Very small samples from highly skewed distributions</li>
+<li>Dependent observations (time series without proper handling)</li>
+</ul>
+<hr />
+<h2>P-values and Significance</h2>
+<p><strong>P-value definition</strong>: P(T ≥ t_obs | H₀ is true)</p>
+<p>The probability of observing a test statistic at least as extreme as the one computed from our data, <strong>assuming the null hypothesis is true</strong>.</p>
+<p><strong>Common misconceptions</strong>:</p>
+<table>
+<thead>
+<tr>
+  <th>Wrong interpretation</th>
+  <th>Correct interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>P(H₀ is true) = p-value</td>
+  <td>The p-value is not the probability H₀ is true</td>
+</tr>
+<tr>
+  <td>p &lt; 0.05 means the effect is large</td>
+  <td>p depends on sample size; d/h measures effect size</td>
+</tr>
+<tr>
+  <td>p &gt; 0.05 means H₀ is true</td>
+  <td>It means insufficient evidence to reject H₀</td>
+</tr>
+<tr>
+  <td>p &lt; 0.05 means practically significant</td>
+  <td>Statistical significance ≠ practical significance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The dance of p-values</strong>: Under H₀, p-values are uniformly distributed on [0, 1]. Under H₁, they concentrate near 0. A histogram of many p-values can reveal the proportion of true effects.</p>
+<hr />
+<h2>Confidence Intervals</h2>
+<p>A <strong>95% frequentist confidence interval</strong> means: if we repeated the experiment many times, 95% of such intervals would contain the true parameter.</p>
+<p><strong>It does NOT mean</strong> there is a 95% probability the true parameter lies in this specific interval — once computed, the interval either contains the true value or it doesn't.</p>
+<h3>Frequentist CI vs Bayesian Credible Interval</h3>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>Frequentist 95% CI</th>
+  <th>Bayesian 95% Credible Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Interpretation</td>
+  <td>95% of such intervals contain θ</td>
+  <td>P(θ ∈ CI | data) = 0.95</td>
+</tr>
+<tr>
+  <td>Prior</td>
+  <td>None</td>
+  <td>Requires prior P(θ)</td>
+</tr>
+<tr>
+  <td>Computation</td>
+  <td>Depends on sampling distribution</td>
+  <td>Derived from posterior</td>
+</tr>
+<tr>
+  <td>Validity</td>
+  <td>Large-sample approximation often needed</td>
+  <td>Exact for conjugate models</td>
+</tr>
+<tr>
+  <td>Intuition</td>
+  <td>Property of the procedure</td>
+  <td>Direct probability statement</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Coverage simulation</strong> (from <code>conjugate_priors.py</code>): Both methods achieve approximately 95% empirical coverage, but the Bayesian interval provides a more natural probabilistic interpretation.</p>
+<hr />
+<h2>Bayesian vs. Frequentist Statistics</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Q[&quot;What is the probability\nthat the drug works?&quot;]
+    F[&quot;Frequentist approach&quot;]
+    B[&quot;Bayesian approach&quot;]
+
+    Q --&gt; F
+    Q --&gt; B
+
+    F --&gt; F1[&quot;Parameters are FIXED\n(unknown but not random)&quot;]
+    F --&gt; F2[&quot;Data is RANDOM\n(varies across experiments)&quot;]
+    F --&gt; F3[&quot;Compute P(data | parameter)&quot;]
+    F --&gt; F4[&quot;Confidence intervals:\n'In repeated sampling, 95% of\nintervals contain the true value'&quot;]
+    F --&gt; F5[&quot;Answer: p &lt; 0.05, REJECT H0\n(no direct probability on H0)&quot;]
+
+    B --&gt; B1[&quot;Parameters are RANDOM\n(have a probability distribution)&quot;]
+    B --&gt; B2[&quot;Prior P(θ): beliefs before data&quot;]
+    B --&gt; B3[&quot;Likelihood P(data | θ)&quot;]
+    B --&gt; B4[&quot;Posterior ∝ Prior × Likelihood&quot;]
+    B --&gt; B5[&quot;Credible interval:\n'95% probability θ is in this range'&quot;]
+    B --&gt; B6[&quot;Answer: P(drug works | data) = 0.94&quot;]
+
+    style F fill:#4a90d9,color:#fff
+    style B fill:#e06c1a,color:#fff
+</div></div>
+<p><strong>When to use Bayesian</strong>:</p>
+<ul>
+<li>Sequential testing (no fixed sample size required)</li>
+<li>Small samples (prior regularises estimates)</li>
+<li>Need probability statements about parameters</li>
+<li>Want to incorporate domain knowledge via informative priors</li>
+</ul>
+<p><strong>When to use Frequentist</strong>:</p>
+<ul>
+<li>Pre-registration and regulatory contexts (FDA, clinical trials)</li>
+<li>No prior knowledge available</li>
+<li>Need reproducible, objective procedures</li>
+</ul>
+<hr />
+<h2>Hypothesis Testing Decision Tree</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([Start: What is your research question?])
+    START --&gt; Q1{How many groups?}
+
+    Q1 --&gt;|One group| ONE[Compare sample to\nknown/theoretical value]
+    Q1 --&gt;|Two groups| TWO[Compare two independent\nor paired groups]
+    Q1 --&gt;|3+ groups| MANY[Compare multiple groups]
+
+    ONE --&gt; ONE_PARAM{Data normally\ndistributed?}
+    ONE_PARAM --&gt;|Yes| ONET[&quot;One-sample t-test\nH0: μ = μ0\nEffect: Cohen's d&quot;]
+    ONE_PARAM --&gt;|No| ONES[&quot;Wilcoxon signed-rank test\n(non-parametric)&quot;]
+
+    TWO --&gt; PAIRED{Observations\npaired?}
+    PAIRED --&gt;|Yes, paired| PAIRT[&quot;Paired t-test\nH0: μ_diff = 0&quot;]
+    PAIRED --&gt;|No, independent| TWOQ{Outcome type?}
+
+    TWOQ --&gt;|Continuous\nnormal| WELCH[&quot;Welch's two-sample t-test\nH0: μA = μB\nNo equal-variance assumption\nEffect: Cohen's d&quot;]
+    TWOQ --&gt;|Continuous\nskewed or ordinal| MWU[&quot;Mann-Whitney U test\n(non-parametric)\nH0: same distribution\nEffect: rank-biserial r&quot;]
+    TWOQ --&gt;|Binary\n(proportions)| ZPROP[&quot;Two-proportion z-test\nH0: pA = pB\nEffect: Cohen's h&quot;]
+    TWOQ --&gt;|Categorical| CHI[&quot;Chi-squared test\nof independence\nH0: variables are independent\nEffect: Cramér's V&quot;]
+
+    MANY --&gt; MANYQ{Assumptions met?}
+    MANYQ --&gt;|Yes| ANOVA[&quot;One-way ANOVA\nH0: all means equal\nPost-hoc: Tukey HSD&quot;]
+    MANYQ --&gt;|No| KW[&quot;Kruskal-Wallis test\n(non-parametric ANOVA)&quot;]
+
+    ONET --&gt; MULT{Multiple tests?}
+    WELCH --&gt; MULT
+    MWU --&gt; MULT
+    ZPROP --&gt; MULT
+    CHI --&gt; MULT
+    ANOVA --&gt; MULT
+    KW --&gt; MULT
+
+    MULT --&gt;|Yes| CORRECT{Correction method}
+    MULT --&gt;|No| INTERPRET[Interpret result:\np &lt; alpha: reject H0\nReport effect size\nReport confidence interval]
+
+    CORRECT --&gt;|Few tests,\nFWER control| BONF[&quot;Bonferroni correction\nadj_alpha = alpha / m&quot;]
+    CORRECT --&gt;|Many tests,\nFDR control| BH[&quot;Benjamini-Hochberg\n(FDR &lt; alpha)&quot;]
+
+    BONF --&gt; INTERPRET
+    BH --&gt; INTERPRET
+
+    style START fill:#2d6a4f,color:#fff
+    style INTERPRET fill:#1a535c,color:#fff
+    style WELCH fill:#4a90d9,color:#fff
+    style MWU fill:#6a3d9a,color:#fff
+    style ZPROP fill:#e06c1a,color:#fff
+    style CHI fill:#c0392b,color:#fff
+    style BH fill:#27ae60,color:#fff
+    style BONF fill:#f39c12,color:#fff
+</div></div>
+<hr />
+<h2>Bayesian Updating Process</h2>
+<p>The core of Bayesian statistics is sequential updating: start with a prior belief, observe data, obtain a posterior that becomes the prior for the next observation.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    PRIOR[&quot;Prior Distribution\nP(θ)\n\nBelief before data\nExample: Beta(1,1)\n= uniform over [0,1]&quot;]
+
+    DATA[&quot;Observed Data\nX ~ P(X|θ)\n\nN=100 users\n15 conversions\n= Binomial(100, θ)&quot;]
+
+    BAYES[&quot;Bayes' Theorem\n\nP(θ|X) ∝ P(X|θ) × P(θ)&quot;]
+
+    POST[&quot;Posterior Distribution\nP(θ|X)\n\nBeta(1+15, 1+85)\n= Beta(16, 86)\nmean = 16/102 = 0.157&quot;]
+
+    PRED[&quot;Posterior Predictive\nP(X_new | X)\n\nExpected future\nconversions = posterior mean&quot;]
+
+    NEXT[&quot;Next Update\nPosterior becomes new Prior&quot;]
+
+    PRIOR --&gt; BAYES
+    DATA --&gt; BAYES
+    BAYES --&gt; POST
+    POST --&gt; PRED
+    POST --&gt; NEXT
+    NEXT --&gt; PRIOR
+
+    style PRIOR fill:#4a90d9,color:#fff
+    style POST fill:#e06c1a,color:#fff
+    style BAYES fill:#27ae60,color:#fff
+    style NEXT fill:#6a3d9a,color:#fff
+</div></div>
+<h3>Conjugate Families</h3>
+<table>
+<thead>
+<tr>
+  <th>Prior</th>
+  <th>Likelihood</th>
+  <th>Posterior</th>
+  <th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Beta(α, β)</td>
+  <td>Binomial(n, p)</td>
+  <td>Beta(α+s, β+f)</td>
+  <td>Conversion rates, click-through</td>
+</tr>
+<tr>
+  <td>Normal(μ₀, σ₀²)</td>
+  <td>Normal(μ, σ²)</td>
+  <td>Normal(μₙ, σₙ²)</td>
+  <td>Continuous measurements</td>
+</tr>
+<tr>
+  <td>Gamma(α, β)</td>
+  <td>Poisson(λ)</td>
+  <td>Gamma(α+Σx, β+n)</td>
+  <td>Count data, event rates</td>
+</tr>
+<tr>
+  <td>Dirichlet(α)</td>
+  <td>Multinomial(n, p)</td>
+  <td>Dirichlet(α+counts)</td>
+  <td>Multi-category</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>A/B Test Analysis Workflow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([A/B Test Request])
+
+    PLAN[&quot;1. PRE-EXPERIMENT PLANNING\n- Define primary metric\n- Set alpha and power\n- Calculate minimum sample size\n- Pre-register hypothesis&quot;]
+
+    POWER[&quot;2. POWER ANALYSIS\nn = f(alpha, power, MDE)\nMDE = minimum detectable effect\n\nExample: alpha=0.05, power=0.80\nbaseline=10%, MDE=2%\n→ n = 3,843 per group&quot;]
+
+    COLLECT[&quot;3. DATA COLLECTION\n- Randomise users to A/B\n- Ensure traffic split is correct\n- Check sample ratio mismatch (SRM)\n- Wait for full exposure&quot;]
+
+    SRM{&quot;4. SAMPLE RATIO\nMISMATCH CHECK\nExpected vs Actual split&quot;}
+    SRM --&gt;|&quot;Split incorrect\n(SRM detected)&quot;| DEBUG[&quot;Debug assignment\nlogic — STOP TEST&quot;]
+    SRM --&gt;|&quot;Split correct&quot;| SANITY
+
+    SANITY[&quot;5. SANITY CHECKS\n- AA test on pre-experiment period\n- Check guardrail metrics\n- Verify no data pipeline issues&quot;]
+
+    STAT[&quot;6. STATISTICAL ANALYSIS\n\nFrequentist: Two-proportion z-test\nOR\nBayesian: Beta-Binomial model&quot;]
+
+    FREQ[&quot;Frequentist Path\n- Compute z-statistic\n- Compare p to alpha\n- Compute 95% CI\n- Report Cohen's h&quot;]
+    BAYES[&quot;Bayesian Path\n- Update Beta posterior\n- Compute P(B &gt; A)\n- Compute E[loss]\n- Report credible interval&quot;]
+
+    DECIDE{&quot;7. DECISION\n\nAll of: statistically significant +\npractically significant +\nno regressions on guardrails&quot;}
+
+    SHIP[&quot;SHIP B\n(Winner)&quot;]
+    HOLD[&quot;HOLD\nRun longer or\nIterate design&quot;]
+    REVERT[&quot;SHIP A\n(B is worse)&quot;]
+
+    LEARN[&quot;8. DOCUMENT LEARNINGS\n- Effect size and CI\n- Secondary metrics\n- Segment analysis\n- Update product model&quot;]
+
+    START --&gt; PLAN --&gt; POWER --&gt; COLLECT --&gt; SRM
+    SANITY --&gt; STAT
+    STAT --&gt; FREQ
+    STAT --&gt; BAYES
+    FREQ --&gt; DECIDE
+    BAYES --&gt; DECIDE
+    DECIDE --&gt;|&quot;p&lt;alpha, lift&gt;MDE,\nP(B&gt;A)&gt;0.95&quot;| SHIP
+    DECIDE --&gt;|&quot;p&gt;=alpha or\ninsufficient data&quot;| HOLD
+    DECIDE --&gt;|&quot;B significantly\nworse&quot;| REVERT
+    SHIP --&gt; LEARN
+    HOLD --&gt; COLLECT
+    REVERT --&gt; LEARN
+
+    style START fill:#2d6a4f,color:#fff
+    style SHIP fill:#27ae60,color:#fff
+    style REVERT fill:#c0392b,color:#fff
+    style HOLD fill:#f39c12,color:#000
+    style DEBUG fill:#c0392b,color:#fff
+</div></div>
+<hr />
+<h2>Descriptive Statistics Reference</h2>
+<h3>Measures of Central Tendency</h3>
+<table>
+<thead>
+<tr>
+  <th>Measure</th>
+  <th>Formula</th>
+  <th>When to use</th>
+  <th>Robust to outliers?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Arithmetic mean</td>
+  <td>Σx / n</td>
+  <td>Symmetric, no outliers</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>Median</td>
+  <td>Middle value</td>
+  <td>Skewed data, income</td>
+  <td>Yes</td>
+</tr>
+<tr>
+  <td>Mode</td>
+  <td>Most frequent</td>
+  <td>Categorical data</td>
+  <td>Yes</td>
+</tr>
+<tr>
+  <td>Trimmed mean</td>
+  <td>Mean after removing p% tails</td>
+  <td>Outliers present</td>
+  <td>Partly</td>
+</tr>
+<tr>
+  <td>Geometric mean</td>
+  <td>(∏xᵢ)^(1/n)</td>
+  <td>Growth rates, ratios</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>Harmonic mean</td>
+  <td>n / Σ(1/xᵢ)</td>
+  <td>Rates (speed, P/E ratio)</td>
+  <td>No</td>
+</tr>
+</tbody>
+</table>
+<h3>Measures of Spread</h3>
+<table>
+<thead>
+<tr>
+  <th>Measure</th>
+  <th>Formula</th>
+  <th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Variance</td>
+  <td>Σ(xᵢ-μ)² / (n-1)</td>
+  <td>Average squared deviation</td>
+</tr>
+<tr>
+  <td>Std deviation</td>
+  <td>√variance</td>
+  <td>Same units as data</td>
+</tr>
+<tr>
+  <td>IQR</td>
+  <td>Q3 - Q1</td>
+  <td>Range of middle 50%</td>
+</tr>
+<tr>
+  <td>MAD</td>
+  <td>median(|xᵢ - median|)</td>
+  <td>Most robust scale estimator</td>
+</tr>
+<tr>
+  <td>CV</td>
+  <td>σ / μ</td>
+  <td>Relative variability (unitless)</td>
+</tr>
+</tbody>
+</table>
+<h3>Skewness and Kurtosis</h3>
+<pre><code>Skewness &gt; 0: Right tail is longer (mean &gt; median)
+Skewness &lt; 0: Left tail is longer (mean &lt; median)
+Skewness = 0: Symmetric
+
+Excess Kurtosis &gt; 0: Heavier tails than normal (leptokurtic)
+Excess Kurtosis &lt; 0: Lighter tails than normal (platykurtic)
+Excess Kurtosis = 0: Same tails as normal (mesokurtic)
+</code></pre>
+<hr />
+<h2>Effect Sizes</h2>
+<p>Effect sizes quantify <strong>practical significance</strong> — independent of sample size.</p>
+<h3>Cohen's d (Continuous)</h3>
+<pre><code>d = (μ₁ - μ₂) / σ_pooled
+
+Benchmarks (Cohen, 1988):
+  Small:  d = 0.20
+  Medium: d = 0.50
+  Large:  d = 0.80
+</code></pre>
+<h3>Cohen's h (Proportions)</h3>
+<pre><code>h = 2·arcsin(√p₁) - 2·arcsin(√p₂)
+
+Benchmarks:
+  Small:  h = 0.20
+  Medium: h = 0.50
+  Large:  h = 0.80
+</code></pre>
+<h3>Cramér's V (Chi-squared)</h3>
+<pre><code>V = √(χ²/ (n · (k-1)))  where k = min(rows, cols)
+
+Benchmarks (adjusted for degrees of freedom):
+  Small:  V ≈ 0.10
+  Medium: V ≈ 0.30
+  Large:  V ≈ 0.50
+</code></pre>
+<hr />
+<h2>Multiple Testing Problem</h2>
+<p>When performing m tests at significance level α, the probability of at least one false positive is:</p>
+<pre><code>P(≥1 false positive) = 1 - (1-α)^m
+
+For m=20, alpha=0.05: P = 1 - 0.95^20 ≈ 0.64
+</code></pre>
+<h3>Correction Methods</h3>
+<p><strong>Bonferroni</strong> (FWER control):</p>
+<ul>
+<li>Adjusted threshold: α* = α / m</li>
+<li>Conservative: use when any false positive is costly</li>
+<li>Example: clinical drug trials with multiple endpoints</li>
+</ul>
+<p><strong>Benjamini-Hochberg</strong> (FDR control):</p>
+<ul>
+<li>Controls the expected proportion of false discoveries</li>
+<li>More powerful than Bonferroni for many tests</li>
+<li>Procedure: sort p-values, reject p_(k) ≤ k/m · α</li>
+<li>Example: genomics, marketing campaign testing</li>
+</ul>
+<pre><code>FDR = E[False Discoveries / Total Discoveries]
+</code></pre>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Probability & Statistics</span></a>
+            <a href="flow_diagrams.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Flow Diagrams: Statistical Analysis Pipelines</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

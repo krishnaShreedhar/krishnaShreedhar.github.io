@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cell-Based Architecture &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Cell-Based Architecture organizes a system into independent, self-contained deployment units called cells — each capable of serving a subset of users autonomous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Cell-Based Architecture</span>
+        </div>
+        <h1 class="post-title">Cell-Based Architecture</h1>
+        <p class="post-subtitle">Cell-Based Architecture organizes a system into independent, self-contained deployment units called cells — each capable of serving a subset of users autonomously. The primary design goal is blast-radius reduction:...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-02</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2 active"><a href="06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Cell-Based Architecture organizes a system into independent, self-contained deployment units called cells — each capable of serving a subset of users autonomously. The primary design goal is blast-radius reduction: failures in one cell do not propagate to others, enabling high availability without requiring globally coordinated failover.</p>
+<h2>Architecture Diagrams</h2>
+<h3>Cell-Based System Topology</h3>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    DNS[Global DNS / Traffic Manager]
+    Router[Cell Router / Global Load Balancer]
+
+    DNS --&gt; Router
+
+    subgraph Cell1[Cell 1 - Region US-East]
+        APIGW1[API Gateway]
+        SvcA1[Service A]
+        SvcB1[Service B]
+        DB1[(Database - Cell 1)]
+        Cache1[Cache - Cell 1]
+        APIGW1 --&gt; SvcA1 &amp; SvcB1
+        SvcA1 &amp; SvcB1 --&gt; DB1
+        SvcA1 --&gt; Cache1
+    end
+
+    subgraph Cell2[Cell 2 - Region US-West]
+        APIGW2[API Gateway]
+        SvcA2[Service A]
+        SvcB2[Service B]
+        DB2[(Database - Cell 2)]
+        Cache2[Cache - Cell 2]
+        APIGW2 --&gt; SvcA2 &amp; SvcB2
+        SvcA2 &amp; SvcB2 --&gt; DB2
+        SvcA2 --&gt; Cache2
+    end
+
+    subgraph Cell3[Cell 3 - Region EU]
+        APIGW3[API Gateway]
+        SvcA3[Service A]
+        SvcB3[Service B]
+        DB3[(Database - Cell 3)]
+        Cache3[Cache - Cell 3]
+        APIGW3 --&gt; SvcA3 &amp; SvcB3
+        SvcA3 &amp; SvcB3 --&gt; DB3
+        SvcA3 --&gt; Cache3
+    end
+
+    Router --&gt;|User A-M| Cell1
+    Router --&gt;|User N-Z| Cell2
+    Router --&gt;|EU Users| Cell3
+
+    style Cell1 fill:#dcfce7,stroke:#16a34a
+    style Cell2 fill:#dbeafe,stroke:#2563eb
+    style Cell3 fill:#fef3c7,stroke:#d97706
+</div></div>
+<h3>Cell Routing Logic</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Request[Incoming Request] --&gt; ExtractKey[Extract Routing Key\nuserID / tenantID / shardKey]
+    ExtractKey --&gt; LookupTable[Cell Routing Table\nConsistent Hash or Range Map]
+    LookupTable --&gt; CellDecision{Cell Assignment}
+    CellDecision --&gt;|Key range 0-33%| Cell1[Route to Cell 1]
+    CellDecision --&gt;|Key range 34-66%| Cell2[Route to Cell 2]
+    CellDecision --&gt;|Key range 67-100%| Cell3[Route to Cell 3]
+    Cell1 --&gt; HealthCheck{Cell 1 Healthy?}
+    HealthCheck --&gt;|Yes| ServeCell1[Serve from Cell 1]
+    HealthCheck --&gt;|No| Failover[Route to Standby Cell\nor Degraded Mode]
+</div></div>
+<h3>Blast Radius Comparison</h3>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph Traditional[Traditional: Global Failure]
+        T_Failure[Component Failure] --&gt; T_AllUsers[All Users Affected\n100% blast radius]
+    end
+
+    subgraph CellBased[Cell-Based: Contained Failure]
+        C_Failure[Component Failure\nin Cell 2] --&gt; C_Cell2Users[Only Cell 2 Users Affected\n~33% blast radius]
+        C_Cell1[Cell 1 - Healthy]
+        C_Cell3[Cell 3 - Healthy]
+        C_Cell2Users -.- C_Cell1
+        C_Cell2Users -.- C_Cell3
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Cell</strong>: An isolated, self-sufficient deployment unit containing a complete copy of all services and data needed to serve its assigned user population. A cell is operationally independent — it has its own databases, caches, internal load balancers, and service instances. No shared mutable state between cells.</p>
+</li>
+<li><p><strong>Blast Radius</strong>: The scope of impact when a failure occurs. In a traditional architecture, one failing component can affect all users. In a cell-based architecture, a cell failure only affects the fraction of users assigned to that cell. Typical deployments size cells so that the maximum blast radius is 1-5% of users.</p>
+</li>
+<li><p><strong>Cell Router</strong>: The global traffic management layer that maps incoming requests to the correct cell based on a routing key (user ID, tenant ID, geographic region). The cell router must be extremely reliable — it is outside the blast radius of any cell but is itself a global dependency.</p>
+</li>
+<li><p><strong>Routing Key</strong>: The attribute used to assign users to cells. Common choices: user ID (consistent hashing), tenant ID (for multi-tenant SaaS), or geographic region (for data residency). The key must be present on every request and should distribute load evenly.</p>
+</li>
+<li><p><strong>Cell Sealing</strong>: The discipline of ensuring that cells do not communicate with each other at runtime. Cross-cell calls would re-introduce coupling and violate blast radius guarantees. Global coordination (user migration between cells, global configuration) happens through control-plane operations, not request-time calls.</p>
+</li>
+<li><p><strong>Shuffle Sharding</strong>: A technique where users are assigned to virtual shards that map to overlapping cell subsets. A failure affects only users sharing the same shard, providing better blast radius control than simple cell assignment.</p>
+</li>
+<li><p><strong>Cell Lifecycle</strong>: Cells can be created, drained, migrated, and destroyed independently. To onboard a new region, provision a new cell, drain users from existing cells to it, and the system is live — no global coordination needed.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Aspect</th>
+  <th>Cell-Based</th>
+  <th>Microservices (no cells)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Blast radius</td>
+  <td>Bounded (~1/N users)</td>
+  <td>Can be unbounded</td>
+</tr>
+<tr>
+  <td>Resource efficiency</td>
+  <td>Lower (duplicate infra per cell)</td>
+  <td>Higher</td>
+</tr>
+<tr>
+  <td>Complexity</td>
+  <td>High (cell router, migration)</td>
+  <td>High (service mesh)</td>
+</tr>
+<tr>
+  <td>Global features</td>
+  <td>Harder (cross-cell coordination)</td>
+  <td>Easier</td>
+</tr>
+<tr>
+  <td>Regional data residency</td>
+  <td>Native</td>
+  <td>Requires extra work</td>
+</tr>
+<tr>
+  <td>Deployment isolation</td>
+  <td>Per-cell</td>
+  <td>Per-service</td>
+</tr>
+<tr>
+  <td>Operational discipline</td>
+  <td>Very high</td>
+  <td>High</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<p><strong>Use cell-based architecture when:</strong></p>
+<ul>
+<li>High availability guarantees require strict blast radius control</li>
+<li>Operating at a scale where even 1% of users affected by a failure represents millions of users</li>
+<li>Multi-tenant SaaS platforms where tenant isolation is a business requirement</li>
+<li>Data residency regulations require user data to stay within specific regions</li>
+</ul>
+<p><strong>Avoid when:</strong></p>
+<ul>
+<li>System scale does not justify the significant infrastructure duplication cost</li>
+<li>Cross-user global features are central to the product (global leaderboards, shared documents)</li>
+<li>Team lacks operational maturity to manage cell lifecycle and routing infrastructure</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="05_soa.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Service-Oriented Architecture (SOA)</span></a>
+            <a href="07_space_based_architecture.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Space-Based Architecture</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

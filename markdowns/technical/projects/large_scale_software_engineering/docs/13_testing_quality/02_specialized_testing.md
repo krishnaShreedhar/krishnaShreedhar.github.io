@@ -1,5 +1,17 @@
-# Specialized Testing
-
+---
+title: "Specialized Testing"
+subtitle: "Beyond the standard testing pyramid, specialized testing techniques address specific quality dimensions: service contract compatibility (contract testing), production-condition robustness (chaos testing), performance..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-12-22
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/13_testing_quality/02_specialized_testing.html"
+---
 Beyond the standard testing pyramid, specialized testing techniques address specific quality dimensions: service contract compatibility (contract testing), production-condition robustness (chaos testing), performance under load (performance testing), and test coverage gaps (mutation testing).
 
 ## Contract Testing

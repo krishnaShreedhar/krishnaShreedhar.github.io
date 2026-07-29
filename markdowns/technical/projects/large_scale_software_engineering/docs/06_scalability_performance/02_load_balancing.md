@@ -1,5 +1,17 @@
-# Load Balancing
-
+---
+title: "Load Balancing"
+subtitle: "Load balancing distributes incoming network traffic across multiple backend instances to maximize throughput, minimize latency, and ensure no single server becomes a bottleneck. Load balancers also provide health..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-04
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/06_scalability_performance/02_load_balancing.html"
+---
 Load balancing distributes incoming network traffic across multiple backend instances to maximize throughput, minimize latency, and ensure no single server becomes a bottleneck. Load balancers also provide health checking and automatic failover.
 
 ## Load Balancer Architecture

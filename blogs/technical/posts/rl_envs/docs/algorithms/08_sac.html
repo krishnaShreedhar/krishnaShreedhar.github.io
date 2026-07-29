@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SAC — Soft Actor-Critic &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Soft Actor-Critic (SAC) [Haarnoja et al., 2018] extends the standard RL objective with an entropy bonus, encouraging the policy to remain as stochastic as possi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">SAC — Soft Actor-Critic</span>
+        </div>
+        <h1 class="post-title">SAC — Soft Actor-Critic</h1>
+        <p class="post-subtitle">Soft Actor-Critic (SAC) [Haarnoja et al., 2018] extends the standard RL objective with an entropy bonus, encouraging the policy to remain as stochastic as possible while maximising cumulative reward. This maximum...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-02-09</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2 active"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p><strong>Use case:</strong> Autonomous vehicle continuous control<br />
+<strong>Type:</strong> Off-policy, maximum entropy, model-free RL<br />
+<strong>Action space:</strong> Continuous</p>
+<hr />
+<h2>Overview</h2>
+<p>Soft Actor-Critic (SAC) [Haarnoja et al., 2018] extends the standard RL objective with an entropy
+bonus, encouraging the policy to remain as stochastic as possible while maximising cumulative
+reward. This maximum entropy framework yields significantly better exploration and robustness
+compared to purely reward-maximising algorithms such as DDPG or TD3.</p>
+<hr />
+<h2>Maximum Entropy RL Framework</h2>
+<p>The standard RL objective maximises expected discounted return:</p>
+<pre><code>J(pi) = E[ sum_t gamma^t * r_t ]
+</code></pre>
+<p>SAC augments this with a per-step entropy bonus:</p>
+<pre><code>J_MaxEnt(pi) = E[ sum_t gamma^t ( r_t + alpha * H(pi(.|s_t)) ) ]
+</code></pre>
+<p>where <code>H(pi(.|s)) = -E_{a~pi}[log pi(a|s)]</code> is the policy entropy and <code>alpha</code> is the
+temperature parameter controlling the entropy-reward trade-off.</p>
+<p>Benefits of the entropy term:</p>
+<ul>
+<li>Encourages exploration without manual epsilon-greedy schedules</li>
+<li>Prevents premature collapse to a single mode</li>
+<li>Robust behaviour in stochastic or partially-observable environments</li>
+</ul>
+<hr />
+<h2>Soft Bellman Equations</h2>
+<p>The soft Q-function satisfies a modified Bellman equation:</p>
+<pre><code>Q_soft(s,a) = r + gamma * E_{s'}[ V_soft(s') ]
+V_soft(s)   = E_{a~pi}[ Q_soft(s,a) - alpha * log pi(a|s) ]
+</code></pre>
+<p>Combining these:</p>
+<pre><code>Q_target(s,a) = r + gamma * (1-done) * ( Q_soft(s', a') - alpha * log pi(a'|s') )
+                where a' ~ pi(.|s')
+</code></pre>
+<p>The critic is trained to minimise the MSE between its prediction and <code>Q_target</code>.</p>
+<p>To reduce overestimation bias (a well-known problem in actor-critic methods), SAC uses
+<strong>twin Q-networks</strong> (originally from TD3) and takes the minimum:</p>
+<pre><code>Q_target = r + gamma * (1-done) * ( min(Q1_target, Q2_target) - alpha * log_pi )
+</code></pre>
+<hr />
+<h2>Automatic Temperature Tuning</h2>
+<p>A key SAC improvement is treating the temperature <code>alpha</code> as a Lagrange multiplier on a
+constrained entropy objective:</p>
+<pre><code>max_pi  E[ sum_t r_t ]
+s.t.    E_{pi}[ -log pi(a|s) ] &gt;= H_target   for all t
+</code></pre>
+<p>The dual objective for <code>alpha</code> is:</p>
+<pre><code>alpha* = argmin_alpha E_{a~pi*}[ -alpha * log pi*(a|s) - alpha * H_target ]
+</code></pre>
+<p>In practice this becomes:</p>
+<pre><code>L_alpha = -mean( log_alpha * (log_pi + H_target).detach() )
+</code></pre>
+<p>where <code>H_target = -action_dim</code> is the heuristic target entropy for continuous actions.
+<code>log_alpha</code> is the learnable parameter (ensures <code>alpha &gt; 0</code> via exponentiation).</p>
+<hr />
+<h2>Reparameterization Trick for Continuous Actions</h2>
+<p>SAC requires differentiating through the action sampling process. This is achieved via the
+reparameterization trick:</p>
+<pre><code>u = mean(s) + std(s) * eps,   eps ~ N(0, I)
+a = tanh(u)
+</code></pre>
+<p>The tanh squashing maps unbounded Gaussian samples to <code>(-1, 1)</code> and requires a log-probability
+correction (change of variables formula):</p>
+<pre><code>log pi(a|s) = log pi(u|s) - sum_i log(1 - tanh(u_i)^2)
+</code></pre>
+<p>This makes the actor loss gradient-computable end-to-end.</p>
+<hr />
+<h2>Comparison to DDPG / TD3</h2>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>DDPG</th>
+  <th>TD3</th>
+  <th>SAC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Policy</td>
+  <td>Deterministic</td>
+  <td>Deterministic</td>
+  <td>Stochastic</td>
+</tr>
+<tr>
+  <td>Entropy regularisation</td>
+  <td>No</td>
+  <td>No</td>
+  <td>Yes</td>
+</tr>
+<tr>
+  <td>Twin critics</td>
+  <td>No</td>
+  <td>Yes</td>
+  <td>Yes</td>
+</tr>
+<tr>
+  <td>Auto temperature</td>
+  <td>—</td>
+  <td>—</td>
+  <td>Yes</td>
+</tr>
+<tr>
+  <td>Exploration strategy</td>
+  <td>OU noise</td>
+  <td>noise</td>
+  <td>policy entropy</td>
+</tr>
+<tr>
+  <td>Sample efficiency</td>
+  <td>Medium</td>
+  <td>High</td>
+  <td>High</td>
+</tr>
+<tr>
+  <td>Stability</td>
+  <td>Low</td>
+  <td>Medium</td>
+  <td>High</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Autonomous Vehicle Use Case</h2>
+<p>In the <code>VehicleEnv</code>, the 2D vehicle must navigate from a random start to a goal position
+while avoiding circular obstacles. The action space is <code>[steering_delta, acceleration]</code>
+in <code>[-1, 1]</code>.</p>
+<p>SAC is well-suited because:</p>
+<ul>
+<li>The entropy bonus discourages deterministic unsafe policies that overfit to training starts</li>
+<li>Twin critics stabilise training in the dense-reward (progress shaping) setting</li>
+<li>Automatic temperature tuning removes manual entropy tuning for each obstacle configuration</li>
+</ul>
+<hr />
+<h2>Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph Actor
+        S([State s]) --&gt; TK[Shared Trunk MLP]
+        TK --&gt; M[Mean head]
+        TK --&gt; L[Log-std head]
+        M --&gt; RT[Reparameterise + tanh]
+        L --&gt; RT
+        RT --&gt; A([Action a])
+    end
+
+    subgraph Critic
+        SC([State s]) --&gt; C1[Q1 MLP]
+        SC --&gt; C2[Q2 MLP]
+        AC([Action a]) --&gt; C1
+        AC --&gt; C2
+        C1 --&gt; MN[min]
+        C2 --&gt; MN
+        MN --&gt; Q([Q-value])
+    end
+
+    subgraph Temperature
+        LP([log_alpha param]) --&gt; AL[Alpha Loss]
+        LP --&gt; AV([alpha value])
+    end
+</div></div>
+<hr />
+<h2>Key Hyperparameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Default</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>actor_lr</code></td>
+  <td>3e-4</td>
+  <td>Actor network learning rate</td>
+</tr>
+<tr>
+  <td><code>critic_lr</code></td>
+  <td>3e-4</td>
+  <td>Critic network learning rate</td>
+</tr>
+<tr>
+  <td><code>alpha_lr</code></td>
+  <td>3e-4</td>
+  <td>Temperature parameter learning rate</td>
+</tr>
+<tr>
+  <td><code>gamma</code></td>
+  <td>0.99</td>
+  <td>Discount factor</td>
+</tr>
+<tr>
+  <td><code>tau</code></td>
+  <td>0.005</td>
+  <td>Polyak averaging coefficient for target critic</td>
+</tr>
+<tr>
+  <td><code>batch_size</code></td>
+  <td>256</td>
+  <td>Off-policy mini-batch size</td>
+</tr>
+<tr>
+  <td><code>replay_start</code></td>
+  <td>1000</td>
+  <td>Number of transitions before first update</td>
+</tr>
+<tr>
+  <td><code>target_entropy</code></td>
+  <td>-2.0</td>
+  <td>Heuristic: <code>-action_dim</code> for continuous</td>
+</tr>
+<tr>
+  <td><code>hidden_dims</code></td>
+  <td>[256,256]</td>
+  <td>MLP layer sizes for all networks</td>
+</tr>
+<tr>
+  <td><code>buffer.capacity</code></td>
+  <td>100000</td>
+  <td>Replay buffer size</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>References</h2>
+<ul>
+<li>Haarnoja, T., Zhou, A., Abbeel, P., &amp; Levine, S. (2018). <em>Soft Actor-Critic: Off-Policy
+Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor.</em> ICML 2018.</li>
+<li>Haarnoja, T. et al. (2018). <em>Soft Actor-Critic Algorithms and Applications.</em> arXiv:1812.05905.</li>
+<li>Fujimoto, S., Hoof, H., &amp; Meger, D. (2018). <em>Addressing Function Approximation Error in
+Actor-Critic Methods (TD3).</em> ICML 2018.</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="07_td3.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">TD3 — Twin Delayed Deep Deterministic Policy Gradient</span></a>
+            <a href="09_grpo.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">GRPO — Group Relative Policy Optimization</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

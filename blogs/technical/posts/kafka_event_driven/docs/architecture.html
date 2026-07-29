@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Kafka Event-Driven Architecture — System Architecture &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This project demonstrates Kafka and event-driven architecture concepts using a fully in-memory mock broker.  The mock broker faithfully reproduces the partition">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Kafka Event-Driven Architecture — System Architect</span>
+        </div>
+        <h1 class="post-title">Kafka Event-Driven Architecture — System Architecture</h1>
+        <p class="post-subtitle">This project demonstrates Kafka and event-driven architecture concepts using a fully in-memory mock broker.  The mock broker faithfully reproduces the partition model, consumer group offsets, and lag mechanics of a...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-04-02</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">kafka-event-driven</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Kafka Event-Driven Architecture — Demonstration Project</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Kafka Event-Driven Architecture — Demonstration Project</a></li><li class="project-nav__lvl-1 active"><a href="architecture.html">Kafka Event-Driven Architecture — System Architecture</a></li><li class="project-nav__lvl-1"><a href="flow_diagrams.html">Kafka Event-Driven Architecture — Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Overview</h2>
+<p>This project demonstrates Kafka and event-driven architecture concepts using
+a fully in-memory mock broker.  The mock broker faithfully reproduces the
+partition model, consumer group offsets, and lag mechanics of a real Apache
+Kafka cluster, allowing all patterns to run without an external service.</p>
+<hr />
+<h2>Core Kafka Concepts</h2>
+<h3>Topics, Partitions, and Replication</h3>
+<p>A Kafka <strong>topic</strong> is a named, ordered, immutable log.  Each topic is divided
+into <strong>partitions</strong> — the unit of parallelism and ordering.  Within a
+partition, messages are totally ordered by offset.  A <strong>replication factor</strong>
+determines how many broker replicas store each partition.</p>
+<p><strong>In-Sync Replicas (ISR)</strong> is the set of replicas that are fully caught up to
+the leader.  <code>acks=all</code> means the producer waits for all ISR members to
+acknowledge the write before declaring success, giving the strongest durability
+guarantee.</p>
+<h3>Delivery Semantics</h3>
+<table>
+<thead>
+<tr>
+  <th>Semantic</th>
+  <th>Producer config</th>
+  <th>Consumer behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>At-most-once</td>
+  <td><code>acks=0</code>, fire-and-forget</td>
+  <td>Auto-commit before process</td>
+</tr>
+<tr>
+  <td>At-least-once</td>
+  <td><code>acks=all</code> + retries</td>
+  <td>Manual commit after process</td>
+</tr>
+<tr>
+  <td>Exactly-once</td>
+  <td>Idempotent + transactions</td>
+  <td>Transactional read-process</td>
+</tr>
+</tbody>
+</table>
+<p>This project implements <strong>at-least-once</strong> delivery on the consumer side
+(manual commit after processing) combined with DLQ routing for failed messages.</p>
+<h3>Offset Management</h3>
+<pre><code>Partition log:
+  offset: 0  1  2  3  4  5  6  7  8  9
+              ↑                    ↑
+         consumer group        high-water
+         committed offset      mark (LEO)
+
+lag = high-water-mark − committed-offset = 9 − 2 = 7
+</code></pre>
+<p>Consumer groups maintain committed offsets per (topic, partition).  The
+<code>MockKafkaBroker</code> stores these in <code>_consumer_offsets[group_id][topic][partition]</code>.</p>
+<hr />
+<h2>System Architecture Diagram</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TB
+    subgraph Producers
+        P1[OrderService Producer]
+        P2[UserService Producer]
+        P3[OutboxRelay Producer]
+    end
+
+    subgraph Kafka Broker [&quot;MockKafkaBroker (in-memory)&quot;]
+        T1[&quot;Topic: user_events\nPartitions: 4\nRetention: 7d&quot;]
+        T2[&quot;Topic: predictions\nPartitions: 4&quot;]
+        T3[&quot;Topic: monitoring\nPartitions: 2&quot;]
+        T4[&quot;Topic: dlq\nPartitions: 1&quot;]
+    end
+
+    subgraph ConsumerGroups [&quot;Consumer Groups&quot;]
+        CG1[&quot;feature-pipeline\n(FeaturePipeline)&quot;]
+        CG2[&quot;inference-pipeline\n(InferencePipeline)&quot;]
+        CG3[&quot;monitoring-pipeline\n(MonitoringPipeline)&quot;]
+        CG4[&quot;dlq-handler\n(DLQHandler)&quot;]
+    end
+
+    subgraph Storage
+        FS[(FeatureStore\nin-memory)]
+        ES[(EventStore\nappend-only log)]
+        OB[(OutboxTable\ndomain DB)]
+    end
+
+    P1 --&gt; T1
+    P2 --&gt; T1
+    P3 --&gt; T1
+    P3 --&gt; T2
+
+    T1 --&gt; CG1
+    T1 --&gt; CG2
+    T1 --&gt; T4
+
+    T2 --&gt; CG3
+    T4 --&gt; CG4
+
+    CG1 --&gt; FS
+    CG2 --&gt; T2
+    CG3 --&gt; T3
+
+    style T4 fill:#ff9999
+    style CG4 fill:#ff9999
+</div></div>
+<hr />
+<h2>Component Interaction</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant App as Application
+    participant OB as OutboxTable
+    participant Relay as OutboxRelay
+    participant Kafka as MockKafkaBroker
+    participant FP as FeaturePipeline
+    participant FS as FeatureStore
+    participant IP as InferencePipeline
+    participant MP as MonitoringPipeline
+
+    App-&gt;&gt;OB: atomic_write(domain_record, outbox_entry)
+    Note over OB: Single &quot;transaction&quot;
+
+    loop Every poll_interval_s
+        Relay-&gt;&gt;OB: get_unpublished()
+        OB--&gt;&gt;Relay: [entry1, entry2, ...]
+        Relay-&gt;&gt;Kafka: produce(topic, key, value)
+        Relay-&gt;&gt;OB: mark_published(entry_id)
+    end
+
+    loop Poll loop
+        FP-&gt;&gt;Kafka: poll(user_events)
+        Kafka--&gt;&gt;FP: MockMessage
+        FP-&gt;&gt;FS: update(user_id, event)
+        FP-&gt;&gt;Kafka: commit()
+    end
+
+    loop Poll loop
+        IP-&gt;&gt;Kafka: poll(user_events)
+        Kafka--&gt;&gt;IP: MockMessage
+        IP-&gt;&gt;FS: get(user_id)
+        FS--&gt;&gt;IP: UserFeatures
+        IP-&gt;&gt;Kafka: produce(predictions, score)
+        IP-&gt;&gt;Kafka: commit()
+    end
+
+    loop Every N predictions
+        MP-&gt;&gt;Kafka: poll(predictions)
+        Kafka--&gt;&gt;MP: prediction record
+        MP-&gt;&gt;MP: compute_psi(reference, current)
+        MP-&gt;&gt;Kafka: produce(monitoring, psi_event)
+    end
+</div></div>
+<hr />
+<h2>Saga Pattern — Sequence Diagram</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Client
+    participant Saga as OrderSaga
+    participant Kafka as MockKafkaBroker
+
+    Client-&gt;&gt;Saga: execute(order_context)
+
+    rect rgb(200, 255, 200)
+        Note over Saga: Forward pass
+        Saga-&gt;&gt;Saga: PlaceOrder (local tx)
+        Saga-&gt;&gt;Kafka: produce(OrderPlaced)
+        Saga-&gt;&gt;Saga: ReserveInventory (local tx)
+        Saga-&gt;&gt;Kafka: produce(InventoryReserved)
+        Saga-&gt;&gt;Saga: ProcessPayment (local tx)
+        Saga-&gt;&gt;Kafka: produce(PaymentProcessed)
+        Saga-&gt;&gt;Kafka: produce(OrderCompleted)
+    end
+
+    Saga--&gt;&gt;Client: SagaExecution(status=COMPLETED)
+
+    Note over Client,Kafka: ---- Failure scenario ----
+
+    Client-&gt;&gt;Saga: execute(order_context_with_bad_item)
+
+    rect rgb(255, 220, 220)
+        Note over Saga: Forward pass — fails at step 2
+        Saga-&gt;&gt;Saga: PlaceOrder ✓
+        Saga-&gt;&gt;Kafka: produce(OrderPlaced)
+        Saga-&gt;&gt;Saga: ReserveInventory ✗ FAIL
+    end
+
+    rect rgb(255, 240, 200)
+        Note over Saga: Compensation pass (reverse)
+        Saga-&gt;&gt;Saga: CancelOrder (compensate PlaceOrder)
+        Saga-&gt;&gt;Kafka: produce(OrderCancelled)
+        Saga-&gt;&gt;Kafka: produce(OrderFailed)
+    end
+
+    Saga--&gt;&gt;Client: SagaExecution(status=FAILED)
+</div></div>
+<hr />
+<h2>DLQ Lifecycle</h2>
+<div class="mermaid-wrap"><div class="mermaid">stateDiagram-v2
+    [*] --&gt; MainTopic : produce
+
+    MainTopic --&gt; Consumer : poll
+    Consumer --&gt; Processing : message received
+    Processing --&gt; Commit : success
+    Processing --&gt; DLQ : failure (route_to_dlq)
+    Commit --&gt; [*]
+
+    DLQ --&gt; RetryScheduled : add_to_dlq (backoff)
+    RetryScheduled --&gt; RetryAttempt : next_retry_at reached
+
+    RetryAttempt --&gt; Commit : success
+    RetryAttempt --&gt; RetryScheduled : failure, retry_count &lt; max_retries
+    RetryAttempt --&gt; Quarantine : retry_count &gt;= max_retries
+
+    Quarantine --&gt; ManualIntervention : human review required
+</div></div>
+<hr />
+<h2>A/B Routing Decision</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    Event[User Event] --&gt; Hash[&quot;hash(user_id) % 100&quot;]
+    Hash --&gt; Bucket{bucket &lt; v2_pct?}
+    Bucket -- Yes --&gt; ModelV2[&quot;Model v2 (20% traffic)&quot;]
+    Bucket -- No --&gt; ModelV1[&quot;Model v1 (80% traffic)&quot;]
+    ModelV2 --&gt; Score[Prediction Score]
+    ModelV1 --&gt; Score
+    Score --&gt; PredictionsTopic[&quot;Topic: predictions&quot;]
+</div></div>
+<hr />
+<h2>Configuration Reference</h2>
+<p>All parameters are driven by <code>config.yaml</code>.  Key sections:</p>
+<table>
+<thead>
+<tr>
+  <th>Section</th>
+  <th>Key</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>kafka</code></td>
+  <td><code>use_mock</code></td>
+  <td><code>true</code> = MockKafkaBroker, <code>false</code> = real Kafka</td>
+</tr>
+<tr>
+  <td><code>producer</code></td>
+  <td><code>acks</code></td>
+  <td>Delivery acknowledgement level (<code>all</code> = strongest)</td>
+</tr>
+<tr>
+  <td><code>producer</code></td>
+  <td><code>enable_idempotence</code></td>
+  <td>Prevents duplicate messages on retry</td>
+</tr>
+<tr>
+  <td><code>consumer</code></td>
+  <td><code>enable_auto_commit</code></td>
+  <td>Always <code>false</code> — manual commit only</td>
+</tr>
+<tr>
+  <td><code>consumer</code></td>
+  <td><code>auto_offset_reset</code></td>
+  <td><code>earliest</code> = start from oldest message</td>
+</tr>
+<tr>
+  <td><code>topics</code></td>
+  <td><code>user_events.partitions</code></td>
+  <td>Parallelism level (number of consumer threads)</td>
+</tr>
+<tr>
+  <td><code>event_patterns</code></td>
+  <td><code>dlq_max_retries</code></td>
+  <td>Maximum retries before quarantine</td>
+</tr>
+<tr>
+  <td><code>event_patterns</code></td>
+  <td><code>dlq_backoff_base_s</code></td>
+  <td>Exponential backoff base (seconds)</td>
+</tr>
+<tr>
+  <td><code>ml_pipeline</code></td>
+  <td><code>model_v2_traffic_pct</code></td>
+  <td>% of users routed to challenger model</td>
+</tr>
+<tr>
+  <td><code>streaming</code></td>
+  <td><code>lag_alert_threshold</code></td>
+  <td>Consumer lag count triggering a warning</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Kafka Event-Driven Architecture — Demonstration Project</span></a>
+            <a href="flow_diagrams.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Kafka Event-Driven Architecture — Flow Diagrams</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

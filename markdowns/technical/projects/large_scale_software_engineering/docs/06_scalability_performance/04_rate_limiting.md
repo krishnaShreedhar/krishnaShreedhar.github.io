@@ -1,5 +1,17 @@
-# Rate Limiting
-
+---
+title: "Rate Limiting"
+subtitle: "Rate limiting controls the rate at which clients can make requests to a service, protecting it from abuse, overload, and denial-of-service attacks. A well-designed rate limiter is fair, accurate at scale, and adds..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-08
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/06_scalability_performance/04_rate_limiting.html"
+---
 Rate limiting controls the rate at which clients can make requests to a service, protecting it from abuse, overload, and denial-of-service attacks. A well-designed rate limiter is fair, accurate at scale, and adds minimal latency to the request path.
 
 ## Rate Limiting Algorithms

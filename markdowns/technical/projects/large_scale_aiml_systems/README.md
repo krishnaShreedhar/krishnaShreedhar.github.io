@@ -1,5 +1,16 @@
-# Large Scale AI/ML Systems
-
+---
+title: "Large Scale AI/ML Systems"
+subtitle: "A comprehensive reference for the engineering of production AI/ML systems — covering ML system architecture, MLOps, LLMOps, data engineering for ML, and scaling ML systems from prototype to production at scale."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-09-03
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/index.html"
+---
 A comprehensive reference for the engineering of production AI/ML systems — covering ML system architecture, MLOps, LLMOps, data engineering for ML, and scaling ML systems from prototype to production at scale.
 
 ## Scope

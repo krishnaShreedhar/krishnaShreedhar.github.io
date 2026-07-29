@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TD3 — Twin Delayed Deep Deterministic Policy Gradient &middot; Shreedhar Kodate</title>
+    <meta name="description" content="TD3 (Fujimoto et al. 2018) addresses three failure modes of DDPG with three targeted improvements. Each improvement is independent and can be understood separat">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">TD3 — Twin Delayed Deep Deterministic Policy Gradi</span>
+        </div>
+        <h1 class="post-title">TD3 — Twin Delayed Deep Deterministic Policy Gradient</h1>
+        <p class="post-subtitle">TD3 (Fujimoto et al. 2018) addresses three failure modes of DDPG with three targeted improvements. Each improvement is independent and can be understood separately, but together they produce significantly more stable...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-06-12</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2 active"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Overview</h2>
+<p>TD3 (Fujimoto et al. 2018) addresses three failure modes of DDPG with three
+targeted improvements. Each improvement is independent and can be understood
+separately, but together they produce significantly more stable and reliable
+continuous control.</p>
+<hr />
+<h2>Improvement 1: Twin Critics (Reduces Overestimation Bias)</h2>
+<h3>The Problem</h3>
+<p>In DDPG, the actor is updated to maximise <code>Q(s, μ(s))</code>. But the critic
+systematically <strong>overestimates</strong> Q-values. The actor then chases these inflated
+estimates, learning a policy that exploits critic errors rather than the true
+environment dynamics.</p>
+<h3>Why Overestimation Occurs</h3>
+<p>The Bellman backup selects the <strong>maximum</strong> Q-value action through the actor:</p>
+<pre><code>target = r + γ · Q_target(s', μ_target(s'))
+</code></pre>
+<p>Any positive noise in the critic's estimate of <code>Q_target(s', a')</code> gets
+incorporated into the target and propagated backwards through all future
+Bellman updates, causing <strong>cumulative positive bias</strong>.</p>
+<h3>The Fix</h3>
+<p>Train <strong>two independent critics</strong> Q1 and Q2, and use the <strong>minimum</strong> in the
+Bellman target:</p>
+<pre><code>a' = μ_target(s') + clipped_noise
+y  = r + γ · min(Q1_target(s', a'),  Q2_target(s', a'))
+</code></pre>
+<p>The minimum is a pessimistic estimate that counteracts the positive bias.
+Q1 and Q2 will make independent errors; taking the minimum propagates the more
+conservative (lower) estimate, preventing the actor from exploiting inflated values.</p>
+<p><strong>Mathematical justification</strong>: For independent estimators Q1, Q2 with true
+value Q* and noise ε_i ~ N(0, σ²):</p>
+<pre><code>E[max(Q1, Q2)] = Q* + σ·√(2/π) &gt; Q*    (biased upward)
+E[min(Q1, Q2)] = Q* - σ·√(2/π) &lt; Q*    (biased downward, but less bad)
+</code></pre>
+<p>Slight underestimation is safer than overestimation because it leads to
+conservative policy updates rather than overconfident ones.</p>
+<hr />
+<h2>Improvement 2: Delayed Policy Updates (Stability)</h2>
+<h3>The Problem</h3>
+<p>In DDPG, the actor and critic are updated every single environment step.
+Early in training, the critic is inaccurate. Updating the actor based on an
+inaccurate critic provides a noisy gradient signal, and the actor may overfit
+to the critic's current errors.</p>
+<h3>The Fix</h3>
+<p>Update the actor (and target networks) only every <code>policy_delay</code> critic steps:</p>
+<pre><code>if update_step % policy_delay == 0:
+    actor_loss = -mean(Q1(s, μ(s)))
+    update actor and both target networks
+</code></pre>
+<p>With <code>policy_delay = 2</code>, the critic receives twice as many gradient steps as
+the actor, ensuring the critic is more accurate before each actor update.</p>
+<p><strong>Intuition</strong>: The critic must &quot;settle&quot; onto a reasonable estimate before the
+actor can meaningfully improve by following the critic's gradient.</p>
+<hr />
+<h2>Improvement 3: Target Policy Smoothing (Regularisation)</h2>
+<h3>The Problem</h3>
+<p>If the critic has a sharp peak in Q-value around some action, the actor will
+overfit to that peak — converging to a narrow action that the environment may
+not actually reward well. This is the continuous analogue of overestimating a
+specific action in discrete Q-learning.</p>
+<h3>The Fix</h3>
+<p>Add clipped noise to the <strong>target policy's action</strong> during the Bellman backup:</p>
+<pre><code>noise    = clip(N(0, σ_policy), -noise_clip, noise_clip)
+a'_smooth = clip(μ_target(s') + noise, -action_scale, action_scale)
+y = r + γ · min(Q1_target(s', a'_smooth), Q2_target(s', a'_smooth))
+</code></pre>
+<p>This forces the critic to assign similar Q-values to nearby actions, smoothing
+out any local Q-value peaks. The actor cannot exploit narrow spikes because the
+target averages over a region of action space.</p>
+<hr />
+<h2>DDPG vs TD3 Update Comparison</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph DDPG[&quot;DDPG Update (every step)&quot;]
+        direction TB
+        D1[&quot;Sample batch&quot;] --&gt; D2[&quot;Critic update\ntarget = r + γ·Q_target(s', μ_target(s'))&quot;]
+        D2 --&gt; D3[&quot;Actor update\nloss = -Q(s, μ(s))&quot;]
+        D3 --&gt; D4[&quot;Soft update\nactor_target, critic_target&quot;]
+    end
+
+    subgraph TD3[&quot;TD3 Update (every step / every policy_delay steps)&quot;]
+        direction TB
+        T1[&quot;Sample batch&quot;] --&gt; T2[&quot;Add smoothing noise\na' = clip(μ_target + noise, -scale, scale)&quot;]
+        T2 --&gt; T3[&quot;Twin critic update\ntarget = r + γ·min(Q1_t, Q2_t)(s', a')&quot;]
+        T3 --&gt; T4{update_step % policy_delay == 0?}
+        T4 -- Yes --&gt; T5[&quot;Actor update\nloss = -Q1(s, μ(s))\nSoft update both targets&quot;]
+        T4 -- No --&gt; T6[&quot;Skip actor update\n(critic only)&quot;]
+    end
+</div></div>
+<hr />
+<h2>Expected Improvements Over DDPG</h2>
+<p>Based on benchmarks from Fujimoto et al. (2018) on continuous control tasks:</p>
+<table>
+<thead>
+<tr>
+  <th>Metric</th>
+  <th>DDPG</th>
+  <th>TD3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Average Q-value error</td>
+  <td>+40% bias</td>
+  <td>~10% bias</td>
+</tr>
+<tr>
+  <td>Policy collapse rate</td>
+  <td>Common (~20%)</td>
+  <td>Rare (~3%)</td>
+</tr>
+<tr>
+  <td>Training stability</td>
+  <td>Variable</td>
+  <td>Consistent</td>
+</tr>
+<tr>
+  <td>Final performance (MuJoCo)</td>
+  <td>3000-6000</td>
+  <td>5000-9000 (avg)</td>
+</tr>
+<tr>
+  <td>Sensitivity to hyperparams</td>
+  <td>High</td>
+  <td>Moderate</td>
+</tr>
+</tbody>
+</table>
+<p>The twin critics and delayed updates together remove the feedback loop between
+actor exploitation and critic overestimation that causes DDPG to diverge.</p>
+<hr />
+<h2>Config Parameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Default</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>policy_noise</code></td>
+  <td>0.2</td>
+  <td>Smoothing noise std; higher → more regularization</td>
+</tr>
+<tr>
+  <td><code>noise_clip</code></td>
+  <td>0.5</td>
+  <td>Max smoothing noise; prevents extreme target actions</td>
+</tr>
+<tr>
+  <td><code>policy_delay</code></td>
+  <td>2</td>
+  <td>Critic steps per actor step; higher → more stable</td>
+</tr>
+<tr>
+  <td><code>tau</code></td>
+  <td>0.005</td>
+  <td>Target soft update rate</td>
+</tr>
+<tr>
+  <td><code>actor_lr</code></td>
+  <td>1e-3</td>
+  <td>Actor learning rate</td>
+</tr>
+<tr>
+  <td><code>critic_lr</code></td>
+  <td>1e-3</td>
+  <td>Critic learning rate</td>
+</tr>
+<tr>
+  <td><code>replay_start</code></td>
+  <td>1000</td>
+  <td>Minimum buffer transitions before updates begin</td>
+</tr>
+</tbody>
+</table>
+<h3>Tuning guidance</h3>
+<ul>
+<li>Increase <code>policy_delay</code> (to 3–4) if Q-values are still overestimating.</li>
+<li>Increase <code>policy_noise</code> and <code>noise_clip</code> if the actor converges to a single
+action (mode collapse).</li>
+<li>Decrease <code>tau</code> if training oscillates; increase if learning is too slow.</li>
+</ul>
+<hr />
+<h2>Autonomous Vehicle Use Case</h2>
+<p>TD3 outperforms DDPG in vehicle control because:</p>
+<ol>
+<li><strong>Twin critics</strong> prevent the agent from learning &quot;phantom shortcuts&quot; — manoeuvres
+that look good to an overestimating critic but fail in the environment.</li>
+<li><strong>Delayed updates</strong> allow the Q-function to accurately model vehicle dynamics
+(inertia, momentum) before the policy is updated.</li>
+<li><strong>Smoothing noise</strong> prevents the policy from committing to a specific steering
+angle that only works in exact test conditions (overfitting to critic peaks).</li>
+</ol>
+<p>The result is a more robust policy that generalises across different vehicle
+configurations and road layouts.</p>
+
+        
+        <nav class="post-nav">
+            <a href="06_ddpg.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">DDPG — Deep Deterministic Policy Gradient</span></a>
+            <a href="08_sac.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">SAC — Soft Actor-Critic</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

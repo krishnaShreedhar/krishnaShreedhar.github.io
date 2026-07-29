@@ -1,5 +1,17 @@
-# Ray Engineering – Flow Diagrams
-
+---
+title: "Ray Engineering – Flow Diagrams"
+subtitle: "Detailed step-by-step flow diagrams for every major execution path in the project.  Each diagram is paired with an explanation of the decision points and data transformations involved."
+category: technical
+project: ray_engineering
+project_title: "Ray Engineering"
+date: 2025-03-26
+reading_time: 4
+tags:
+  - ray-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/ray_engineering/docs/flow_diagrams.html"
+---
 Detailed step-by-step flow diagrams for every major execution path in the
 project.  Each diagram is paired with an explanation of the decision points
 and data transformations involved.

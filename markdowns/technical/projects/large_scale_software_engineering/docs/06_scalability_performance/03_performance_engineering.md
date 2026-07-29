@@ -1,5 +1,17 @@
-# Performance Engineering
-
+---
+title: "Performance Engineering"
+subtitle: "Performance engineering is the systematic process of measuring, analyzing, and improving system performance. It involves understanding latency distributions, identifying bottlenecks through profiling, applying..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-13
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/06_scalability_performance/03_performance_engineering.html"
+---
 Performance engineering is the systematic process of measuring, analyzing, and improving system performance. It involves understanding latency distributions, identifying bottlenecks through profiling, applying optimizations, and validating improvements under realistic load.
 
 ## Performance Measurement Framework

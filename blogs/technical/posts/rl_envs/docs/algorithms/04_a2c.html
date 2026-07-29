@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>A2C — Advantage Actor-Critic &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A2C (Advantage Actor-Critic) is a synchronous, on-policy algorithm that simultaneously learns a **policy** (the actor) and a **value function** (the critic). It">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">A2C — Advantage Actor-Critic</span>
+        </div>
+        <h1 class="post-title">A2C — Advantage Actor-Critic</h1>
+        <p class="post-subtitle">A2C (Advantage Actor-Critic) is a synchronous, on-policy algorithm that simultaneously learns a **policy** (the actor) and a **value function** (the critic). It extends REINFORCE by using the critic's value estimate...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-07-15</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2 active"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Concept</h2>
+<p>A2C (Advantage Actor-Critic) is a synchronous, on-policy algorithm that
+simultaneously learns a <strong>policy</strong> (the actor) and a <strong>value function</strong> (the
+critic). It extends REINFORCE by using the critic's value estimate to compute
+an <strong>advantage</strong> — how much better an action was compared to what was expected —
+rather than raw cumulative return. This variance reduction is the key insight
+that makes A2C more sample-efficient than REINFORCE.</p>
+<p>The &quot;synchronous&quot; in A2C means all parallel workers (if any) are updated in
+lock-step after every rollout, as opposed to A3C which uses asynchronous
+gradient updates.</p>
+<hr />
+<h2>Advantage Estimation</h2>
+<p>For a rollout of T steps the <strong>n-step return</strong> is computed backwards:</p>
+<pre><code>G_t = r_t + γ·r_{t+1} + γ²·r_{t+2} + ... + γ^{T-t}·V(s_T)
+</code></pre>
+<p>where <code>V(s_T)</code> is the bootstrap value from the critic (zero if the episode ended).</p>
+<p>The <strong>advantage</strong>:</p>
+<pre><code>A_t = G_t - V(s_t)
+</code></pre>
+<p><code>A_t &gt; 0</code> means action <code>a_t</code> led to a better-than-expected outcome; the actor
+is pushed to make it more probable. <code>A_t &lt; 0</code> reduces its probability.</p>
+<hr />
+<h2>Actor-Critic Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    S[&quot;State s_t\n[input_dim]&quot;] --&gt; T[&quot;Shared Trunk\n(MLP, ReLU)&quot;]
+    T --&gt; AH[&quot;Actor Head\nLinear → logits\n[action_dim]&quot;]
+    T --&gt; CH[&quot;Critic Head\nLinear → V(s)\n[1]&quot;]
+    AH --&gt; D[&quot;Categorical\nDistribution&quot;]
+    D --&gt; A[&quot;Action a_t&quot;]
+    D --&gt; LP[&quot;log π(a_t|s_t)&quot;]
+    D --&gt; H[&quot;Entropy H(π)&quot;]
+    CH --&gt; V[&quot;Value V(s_t)&quot;]
+</div></div>
+<p>The <strong>shared trunk</strong> extracts features used by both heads. This reduces total
+parameters and encourages the actor and critic to learn complementary representations.</p>
+<hr />
+<h2>Combined Loss</h2>
+<pre><code>L_actor  = -E[log π(a|s) · A_t] - α_H · H(π)
+L_critic = α_V · MSE(V(s_t), G_t)
+L_total  = L_actor + L_critic
+</code></pre>
+<table>
+<thead>
+<tr>
+  <th>Term</th>
+  <th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Policy gradient</td>
+  <td>Push actions with positive advantage</td>
+</tr>
+<tr>
+  <td>Entropy bonus</td>
+  <td>Prevent premature convergence to a deterministic policy</td>
+</tr>
+<tr>
+  <td>Critic MSE</td>
+  <td>Improve the accuracy of the baseline V(s)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Comparison to REINFORCE</h2>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>REINFORCE</th>
+  <th>A2C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Baseline</td>
+  <td>None (or simple mean)</td>
+  <td>Learned value function V(s)</td>
+</tr>
+<tr>
+  <td>Variance</td>
+  <td>High</td>
+  <td>Lower (advantage reduces noise)</td>
+</tr>
+<tr>
+  <td>Bias</td>
+  <td>Zero</td>
+  <td>Small (bootstrap bias)</td>
+</tr>
+<tr>
+  <td>Update frequency</td>
+  <td>End of episode</td>
+  <td>Every n_steps steps</td>
+</tr>
+<tr>
+  <td>Sample efficiency</td>
+  <td>Low</td>
+  <td>Moderate</td>
+</tr>
+<tr>
+  <td>Implementation cost</td>
+  <td>Very low</td>
+  <td>Low</td>
+</tr>
+</tbody>
+</table>
+<p>The critic acts as a <strong>control variate</strong>: subtracting V(s_t) from the return
+does not change the expected gradient but significantly reduces its variance,
+leading to faster, more stable learning.</p>
+<hr />
+<h2>Synchronous vs Asynchronous (A3C)</h2>
+<table>
+<thead>
+<tr>
+  <th>Aspect</th>
+  <th>A2C (Synchronous)</th>
+  <th>A3C (Asynchronous)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Workers</td>
+  <td>Wait for each other</td>
+  <td>Update independently</td>
+</tr>
+<tr>
+  <td>Reproducibility</td>
+  <td>High</td>
+  <td>Low (non-deterministic)</td>
+</tr>
+<tr>
+  <td>GPU utilisation</td>
+  <td>Better (batched updates)</td>
+  <td>Worse (CPU-heavy)</td>
+</tr>
+<tr>
+  <td>Modern preference</td>
+  <td>Yes (simpler, GPU-friendly)</td>
+  <td>Less common today</td>
+</tr>
+</tbody>
+</table>
+<p>Modern hardware favours A2C's batched GPU updates over A3C's CPU-heavy async scheme.</p>
+<hr />
+<h2>Use Case: Path Planning</h2>
+<p>A2C is well-suited to discrete navigation tasks (grid-world path planning):</p>
+<ul>
+<li><strong>Short episodes</strong> (200 steps) mean n-step returns are not excessively long.</li>
+<li><strong>Discrete actions</strong> (up/down/left/right) fit the Categorical policy naturally.</li>
+<li><strong>Obstacles</strong> in the grid create a non-trivial reward landscape that benefits
+from the critic's learned value function.</li>
+<li>The entropy bonus keeps the policy exploring different routes, avoiding local
+optima caused by the first feasible path found.</li>
+</ul>
+<hr />
+<h2>Config Parameters</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Default</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>learning_rate</code></td>
+  <td>3e-4</td>
+  <td>Adam step size; too high → unstable, too low → slow</td>
+</tr>
+<tr>
+  <td><code>gamma</code></td>
+  <td>0.99</td>
+  <td>Discount; lower values prioritise immediate rewards</td>
+</tr>
+<tr>
+  <td><code>n_steps</code></td>
+  <td>20</td>
+  <td>Rollout length; longer → less bias, more variance</td>
+</tr>
+<tr>
+  <td><code>entropy_coef</code></td>
+  <td>0.01</td>
+  <td>Exploration drive; increase if policy collapses</td>
+</tr>
+<tr>
+  <td><code>value_loss_coef</code></td>
+  <td>0.5</td>
+  <td>Balances critic vs actor gradient magnitudes</td>
+</tr>
+<tr>
+  <td><code>max_grad_norm</code></td>
+  <td>0.5</td>
+  <td>Gradient clipping threshold</td>
+</tr>
+<tr>
+  <td><code>hidden_dims</code></td>
+  <td>[128,128]</td>
+  <td>Shared trunk capacity</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Expected Performance</h2>
+<p>On a 10×10 grid world with 10 obstacles:</p>
+<ul>
+<li><strong>Random baseline</strong>: ~5% success rate per episode.</li>
+<li><strong>A2C after 500 episodes</strong>: typically 50–70% success rate.</li>
+<li><strong>A2C at convergence (2000 episodes)</strong>: 85–95% success rate.</li>
+<li><strong>Training time</strong>: ~2–5 minutes on CPU for 2000 episodes.</li>
+</ul>
+<p>The advantage baseline typically reduces the variance of gradient estimates by
+3–10× compared to vanilla REINFORCE on this task.</p>
+
+        
+        <nav class="post-nav">
+            <a href="03_double_dqn.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">03 — Double DQN</span></a>
+            <a href="05_ppo.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">PPO — Proximal Policy Optimization</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

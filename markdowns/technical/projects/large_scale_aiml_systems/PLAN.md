@@ -1,5 +1,16 @@
-# Plan: Large Scale AI/ML Systems Documentation
-
+---
+title: "Plan: Large Scale AI/ML Systems Documentation"
+subtitle: "Build a comprehensive engineering reference for production AI/ML systems that bridges the gap between ML research and production reliability, covering the full lifecycle from data collection to large-scale inference..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-05-26
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/PLAN.html"
+---
 ## Objective
 
 Build a comprehensive engineering reference for production AI/ML systems that bridges the gap between ML research and production reliability, covering the full lifecycle from data collection to large-scale inference serving.

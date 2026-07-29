@@ -1,5 +1,17 @@
-# Inference Optimization
-
+---
+title: "Inference Optimization"
+subtitle: "Inference optimization reduces the latency and cost of running large neural networks at serving time. Training cost is paid once; inference cost is paid for every prediction in production — for large LLMs handling..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-11-09
+reading_time: 5
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/05_scaling_ml_systems/03_inference_optimization.html"
+---
 Inference optimization reduces the latency and cost of running large neural networks at serving time. Training cost is paid once; inference cost is paid for every prediction in production — for large LLMs handling millions of requests, optimizing inference has 10-100x impact on total compute spend. Key techniques include quantization, KV-cache management, continuous batching, and speculative decoding.
 
 ## LLM Inference Bottlenecks

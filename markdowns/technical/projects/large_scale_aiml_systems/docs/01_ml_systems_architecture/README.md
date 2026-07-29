@@ -1,5 +1,17 @@
-# ML Systems Architecture
-
+---
+title: "ML Systems Architecture"
+subtitle: "ML systems architecture encompasses the design of end-to-end pipelines that transform raw data into model predictions served at scale. Unlike traditional software, ML systems must manage both code artifacts (models)..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-02-07
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/01_ml_systems_architecture/index.html"
+---
 ML systems architecture encompasses the design of end-to-end pipelines that transform raw data into model predictions served at scale. Unlike traditional software, ML systems must manage both code artifacts (models) and data artifacts (features, training datasets) with strict versioning and reproducibility requirements.
 
 ## Overview

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Distributed Training &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Distributed training splits the workload of training large neural networks across multiple GPUs and multiple machines. As models grow to billions or trillions o">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Distributed Training</span>
+        </div>
+        <h1 class="post-title">Distributed Training</h1>
+        <p class="post-subtitle">Distributed training splits the workload of training large neural networks across multiple GPUs and multiple machines. As models grow to billions or trillions of parameters and training datasets grow to trillions of...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-06-19</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2 active"><a href="01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Distributed training splits the workload of training large neural networks across multiple GPUs and multiple machines. As models grow to billions or trillions of parameters and training datasets grow to trillions of tokens, single-GPU training becomes infeasible — distributed training is the only approach that can train frontier models within reasonable time and cost budgets.</p>
+<h2>Distributed Training Strategies Overview</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Strategies[Distributed Training Parallelism Strategies]
+        subgraph DataParallel[Data Parallelism]
+            DP[Each GPU has a full model copy\nDataset sharded across GPUs\nGradients all-reduced across workers\nScales to large datasets\nModel must fit on single GPU]
+            DDP[PyTorch DDP\nDistributedDataParallel\nOverlaps backward pass\nwith all-reduce communication\nIndustry standard for data parallel]
+        end
+
+        subgraph ModelParallel[Model Parallelism]
+            TP[Tensor Parallelism\nSplit individual layers\nacross GPUs\nIntra-layer parallelism]
+            PP[Pipeline Parallelism\nSplit model layers into stages\neach GPU owns some layers\nInter-layer parallelism]
+        end
+
+        subgraph Hybrid[Hybrid Approaches]
+            FSDP[FSDP - Fully Sharded Data Parallel\nShard model parameters optimizer states\nand gradients across GPUs\nEffectively zero-redundancy data parallel\nPyTorch built-in]
+            DeepSpeed[DeepSpeed ZeRO\nZero Redundancy Optimizer\nZeRO-1 shard optimizer states\nZeRO-2 shard gradients\nZeRO-3 shard parameters]
+        end
+    end
+</div></div>
+<h2>DDP Communication Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph DDPFlow[DDP - AllReduce Gradient Synchronization]
+        subgraph Forward[Forward Pass - Parallel]
+            GPU0F[GPU 0: Forward on batch shard 0]
+            GPU1F[GPU 1: Forward on batch shard 1]
+            GPU2F[GPU 2: Forward on batch shard 2]
+            GPU3F[GPU 3: Forward on batch shard 3]
+        end
+
+        subgraph Backward[Backward Pass - Parallel]
+            GPU0B[GPU 0: Compute local gradients]
+            GPU1B[GPU 1: Compute local gradients]
+            GPU2B[GPU 2: Compute local gradients]
+            GPU3B[GPU 3: Compute local gradients]
+        end
+
+        AllReduce[All-Reduce Operation\nRing-All-Reduce or NCCL\nAverage gradients across all GPUs\nAll GPUs receive identical gradients]
+
+        Update[Synchronized Update\nAll GPUs apply same gradient update\nModels remain identical\nStep count incremented]
+
+        Forward --&gt; Backward --&gt; AllReduce --&gt; Update
+    end
+</div></div>
+<h2>FSDP / DeepSpeed ZeRO Memory Savings</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph MemoryBreakdown[GPU Memory Usage for a 7B Parameter Model]
+        subgraph NaiveDP[Naive Data Parallel - per GPU]
+            P1[Parameters: 28 GB in fp32]
+            G1[Gradients: 28 GB]
+            OS1[Optimizer States: 56 GB Adam first and second moments]
+            Total1[Total: 112 GB per GPU\nDoesnt fit on A100 80GB]
+            style Total1 fill:#fee2e2,stroke:#dc2626
+        end
+
+        subgraph ZeROStages[ZeRO Sharding across N GPUs]
+            Z1[ZeRO-1: Shard optimizer states\nReduction: 4x with N=4\nOptimizer states: 14 GB]
+            Z2[ZeRO-2: Shard gradients + optimizer\nReduction: 8x\nGrad + optim: 21 GB total]
+            Z3[ZeRO-3: Shard params + grad + optim\nReduction: 64x with N=64\n1.75 GB per GPU\nTrainable on single A100]
+            style Z3 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        end
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Data Parallelism</strong>: The simplest and most common form of distributed training. Each GPU holds a complete replica of the model and processes a different mini-batch. After the backward pass, gradients are averaged across all GPUs via all-reduce. All GPUs apply the same averaged gradient, keeping model replicas synchronized. Scales training throughput linearly with the number of GPUs (assuming communication doesn't bottleneck). Requires the model to fit in the memory of a single GPU.</p>
+</li>
+<li><p><strong>All-Reduce</strong>: The collective communication operation that sums (or averages) tensors across all workers. For gradient synchronization, each worker contributes its local gradients and receives the global average. NCCL (NVIDIA Collective Communication Library) implements highly optimized ring-all-reduce using NVLink and InfiniBand. All-reduce bandwidth determines the maximum achievable scaling efficiency.</p>
+</li>
+<li><p><strong>Gradient Accumulation</strong>: Computing gradients over multiple mini-batches before performing the optimizer step. Simulates a larger effective batch size without increasing GPU memory — important when the desired batch size exceeds what fits in GPU memory. With gradient accumulation of 8 steps, an effective batch size of 8x the per-GPU batch size is achieved, then one optimizer step and gradient zero-ing.</p>
+</li>
+<li><p><strong>Mixed Precision Training (BF16/FP16)</strong>: Training with 16-bit floating point instead of 32-bit. Halves memory usage for activations and parameters, enables processing larger batches, and increases GPU throughput (tensor cores are optimized for 16-bit). Master weights and optimizer states are kept in FP32 for numerical stability. BF16 (Brain Float 16) has a larger dynamic range than FP16 and is preferred for LLM training (less loss spiking).</p>
+</li>
+<li><p><strong>Gradient Checkpointing (Activation Recomputation)</strong>: During the forward pass, instead of storing all intermediate activations in GPU memory (needed for backpropagation), discard them and recompute them during the backward pass. Reduces activation memory by ~10x at the cost of ~33% increase in compute. Critical for training large models where activation memory dominates.</p>
+</li>
+<li><p><strong>FSDP (Fully Sharded Data Parallel)</strong>: PyTorch's native implementation of ZeRO-3-style sharding. Model parameters, gradients, and optimizer states are sharded across all GPUs — each GPU only holds 1/N of each. Before a layer's forward pass, the full parameters are all-gathered; after the backward pass, they are re-sharded. Enables training models much larger than single-GPU memory. Supported directly in PyTorch without additional libraries.</p>
+</li>
+<li><p><strong>DeepSpeed ZeRO</strong>: Microsoft's implementation with three stages of sharding plus CPU offloading. ZeRO-Infinity allows offloading parameters to CPU RAM and NVMe SSDs — enabling training models that don't fit in aggregate GPU memory. Required for training the largest frontier models (100B+ parameters).</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Strategy</th>
+  <th>Model Size Limit</th>
+  <th>Communication Overhead</th>
+  <th>Implementation Complexity</th>
+  <th>Batch Size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>DDP</td>
+  <td>Single GPU memory</td>
+  <td>Low</td>
+  <td>Low</td>
+  <td>Scales linearly</td>
+</tr>
+<tr>
+  <td>FSDP ZeRO-3</td>
+  <td>N x GPU memory</td>
+  <td>Medium</td>
+  <td>Medium</td>
+  <td>Scales linearly</td>
+</tr>
+<tr>
+  <td>Tensor Parallel</td>
+  <td>N x GPU memory</td>
+  <td>High</td>
+  <td>High</td>
+  <td>Fixed</td>
+</tr>
+<tr>
+  <td>Pipeline Parallel</td>
+  <td>N x GPU memory</td>
+  <td>Medium</td>
+  <td>Very High</td>
+  <td>Fixed</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>DDP</strong>: Default for any model that fits on a single GPU — simplest distributed strategy with near-linear scaling efficiency</li>
+<li><strong>FSDP / ZeRO-2</strong>: Models that fit across GPUs in aggregate but not on a single GPU (7B-70B models on moderate clusters)</li>
+<li><strong>ZeRO-3 / ZeRO-Infinity</strong>: Largest models where parameters must be sharded — 70B+ on clusters, or when optimizer states dominate memory</li>
+<li><strong>Gradient checkpointing</strong>: Always enable when training large transformers — the 33% compute overhead is almost always worth the memory savings that enable larger batch sizes</li>
+<li><strong>BF16 mixed precision</strong>: Default for all modern LLM training — A100/H100 hardware natively supports BF16 and it's numerically stabler than FP16</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Scaling ML Systems</span></a>
+            <a href="02_model_parallelism.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Model Parallelism</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

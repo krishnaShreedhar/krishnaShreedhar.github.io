@@ -1,5 +1,17 @@
-# Tutorial 07: Occupancy
-
+---
+title: "Tutorial 07: Occupancy"
+subtitle: "See `src/tutorials/07_occupancy/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-02-15
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/07_occupancy.html"
+---
 ## Concept
 
 See `src/tutorials/07_occupancy/main.cu` for detailed inline comments explaining

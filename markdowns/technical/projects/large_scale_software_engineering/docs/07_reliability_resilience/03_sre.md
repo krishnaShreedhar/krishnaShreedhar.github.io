@@ -1,5 +1,17 @@
-# Site Reliability Engineering (SRE)
-
+---
+title: "Site Reliability Engineering (SRE)"
+subtitle: "Site Reliability Engineering is the discipline of applying software engineering to operations problems — automating toil, defining reliability standards through SLOs, and building systems that are easy to operate...."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-08
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/07_reliability_resilience/03_sre.html"
+---
 Site Reliability Engineering is the discipline of applying software engineering to operations problems — automating toil, defining reliability standards through SLOs, and building systems that are easy to operate. SRE was formalized at Google and has since been adopted broadly as the operational counterpart to DevOps.
 
 ## SRE Principles

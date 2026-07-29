@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ray Engineering &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A self-contained project that illustrates **every major Ray subsystem** through minimal, runnable Python examples.  Each module demonstrates real patterns used ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Ray Engineering</span>
+        </div>
+        <h1 class="post-title">Ray Engineering</h1>
+        <p class="post-subtitle">A self-contained project that illustrates **every major Ray subsystem** through minimal, runnable Python examples.  Each module demonstrates real patterns used in production distributed ML systems—including the...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-09-18</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">ray-engineering</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Ray Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">Ray Engineering</a></li><li class="project-nav__lvl-1"><a href="docs/architecture.html">Ray Engineering – Architecture Reference</a></li><li class="project-nav__lvl-1"><a href="docs/flow_diagrams.html">Ray Engineering – Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A self-contained project that illustrates <strong>every major Ray subsystem</strong> through
+minimal, runnable Python examples.  Each module demonstrates real patterns
+used in production distributed ML systems—including the corresponding
+anti-patterns so you know what to avoid.</p>
+<hr />
+<h2>Concepts Covered</h2>
+<table>
+<thead>
+<tr>
+  <th>Module</th>
+  <th>Ray API</th>
+  <th>Pattern demonstrated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>core_primitives/remote_functions.py</code></td>
+  <td><code>@ray.remote</code>, <code>ray.get</code>, <code>ray.wait</code></td>
+  <td>Submit-all-then-get, DAG composition, streaming collection</td>
+</tr>
+<tr>
+  <td><code>core_primitives/actors.py</code></td>
+  <td><code>@ray.remote class</code>, <code>ActorPool</code></td>
+  <td>ParameterServer, stateful workers, load-balanced pool</td>
+</tr>
+<tr>
+  <td><code>core_primitives/object_store.py</code></td>
+  <td><code>ray.put</code>, <code>ObjectRef</code></td>
+  <td>Zero-copy fan-out, lifecycle management</td>
+</tr>
+<tr>
+  <td><code>distributed_training/data_pipeline.py</code></td>
+  <td><code>ray.data.Dataset</code>, <code>map_batches</code></td>
+  <td>Lazy ETL pipeline, train/val split</td>
+</tr>
+<tr>
+  <td><code>distributed_training/torch_trainer.py</code></td>
+  <td><code>TorchTrainer</code>, <code>ScalingConfig</code>, <code>Checkpoint</code></td>
+  <td>DDP training, per-epoch checkpointing</td>
+</tr>
+<tr>
+  <td><code>hyperparameter_tuning/tune_experiment.py</code></td>
+  <td><code>Tuner</code>, <code>ASHAScheduler</code>, <code>OptunaSearch</code></td>
+  <td>Bayesian HPO with early stopping</td>
+</tr>
+<tr>
+  <td><code>model_serving/serve_deployment.py</code></td>
+  <td><code>@serve.deployment</code>, <code>@serve.batch</code></td>
+  <td>Multi-model pipeline, request batching</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Project Structure</h2>
+<pre><code>ray_engineering/
+├── config.yaml                    # ALL constants and hyperparameters
+├── pyproject.toml
+├── README.md
+├── logs/                          # Rotating JSON log files written here
+├── src/
+│   ├── utils/
+│   │   ├── config_loader.py       # YAML config reader
+│   │   └── logging_setup.py      # JSON formatter + rotating file handler
+│   ├── core_primitives/
+│   │   ├── remote_functions.py
+│   │   ├── actors.py
+│   │   └── object_store.py
+│   ├── distributed_training/
+│   │   ├── data_pipeline.py
+│   │   └── torch_trainer.py
+│   ├── hyperparameter_tuning/
+│   │   └── tune_experiment.py
+│   ├── model_serving/
+│   │   └── serve_deployment.py
+│   └── notebooks/
+│       └── ray_concepts_demo.ipynb
+├── docs/
+│   ├── architecture.md            # Mermaid cluster / serving diagrams
+│   └── flow_diagrams.md           # Step-by-step execution flows
+└── docker/
+    ├── Dockerfile
+    ├── docker-compose.yml
+    └── requirements.txt
+</code></pre>
+<hr />
+<h2>Quick Start</h2>
+<h3>1. Install dependencies</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">pip install ray[all]==2.9.0 torch pyyaml numpy pandas optuna matplotlib
+</code></pre></div>
+<h3>2. Run individual modules</h3>
+<p>Each Python file is independently runnable.  All parameters come from
+<code>config.yaml</code> – edit the file to change behaviour.</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># From the project root (ray_engineering/)
+PYTHONPATH=src python src/core_primitives/remote_functions.py
+PYTHONPATH=src python src/core_primitives/actors.py
+PYTHONPATH=src python src/core_primitives/object_store.py
+PYTHONPATH=src python src/distributed_training/data_pipeline.py
+PYTHONPATH=src python src/distributed_training/torch_trainer.py
+PYTHONPATH=src python src/hyperparameter_tuning/tune_experiment.py
+PYTHONPATH=src python src/model_serving/serve_deployment.py
+</code></pre></div>
+<h3>3. Run the Jupyter notebook</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd src/notebooks
+jupyter lab ray_concepts_demo.ipynb
+</code></pre></div>
+<p>The notebook walks through every concept step-by-step with inline
+visualisations (label distributions, training curves, HPO scatter plots,
+latency histograms).</p>
+<hr />
+<h2>Docker</h2>
+<h3>Build and run locally (single container)</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker
+docker build -t ray-engineering:latest -f Dockerfile ..
+docker run --rm -v $(pwd)/../logs:/app/logs ray-engineering:latest
+</code></pre></div>
+<h3>Multi-node cluster with Docker Compose</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker
+docker compose up --build
+
+# Scale to 4 workers
+docker compose up --scale ray-worker=4
+</code></pre></div>
+<p>The head node starts Ray and runs <code>remote_functions.py</code>.  Worker nodes join
+the cluster and wait for tasks.  The Ray Dashboard is available at
+<code>http://localhost:8265</code>.</p>
+<hr />
+<h2>Configuration</h2>
+<p>All tunable parameters live in <code>config.yaml</code>.  <strong>No values are hardcoded</strong>
+in the Python source files.</p>
+<p>Key sections:</p>
+<div class="code-wrapper"><span class="code-lang">yaml</span><pre><code class="language-yaml">logging:
+  level: INFO        # Set to DEBUG for verbose output
+  log_file: logs/ray_engineering.log
+
+ray.init:
+  num_cpus: 4        # Simulated local cluster size
+  object_store_memory: 1073741824  # 1 GB Plasma store
+
+distributed_training:
+  num_workers: 2
+  epochs: 5
+  learning_rate: 0.001
+
+hyperparameter_tuning:
+  num_samples: 20    # Total Tune trials
+  metric: accuracy
+  mode: max
+</code></pre></div>
+<hr />
+<h2>Logging</h2>
+<p>Every module writes <strong>JSON-formatted</strong> logs to <code>logs/ray_engineering.log</code>
+(rotating, max 100 MB, 5 backups) and human-readable text to stdout.</p>
+<p>Log level is controlled by <code>logging.level</code> in <code>config.yaml</code>.  Set to
+<code>DEBUG</code> to see per-batch loss values, object references, and scheduler
+decisions.</p>
+<hr />
+<h2>Anti-Patterns Demonstrated</h2>
+<p>The project explicitly codes and labels anti-patterns so learners can
+recognise them:</p>
+<table>
+<thead>
+<tr>
+  <th>Anti-pattern</th>
+  <th>File</th>
+  <th>Correct alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>ray.get()</code> inside submission loop</td>
+  <td><code>remote_functions.py::demo_anti_pattern</code></td>
+  <td>Collect all futures, then single <code>ray.get()</code></td>
+</tr>
+<tr>
+  <td>Calling actor methods one-at-a-time</td>
+  <td><code>actors.py::demo_anti_pattern_actor</code></td>
+  <td>Batch futures, then <code>ray.get(futures)</code></td>
+</tr>
+<tr>
+  <td>Passing raw large arrays to tasks</td>
+  <td><code>object_store.py::demo_anti_pattern_vs_correct</code></td>
+  <td><code>ray.put()</code> once, pass <code>ObjectRef</code></td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/architecture.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Ray Engineering – Architecture Reference</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

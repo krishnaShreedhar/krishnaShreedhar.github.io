@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ML Pipelines &middot; Shreedhar Kodate</title>
+    <meta name="description" content="An ML pipeline is a directed acyclic graph (DAG) of transformations that takes raw data as input and produces a trained, evaluated, and deployed model as output">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">ML Pipelines</span>
+        </div>
+        <h1 class="post-title">ML Pipelines</h1>
+        <p class="post-subtitle">An ML pipeline is a directed acyclic graph (DAG) of transformations that takes raw data as input and produces a trained, evaluated, and deployed model as output. Well-designed ML pipelines are reproducible,...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-12</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2 active"><a href="01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>An ML pipeline is a directed acyclic graph (DAG) of transformations that takes raw data as input and produces a trained, evaluated, and deployed model as output. Well-designed ML pipelines are reproducible, versioned, testable, and observable — applying software engineering discipline to ML workflows.</p>
+<h2>End-to-End ML Pipeline</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph DataIngestion[Data Ingestion]
+        RawData[Raw Data Sources\nDatabases, APIs, Files, Streams]
+        Validate[Data Validation\nGreat Expectations\nCheck schema and stats]
+        RawData --&gt; Validate
+    end
+
+    subgraph FeatureEngineering[Feature Engineering]
+        FeatureComp[Feature Computation\nAggregations, transformations\nEmbeddings, encodings]
+        FeatureStore[Feature Store\nStore computed features\nfor training and serving]
+        Validate --&gt; FeatureComp --&gt; FeatureStore
+    end
+
+    subgraph Training[Model Training]
+        DataSplit[Train/Val/Test Split\nTime-based or random]
+        Train[Model Training\nGPU cluster\nDistributed if needed]
+        Evaluate[Model Evaluation\nAccuracy, F1, AUC\nBusiness metrics]
+        FeatureStore --&gt; DataSplit --&gt; Train --&gt; Evaluate
+    end
+
+    subgraph Deployment[Deployment Decision]
+        Compare[Compare vs Champion\nIs challenger better?]
+        Register[Register Model\nMLflow model registry\nversion and metadata]
+        Deploy[Deploy to Serving]
+        Evaluate --&gt; Compare --&gt; Register --&gt; Deploy
+    end
+
+    Monitor[Production Monitoring\nData drift, prediction drift\nBusiness metric monitoring]
+    Deploy --&gt; Monitor
+
+    style FeatureStore fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    style Register fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>ML Pipeline Orchestration Tools</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Orchestrators[ML Pipeline Orchestrators]
+        Kubeflow[Kubeflow Pipelines\nKubernetes-native\nPython SDK\nML-specific primitives]
+        Airflow[Apache Airflow\nGeneral DAG orchestration\nLarge ecosystem\nML plugins available]
+        Metaflow[Netflix Metaflow\nData scientist friendly\nAWS-integrated\nVersioned artifacts]
+        Prefect[Prefect\nModern Python API\nObservability built-in\nHybrid execution]
+        ZenML[ZenML\nML-specific\nPipeline portability\nStack abstraction]
+    end
+
+    subgraph Comparison[Tool Selection Criteria]
+        UseKubeflow[Kubeflow: K8s-native\nmicroservices team\nfine-grained control]
+        UseAirflow[Airflow: existing Airflow\ndata engineering team\nmixed workflows]
+        UseMetaflow[Metaflow: data scientists\nAWS shop\nminimal infra overhead]
+    end
+</div></div>
+<h2>Training-Serving Skew Prevention</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph TrainingSkewProblem[Training-Serving Skew]
+        TSkew[Training features: computed from historical DB\nServing features: computed from real-time API\nDifferent logic → model sees different distribution\nPredictions degrade silently]
+        style TSkew fill:#fee2e2,stroke:#dc2626
+    end
+
+    subgraph FeatureStoreUnification[Feature Store Solution]
+        FeatDef[Single Feature Definition\npython def compute_user_spend_7d:\n  ...same SQL logic...\nused for both training and serving]
+        OfflineStore[Offline Store: historical\npoint-in-time correct]
+        OnlineStore[Online Store: real-time\nsame logic, low latency]
+        FeatDef --&gt; OfflineStore &amp; OnlineStore
+        style FeatDef fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>ML Pipeline as Code</strong>: Define pipelines as code (Python functions, YAML configurations) with version control, code review, and CI/CD. Every pipeline run should be reproducible given the same inputs. Pipelines as code enable collaboration and prevent &quot;notebook chaos&quot; where important ML code lives in undiscoverable Jupyter notebooks.</p>
+</li>
+<li><p><strong>DAG (Directed Acyclic Graph)</strong>: The fundamental structure of ML pipelines. Each node is a computation step; edges represent data dependencies. DAG structure enables parallelism (independent branches run concurrently), caching (reuse completed steps on rerun), and failure recovery (resume from the failed step).</p>
+</li>
+<li><p><strong>Artifact Versioning</strong>: Every artifact produced by a pipeline (datasets, features, models, metrics) is versioned and associated with the pipeline run that produced it. This enables reproducibility (re-run an exact historical pipeline), debugging (trace a bad model to its training data), and rollback.</p>
+</li>
+<li><p><strong>Training-Serving Skew</strong>: The most common and insidious failure mode in ML systems. Training uses historical batch data to compute features; serving computes the same features from real-time data using different code paths. Subtle differences in feature computation logic cause the model to see a different distribution in production than in training. Feature stores with a single feature definition prevent this.</p>
+</li>
+<li><p><strong>Pipeline Triggers</strong>: ML pipelines can be triggered by: schedule (retrain every week), data events (new data volume threshold crossed), model performance degradation (accuracy drops below threshold), or manual approval. Automated triggers require careful guardrails to prevent runaway retraining.</p>
+</li>
+<li><p><strong>Continuous Training (CT)</strong>: Automatically retraining models on fresh data based on triggers. Different from CI/CD for software — CT must include evaluation gates (the new model must be at least as good as the current champion before deployment).</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Approach</th>
+  <th>Engineering Overhead</th>
+  <th>Flexibility</th>
+  <th>Reproducibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Notebooks only</td>
+  <td>Very Low</td>
+  <td>High</td>
+  <td>Very Low</td>
+</tr>
+<tr>
+  <td>Scripts in git</td>
+  <td>Low</td>
+  <td>High</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Orchestrated pipelines</td>
+  <td>Medium</td>
+  <td>Medium</td>
+  <td>High</td>
+</tr>
+<tr>
+  <td>ML platform (Kubeflow)</td>
+  <td>High</td>
+  <td>Medium</td>
+  <td>Very High</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Scripted pipelines</strong>: Small teams, early stage, single model — low overhead with reasonable reproducibility</li>
+<li><strong>Kubeflow/Airflow</strong>: Production systems with multiple models, multiple teams, and reliability requirements</li>
+<li><strong>Feature store</strong>: Any system where features are shared across models or where training-serving skew is a risk (almost always)</li>
+<li><strong>Continuous training</strong>: When model accuracy is sensitive to data staleness (recommendation, fraud detection, NLP on evolving language)</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">ML Systems Architecture</span></a>
+            <a href="02_feature_stores.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Feature Stores</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

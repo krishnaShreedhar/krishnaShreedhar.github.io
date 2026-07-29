@@ -1,5 +1,17 @@
-# Pandas & PySpark — Core Concepts
-
+---
+title: "Pandas & PySpark — Core Concepts"
+subtitle: "graph TD subgraph Driver[\"Driver Process\"] SC[SparkContext / SparkSession] DAG[DAG Scheduler] TS[Task Scheduler] end"
+category: technical
+project: pandas_pyspark
+project_title: "Pandas & PySpark — Concepts & Examples"
+date: 2025-03-05
+reading_time: 4
+tags:
+  - pandas-pyspark
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/pandas_pyspark/docs/concepts.html"
+---
 ## 1. PySpark Cluster Architecture
 
 ```mermaid

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Deep Learning Quantization Concepts &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Quantization maps a continuous floating-point tensor to a discrete integer representation. The core mathematical transformation is:">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Deep Learning Quantization Concepts</span>
+        </div>
+        <h1 class="post-title">Deep Learning Quantization Concepts</h1>
+        <p class="post-subtitle">Quantization maps a continuous floating-point tensor to a discrete integer representation. The core mathematical transformation is:</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-04-29</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>6 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">quantization-deep-learning</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Deep Learning Quantization</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Deep Learning Quantization</a></li><li class="project-nav__lvl-1 active"><a href="concepts.html">Deep Learning Quantization Concepts</a></li><li class="project-nav__lvl-1"><a href="flow_diagrams.html">Quantization Workflow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>1. Quantization Fundamentals</h2>
+<p>Quantization maps a continuous floating-point tensor to a discrete integer representation. The core mathematical transformation is:</p>
+<pre><code>x_int = clamp(round(x_float / scale) + zero_point, quant_min, quant_max)
+x_dequant = (x_int - zero_point) * scale
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>scale</code> — step size between adjacent quantization levels</li>
+<li><code>zero_point</code> — integer value that represents 0.0 in float space</li>
+<li><code>quant_min</code> / <code>quant_max</code> — integer range bounds (e.g., -128 to 127 for INT8)</li>
+</ul>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    FP32[&quot;FP32 Tensor\nx ∈ ℝ&quot;]
+    SCALE[&quot;Compute scale &amp; zero_point\nscale = range / (2^bits - 1)\nzero_point = round(-min/scale)&quot;]
+    QUANT[&quot;Quantize\nx_int = round(x/scale) + zp\nclamp to [qmin, qmax]&quot;]
+    INT8[&quot;INT8 Tensor\nx_int ∈ {-128..127}&quot;]
+    DEQUANT[&quot;Dequantize\nx_fp = (x_int - zp) × scale&quot;]
+    OUT[&quot;Approx FP32\nx̂ ∈ ℝ (discretized)&quot;]
+
+    FP32 --&gt; SCALE
+    SCALE --&gt; QUANT
+    FP32 --&gt; QUANT
+    QUANT --&gt; INT8
+    INT8 --&gt; DEQUANT
+    DEQUANT --&gt; OUT
+
+    style INT8 fill:#ff9900,color:#000
+    style FP32 fill:#4488ff,color:#fff
+    style OUT fill:#44aa44,color:#fff
+</div></div>
+<p><strong>Quantization Error:</strong> <code>ε = x_float - x_dequant</code></p>
+<p>The maximum error per value is <code>scale/2</code> (half a quantization step). Minimizing <code>scale</code> (choosing a tighter range) reduces error but increases clipping risk.</p>
+<hr />
+<h2>2. PTQ vs QAT Workflow Comparison</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph PTQ [&quot;Post-Training Quantization (PTQ)&quot;]
+        direction TB
+        P1[&quot;Train FP32 Model\n(standard training)&quot;]
+        P2[&quot;Collect calibration data\n(100–1000 representative samples)&quot;]
+        P3[&quot;Run calibration data through model\n(observers record min/max/histogram)&quot;]
+        P4[&quot;Compute scale &amp; zero_point\nper layer (or per channel)&quot;]
+        P5[&quot;Convert to INT8\ntorch.quantization.convert()&quot;]
+        P6[&quot;Deploy INT8 model\n(no further training needed)&quot;]
+
+        P1 --&gt; P2
+        P2 --&gt; P3
+        P3 --&gt; P4
+        P4 --&gt; P5
+        P5 --&gt; P6
+    end
+
+    subgraph QAT [&quot;Quantization-Aware Training (QAT)&quot;]
+        direction TB
+        Q1[&quot;Train FP32 Model\n(or start from pretrained)&quot;]
+        Q2[&quot;Insert FakeQuantize nodes\ntorch.quantization.prepare_qat()&quot;]
+        Q3[&quot;Fine-tune with QAT\n(forward: simulated INT8)\n(backward: STE gradients)&quot;]
+        Q4[&quot;Model adapts weights\nto quantization noise&quot;]
+        Q5[&quot;Remove FakeQuantize nodes\ntorch.quantization.convert()&quot;]
+        Q6[&quot;Deploy INT8 model\n(higher accuracy than PTQ)&quot;]
+
+        Q1 --&gt; Q2
+        Q2 --&gt; Q3
+        Q3 --&gt; Q4
+        Q4 --&gt; Q5
+        Q5 --&gt; Q6
+    end
+
+    style PTQ fill:#e8f4f8
+    style QAT fill:#f8f4e8
+</div></div>
+<table>
+<thead>
+<tr>
+  <th>Property</th>
+  <th>PTQ</th>
+  <th>QAT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Training required</td>
+  <td>None (only calibration)</td>
+  <td>Yes (fine-tuning)</td>
+</tr>
+<tr>
+  <td>Calibration data</td>
+  <td>100–1000 samples</td>
+  <td>Full training dataset</td>
+</tr>
+<tr>
+  <td>Accuracy drop</td>
+  <td>0.5–2% typical</td>
+  <td>0.1–0.5% typical</td>
+</tr>
+<tr>
+  <td>Time to quantize</td>
+  <td>Minutes</td>
+  <td>Hours</td>
+</tr>
+<tr>
+  <td>Best for</td>
+  <td>Quick deployment</td>
+  <td>Production accuracy</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Calibration Techniques Decision Tree</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START[&quot;Need to calibrate quantization range?&quot;]
+    Q_DATA{&quot;Calibration\ndata available?&quot;}
+    Q_OUTLIERS{&quot;Are there\noutliers in\nactivations?&quot;}
+    Q_SPEED{&quot;Speed vs\naccuracy\ntrade-off?&quot;}
+
+    MM[&quot;Min-Max Calibrator\nrange = [min(x), max(x)]\n✓ Simple, exact\n✗ Outlier-sensitive&quot;]
+    PCT[&quot;Percentile Calibrator\nrange = [p%, (100-p)%]\n✓ Robust to outliers\n✗ Requires tuning p&quot;]
+    MSE[&quot;MSE Calibrator\nOptimize: argmin_α MSE(x, Q(αx))\n✓ Minimizes quantization error\n✗ Grid search overhead&quot;]
+    KL[&quot;KL-Divergence Calibrator\nMinimize KL(P_fp32 || P_int8)\n✓ Best for activations\n✗ Most computationally expensive&quot;]
+    DYN[&quot;Dynamic Quantization\nNo calibration needed!\nActivations quantized at runtime&quot;]
+
+    START --&gt; Q_DATA
+    Q_DATA --&gt;|No| DYN
+    Q_DATA --&gt;|Yes| Q_OUTLIERS
+    Q_OUTLIERS --&gt;|No| MM
+    Q_OUTLIERS --&gt;|Yes| Q_SPEED
+    Q_SPEED --&gt;|Speed| PCT
+    Q_SPEED --&gt;|Accuracy| MSE
+    Q_SPEED --&gt;|Best accuracy| KL
+
+    style MM fill:#ddeeFF
+    style PCT fill:#ddffd4
+    style MSE fill:#fff4dd
+    style KL fill:#ffd4d4
+    style DYN fill:#f4ddff
+</div></div>
+<hr />
+<h2>4. Mixed-Precision Sensitivity Analysis Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    FP32[&quot;FP32 Baseline Model\nAccuracy = A_baseline&quot;]
+    
+    LOOP[&quot;For each quantizable layer L_i:&quot;]
+    
+    SINGLE[&quot;Quantize ONLY layer L_i to INT8\n(all other layers stay FP32)&quot;]
+    
+    MEASURE[&quot;Measure accuracy A_i\nwith layer L_i quantized&quot;]
+    
+    DROP[&quot;sensitivity(L_i) = A_baseline - A_i\n(accuracy drop from one-layer quantization)&quot;]
+    
+    RANK[&quot;Rank all layers by sensitivity\n(high drop = sensitive layer)&quot;]
+    
+    THRESH{&quot;sensitivity(L_i)\n&gt; threshold?&quot;}
+    
+    FP16[&quot;Assign FP16 to L_i\n(keep high precision)&quot;]
+    INT8[&quot;Assign INT8 to L_i\n(quantize for speed/size)&quot;]
+    
+    MIXEDPREC[&quot;Mixed Precision Model\nSensitive layers → FP16\nInsensitive layers → INT8&quot;]
+    
+    FP32 --&gt; LOOP
+    LOOP --&gt; SINGLE
+    SINGLE --&gt; MEASURE
+    MEASURE --&gt; DROP
+    DROP --&gt; LOOP
+    LOOP --&gt; RANK
+    RANK --&gt; THRESH
+    THRESH --&gt;|Yes| FP16
+    THRESH --&gt;|No| INT8
+    FP16 --&gt; MIXEDPREC
+    INT8 --&gt; MIXEDPREC
+
+    style FP32 fill:#4488ff,color:#fff
+    style FP16 fill:#ffaa44,color:#000
+    style INT8 fill:#ff9900,color:#000
+    style MIXEDPREC fill:#44aa44,color:#fff
+</div></div>
+<hr />
+<h2>5. QAT Training Loop with Fake Quantization</h2>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Data as Training Data
+    participant FQ as FakeQuantize Node
+    participant Model as Model Layers
+    participant Loss as Loss Function
+    participant Optimizer as Optimizer (Adam/SGD)
+
+    loop Each Training Batch
+        Data -&gt;&gt; FQ: x_float (FP32 input)
+        Note over FQ: Forward: quantize then dequantize&lt;br/&gt;x_q = round(x/scale)*scale&lt;br/&gt;(stays in FP32, on INT8 grid)
+        FQ -&gt;&gt; Model: x_q (simulated INT8 values)
+        Model -&gt;&gt; Loss: predictions (FP32)
+        Loss -&gt;&gt; Optimizer: loss value
+        Note over Optimizer: Backward: STE approximation&lt;br/&gt;∂L/∂x ≈ ∂L/∂x_q (identity)&lt;br/&gt;Gradient passes through FakeQuantize
+        Optimizer -&gt;&gt; Model: update FP32 weights
+        Note over Model: Weights adapt to minimize&lt;br/&gt;loss under INT8 constraints
+    end
+
+    Model -&gt;&gt; Model: convert() → INT8&lt;br/&gt;Remove FakeQuantize nodes&lt;br/&gt;Deploy with real INT8 arithmetic
+</div></div>
+<hr />
+<h2>6. Quantization Format Reference Table</h2>
+<table>
+<thead>
+<tr>
+  <th>Format</th>
+  <th>Bits</th>
+  <th>Range</th>
+  <th>Use Case</th>
+  <th>Precision Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>FP32</td>
+  <td>32</td>
+  <td>±3.4×10^38</td>
+  <td>Training, baseline</td>
+  <td>None (reference)</td>
+</tr>
+<tr>
+  <td>FP16</td>
+  <td>16</td>
+  <td>±65504</td>
+  <td>Mixed-precision training</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>BF16</td>
+  <td>16</td>
+  <td>±3.4×10^38</td>
+  <td>Large model training (TPUs)</td>
+  <td>Low (wider range than FP16)</td>
+</tr>
+<tr>
+  <td>FP8 (E4M3)</td>
+  <td>8</td>
+  <td>±448</td>
+  <td>Training on H100 GPUs</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>FP8 (E5M2)</td>
+  <td>8</td>
+  <td>±57344</td>
+  <td>Gradient quantization</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>INT8</td>
+  <td>8</td>
+  <td>-128 to 127</td>
+  <td>Inference (PTQ/QAT)</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>INT4</td>
+  <td>4</td>
+  <td>-8 to 7</td>
+  <td>Aggressive compression, LLMs</td>
+  <td>High</td>
+</tr>
+<tr>
+  <td>NF4</td>
+  <td>4</td>
+  <td>Normal float levels</td>
+  <td>QLoRA fine-tuning</td>
+  <td>High (structured)</td>
+</tr>
+<tr>
+  <td>UINT8</td>
+  <td>8</td>
+  <td>0 to 255</td>
+  <td>Post-ReLU activations</td>
+  <td>Medium</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>BF16 has the same exponent range as FP32 (good for training stability) but only 7 mantissa bits.</li>
+<li>NF4 (Normal Float 4) uses quantization levels optimally spaced for normally distributed weights (used in bitsandbytes / QLoRA).</li>
+<li>FP8 is hardware-native on NVIDIA H100 and newer.</li>
+</ul>
+<hr />
+<h2>7. Quantization Granularity Levels</h2>
+<table>
+<thead>
+<tr>
+  <th>Granularity</th>
+  <th>Scope</th>
+  <th>Scale Tensors</th>
+  <th>Pros</th>
+  <th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Per-tensor</td>
+  <td>Entire tensor</td>
+  <td>1 scalar</td>
+  <td>Fastest, smallest overhead</td>
+  <td>Worst quality (one scale fits all)</td>
+</tr>
+<tr>
+  <td>Per-channel</td>
+  <td>Per output channel of Conv/Linear</td>
+  <td>C scalars (C = out_channels)</td>
+  <td>Good quality for weights</td>
+  <td>C times more scale storage</td>
+</tr>
+<tr>
+  <td>Per-group</td>
+  <td>Groups of N elements</td>
+  <td>tensor / group_size scales</td>
+  <td>Flexible, used in GPTQ/AWQ</td>
+  <td>More complex dequant</td>
+</tr>
+<tr>
+  <td>Per-token</td>
+  <td>Per sequence position (LLMs)</td>
+  <td>seq_len scalars</td>
+  <td>Handles token distribution variance</td>
+  <td>Only for transformers</td>
+</tr>
+<tr>
+  <td>Per-row</td>
+  <td>Each row of a matrix</td>
+  <td>rows scalars</td>
+  <td>Good for Linear in LLMs</td>
+  <td>More overhead than per-tensor</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation:</strong></p>
+<ul>
+<li><strong>Weights</strong>: Per-channel quantization (dramatically better than per-tensor for Conv layers)</li>
+<li><strong>Activations</strong>: Per-tensor quantization (per-channel activations are expensive at runtime)</li>
+<li><strong>LLM weights</strong>: Per-group quantization (group size 64 or 128 is common in GPTQ/AWQ)</li>
+</ul>
+<hr />
+<h2>8. SQNR Formula and Interpretation</h2>
+<p>Signal-to-Quantization-Noise Ratio measures how much of the original signal is preserved:</p>
+<pre><code>SQNR = 10 × log₁₀( E[x²] / E[(x - x̂)²] )
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>x</code> = original FP32 tensor</li>
+<li><code>x̂</code> = dequantized tensor (FP32 values on INT8 grid)</li>
+<li><code>E[x²]</code> = signal power</li>
+<li><code>E[(x - x̂)²]</code> = noise power (quantization error power)</li>
+</ul>
+<p><strong>Reference values:</strong></p>
+<table>
+<thead>
+<tr>
+  <th>SQNR</th>
+  <th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>&gt; 50 dB</td>
+  <td>Excellent — virtually no perceptible quality loss</td>
+</tr>
+<tr>
+  <td>40–50 dB</td>
+  <td>Good — typical INT8 quantization quality</td>
+</tr>
+<tr>
+  <td>30–40 dB</td>
+  <td>Acceptable — some accuracy degradation</td>
+</tr>
+<tr>
+  <td>&lt; 30 dB</td>
+  <td>Poor — significant accuracy drop expected</td>
+</tr>
+<tr>
+  <td>−∞ dB</td>
+  <td>Complete signal destruction</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Theoretical INT8 SQNR</strong> (symmetric, uniform, Gaussian input): ~49.9 dB
+<strong>Theoretical INT4 SQNR</strong>: ~25.8 dB</p>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Deep Learning Quantization</span></a>
+            <a href="flow_diagrams.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Quantization Workflow Diagrams</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

@@ -1,5 +1,17 @@
-# 03 — Double DQN
-
+---
+title: "03 — Double DQN"
+subtitle: "Double DQN (van Hasselt et al., 2015) addresses a systematic overestimation bias in standard DQN by decoupling the **selection** of the best next action from its **evaluation**."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-08-27
+reading_time: 3
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/03_double_dqn.html"
+---
 ## Concept
 
 Double DQN (van Hasselt et al., 2015) addresses a systematic overestimation

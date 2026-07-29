@@ -1,5 +1,17 @@
-# Fundamental Theorems of Distributed Systems
-
+---
+title: "Fundamental Theorems of Distributed Systems"
+subtitle: "The fundamental theorems of distributed systems establish the theoretical limits of what is possible in distributed computation. They explain why designing distributed systems requires accepting certain trade-offs..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-03-16
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/12_distributed_systems_theory/01_fundamental_theorems.html"
+---
 The fundamental theorems of distributed systems establish the theoretical limits of what is possible in distributed computation. They explain why designing distributed systems requires accepting certain trade-offs that cannot be engineered away.
 
 ## CAP Theorem

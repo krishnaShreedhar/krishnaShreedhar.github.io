@@ -1,5 +1,17 @@
-# Data Management
-
+---
+title: "Data Management"
+subtitle: "Data management covers the storage, retrieval, transformation, and movement of data at scale. The explosion of database paradigms, caching systems, and streaming platforms over the past decade means engineers must..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-13
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/05_data_management/index.html"
+---
 Data management covers the storage, retrieval, transformation, and movement of data at scale. The explosion of database paradigms, caching systems, and streaming platforms over the past decade means engineers must understand a broad landscape to make effective choices for their workloads.
 
 ## Overview

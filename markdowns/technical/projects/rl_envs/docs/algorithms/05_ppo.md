@@ -1,5 +1,17 @@
-# PPO — Proximal Policy Optimization
-
+---
+title: "PPO — Proximal Policy Optimization"
+subtitle: "Policy gradient methods suffer from a fundamental instability: a single bad gradient step can collapse the policy into a degenerate distribution, and on-policy data collection means the collapsed policy generates all..."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-12-15
+reading_time: 4
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/05_ppo.html"
+---
 ## Motivation: Trust Region Without the Constraint
 
 Policy gradient methods suffer from a fundamental instability: a single bad

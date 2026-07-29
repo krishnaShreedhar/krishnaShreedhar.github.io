@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Python Engineering Patterns – Concept Reference &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This document explains when and why to use each pattern, illustrated with Mermaid diagrams.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Python Engineering Patterns – Concept Reference</span>
+        </div>
+        <h1 class="post-title">Python Engineering Patterns – Concept Reference</h1>
+        <p class="post-subtitle">This document explains when and why to use each pattern, illustrated with Mermaid diagrams.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-22</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">python-engg-tmplates</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Python Engineering Patterns</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Python Engineering Patterns</a></li><li class="project-nav__lvl-1 active"><a href="concepts.html">Python Engineering Patterns – Concept Reference</a></li><li class="project-nav__lvl-1"><a href="flow_diagrams.html">Execution Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>This document explains when and why to use each pattern, illustrated with
+Mermaid diagrams.</p>
+<hr />
+<h2>1. Python Concurrency Models</h2>
+<p>Python offers three concurrency primitives. The right choice depends on
+whether your bottleneck is I/O, CPU, or both.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Start([Bottleneck type?])
+
+    Start --&gt;|&quot;I/O-bound\n(network, disk, DB)&quot;| IO[asyncio / Threading]
+    Start --&gt;|&quot;CPU-bound\n(compute, numpy)&quot;| CPU[Multiprocessing]
+    Start --&gt;|&quot;Mixed&quot;| Mixed[Multiprocessing + asyncio workers]
+
+    IO --&gt; AsyncIO[&quot;asyncio\n• Single thread\n• Cooperative multitasking\n• Best for 1000s of tasks\n• Zero OS overhead&quot;]
+    IO --&gt; Threads[&quot;threading\n• OS threads\n• GIL released during I/O\n• Simpler mental model\n• Best for 10-100 tasks&quot;]
+
+    CPU --&gt; MP[&quot;multiprocessing\n• Separate processes\n• True parallelism\n• Bypasses GIL\n• Higher memory cost&quot;]
+
+    AsyncIO --&gt; GIL[&quot;GIL (Global Interpreter Lock)\nOne Python bytecode at a time\nReleased during I/O syscalls\nNot released for pure Python compute&quot;]
+    Threads --&gt; GIL
+    MP --&gt; NoGIL[&quot;No GIL constraint\n(each process has its own GIL)&quot;]
+</div></div>
+<p><strong>When to use what:</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Workload</th>
+  <th>Best tool</th>
+  <th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>HTTP requests, DB queries</td>
+  <td><code>asyncio</code></td>
+  <td>Cooperative, zero thread overhead</td>
+</tr>
+<tr>
+  <td>File I/O, subprocess</td>
+  <td><code>threading</code> or <code>asyncio</code></td>
+  <td>GIL released during I/O</td>
+</tr>
+<tr>
+  <td>Numerical computation</td>
+  <td><code>multiprocessing</code></td>
+  <td>True CPU parallelism</td>
+</tr>
+<tr>
+  <td>ML inference batch</td>
+  <td><code>ProcessPoolExecutor</code></td>
+  <td>Load model once per worker</td>
+</tr>
+<tr>
+  <td>Streaming large files</td>
+  <td><code>async for</code> + generator</td>
+  <td>Constant memory</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Observer / EventBus Pattern</h2>
+<p>The Observer pattern decouples event producers from consumers. The EventBus
+variant allows many-to-many subscriptions without direct object references.</p>
+<div class="mermaid-wrap"><div class="mermaid">classDiagram
+    class EventBus {
+        -handlers: dict[str, list[ref]]
+        +subscribe(event, handler)
+        +unsubscribe(event, handler)
+        +publish(event, data) int
+    }
+
+    class MetricsCollector {
+        -counts: defaultdict[str, int]
+        +on_event(event, data)
+        +report() dict
+    }
+
+    class AuditLogger {
+        -entries: list[dict]
+        +on_event(event, data)
+        +entries() list
+    }
+
+    class UserService {
+        -bus: EventBus
+        +login(user_id)
+        +logout(user_id)
+    }
+
+    class OrderService {
+        -bus: EventBus
+        +place_order(order)
+    }
+
+    EventBus &quot;1&quot; o-- &quot;0..*&quot; MetricsCollector : notifies
+    EventBus &quot;1&quot; o-- &quot;0..*&quot; AuditLogger : notifies
+    UserService --&gt; EventBus : publishes
+    OrderService --&gt; EventBus : publishes
+</div></div>
+<p><strong>Sequence of a published event:</strong></p>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Producer as UserService
+    participant Bus as EventBus
+    participant M as MetricsCollector
+    participant A as AuditLogger
+
+    Producer-&gt;&gt;Bus: publish(&quot;user.login&quot;, {user_id: &quot;u-001&quot;})
+    Bus-&gt;&gt;M: on_event(&quot;user.login&quot;, data)
+    M--&gt;&gt;Bus: ok
+    Bus-&gt;&gt;A: on_event(&quot;user.login&quot;, data)
+    A--&gt;&gt;Bus: ok
+    Bus--&gt;&gt;Producer: notified=2
+</div></div>
+<p><strong>Key design choices:</strong></p>
+<ul>
+<li>Handlers are stored as <code>weakref.WeakMethod</code> so dead subscribers are
+automatically pruned (no memory leaks).</li>
+<li>Failed handlers log an error but do not prevent other handlers from running.</li>
+<li>The bus is synchronous; for async dispatch, wrap <code>publish</code> in <code>asyncio.create_task</code>.</li>
+</ul>
+<hr />
+<h2>3. Strategy Pattern Class Hierarchy</h2>
+<p>Strategy separates <em>what algorithm to use</em> from <em>how to invoke it</em>, making
+algorithms interchangeable at runtime.</p>
+<div class="mermaid-wrap"><div class="mermaid">classDiagram
+    class SamplingStrategy {
+        &lt;&lt;abstract&gt;&gt;
+        +sample(dataset, n) list
+    }
+
+    class RandomSampling {
+        -rng: Random
+        +sample(dataset, n) list
+    }
+
+    class StratifiedSampling {
+        -label_key: str
+        -rng: Random
+        +sample(dataset, n) list
+    }
+
+    class WeightedSampling {
+        -weight_key: str
+        +sample(dataset, n) list
+    }
+
+    class DataSampler {
+        -strategy: SamplingStrategy
+        +set_strategy(strategy)
+        +draw(dataset, n) list
+    }
+
+    SamplingStrategy &lt;|-- RandomSampling
+    SamplingStrategy &lt;|-- StratifiedSampling
+    SamplingStrategy &lt;|-- WeightedSampling
+    DataSampler o-- SamplingStrategy : uses
+</div></div>
+<p><strong>When to use Strategy:</strong></p>
+<ul>
+<li>Multiple algorithms for the same task (sorting, sampling, pricing)</li>
+<li>Algorithm selection needs to change at runtime</li>
+<li>Avoiding large <code>if/elif</code> chains in business logic</li>
+<li>Testing individual algorithms in isolation</li>
+</ul>
+<hr />
+<h2>4. Retry Decorator – Decision Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Call([Call decorated function])
+    Try[Execute function]
+    Success{Succeeded?}
+    Retryable{Exception is\nretryable?}
+    MaxReached{Attempts ==\nmax_attempts?}
+    CalcWait[Calculate wait:\nbackoff * 2^attempt]
+    Jitter{jitter=True?}
+    AddJitter[Add random 0..wait]
+    Sleep[sleep wait seconds]
+    Raise([Re-raise exception])
+    Return([Return result])
+
+    Call --&gt; Try
+    Try --&gt; Success
+    Success --&gt;|Yes| Return
+    Success --&gt;|No| Retryable
+    Retryable --&gt;|No| Raise
+    Retryable --&gt;|Yes| MaxReached
+    MaxReached --&gt;|Yes| Raise
+    MaxReached --&gt;|No| CalcWait
+    CalcWait --&gt; Jitter
+    Jitter --&gt;|Yes| AddJitter --&gt; Sleep
+    Jitter --&gt;|No| Sleep
+    Sleep --&gt; Try
+</div></div>
+<p><strong>Why jitter?</strong> Without jitter, all N clients that fail simultaneously will
+retry at the same time (thundering herd). Uniform jitter <code>[0, wait]</code> spreads
+retries across time, reducing peak load by ~50%.</p>
+<hr />
+<h2>5. Production Service Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TB
+    subgraph &quot;startup&quot;
+        A[Load config.yaml] --&gt; B[Setup logging\nRotatingFileHandler + QueueHandler]
+        B --&gt; C[Install signal handlers\nSIGTERM / SIGINT]
+        C --&gt; D[Register metrics\nCounter + Gauge + Histogram]
+        D --&gt; E[Service READY]
+    end
+
+    subgraph &quot;main loop&quot;
+        E --&gt; F{Shutdown\nrequested?}
+        F --&gt;|No| G[Fetch batch\nfrom source]
+        G --&gt; H[Validate records\nValidationError on failure]
+        H --&gt; I[Process batch\n_process_batch]
+        I --&gt; J[Record metrics\nlatency, errors, count]
+        J --&gt; K{Every N batches}
+        K --&gt;|Yes| L[gc.collect\nrelease memory]
+        K --&gt;|No| F
+        L --&gt; F
+    end
+
+    subgraph &quot;shutdown&quot;
+        F --&gt;|Yes| M[Finish current batch]
+        M --&gt; N[Flush log queue]
+        N --&gt; O[Log metrics report]
+        O --&gt; P[gc.collect final]
+        P --&gt; Q([Process exits 0])
+    end
+
+    subgraph &quot;signals&quot;
+        R[SIGTERM / SIGINT] --&gt;|sets shutdown flag| F
+    end
+</div></div>
+<p><strong>Key properties of the production service:</strong></p>
+<ol>
+<li><strong>Graceful shutdown</strong>: in-flight batch completes before exit.</li>
+<li><strong>GC control</strong>: <code>gc.set_threshold()</code> reduces mid-batch pauses;
+explicit <code>gc.collect()</code> at batch boundaries.</li>
+<li><strong>Structured errors</strong>: <code>ValidationError</code> is logged and counted, not fatal.</li>
+<li><strong>Observable</strong>: every batch emits latency to the histogram; percentiles
+available at any time via <code>MetricsRegistry.report()</code>.</li>
+<li><strong>Config-driven</strong>: all tuning knobs (<code>batch_size</code>, <code>gc_threshold</code>,
+<code>max_workers</code>) live in <code>config.yaml</code>.</li>
+</ol>
+<hr />
+<h2>6. Collections Module – When to Use Each</h2>
+<table>
+<thead>
+<tr>
+  <th>Type</th>
+  <th>Use case</th>
+  <th>Key advantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>defaultdict(list)</code></td>
+  <td>Grouping / adjacency lists</td>
+  <td>No <code>KeyError</code>; auto-initialise</td>
+</tr>
+<tr>
+  <td><code>defaultdict(int)</code></td>
+  <td>Frequency counting</td>
+  <td>Cleaner than <code>dict.get(k, 0) + 1</code></td>
+</tr>
+<tr>
+  <td><code>Counter</code></td>
+  <td>Token counting, top-N</td>
+  <td>Arithmetic operators, <code>most_common()</code></td>
+</tr>
+<tr>
+  <td><code>deque(maxlen=N)</code></td>
+  <td>Sliding window, bounded buffer</td>
+  <td>O(1) append/pop both ends</td>
+</tr>
+<tr>
+  <td><code>namedtuple</code></td>
+  <td>Immutable record (no methods)</td>
+  <td>Lightweight, tuple-compatible</td>
+</tr>
+<tr>
+  <td><code>NamedTuple</code></td>
+  <td>Typed record with defaults</td>
+  <td>Full type annotations</td>
+</tr>
+<tr>
+  <td><code>ChainMap</code></td>
+  <td>Layered config (env &gt; file &gt; defaults)</td>
+  <td>Read-through, live updates</td>
+</tr>
+<tr>
+  <td><code>OrderedDict</code></td>
+  <td>LRU cache, insertion-order dict</td>
+  <td><code>move_to_end()</code>, <code>popitem(last=False)</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7. Logging Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    App[&quot;Application code\nlogger.info(...)&quot;] --&gt; QH[&quot;QueueHandler\n(non-blocking put)&quot;]
+    QH --&gt; Q[&quot;logging.Queue\n(thread-safe)&quot;]
+    Q --&gt; QL[&quot;QueueListener\n(background thread)&quot;]
+    QL --&gt; FH[&quot;RotatingFileHandler\nJSON lines&quot;]
+    QL --&gt; CH[&quot;StreamHandler\ntext to stdout&quot;]
+
+    style Q fill:#f5f5f5,stroke:#999
+    style QL fill:#dff0d8,stroke:#3c763d
+</div></div>
+<p><strong>Why <code>QueueHandler</code>?</strong> File I/O on the hot path (inside a request handler or
+tight loop) adds latency. The <code>QueueHandler</code> puts the log record onto an
+in-memory queue and returns immediately. The <code>QueueListener</code> drains the queue
+in a dedicated daemon thread, so disk latency never affects application code.</p>
+<hr />
+<h2>8. Structural Patterns Summary</h2>
+<table>
+<thead>
+<tr>
+  <th>Pattern</th>
+  <th>Problem solved</th>
+  <th>Example in codebase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Adapter</strong></td>
+  <td>Two incompatible interfaces</td>
+  <td><code>LegacyStoreAdapter</code> wraps <code>LegacyKeyValueStore</code></td>
+</tr>
+<tr>
+  <td><strong>Decorator</strong></td>
+  <td>Add capability without subclassing</td>
+  <td><code>ValidatingReader</code> + <code>TimingReader</code> wrap <code>DataReader</code></td>
+</tr>
+<tr>
+  <td><strong>Facade</strong></td>
+  <td>Hide subsystem complexity</td>
+  <td><code>MLPipelineFacade</code> hides extract/predict/format</td>
+</tr>
+<tr>
+  <td><strong>Proxy</strong></td>
+  <td>Lazy init + caching</td>
+  <td><code>CachingProxy</code> over <code>ExpensiveService</code></td>
+</tr>
+<tr>
+  <td><strong>Composite</strong></td>
+  <td>Tree of interchangeable components</td>
+  <td><code>SequentialPipeline</code> contains <code>TransformStep</code> nodes</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Python Engineering Patterns</span></a>
+            <a href="flow_diagrams.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Execution Flow Diagrams</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

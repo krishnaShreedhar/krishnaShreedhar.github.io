@@ -1,5 +1,17 @@
-# Feature Engineering
-
+---
+title: "Feature Engineering"
+subtitle: "Feature engineering is the process of transforming raw data into informative representations — features — that capture the signals most predictive of the target variable. Good feature engineering encodes domain..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-10-22
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/04_data_engineering_for_ml/03_feature_engineering.html"
+---
 Feature engineering is the process of transforming raw data into informative representations — features — that capture the signals most predictive of the target variable. Good feature engineering encodes domain knowledge about what makes examples similar or different, enabling models to learn faster and generalize better. In tabular ML, feature engineering often has a larger impact on model performance than model architecture selection.
 
 ## Feature Engineering Taxonomy

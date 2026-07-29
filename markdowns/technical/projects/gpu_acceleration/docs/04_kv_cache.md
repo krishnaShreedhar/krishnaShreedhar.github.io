@@ -1,5 +1,17 @@
-# Module 4 — KV-Cache from Scratch
-
+---
+title: "Module 4 — KV-Cache from Scratch"
+subtitle: "This module builds a KV-cache from first principles and measures the throughput improvement it delivers during autoregressive inference."
+category: technical
+project: gpu_acceleration
+project_title: "GPU Acceleration — Transformer Tutorials"
+date: 2025-07-21
+reading_time: 3
+tags:
+  - gpu-acceleration
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/gpu_acceleration/docs/04_kv_cache.html"
+---
 ## Overview
 
 This module builds a KV-cache from first principles and measures the

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SmallVLM Architecture &middot; Shreedhar Kodate</title>
+    <meta name="description" content="SmallVLM is a minimal Vision-Language Model built from scratch in PyTorch for the image captioning task. Every component is implemented explicitly so the data f">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">SmallVLM Architecture</span>
+        </div>
+        <h1 class="post-title">SmallVLM Architecture</h1>
+        <p class="post-subtitle">SmallVLM is a minimal Vision-Language Model built from scratch in PyTorch for the image captioning task. Every component is implemented explicitly so the data flow, parameter counts, and design decisions are easy to...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-10-19</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">model-architectures</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">SmallVLM — Minimal Vision-Language Model Tutorial</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">SmallVLM — Minimal Vision-Language Model Tutorial</a></li><li class="project-nav__lvl-1 active"><a href="architecture.html">SmallVLM Architecture</a></li><li class="project-nav__lvl-1"><a href="training_pipeline.html">Training Pipeline</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Overview</h2>
+<p>SmallVLM is a minimal Vision-Language Model built from scratch in PyTorch for the image captioning task. Every component is implemented explicitly so the data flow, parameter counts, and design decisions are easy to follow.</p>
+<p><strong>Total parameters:</strong> ~25M (default config)</p>
+<hr />
+<h2>Component breakdown</h2>
+<h3>1. Vision Encoder (<code>src/model/vision_encoder.py</code>)</h3>
+<p>A Vision Transformer (ViT) that converts a raw image into a sequence of contextualised patch embeddings.</p>
+<table>
+<thead>
+<tr>
+  <th>Sub-module</th>
+  <th>Role</th>
+  <th>Output shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>PatchEmbedding</code></td>
+  <td><code>Conv2d(3, 384, kernel=16, stride=16)</code> splits the 224×224 image into 196 non-overlapping 16×16 patches and linearly projects each patch</td>
+  <td><code>(B, 196, 384)</code></td>
+</tr>
+<tr>
+  <td>Prepend <code>[CLS]</code> token</td>
+  <td>Learnable global image summary token</td>
+  <td><code>(B, 197, 384)</code></td>
+</tr>
+<tr>
+  <td>Learnable positional embedding</td>
+  <td>Distinguishes spatial positions</td>
+  <td><code>(B, 197, 384)</code></td>
+</tr>
+<tr>
+  <td>6 × <code>ViTBlock</code></td>
+  <td>Multi-head self-attention (6 heads) + FFN (ratio 4×) with pre-LayerNorm</td>
+  <td><code>(B, 197, 384)</code></td>
+</tr>
+<tr>
+  <td>Final <code>LayerNorm</code></td>
+  <td>Stabilises activations</td>
+  <td><code>(B, 197, 384)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output exported to the projection layer:</strong></p>
+<ul>
+<li><code>patch_tokens</code> → <code>(B, 196, 384)</code> — one embedding per image patch</li>
+<li><code>cls_token</code> → <code>(B, 384)</code> — unused in the captioning head but available for retrieval tasks</li>
+</ul>
+<p><strong>Why ViT?</strong> Patch-based processing gives fixed-length output regardless of image content, which simplifies the decoder interface.</p>
+<hr />
+<h3>2. Vision Projection (<code>src/model/projection.py</code>)</h3>
+<p>A two-layer MLP connector that maps visual features into the language decoder's embedding space.</p>
+<pre><code>384 → Linear → GELU → 768 → Linear → 384
+</code></pre>
+<p>This bottleneck design (384 → 768 → 384) allows the projection to learn a non-linear alignment between the vision and language representation spaces. A single linear layer would restrict the mapping to be affine.</p>
+<hr />
+<h3>3. Language Decoder (<code>src/model/language_decoder.py</code>)</h3>
+<p>A GPT-2-style autoregressive Transformer decoder with one key addition: <strong>cross-attention to vision tokens</strong>.</p>
+<table>
+<thead>
+<tr>
+  <th>Sub-module</th>
+  <th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>nn.Embedding(50257, 384)</code></td>
+  <td>Maps token IDs to dense vectors</td>
+</tr>
+<tr>
+  <td>Learnable positional embedding</td>
+  <td>Position-aware token representations (up to 128 tokens)</td>
+</tr>
+<tr>
+  <td>6 × <code>DecoderBlock</code></td>
+  <td>Three-stage block (see below)</td>
+</tr>
+<tr>
+  <td>Final <code>LayerNorm</code> + <code>Linear(384, 50257)</code></td>
+  <td>LM head; <strong>weight-tied</strong> to the token embedding matrix</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DecoderBlock internals:</strong></p>
+<ol>
+<li><strong>Causal self-attention</strong> — Token <code>i</code> can only attend to tokens <code>≤ i</code> (enforced by a pre-computed causal mask buffer). Ensures autoregressive generation.</li>
+<li><strong>Cross-attention</strong> — Query from the text stream, Key/Value from the projected vision tokens. This is how the model &quot;looks at&quot; the image while generating each word.</li>
+<li><strong>Position-wise FFN</strong> — Two linear layers with GELU, ratio 4×.</li>
+</ol>
+<p><strong>Weight tying:</strong> The LM head weight matrix is shared with the token embedding matrix. This halves the parameter count of the output projection (~20M → ~15M) and empirically improves generation quality.</p>
+<hr />
+<h3>4. Forward pass during training</h3>
+<pre><code>Image (B, C, H, W)
+  → VisionEncoder   → patch_tokens (B, 196, 384)
+  → VisionProjection → proj_tokens (B, 196, 384)
+
+Caption IDs (B, T)  ← teacher-forced input
+  → decoder_input = caption_ids[:, :-1]  # everything except last token
+  → target        = caption_ids[:, 1:]   # everything except BOS
+
+LanguageDecoder(decoder_input, proj_tokens)
+  → logits (B, T-1, 50257)
+
+Loss = CrossEntropy(logits.reshape(-1, V), target.reshape(-1), ignore_index=pad_id)
+</code></pre>
+<p>Teacher-forcing feeds the ground-truth prefix at every step during training, which is faster and more stable than auto-regressive training.</p>
+<hr />
+<h2>Parameter count (default config)</h2>
+<table>
+<thead>
+<tr>
+  <th>Module</th>
+  <th>~Params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Vision Encoder (ViT-6L-384)</td>
+  <td>13.5M</td>
+</tr>
+<tr>
+  <td>Vision Projection (MLP)</td>
+  <td>0.6M</td>
+</tr>
+<tr>
+  <td>Language Decoder (GPT-6L-384)</td>
+  <td>13.5M (−5M with weight tying)</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td><strong>~22M</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Design principles</h2>
+<ul>
+<li><strong>Minimal by default.</strong> Every component is purpose-built for this task; no inherited <code>transformers</code> model classes.</li>
+<li><strong>Config-driven.</strong> All architectural hyperparameters live in <code>configs/model.yaml</code>.</li>
+<li><strong>Explainable shapes.</strong> Every module's docstring states its exact input/output tensor shapes.</li>
+<li><strong>Extensible.</strong> Cross-attention can be disabled (<code>use_cross_attention: false</code>) for a simpler prefix-based VLM variant.</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">SmallVLM — Minimal Vision-Language Model Tutorial</span></a>
+            <a href="training_pipeline.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Training Pipeline</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

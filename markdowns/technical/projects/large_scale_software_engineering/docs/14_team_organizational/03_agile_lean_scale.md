@@ -1,5 +1,17 @@
-# Agile and Lean at Scale
-
+---
+title: "Agile and Lean at Scale"
+subtitle: "Agile methodologies provide frameworks for iterative, collaborative software development. Lean principles (from manufacturing) focus on eliminating waste and maximizing value flow. At scale, these principles require..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-02-16
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/14_team_organizational/03_agile_lean_scale.html"
+---
 Agile methodologies provide frameworks for iterative, collaborative software development. Lean principles (from manufacturing) focus on eliminating waste and maximizing value flow. At scale, these principles require adaptation to coordinate dozens or hundreds of teams while maintaining delivery speed.
 
 ## Agile Framework Landscape

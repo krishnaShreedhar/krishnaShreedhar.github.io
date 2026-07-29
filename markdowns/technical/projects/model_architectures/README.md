@@ -1,5 +1,16 @@
-# SmallVLM — Minimal Vision-Language Model Tutorial
-
+---
+title: "SmallVLM — Minimal Vision-Language Model Tutorial"
+subtitle: "A from-scratch, explainable implementation of a small Vision-Language Model (VLM) for **image captioning**, built entirely with PyTorch. The goal is to understand every design decision rather than to achieve..."
+category: technical
+project: model_architectures
+project_title: "SmallVLM — Minimal Vision-Language Model Tutorial"
+date: 2025-03-16
+reading_time: 3
+tags:
+  - model-architectures
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/model_architectures/index.html"
+---
 A from-scratch, explainable implementation of a small Vision-Language Model (VLM) for **image captioning**, built entirely with PyTorch. The goal is to understand every design decision rather than to achieve state-of-the-art results.
 
 ---
@@ -156,5 +167,5 @@ All constants and hyperparameters are in `configs/`. No command-line arguments �
 |---|---|
 | [`docs/architecture.md`](docs/architecture.md) | Detailed component walkthrough with tensor shapes |
 | [`docs/training_pipeline.md`](docs/training_pipeline.md) | Training stage descriptions and algorithms |
-| [`docs/diagrams/vlm_architecture.mmd`](docs/diagrams/vlm_architecture.mmd) | Mermaid data-flow diagram |
-| [`docs/diagrams/training_flow.mmd`](docs/diagrams/training_flow.mmd) | Mermaid training pipeline diagram |
+| `docs/diagrams/vlm_architecture.mmd` | Mermaid data-flow diagram |
+| `docs/diagrams/training_flow.mmd` | Mermaid training pipeline diagram |

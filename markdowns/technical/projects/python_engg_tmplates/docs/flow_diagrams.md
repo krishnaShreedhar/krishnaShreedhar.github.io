@@ -1,5 +1,17 @@
-# Execution Flow Diagrams
-
+---
+title: "Execution Flow Diagrams"
+subtitle: "sequenceDiagram participant Main as Main Thread participant Exec as ThreadPoolExecutor participant W1 as Worker Thread 1 participant W2 as Worker Thread 2 participant W3 as Worker Thread 3 participant Q as Internal..."
+category: technical
+project: python_engg_tmplates
+project_title: "Python Engineering Patterns"
+date: 2025-07-12
+reading_time: 5
+tags:
+  - python-engg-tmplates
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/python_engg_tmplates/docs/flow_diagrams.html"
+---
 ---
 
 ## 1. Thread Pool Execution Flow

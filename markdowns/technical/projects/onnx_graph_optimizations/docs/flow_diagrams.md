@@ -1,5 +1,17 @@
-# ONNX Optimization Pipeline - Flow Diagrams
-
+---
+title: "ONNX Optimization Pipeline - Flow Diagrams"
+subtitle: "Detailed workflow diagrams for every stage of the ONNX optimization lifecycle. Each diagram corresponds directly to code in the `src/` modules."
+category: technical
+project: onnx_graph_optimizations
+project_title: "ONNX Graph Optimizations"
+date: 2025-10-03
+reading_time: 5
+tags:
+  - onnx-graph-optimizations
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/onnx_graph_optimizations/docs/flow_diagrams.html"
+---
 Detailed workflow diagrams for every stage of the ONNX optimization lifecycle.
 Each diagram corresponds directly to code in the `src/` modules.
 

@@ -1,5 +1,17 @@
-# API Design
-
+---
+title: "API Design"
+subtitle: "APIs are contracts between systems. A well-designed API is intuitive, stable, secure, and self-documenting. A poorly designed API is a maintenance burden that breaks clients on every change. API design decisions are..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-08-05
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/11_api_design/index.html"
+---
 APIs are contracts between systems. A well-designed API is intuitive, stable, secure, and self-documenting. A poorly designed API is a maintenance burden that breaks clients on every change. API design decisions are among the hardest to reverse because they affect all existing consumers.
 
 ## Overview

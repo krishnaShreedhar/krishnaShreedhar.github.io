@@ -1,5 +1,17 @@
-# GraphQL Design
-
+---
+title: "GraphQL Design"
+subtitle: "GraphQL is a query language and runtime for APIs that enables clients to request exactly the data they need. Unlike REST (where the server defines what each endpoint returns), GraphQL puts data-fetching control in..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-17
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/11_api_design/04_graphql_design.html"
+---
 GraphQL is a query language and runtime for APIs that enables clients to request exactly the data they need. Unlike REST (where the server defines what each endpoint returns), GraphQL puts data-fetching control in the client's hands — eliminating over-fetching and under-fetching.
 
 ## GraphQL Architecture

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Performance Engineering &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Performance engineering is the systematic process of measuring, analyzing, and improving system performance. It involves understanding latency distributions, id">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Performance Engineering</span>
+        </div>
+        <h1 class="post-title">Performance Engineering</h1>
+        <p class="post-subtitle">Performance engineering is the systematic process of measuring, analyzing, and improving system performance. It involves understanding latency distributions, identifying bottlenecks through profiling, applying...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-11-13</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_design_patterns/index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="../03_design_patterns/06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2 active"><a href="03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Performance engineering is the systematic process of measuring, analyzing, and improving system performance. It involves understanding latency distributions, identifying bottlenecks through profiling, applying optimizations, and validating improvements under realistic load.</p>
+<h2>Performance Measurement Framework</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Metrics[Key Performance Metrics]
+        Latency[Latency\nTime to process one request\np50 p95 p99 p999]
+        Throughput[Throughput\nRequests per second\nTransactions per second]
+        Utilization[Resource Utilization\nCPU Memory I/O Network]
+        ErrorRate[Error Rate\nFailed requests divided by total]
+        Saturation[Saturation\nWork queue depth\nWaiting threads]
+    end
+
+    subgraph Methods[USE Method - Brendan Gregg]
+        U[Utilization\nHow busy is the resource]
+        S[Saturation\nHow much extra work is queued]
+        E[Errors\nError events count]
+        U --- S --- E
+    end
+
+    subgraph RED[RED Method - Microservices]
+        R[Rate\nRequests per second]
+        Er[Errors\nFailed requests per second]
+        D[Duration\nRequest latency distribution]
+        R --- Er --- D
+    end
+</div></div>
+<h2>Latency Percentiles</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph LatencyDist[Latency Distribution]
+        P50[p50 - Median\n50% of requests\nfaster than this\nTypical experience]
+        P95[p95\n95% of requests faster\n1 in 20 users slower]
+        P99[p99\n99% faster\n1 in 100 users slower\nSLA target for APIs]
+        P999[p99.9\n1 in 1000 slower\nWorst-case user experience]
+        Tail[Tail Latency\nOutliers drag up averages\nAverage hides worst experience]
+
+        P50 --&gt; P95 --&gt; P99 --&gt; P999 --&gt; Tail
+    end
+
+    Note[Key insight:\nAverage latency is misleading.\nAlways analyze percentiles.\n10ms avg could hide 2s p999.]
+
+    style Note fill:#fef3c7,stroke:#d97706
+</div></div>
+<h2>Profiling and Bottleneck Identification</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    A[Performance Problem Reported] --&gt; B[Reproduce with realistic load]
+    B --&gt; C[Measure baseline metrics\nlatency CPU memory I/O]
+    C --&gt; D{Where is the bottleneck?}
+    D --&gt;|CPU bound| E[Profile CPU\nflame graphs, hot functions]
+    D --&gt;|I/O bound| F[Profile I/O\nquery plans, disk, network]
+    D --&gt;|Memory bound| G[Profile Memory\nheap, GC pressure]
+    D --&gt;|Lock contention| H[Profile Locks\nthread dumps, deadlocks]
+    E --&gt; I[Apply targeted optimization]
+    F --&gt; I
+    G --&gt; I
+    H --&gt; I
+    I --&gt; J[Measure improvement]
+    J --&gt; K{Goal met?}
+    K --&gt;|No| B
+    K --&gt;|Yes| L[Document and monitor]
+</div></div>
+<h2>Little's Law</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph LittlesLaw[Little's Law: L = lambda x W]
+        L[L = Average number of items\nin the system]
+        Lambda[lambda = Average arrival rate\nrequests per second]
+        W[W = Average time an item\nspends in the system]
+
+        Formula[L = lambda times W\nExample:\n500 req/s x 0.1s = 50 concurrent requests]
+        L --- Lambda --- W --- Formula
+    end
+
+    Implication[Implication:\nTo support 1000 req/s at 100ms latency\nyou need to handle 100 concurrent requests\nSize your thread pools accordingly]
+
+    style Formula fill:#dcfce7,stroke:#16a34a
+    style Implication fill:#fef3c7,stroke:#d97706
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Latency vs Throughput Trade-off</strong>: Optimizing for throughput (batching, larger requests) often increases per-request latency. Optimizing for latency (avoid batching, eager processing) reduces throughput. Most systems need to balance both — the operating point depends on workload characteristics.</p>
+</li>
+<li><p><strong>Percentile Metrics (p50, p95, p99)</strong>: Average latency hides the worst-case user experience. The p99 latency is the 99th percentile — 1 in 100 requests takes longer than this. SLAs are typically expressed as p95 or p99 guarantees. High tail latency often indicates resource contention, GC pauses, or queue build-up.</p>
+</li>
+<li><p><strong>Flame Graphs</strong>: A visualization of profiling data where each stack frame is a horizontal bar, width proportional to CPU time. Allows quick identification of hot code paths without reading raw profiling output. Created by Brendan Gregg; available for CPU, memory, and off-CPU profiling.</p>
+</li>
+<li><p><strong>USE Method (Utilization, Saturation, Errors)</strong>: A methodology for checking every resource (CPU, memory, disk, network) for: how busy it is (utilization), how much work is queued (saturation), and how often it fails (errors). Start with the resource showing the highest utilization or saturation.</p>
+</li>
+<li><p><strong>Red Method (Rate, Errors, Duration)</strong>: Three signals to monitor for every microservice — the rate of requests, the rate of errors, and the distribution of request durations. Sufficient for diagnosing most service-level performance problems.</p>
+</li>
+<li><p><strong>Little's Law</strong>: L = λW. The average number of items in a system (L) equals the arrival rate (λ) multiplied by the average time in the system (W). Fundamental for capacity planning — knowing expected RPS and target latency gives you the required concurrency.</p>
+</li>
+<li><p><strong>Connection Pooling</strong>: Creating and destroying database connections on each request is expensive (hundreds of milliseconds for TCP + TLS + auth). Connection pools maintain a set of pre-established connections and reuse them. Pool size tuning: too small causes waiting; too large exhausts DB connection limits.</p>
+</li>
+<li><p><strong>N+1 Query Problem</strong>: A common ORM anti-pattern where a query to fetch N objects is followed by N additional queries to fetch each object's relations. For 100 orders, 101 SQL queries are issued. Fix: use JOIN or eager loading (SELECT IN with batch).</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Optimization</th>
+  <th>Benefit</th>
+  <th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Caching</td>
+  <td>Reduced DB load, lower latency</td>
+  <td>Stale data</td>
+</tr>
+<tr>
+  <td>Connection pooling</td>
+  <td>Reduced connection overhead</td>
+  <td>Pool exhaustion</td>
+</tr>
+<tr>
+  <td>Batching</td>
+  <td>Higher throughput</td>
+  <td>Higher latency</td>
+</tr>
+<tr>
+  <td>Async processing</td>
+  <td>Non-blocking</td>
+  <td>Complex error handling</td>
+</tr>
+<tr>
+  <td>Index tuning</td>
+  <td>Faster queries</td>
+  <td>Write overhead, disk space</td>
+</tr>
+<tr>
+  <td>Denormalization</td>
+  <td>Fewer JOINs</td>
+  <td>Data consistency risk</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Apply</h2>
+<ul>
+<li>Profile before optimizing — never guess at bottlenecks; always measure</li>
+<li>Fix the highest-impact bottleneck first (Amdahl's Law — the serial bottleneck limits total speedup)</li>
+<li>Set performance budgets: define p99 and p999 latency targets and alert when they are exceeded</li>
+<li>Use load testing (k6, Gatling, Locust) to validate performance under realistic traffic patterns before production</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="02_load_balancing.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Load Balancing</span></a>
+            <a href="04_rate_limiting.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Rate Limiting</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

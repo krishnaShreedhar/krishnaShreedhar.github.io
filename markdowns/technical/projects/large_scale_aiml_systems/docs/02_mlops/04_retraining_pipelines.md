@@ -1,5 +1,17 @@
-# Retraining Pipelines
-
+---
+title: "Retraining Pipelines"
+subtitle: "Retraining pipelines automate the process of updating ML models with fresh data to maintain prediction quality as the world changes. Unlike traditional software that remains correct until explicitly changed, ML..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-06-18
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/02_mlops/04_retraining_pipelines.html"
+---
 Retraining pipelines automate the process of updating ML models with fresh data to maintain prediction quality as the world changes. Unlike traditional software that remains correct until explicitly changed, ML models are correct only relative to the data distribution they were trained on — systematic retraining is required to keep them accurate over time.
 
 ## Retraining Pipeline Architecture

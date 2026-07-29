@@ -1,5 +1,17 @@
-# Platform Engineering
-
+---
+title: "Platform Engineering"
+subtitle: "Platform Engineering is the discipline of building and operating Internal Developer Platforms (IDPs) that reduce cognitive load on product engineers. Platform teams create golden paths — opinionated, paved roads for..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-15
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/15_emerging_paradigms/01_platform_engineering.html"
+---
 Platform Engineering is the discipline of building and operating Internal Developer Platforms (IDPs) that reduce cognitive load on product engineers. Platform teams create golden paths — opinionated, paved roads for common tasks — enabling developers to deploy, observe, and scale applications without deep infrastructure expertise.
 
 ## Internal Developer Platform Architecture

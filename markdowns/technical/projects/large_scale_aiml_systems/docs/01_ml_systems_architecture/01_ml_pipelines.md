@@ -1,5 +1,17 @@
-# ML Pipelines
-
+---
+title: "ML Pipelines"
+subtitle: "An ML pipeline is a directed acyclic graph (DAG) of transformations that takes raw data as input and produces a trained, evaluated, and deployed model as output. Well-designed ML pipelines are reproducible,..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-08-12
+reading_time: 3
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/01_ml_systems_architecture/01_ml_pipelines.html"
+---
 An ML pipeline is a directed acyclic graph (DAG) of transformations that takes raw data as input and produces a trained, evaluated, and deployed model as output. Well-designed ML pipelines are reproducible, versioned, testable, and observable — applying software engineering discipline to ML workflows.
 
 ## End-to-End ML Pipeline

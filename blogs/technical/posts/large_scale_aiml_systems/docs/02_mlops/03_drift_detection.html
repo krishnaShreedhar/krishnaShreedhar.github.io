@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Drift Detection &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Drift detection is the process of identifying when the statistical properties of data or model behavior change in production, indicating that a deployed model m">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Drift Detection</span>
+        </div>
+        <h1 class="post-title">Drift Detection</h1>
+        <p class="post-subtitle">Drift detection is the process of identifying when the statistical properties of data or model behavior change in production, indicating that a deployed model may no longer be reliable. Unlike traditional software...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-02-23</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2 active"><a href="03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Drift detection is the process of identifying when the statistical properties of data or model behavior change in production, indicating that a deployed model may no longer be reliable. Unlike traditional software where bugs cause immediate failures, ML model degradation is gradual and silent — models continue to return predictions, but those predictions become increasingly wrong as the world shifts away from what the model learned.</p>
+<h2>Types of Drift</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph DriftTypes[Drift Taxonomy]
+        DataDrift[Data Drift\nalso: covariate shift\nP_train(X) != P_serve(X)\nInput feature distribution changes\nExample: new user demographics\nnew product categories]
+
+        ConceptDrift[Concept Drift\nalso: label shift\nP_train(Y|X) != P_serve(Y|X)\nRelationship between features and labels changes\nExample: fraud patterns evolve\neconomic conditions shift]
+
+        PredictionDrift[Prediction Drift\nP_train(Y_hat) != P_serve(Y_hat)\nModel output distribution changes\nLeading indicator of degradation\ncan detect without ground truth labels]
+
+        LabelDrift[Label Drift\nP_train(Y) != P_serve(Y)\nTarget variable distribution changes\nRequires ground truth collection\noften delayed by days or weeks]
+
+        DataDrift --&gt; ConceptDrift
+        ConceptDrift --&gt; LabelDrift
+        DataDrift --&gt; PredictionDrift
+    end
+</div></div>
+<h2>Drift Detection Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Pipeline[Drift Detection Pipeline]
+        ServingLogs[Serving Logs\nrequests, features, predictions\nlogged to data lake]
+        ReferenceData[Reference Dataset\ntraining data distribution\nbaseline for comparison]
+
+        Compute[Feature Statistics\ncompute per feature:\nmean, std, quantiles, histogram]
+        Compare[Statistical Comparison\nKS test for continuous features\nchi-squared for categoricals\nPSI - Population Stability Index]
+
+        Alert{Drift\nDetected?}
+        Alert --&gt;|Yes| Notify[Alert Team\nor trigger retraining]
+        Alert --&gt;|No| Monitor[Continue monitoring\nnext window]
+
+        ServingLogs --&gt; Compute
+        ReferenceData --&gt; Compute
+        Compute --&gt; Compare --&gt; Alert
+    end
+
+    style Notify fill:#fee2e2,stroke:#dc2626
+    style Monitor fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Statistical Tests for Drift</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph StatTests[Drift Detection Methods]
+        subgraph Univariate[Per-Feature Tests]
+            KS[Kolmogorov-Smirnov Test\ncontinuous features\ncompares CDFs\np-value threshold: 0.05]
+            Chi2[Chi-Squared Test\ncategorical features\ncompares frequency distributions]
+            PSI[Population Stability Index\nPSI less than 0.1: no drift\nPSI 0.1-0.2: minor drift\nPSI greater than 0.2: major drift\nwidely used in finance]
+        end
+
+        subgraph Multivariate[Multivariate Tests]
+            MMD[Maximum Mean Discrepancy\ntests entire feature space jointly\nkernel-based\ncaptures correlations]
+            Classifier[Classifier-Based Test\ntrain classifier to distinguish\ntrain vs serving data\nhigh AUC indicates drift]
+        end
+
+        subgraph ModelPerf[Model Performance Monitoring]
+            PredDrift[Prediction Distribution\nno ground truth needed\nfast indicator]
+            ActualPerf[Actual Performance\nrequires ground truth labels\ndelayed but definitive]
+        end
+    end
+</div></div>
+<h2>Drift Response Workflow</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Response[Drift Response Decision Tree]
+        Detected[Drift Detected\nfeature X PSI = 0.32]
+
+        Investigate[Investigate Root Cause\ndata pipeline issue?\nlegitimate distribution shift?\nseasonal pattern?]
+
+        DataPipeline{Data\nPipeline\nIssue?}
+        DataPipeline --&gt;|Yes| FixPipeline[Fix upstream data issue\nnot a model problem]
+        DataPipeline --&gt;|No| ModelIssue[Legitimate distribution shift\nmodel may be stale]
+
+        Retrain{Model\nDegradation\nConfirmed?}
+        Retrain --&gt;|Yes| TriggerRetrain[Trigger retraining pipeline\nwith recent data]
+        Retrain --&gt;|No| Monitor2[Monitor closely\nset tighter thresholds]
+
+        Detected --&gt; Investigate --&gt; DataPipeline
+        ModelIssue --&gt; Retrain
+    end
+
+    style FixPipeline fill:#dcfce7,stroke:#16a34a
+    style TriggerRetrain fill:#fef3c7,stroke:#d97706
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Data Drift (Covariate Shift)</strong>: The input feature distribution P(X) changes between training and serving. The model's learned mapping from X to Y may still be correct, but the model is being asked to predict on inputs from a different distribution than it was trained on. Common causes: seasonal patterns, demographic shifts, new product launches, changes in upstream data pipelines.</p>
+</li>
+<li><p><strong>Concept Drift</strong>: The relationship between inputs and outputs P(Y|X) changes. Even with the same input features, the correct prediction has changed. Example: fraud patterns evolve as fraudsters adapt to detection systems. Concept drift requires retraining — no amount of feature engineering can fix a stale decision boundary.</p>
+</li>
+<li><p><strong>Population Stability Index (PSI)</strong>: A widely used metric in credit risk modeling for measuring feature drift. Computed as the sum of (actual_fraction - expected_fraction) * ln(actual_fraction / expected_fraction) across feature value bins. PSI &lt; 0.1 is acceptable, 0.1-0.2 warrants investigation, &gt; 0.2 indicates significant drift requiring action.</p>
+</li>
+<li><p><strong>Reference Dataset</strong>: The baseline distribution used for comparison. Typically the training dataset or a representative held-out sample. The reference should be stable — using a rolling window reference can mask gradual drift. Keep a fixed reference snapshot alongside each deployed model version.</p>
+</li>
+<li><p><strong>Ground Truth Latency</strong>: For many applications, ground truth labels are delayed — fraud labels may not be confirmed for days (chargebacks take time), recommendation clicks are immediate but conversions take hours. Drift detection without ground truth (monitoring prediction distributions) provides early warning; actual performance monitoring confirms the problem.</p>
+</li>
+<li><p><strong>Evidently AI</strong>: Open-source Python library for ML monitoring and drift detection. Generates HTML reports and JSON metrics for data drift, data quality, and model performance. Integrates with MLflow, Grafana, and custom dashboards. Supports batch analysis and reference-based drift comparison.</p>
+</li>
+<li><p><strong>Whylogs</strong>: Open-source data logging library that computes statistical profiles (histograms, distributions, counts) of datasets and model inputs/outputs at low overhead. Profiles can be stored and compared over time, enabling continuous drift monitoring without storing full datasets.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Detection Method</th>
+  <th>Sensitivity</th>
+  <th>Interpretability</th>
+  <th>Compute Cost</th>
+  <th>Requires Labels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>PSI per feature</td>
+  <td>Medium</td>
+  <td>High</td>
+  <td>Very Low</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>KS test per feature</td>
+  <td>High</td>
+  <td>High</td>
+  <td>Low</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>Classifier-based</td>
+  <td>Very High</td>
+  <td>Low</td>
+  <td>High</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>Actual model AUC</td>
+  <td>Definitive</td>
+  <td>High</td>
+  <td>Low</td>
+  <td>Yes (delayed)</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>PSI monitoring</strong>: Production default for tabular models — low compute cost, interpretable thresholds, well-understood by business stakeholders</li>
+<li><strong>KS test</strong>: When continuous feature distributions need precise statistical comparison, e.g., monitoring input score distributions</li>
+<li><strong>Classifier-based drift</strong>: When features are high-dimensional (embeddings, images) and univariate tests miss multivariate shifts</li>
+<li><strong>Prediction drift monitoring</strong>: Always — it's a free leading indicator requiring no ground truth. Alert when prediction rate for positive class changes significantly</li>
+<li><strong>No drift monitoring</strong>: Never acceptable for production models serving business-critical predictions</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="02_experiment_tracking.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Experiment Tracking</span></a>
+            <a href="04_retraining_pipelines.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Retraining Pipelines</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

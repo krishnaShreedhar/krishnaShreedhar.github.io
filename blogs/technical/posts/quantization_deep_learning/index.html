@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Deep Learning Quantization &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A comprehensive project illustrating deep learning quantization concepts through minimal working code examples, visualizations, mermaid diagrams, and extensive ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Deep Learning Quantization</span>
+        </div>
+        <h1 class="post-title">Deep Learning Quantization</h1>
+        <p class="post-subtitle">A comprehensive project illustrating deep learning quantization concepts through minimal working code examples, visualizations, mermaid diagrams, and extensive documentation.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-22</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">quantization-deep-learning</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Deep Learning Quantization</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">Deep Learning Quantization</a></li><li class="project-nav__lvl-1"><a href="docs/concepts.html">Deep Learning Quantization Concepts</a></li><li class="project-nav__lvl-1"><a href="docs/flow_diagrams.html">Quantization Workflow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A comprehensive project illustrating deep learning quantization concepts through minimal working code examples, visualizations, mermaid diagrams, and extensive documentation.</p>
+<h2>Overview</h2>
+<p>Quantization reduces model precision from 32-bit floating point (FP32) to lower-bit representations (INT8, INT4, FP16, etc.), achieving:</p>
+<ul>
+<li><strong>2-4x model size reduction</strong></li>
+<li><strong>2-4x inference speedup</strong> on supported hardware</li>
+<li><strong>Minimal accuracy degradation</strong> when done correctly</li>
+</ul>
+<p>This project covers four core quantization techniques:</p>
+<table>
+<thead>
+<tr>
+  <th>Technique</th>
+  <th>Description</th>
+  <th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Post-Training Quantization (PTQ)</td>
+  <td>Quantize after training, no retraining</td>
+  <td>Fastest, baseline accuracy drop</td>
+</tr>
+<tr>
+  <td>Quantization-Aware Training (QAT)</td>
+  <td>Simulate quantization during training</td>
+  <td>Best accuracy, requires training</td>
+</tr>
+<tr>
+  <td>Calibration</td>
+  <td>Determine optimal quantization ranges</td>
+  <td>Part of PTQ pipeline</td>
+</tr>
+<tr>
+  <td>Mixed Precision</td>
+  <td>Different precision per layer</td>
+  <td>Sensitive layers stay at FP16</td>
+</tr>
+</tbody>
+</table>
+<h2>Project Structure</h2>
+<pre><code>quantization_deep_learning/
+    src/
+        ptq/                    # Post-Training Quantization implementations
+            static_quantization.py     # Static PTQ with calibration
+            dynamic_quantization.py    # Dynamic PTQ for LSTM/Linear
+            weight_analysis.py         # Weight distribution visualization
+        qat/                    # Quantization-Aware Training
+            qat_trainer.py             # QAT training loop
+            fake_quantization.py       # Fake quantization node demo
+            ste_demo.py                # Straight-Through Estimator demo
+        calibration/            # Calibration techniques
+            calibrators.py             # Min-Max, Percentile, MSE, KL-Div calibrators
+            range_analyzer.py          # Calibration range analysis and visualization
+        evaluation/             # Benchmarking and analysis
+            benchmark.py               # Latency, throughput, size benchmarks
+            error_metrics.py           # SQNR, cosine similarity, MSE metrics
+            sensitivity_analysis.py    # Per-layer sensitivity and mixed-precision
+        notebooks/
+            quantization_demo.ipynb    # End-to-end demonstration notebook
+    docs/
+        concepts.md             # Quantization theory with mermaid diagrams
+        flow_diagrams.md        # Quantization workflow diagrams
+    docker/
+        Dockerfile
+        docker-compose.yml
+        requirements.txt
+    config.yaml                 # All hyperparameters and constants
+    pyproject.toml
+</code></pre>
+<h2>Quantization Concepts</h2>
+<h3>1. Quantization Fundamentals</h3>
+<p>Quantization maps a continuous range of floating-point values to a discrete set of integers:</p>
+<pre><code>x_int = round(x_float / scale) + zero_point
+x_dequant = (x_int - zero_point) * scale
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>scale</code>: step size between quantized levels</li>
+<li><code>zero_point</code>: integer value corresponding to 0.0 in float</li>
+<li><strong>Symmetric</strong>: zero_point = 0, scale = max(|x|) / 127</li>
+<li><strong>Asymmetric</strong>: zero_point != 0, covers [min, max] range</li>
+</ul>
+<h3>2. Post-Training Quantization (PTQ)</h3>
+<p>PTQ quantizes a trained FP32 model without additional training:</p>
+<p><strong>Static PTQ</strong>:</p>
+<ol>
+<li>Collect calibration data statistics</li>
+<li>Compute scale/zero_point per layer</li>
+<li>Convert model to INT8 operators</li>
+</ol>
+<p><strong>Dynamic PTQ</strong>:</p>
+<ul>
+<li>Weights quantized statically at conversion time</li>
+<li>Activations quantized dynamically at runtime</li>
+<li>Best for LSTM, Linear layers with variable input ranges</li>
+</ul>
+<h3>3. Quantization-Aware Training (QAT)</h3>
+<p>QAT simulates quantization during training using fake quantization nodes:</p>
+<ol>
+<li>Insert <code>FakeQuantize</code> nodes in the computation graph</li>
+<li>Forward pass uses quantized values (quantize → dequantize)</li>
+<li>Backward pass uses Straight-Through Estimator (STE)</li>
+<li>Model learns to minimize quantization error</li>
+<li>Convert to INT8 after training</li>
+</ol>
+<h3>4. Calibration Techniques</h3>
+<table>
+<thead>
+<tr>
+  <th>Method</th>
+  <th>Description</th>
+  <th>Pros</th>
+  <th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Min-Max</td>
+  <td>Range = [min(x), max(x)]</td>
+  <td>Simple, exact range</td>
+  <td>Sensitive to outliers</td>
+</tr>
+<tr>
+  <td>Percentile</td>
+  <td>Range = [p%, (1-p)%]</td>
+  <td>Robust to outliers</td>
+  <td>Requires tuning</td>
+</tr>
+<tr>
+  <td>MSE</td>
+  <td>Minimize MSE between FP32/INT8</td>
+  <td>Optimal for Gaussian</td>
+  <td>Computationally expensive</td>
+</tr>
+<tr>
+  <td>KL-Divergence</td>
+  <td>Minimize KL(FP32 || INT8)</td>
+  <td>Best for activations</td>
+  <td>Most complex</td>
+</tr>
+</tbody>
+</table>
+<h3>5. Sensitivity Analysis and Mixed Precision</h3>
+<p>Not all layers are equally sensitive to quantization. The workflow:</p>
+<ol>
+<li>Baseline: measure FP32 accuracy</li>
+<li>Per-layer: quantize one layer at a time, measure accuracy drop</li>
+<li>Rank: sort layers by sensitivity (accuracy drop)</li>
+<li>Assign: sensitive layers (drop &gt; threshold) → FP16, rest → INT8</li>
+</ol>
+<h2>Usage</h2>
+<p>All configuration is in <code>config.yaml</code>. No CLI arguments needed.</p>
+<h3>Running PTQ</h3>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python"># src/ptq/static_quantization.py
+python src/ptq/static_quantization.py
+</code></pre></div>
+<p>This will:</p>
+<ol>
+<li>Train a small CNN on synthetic data</li>
+<li>Apply static PTQ with calibration</li>
+<li>Compare FP32 vs INT8 model size and inference time</li>
+<li>Save outputs to <code>outputs/models/</code></li>
+</ol>
+<h3>Running QAT</h3>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">python src/qat/qat_trainer.py
+</code></pre></div>
+<h3>Running Calibration Analysis</h3>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">python src/calibration/calibrators.py
+python src/calibration/range_analyzer.py
+</code></pre></div>
+<h3>Running Evaluation</h3>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">python src/evaluation/benchmark.py
+python src/evaluation/sensitivity_analysis.py
+</code></pre></div>
+<h3>Notebook Demo</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">jupyter notebook src/notebooks/quantization_demo.ipynb
+</code></pre></div>
+<h2>Docker Usage</h2>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker
+docker compose up --build
+</code></pre></div>
+<p>This starts a Jupyter Lab server at <code>http://localhost:8888</code>.</p>
+<h2>Key Results (Expected)</h2>
+<table>
+<thead>
+<tr>
+  <th>Metric</th>
+  <th>FP32</th>
+  <th>PTQ INT8</th>
+  <th>QAT INT8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Model Size</td>
+  <td>1.0x</td>
+  <td>~0.25x</td>
+  <td>~0.25x</td>
+</tr>
+<tr>
+  <td>Inference Latency</td>
+  <td>1.0x</td>
+  <td>~0.5-0.7x</td>
+  <td>~0.5-0.7x</td>
+</tr>
+<tr>
+  <td>Accuracy</td>
+  <td>baseline</td>
+  <td>-0.5 to -2%</td>
+  <td>-0.1 to -0.5%</td>
+</tr>
+<tr>
+  <td>SQNR</td>
+  <td>inf</td>
+  <td>~35-45 dB</td>
+  <td>~45-55 dB</td>
+</tr>
+</tbody>
+</table>
+<h2>References</h2>
+<ul>
+<li>PyTorch Quantization Documentation: <a href="https://pytorch.org/docs/stable/quantization.html">https://pytorch.org/docs/stable/quantization.html</a></li>
+<li>Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference (Jacob et al., 2018)</li>
+<li>Data-Free Quantization Through Weight Equalization and Bias Correction (Nagel et al., 2019)</li>
+<li>ZeroQuant: Efficient and Affordable Post-Training Quantization for Large-Scale Transformers (Yao et al., 2022)</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/concepts.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Deep Learning Quantization Concepts</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

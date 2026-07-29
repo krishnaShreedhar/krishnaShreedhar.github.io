@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Pandas & PySpark — Concepts & Examples &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A self-contained learning project that illustrates core Pandas and PySpark concepts through minimal, working code examples backed by synthetic data. Every const">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Pandas & PySpark — Concepts & Examples</span>
+        </div>
+        <h1 class="post-title">Pandas & PySpark — Concepts & Examples</h1>
+        <p class="post-subtitle">A self-contained learning project that illustrates core Pandas and PySpark concepts through minimal, working code examples backed by synthetic data. Every constant and hyperparameter is controlled from `config.yaml`.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-12-22</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">pandas-pyspark</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Pandas & PySpark — Concepts & Examples</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">Pandas & PySpark — Concepts & Examples</a></li><li class="project-nav__lvl-1"><a href="docs/concepts.html">Pandas & PySpark — Core Concepts</a></li><li class="project-nav__lvl-1"><a href="docs/flow_diagrams.html">Flow Diagrams — Pandas & PySpark</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A self-contained learning project that illustrates core Pandas and PySpark concepts through minimal, working code examples backed by synthetic data. Every constant and hyperparameter is controlled from <code>config.yaml</code>.</p>
+<h2>Concepts Covered</h2>
+<h3>Pandas Core (<code>src/pandas_core/</code>)</h3>
+<ul>
+<li><strong><code>dataframe_operations.py</code></strong> — <code>.loc</code>, <code>.iloc</code>, <code>.at</code>, <code>.iat</code> indexing; inner/left/right/outer merges; melt, pivot, stack, unstack, crosstab; MultiIndex creation and <code>.xs</code>/<code>.swaplevel</code>; copy-vs-view semantics</li>
+<li><strong><code>groupby_patterns.py</code></strong> — <code>agg()</code>, named aggregations (<code>NamedAgg</code>), <code>transform()</code> (group-mean normalisation, cumulative sum, rank), <code>filter()</code>, <code>apply()</code>, time-based <code>Grouper</code></li>
+<li><strong><code>time_series_ops.py</code></strong> — Rolling windows (SMA, Bollinger bands), EWM (MACD, signal), expanding windows, shift/lag/lead, <code>resample()</code> for OHLCV aggregation</li>
+</ul>
+<h3>Pandas Optimization (<code>src/pandas_optimization/</code>)</h3>
+<ul>
+<li><strong><code>performance_patterns.py</code></strong> — Vectorised ops vs <code>iterrows</code> vs <code>itertuples</code> (timed benchmark); <code>query()</code> and <code>eval()</code> with numexpr; <code>pipe()</code> for composable pipelines; Polars syntax comparison</li>
+<li><strong><code>dtype_optimizer.py</code></strong> — Category dtype for low-cardinality strings (memory reporting before/after); <code>pd.to_numeric(downcast=)</code> for int/float columns</li>
+<li><strong><code>chunked_processing.py</code></strong> — Streaming large CSV with <code>chunksize</code>; partial aggregation accumulation across chunks</li>
+</ul>
+<h3>PySpark Core (<code>src/pyspark_core/</code>)</h3>
+<ul>
+<li><strong><code>spark_session.py</code></strong> — SparkSession factory from config; AQE, Arrow, broadcast threshold settings</li>
+<li><strong><code>dataframe_ops.py</code></strong> — StructType schema definition; <code>withColumn</code>, <code>filter</code>, <code>select</code>, <code>when/otherwise</code>; groupBy aggregations; broadcast join vs regular join; SparkSQL with <code>createOrReplaceTempView</code></li>
+<li><strong><code>window_functions.py</code></strong> — <code>rank</code>, <code>dense_rank</code>, <code>row_number</code>, <code>ntile</code>; <code>lag</code>, <code>lead</code>; <code>rowsBetween</code> rolling mean; cumulative sum within partition</li>
+</ul>
+<h3>PySpark Optimization (<code>src/pyspark_optimization/</code>)</h3>
+<ul>
+<li><strong><code>optimization_patterns.py</code></strong> — AQE settings and benefits; <code>repartition</code> (shuffle) vs <code>coalesce</code> (no shuffle); cache/persist with different <code>StorageLevel</code>; broadcast variables for Python dict lookups; <code>explain(mode='formatted')</code> physical plans</li>
+<li><strong><code>pandas_udf_examples.py</code></strong> — Regular Python UDF (row-by-row) vs Pandas UDF (Arrow-batched, vectorised); <code>mapInPandas</code> for distributed inference pattern; side-by-side timing comparison</li>
+</ul>
+<h3>ML Pipelines (<code>src/ml_pipelines/</code>)</h3>
+<ul>
+<li><strong><code>feature_pipeline.py</code></strong> — StringIndexer → OneHotEncoder → VectorAssembler → StandardScaler as a Pipeline; fit-once/transform-many; save and load <code>PipelineModel</code></li>
+<li><strong><code>model_pipeline.py</code></strong> — GBTClassifier training with Pipeline API; RandomForest + CrossValidator + ParamGridBuilder; AUC-ROC evaluation; model save/load</li>
+</ul>
+<h3>Data Quality (<code>src/data_quality/</code>)</h3>
+<ul>
+<li><strong><code>quality_checks.py</code></strong> — Great-Expectations-style checks (null threshold, range, uniqueness, schema, custom predicates); runs on clean and intentionally dirty data; CSV report output</li>
+</ul>
+<h3>Notebook (<code>src/notebooks/</code>)</h3>
+<ul>
+<li><strong><code>pandas_pyspark_demo.ipynb</code></strong> — Side-by-side Pandas/PySpark for filter, groupBy, window, join; benchmark charts (iterrows vs vectorised); memory optimisation waterfall; Pandas/PySpark/Polars comparison table</li>
+</ul>
+<h3>Documentation (<code>docs/</code>)</h3>
+<ul>
+<li><strong><code>concepts.md</code></strong> — Mermaid diagrams: cluster architecture, Catalyst optimizer pipeline, Pandas memory model; full comparison table</li>
+<li><strong><code>flow_diagrams.md</code></strong> — Mermaid diagrams: job execution sequence, transformation vs action, stage/shuffle, ML pipeline, data quality, UDF data flow, AQE flow</li>
+</ul>
+<h2>Project Structure</h2>
+<pre><code>pandas_pyspark/
+    src/
+        config_loader.py            # Shared YAML config loader + logging setup
+        pandas_core/
+            dataframe_operations.py
+            groupby_patterns.py
+            time_series_ops.py
+        pandas_optimization/
+            performance_patterns.py
+            dtype_optimizer.py
+            chunked_processing.py
+        pyspark_core/
+            spark_session.py
+            dataframe_ops.py
+            window_functions.py
+        pyspark_optimization/
+            optimization_patterns.py
+            pandas_udf_examples.py
+        ml_pipelines/
+            feature_pipeline.py
+            model_pipeline.py
+        data_quality/
+            quality_checks.py
+        notebooks/
+            pandas_pyspark_demo.ipynb
+    docs/
+        concepts.md
+        flow_diagrams.md
+    docker/
+        Dockerfile
+        docker-compose.yml
+        requirements.txt
+    config.yaml
+    pyproject.toml
+    README.md
+</code></pre>
+<h2>Usage</h2>
+<h3>With Docker (recommended)</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># Start JupyterLab
+cd docker/
+docker compose up pandas-pyspark-lab
+
+# Open browser: http://localhost:8888
+
+# Run all modules in one shot
+docker compose --profile runner up pandas-pyspark-runner
+</code></pre></div>
+<h3>Without Docker</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># Install dependencies (uv recommended)
+pip install pandas pyspark numpy matplotlib pyarrow pyyaml jupyter polars
+
+# Set PYTHONPATH to src/
+export PYTHONPATH=src/
+
+# Run any module directly
+python src/pandas_core/dataframe_operations.py
+python src/pandas_core/groupby_patterns.py
+python src/pandas_core/time_series_ops.py
+python src/pandas_optimization/performance_patterns.py
+python src/pandas_optimization/dtype_optimizer.py
+python src/pandas_optimization/chunked_processing.py
+python src/data_quality/quality_checks.py
+python src/pyspark_core/dataframe_ops.py
+python src/pyspark_core/window_functions.py
+python src/pyspark_optimization/optimization_patterns.py
+python src/pyspark_optimization/pandas_udf_examples.py
+python src/ml_pipelines/feature_pipeline.py
+python src/ml_pipelines/model_pipeline.py
+
+# Open notebook
+jupyter lab src/notebooks/pandas_pyspark_demo.ipynb
+</code></pre></div>
+<h2>Configuration</h2>
+<p>All constants live in <code>config.yaml</code>. Key sections:</p>
+<table>
+<thead>
+<tr>
+  <th>Section</th>
+  <th>Key settings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>logging</code></td>
+  <td>level, log file path, rotation size</td>
+</tr>
+<tr>
+  <td><code>data</code></td>
+  <td>random_seed, num_rows, output_dir</td>
+</tr>
+<tr>
+  <td><code>spark</code></td>
+  <td>app_name, master, AQE, Arrow, broadcast threshold</td>
+</tr>
+<tr>
+  <td><code>pandas</code></td>
+  <td>chunksize, category_threshold</td>
+</tr>
+<tr>
+  <td><code>window</code></td>
+  <td>rolling_window, ewm_span</td>
+</tr>
+<tr>
+  <td><code>ml_pipeline</code></td>
+  <td>train_ratio, cv_folds, max_depth_options</td>
+</tr>
+<tr>
+  <td><code>data_quality</code></td>
+  <td>null_threshold, age range, revenue bounds</td>
+</tr>
+</tbody>
+</table>
+<p>Logs are written to <code>logs/pandas_pyspark.log</code> (rotating, 100 MB per file, 5 backups).
+Outputs (CSV, model artefacts, charts) go to <code>outputs/</code>.</p>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/concepts.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Pandas & PySpark — Core Concepts</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

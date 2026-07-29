@@ -1,5 +1,16 @@
-# Ray Engineering
-
+---
+title: "Ray Engineering"
+subtitle: "A self-contained project that illustrates **every major Ray subsystem** through minimal, runnable Python examples.  Each module demonstrates real patterns used in production distributed ML systems—including the..."
+category: technical
+project: ray_engineering
+project_title: "Ray Engineering"
+date: 2025-09-18
+reading_time: 3
+tags:
+  - ray-engineering
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/ray_engineering/index.html"
+---
 A self-contained project that illustrates **every major Ray subsystem** through
 minimal, runnable Python examples.  Each module demonstrates real patterns
 used in production distributed ML systems—including the corresponding

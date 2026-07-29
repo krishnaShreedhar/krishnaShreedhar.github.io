@@ -1,5 +1,17 @@
-# Distributed Systems Patterns
-
+---
+title: "Distributed Systems Patterns"
+subtitle: "Distributed systems patterns solve the unique challenges of building reliable, consistent, and resilient software across multiple processes and machines — where networks are unreliable, clocks are unsynchronized, and..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-11
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/03_design_patterns/05_distributed_systems_patterns.html"
+---
 Distributed systems patterns solve the unique challenges of building reliable, consistent, and resilient software across multiple processes and machines — where networks are unreliable, clocks are unsynchronized, and failures are partial and silent.
 
 ## Circuit Breaker Pattern

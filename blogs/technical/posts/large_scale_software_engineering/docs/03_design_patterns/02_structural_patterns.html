@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Structural Patterns &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Structural design patterns describe how classes and objects can be combined to form larger structures. They use inheritance and composition to realize new funct">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Structural Patterns</span>
+        </div>
+        <h1 class="post-title">Structural Patterns</h1>
+        <p class="post-subtitle">Structural design patterns describe how classes and objects can be combined to form larger structures. They use inheritance and composition to realize new functionality, making it possible to combine interfaces or...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-30</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-software-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale Software Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale Software Engineering</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale Software Engineering Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale Software Engineering</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_architectural_paradigms/index.html">Architectural Paradigms</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/01_monolithic_architecture.html">Monolithic Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/02_microservices_architecture.html">Microservices Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/03_event_driven_architecture.html">Event-Driven Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/04_serverless_architecture.html">Serverless Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/05_soa.html">Service-Oriented Architecture (SOA)</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/06_cell_based_architecture.html">Cell-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/07_space_based_architecture.html">Space-Based Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_architectural_paradigms/08_reactive_architecture.html">Reactive Architecture</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_software_engineering_principles/index.html">Software Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/01_solid_principles.html">SOLID Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/02_dry_kiss_yagni.html">DRY, KISS, and YAGNI</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/03_domain_driven_design.html">Domain-Driven Design (DDD)</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/04_package_module_design.html">Package and Module Design Principles</a></li><li class="project-nav__lvl-2"><a href="../02_software_engineering_principles/05_coding_design_principles.html">Coding Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Design Patterns</a></li><li class="project-nav__lvl-2"><a href="01_creational_patterns.html">Creational Patterns</a></li><li class="project-nav__lvl-2 active"><a href="02_structural_patterns.html">Structural Patterns</a></li><li class="project-nav__lvl-2"><a href="03_behavioral_patterns.html">Behavioral Patterns</a></li><li class="project-nav__lvl-2"><a href="04_concurrency_patterns.html">Concurrency Patterns</a></li><li class="project-nav__lvl-2"><a href="05_distributed_systems_patterns.html">Distributed Systems Patterns</a></li><li class="project-nav__lvl-2"><a href="06_cloud_infrastructure_patterns.html">Cloud Infrastructure Patterns</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_communication_protocols/index.html">Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/01_synchronous_protocols.html">Synchronous Communication Protocols</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/02_async_messaging_patterns.html">Asynchronous Messaging Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/03_serialization_formats.html">Serialization Formats</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/04_service_to_service_patterns.html">Service-to-Service Communication Patterns</a></li><li class="project-nav__lvl-2"><a href="../04_communication_protocols/05_network_protocols.html">Network Protocols</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_data_management/index.html">Data Management</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/01_database_paradigms.html">Database Paradigms</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/02_consistency_transactions.html">Consistency and Transactions</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/03_data_modeling.html">Data Modeling</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/04_caching_strategies.html">Caching Strategies</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/05_replication_partitioning.html">Replication and Partitioning</a></li><li class="project-nav__lvl-2"><a href="../05_data_management/06_data_pipelines.html">Data Pipelines</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../06_scalability_performance/index.html">Scalability and Performance</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/01_scalability_dimensions.html">Scalability Dimensions</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/02_load_balancing.html">Load Balancing</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/03_performance_engineering.html">Performance Engineering</a></li><li class="project-nav__lvl-2"><a href="../06_scalability_performance/04_rate_limiting.html">Rate Limiting</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../07_reliability_resilience/index.html">Reliability and Resilience</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/01_reliability_concepts.html">Reliability Concepts</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/02_resilience_patterns.html">Resilience Patterns</a></li><li class="project-nav__lvl-2"><a href="../07_reliability_resilience/03_sre.html">Site Reliability Engineering (SRE)</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../08_security_engineering/index.html">Security Engineering</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/01_security_principles.html">Security Engineering Principles</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/02_authentication_authorization.html">Authentication and Authorization</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/03_application_security.html">Application Security</a></li><li class="project-nav__lvl-2"><a href="../08_security_engineering/04_infrastructure_security.html">Infrastructure Security</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../09_observability_monitoring/index.html">Observability and Monitoring</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/01_three_pillars.html">The Three Pillars of Observability</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/02_monitoring_approaches.html">Monitoring Approaches</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/03_alerting_incident_management.html">Alerting and Incident Management</a></li><li class="project-nav__lvl-2"><a href="../09_observability_monitoring/04_log_management.html">Log Management</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../10_devops_infrastructure/index.html">DevOps and Infrastructure</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/01_cicd_pipelines.html">CI/CD Pipelines</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/02_containerization_orchestration.html">Containerization and Orchestration</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/03_cloud_architecture.html">Cloud Architecture</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/04_iac.html">Infrastructure as Code (IaC)</a></li><li class="project-nav__lvl-2"><a href="../10_devops_infrastructure/05_twelve_factor_app.html">The Twelve-Factor App</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../11_api_design/index.html">API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/01_restful_design.html">RESTful API Design</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/02_api_security.html">API Security</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/03_api_documentation.html">API Documentation</a></li><li class="project-nav__lvl-2"><a href="../11_api_design/04_graphql_design.html">GraphQL Design</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../12_distributed_systems_theory/index.html">Distributed Systems Theory</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/01_fundamental_theorems.html">Fundamental Theorems of Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/02_consensus_algorithms.html">Consensus Algorithms</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/03_consistency_models.html">Consistency Models</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/04_time_ordering.html">Time and Ordering in Distributed Systems</a></li><li class="project-nav__lvl-2"><a href="../12_distributed_systems_theory/05_distributed_coordination.html">Distributed Coordination</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../13_testing_quality/index.html">Testing and Quality</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/01_testing_pyramid.html">The Testing Pyramid</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/02_specialized_testing.html">Specialized Testing</a></li><li class="project-nav__lvl-2"><a href="../13_testing_quality/03_test_design_principles.html">Test Design Principles</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../14_team_organizational/index.html">Team and Organizational Patterns</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/01_team_topologies.html">Team Topologies</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/02_engineering_culture.html">Engineering Culture</a></li><li class="project-nav__lvl-2"><a href="../14_team_organizational/03_agile_lean_scale.html">Agile and Lean at Scale</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../15_emerging_paradigms/index.html">Emerging Paradigms</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/01_platform_engineering.html">Platform Engineering</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/02_edge_distributed_computing.html">Edge and Distributed Computing</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/03_ebpf.html">eBPF (Extended Berkeley Packet Filter)</a></li><li class="project-nav__lvl-2"><a href="../15_emerging_paradigms/04_sustainability.html">Sustainability in Software Engineering</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Structural design patterns describe how classes and objects can be combined to form larger structures. They use inheritance and composition to realize new functionality, making it possible to combine interfaces or implementations flexibly.</p>
+<h2>Adapter Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    Client[Client\nexpects: LegacyPaymentInterface]
+    Adapter[PaymentAdapter\nimplements LegacyPaymentInterface\ndelegates to StripeSDK]
+    Adaptee[Stripe SDK\ncharge, refund, retrieve]
+
+    Client --&gt;|pay| Adapter
+    Adapter --&gt;|stripe.charge| Adaptee
+
+    style Adapter fill:#fef3c7,stroke:#d97706,stroke-width:2px
+</div></div>
+<h2>Decorator Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Interface[DataSource\nread_data\nwrite_data]
+    FileDS[FileDataSource\nBase implementation]
+    EncDec[EncryptionDecorator\nwraps DataSource\nadd encryption layer]
+    CompDec[CompressionDecorator\nwraps DataSource\nadd compression layer]
+    CacheDec[CachingDecorator\nwraps DataSource\nadd caching layer]
+
+    Interface --&gt; FileDS
+    Interface --&gt; EncDec
+    Interface --&gt; CompDec
+    Interface --&gt; CacheDec
+
+    CacheDec --&gt;|wraps| CompDec
+    CompDec --&gt;|wraps| EncDec
+    EncDec --&gt;|wraps| FileDS
+
+    Client[Client] --&gt;|reads from| CacheDec
+
+    style EncDec fill:#dbeafe,stroke:#2563eb
+    style CompDec fill:#dbeafe,stroke:#2563eb
+    style CacheDec fill:#dbeafe,stroke:#2563eb
+</div></div>
+<h2>Facade Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Client[Client Code]
+
+    subgraph Facade[HomeTheaterFacade]
+        WatchMovie[watchMovie]
+        EndMovie[endMovie]
+    end
+
+    subgraph Subsystems[Complex Subsystems]
+        Projector[ProjectorSubsystem\non, setInput, setZoom]
+        Amplifier[AmplifierSubsystem\non, setVolume, setSurround]
+        Lights[LightSubsystem\ndim, off]
+        Screen[ScreenSubsystem\ndown, up]
+        Player[MediaPlayer\nplay, stop, eject]
+    end
+
+    Client --&gt; Facade
+    WatchMovie --&gt; Projector &amp; Amplifier &amp; Lights &amp; Screen &amp; Player
+    EndMovie --&gt; Projector &amp; Amplifier &amp; Lights &amp; Screen &amp; Player
+
+    style Facade fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>Proxy Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Client[Client]
+    Interface[UserService\nget_user\nupdate_user]
+
+    RealSvc[RealUserService\nactual DB calls]
+
+    subgraph ProxyTypes[Proxy Variants]
+        CacheProxy[CachingProxy\ncache get_user results]
+        AuthProxy[AuthorizationProxy\ncheck permissions before calls]
+        LogProxy[LoggingProxy\nlog all calls with timing]
+        LazyProxy[VirtualProxy\nlazy initialization of RealService]
+    end
+
+    Client --&gt; CacheProxy &amp; AuthProxy &amp; LogProxy
+    CacheProxy &amp; AuthProxy &amp; LogProxy -.-&gt;|implements| Interface
+    RealSvc -.-&gt;|implements| Interface
+    CacheProxy &amp; AuthProxy &amp; LogProxy --&gt;|delegates to| RealSvc
+
+    style Client fill:#dbeafe,stroke:#2563eb
+    style RealSvc fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Composite Pattern</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    Component[FileSystemComponent\nget_size\nlist]
+
+    File[File\nleaf node\nget_size = file size]
+    Directory[Directory\ncomposite node\nget_size = sum of children]
+    SymLink[Symbolic Link\nget_size = target size]
+
+    File -.-&gt;|implements| Component
+    Directory -.-&gt;|implements| Component
+    SymLink -.-&gt;|implements| Component
+
+    Root[/ root directory] --&gt; Bin[/bin directory] --&gt; Bash[bash file]
+    Root --&gt; Home[/home directory] --&gt; User[/user directory] --&gt; Config[.config file]
+
+    style Directory fill:#fef3c7,stroke:#d97706
+    style File fill:#dcfce7,stroke:#16a34a
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Adapter</strong>: Converts the interface of a class into another interface that clients expect. Allows incompatible interfaces to work together without modifying source classes. There are two variants: class adapter (uses inheritance, requires multiple inheritance support) and object adapter (uses composition, more flexible).</p>
+</li>
+<li><p><strong>Bridge</strong>: Decouples an abstraction from its implementation so that both can vary independently. Where Adapter makes unrelated classes work together, Bridge is designed up-front to keep abstraction and implementation in separate class hierarchies (e.g., Shape abstraction with drawing implementation).</p>
+</li>
+<li><p><strong>Composite</strong>: Composes objects into tree structures to represent part-whole hierarchies. Clients treat individual objects and compositions uniformly. The key insight: leaf nodes and container nodes share the same interface, so clients don't need to distinguish between them.</p>
+</li>
+<li><p><strong>Decorator</strong>: Attaches additional responsibilities to an object dynamically. Provides a flexible alternative to subclassing for extending functionality. Decorators wrap the component and add behaviour before/after delegation. They can be stacked — multiple decorators chain.</p>
+</li>
+<li><p><strong>Facade</strong>: Provides a simplified interface to a complex subsystem. Doesn't prevent direct access to the subsystem but provides a higher-level interface that makes the subsystem easier to use. Reduces coupling between subsystem and clients.</p>
+</li>
+<li><p><strong>Flyweight</strong>: Uses sharing to support large numbers of fine-grained objects efficiently. Separates intrinsic state (shared, immutable) from extrinsic state (context-specific, not shared). Example: character objects in a text editor share a single flyweight per character type; position is extrinsic.</p>
+</li>
+<li><p><strong>Proxy</strong>: Provides a surrogate for another object to control access. Types include: virtual proxy (lazy initialization), remote proxy (local representative for a remote object), protection proxy (access control), caching proxy, and logging proxy.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Pattern</th>
+  <th>Benefit</th>
+  <th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Adapter</td>
+  <td>Integrates incompatible interfaces</td>
+  <td>Extra indirection layer</td>
+</tr>
+<tr>
+  <td>Bridge</td>
+  <td>Independent evolution of abstraction/implementation</td>
+  <td>More up-front design</td>
+</tr>
+<tr>
+  <td>Composite</td>
+  <td>Treat individual and composite uniformly</td>
+  <td>Can make design too general</td>
+</tr>
+<tr>
+  <td>Decorator</td>
+  <td>Flexible feature composition</td>
+  <td>Many small objects, hard to debug</td>
+</tr>
+<tr>
+  <td>Facade</td>
+  <td>Simplified API for complex subsystem</td>
+  <td>Can become a god object</td>
+</tr>
+<tr>
+  <td>Flyweight</td>
+  <td>Memory efficiency for many objects</td>
+  <td>Complexity of state separation</td>
+</tr>
+<tr>
+  <td>Proxy</td>
+  <td>Transparent cross-cutting concerns</td>
+  <td>Indirection, potential performance overhead</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Adapter</strong>: Integrating third-party libraries with mismatched interfaces, legacy system integration</li>
+<li><strong>Decorator</strong>: Adding logging, caching, auth, or metrics to services without modifying them</li>
+<li><strong>Facade</strong>: Simplifying SDK/library interfaces for application use</li>
+<li><strong>Proxy</strong>: Implementing lazy loading, access control, or transparent caching</li>
+<li><strong>Composite</strong>: Tree structures — file systems, org charts, UI component trees, expression trees</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="01_creational_patterns.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Creational Patterns</span></a>
+            <a href="03_behavioral_patterns.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Behavioral Patterns</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

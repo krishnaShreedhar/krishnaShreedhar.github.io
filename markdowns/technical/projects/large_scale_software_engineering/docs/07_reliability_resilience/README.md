@@ -1,5 +1,17 @@
-# Reliability and Resilience
-
+---
+title: "Reliability and Resilience"
+subtitle: "Reliability is a system's ability to function correctly over time. Resilience is its ability to maintain acceptable behaviour in the face of failures. In distributed systems, failures are not exceptional events —..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-04
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/07_reliability_resilience/index.html"
+---
 Reliability is a system's ability to function correctly over time. Resilience is its ability to maintain acceptable behaviour in the face of failures. In distributed systems, failures are not exceptional events — they are the norm. The question is not whether components will fail, but how gracefully the system handles those failures.
 
 ## Overview

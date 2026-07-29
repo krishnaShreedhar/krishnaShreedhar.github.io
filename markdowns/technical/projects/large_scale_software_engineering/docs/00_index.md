@@ -1,5 +1,17 @@
-# Index: Large Scale Software Engineering
-
+---
+title: "Index: Large Scale Software Engineering"
+subtitle: "Complete table of contents for the Large Scale Software Engineering reference."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-01-04
+reading_time: 2
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/00_index.html"
+---
 Complete table of contents for the Large Scale Software Engineering reference.
 
 ## Sections and Files

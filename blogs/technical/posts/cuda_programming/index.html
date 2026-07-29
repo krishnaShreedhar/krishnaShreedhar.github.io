@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CUDA & cuDNN Programming Tutorials &middot; Shreedhar Kodate</title>
+    <meta name="description" content="25 standalone CUDA C++ tutorials covering GPU programming from fundamentals to advanced library usage. Each tutorial targets NVIDIA H200 (sm_90) and implements ">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">CUDA & cuDNN Programming Tutorials</span>
+        </div>
+        <h1 class="post-title">CUDA & cuDNN Programming Tutorials</h1>
+        <p class="post-subtitle">25 standalone CUDA C++ tutorials covering GPU programming from fundamentals to advanced library usage. Each tutorial targets NVIDIA H200 (sm_90) and implements one concept with ablation experiments, extensive...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-05-29</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">cuda-programming</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">CUDA & cuDNN Programming Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">CUDA & cuDNN Programming Tutorials</a></li><li class="project-nav__lvl-1"><a href="docs/plan.html">CUDA & cuDNN Tutorial Implementation Plan</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/01_threads_blocks_grids.html">Tutorial 01: Threads, Blocks & Grids</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/02_warps_simt.html">Tutorial 02: Warps & SIMT</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/03_cuda_memory_types.html">Tutorial 03: CUDA Memory Types</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/04_memory_coalescing.html">Tutorial 04: Memory Coalescing</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/05_shared_memory_bank_conflicts.html">Tutorial 05: Shared Memory & Bank Conflicts</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/06_thread_synchronization.html">Tutorial 06: Thread Synchronization</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/07_occupancy.html">Tutorial 07: Occupancy</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/08_cuda_streams.html">Tutorial 08: CUDA Streams</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/09_cuda_events_timing.html">Tutorial 09: CUDA Events & Timing</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/10_unified_memory.html">Tutorial 10: Unified Memory</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/11_pinned_memory.html">Tutorial 11: Pinned Memory</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/12_atomic_operations.html">Tutorial 12: Atomic Operations</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/13_parallel_reduction.html">Tutorial 13: Parallel Reduction</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/14_warp_shuffle.html">Tutorial 14: Warp Shuffle Intrinsics</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/15_tiled_matmul.html">Tutorial 15: Tiled Matrix Multiplication</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/16_tensor_cores_wmma.html">Tutorial 16: Tensor Cores & WMMA</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/17_cutlass.html">Tutorial 17: CUTLASS</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/18_ptx_sass.html">Tutorial 18: PTX & SASS</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/19_nsight_profiling.html">Tutorial 19: Nsight Profiling</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/20_cublas.html">Tutorial 20: cuBLAS</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/21_cudnn_descriptors.html">Tutorial 21: cuDNN Handles & Descriptors</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/22_cudnn_algorithm_selection.html">Tutorial 22: cuDNN Algorithm Selection</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/23_cudnn_workspace.html">Tutorial 23: cuDNN Workspace Memory</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/24_cudnn_fused_ops.html">Tutorial 24: cuDNN Fused Operations</a></li><li class="project-nav__lvl-2"><a href="docs/tutorials/25_cuda_graphs.html">Tutorial 25: CUDA Graphs</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>25 standalone CUDA C++ tutorials covering GPU programming from fundamentals to
+advanced library usage. Each tutorial targets NVIDIA H200 (sm_90) and
+implements one concept with ablation experiments, extensive logging, and YAML
+configuration.</p>
+<h2>Project Structure</h2>
+<pre><code>cuda_programming/
+├── src/
+│   ├── common/
+│   │   ├── logger.hpp           # Thread-safe logger (reads level from YAML)
+│   │   ├── config_loader.hpp    # yaml-cpp wrapper: get&lt;T&gt;(section, key)
+│   │   └── cuda_utils.hpp       # CUDA_CHECK, CUDNN_CHECK, DeviceInfo
+│   ├── tutorials/
+│   │   ├── 01_threads_blocks_grids/main.cu
+│   │   ├── 02_warps_simt/main.cu
+│   │   └── ... (25 tutorials total)
+│   └── notebooks/
+├── configs/
+│   ├── global.yaml
+│   └── tutorials/
+│       └── NN_name.yaml         # one per tutorial
+├── docs/
+│   ├── plan.md                  # concept groupings and learning path
+│   └── tutorials/               # per-tutorial explainers
+├── docker/
+│   ├── Dockerfile               # nvidia/cuda:13.0.1-devel-ubuntu22.04
+│   ├── docker-compose.yml
+│   └── .env
+├── logs/                        # runtime logs (created at first run)
+├── CMakeLists.txt
+└── pyproject.toml
+</code></pre>
+<h2>Prerequisites</h2>
+<ul>
+<li>NVIDIA H200 GPU (sm_90), driver &gt;= 550</li>
+<li>CUDA 13.0.1</li>
+<li>cuDNN 9.x</li>
+<li>cmake &gt;= 3.24</li>
+<li>yaml-cpp development headers</li>
+<li>CUTLASS (for tutorial 17, auto-cloned in Docker)</li>
+</ul>
+<h2>Build</h2>
+<h3>With Docker (recommended)</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker/
+docker-compose build
+docker-compose run cuda_tutorials bash
+</code></pre></div>
+<h3>Local build</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cmake -S . -B build \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCUTLASS_DIR=/path/to/cutlass
+cmake --build build --target all_tutorials -j$(nproc)
+</code></pre></div>
+<p>Binaries are placed in <code>build/bin/</code>.</p>
+<h2>Run a Tutorial</h2>
+<p>All config via YAML — no CLI arguments:</p>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># Adjust configs/tutorials/01_threads_blocks_grids.yaml, then:
+./build/bin/tutorial_01_threads_blocks_grids
+
+# Logs appear in logs/01_threads_blocks_grids.log and stdout
+</code></pre></div>
+<h2>Tutorials</h2>
+<table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>Topic</th>
+  <th>Key Concept</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>01</td>
+  <td>Threads, Blocks &amp; Grids</td>
+  <td>Execution hierarchy, vector addition sweep</td>
+</tr>
+<tr>
+  <td>02</td>
+  <td>Warps &amp; SIMT</td>
+  <td>Warp divergence cost measurement</td>
+</tr>
+<tr>
+  <td>03</td>
+  <td>CUDA Memory Types</td>
+  <td>Register / shared / constant / global bandwidth</td>
+</tr>
+<tr>
+  <td>04</td>
+  <td>Memory Coalescing</td>
+  <td>Coalesced vs strided access bandwidth</td>
+</tr>
+<tr>
+  <td>05</td>
+  <td>Shared Memory &amp; Bank Conflicts</td>
+  <td>Naive vs padded transpose</td>
+</tr>
+<tr>
+  <td>06</td>
+  <td>Thread Synchronization</td>
+  <td>Prefix sum with/without <code>__syncthreads()</code></td>
+</tr>
+<tr>
+  <td>07</td>
+  <td>Occupancy</td>
+  <td><code>cudaOccupancyMaxActiveBlocksPerMultiprocessor</code></td>
+</tr>
+<tr>
+  <td>08</td>
+  <td>CUDA Streams</td>
+  <td>H2D + compute + D2H overlap</td>
+</tr>
+<tr>
+  <td>09</td>
+  <td>CUDA Events &amp; Timing</td>
+  <td>GPU events vs CPU chrono</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>Unified Memory</td>
+  <td>Demand paging, prefetch, ReadMostly advise</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>Pinned Memory</td>
+  <td>Pageable vs pinned H2D/D2H bandwidth</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>Atomic Operations</td>
+  <td>Global vs shared-memory histogram</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td>Parallel Reduction</td>
+  <td>Naive, optimized, warp shuffle variants</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>Warp Shuffle</td>
+  <td><code>__shfl_down_sync</code>, broadcast, XOR butterfly</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td>Tiled MatMul</td>
+  <td>Shared memory tiling vs naive GEMM</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td>Tensor Cores / WMMA</td>
+  <td>FP16 wmma vs FP32 CUDA cores</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td>CUTLASS</td>
+  <td><code>cutlass::gemm::device::Gemm</code> template</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td>PTX &amp; SASS</td>
+  <td>Inline PTX, <code>#pragma unroll</code>, register counts</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td>Nsight Profiling</td>
+  <td>NVTX ranges, Nsight Compute instructions</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td>cuBLAS</td>
+  <td><code>cublasSgemm</code>, TF32 Tensor Core math mode</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td>cuDNN Descriptors</td>
+  <td>Handle, tensor, filter, conv descriptors</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td>cuDNN Algorithm Selection</td>
+  <td><code>cudnnFindConvolutionForwardAlgorithmEx</code></td>
+</tr>
+<tr>
+  <td>23</td>
+  <td>cuDNN Workspace</td>
+  <td>Workspace cap vs algorithm fallback</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td>cuDNN Fused Ops</td>
+  <td>Conv+Bias+ReLU unfused vs fused</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td>CUDA Graphs</td>
+  <td>Graph capture, instantiate, replay</td>
+</tr>
+</tbody>
+</table>
+<h2>Configuration System</h2>
+<p>All parameters are read from YAML — no command-line arguments.</p>
+<div class="code-wrapper"><span class="code-lang">yaml</span><pre><code class="language-yaml"># configs/global.yaml
+logging:
+  level: INFO
+  file: global.log
+device:
+  id: 0
+
+# configs/tutorials/01_threads_blocks_grids.yaml
+logging:
+  level: DEBUG
+  file: 01_threads_blocks_grids.log
+tutorial:
+  N: 1048576
+  block_dims: [32, 64, 128, 256, 512]
+  num_iterations: 10
+</code></pre></div>
+<h2>Profiling</h2>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># Nsight Systems (timeline view)
+nsys profile --trace=cuda,nvtx ./build/bin/tutorial_19_nsight_profiling
+
+# Nsight Compute (kernel metrics)
+ncu --set full --target-processes all ./build/bin/tutorial_15_tiled_matmul
+</code></pre></div>
+<h2>Hardware Target</h2>
+<ul>
+<li>GPU: NVIDIA H200 SXM (sm_90), 141 GB HBM3</li>
+<li>Peak HBM bandwidth: ~3350 GB/s</li>
+<li>Peak FP16 Tensor Core: ~1979 TFLOPS (dense)</li>
+<li>Compile flag: <code>-arch=sm_90</code></li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/plan.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">CUDA & cuDNN Tutorial Implementation Plan</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

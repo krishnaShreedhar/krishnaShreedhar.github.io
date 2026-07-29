@@ -1,5 +1,17 @@
-# Probability & Statistics: Core Concepts
-
+---
+title: "Probability & Statistics: Core Concepts"
+subtitle: "This document covers the foundational statistical concepts implemented in this project, with diagrams, formal definitions, and practical intuition."
+category: technical
+project: probability_statistics
+project_title: "Probability & Statistics"
+date: 2025-08-18
+reading_time: 8
+tags:
+  - probability-statistics
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/probability_statistics/docs/concepts.html"
+---
 This document covers the foundational statistical concepts implemented in this project,
 with diagrams, formal definitions, and practical intuition.
 

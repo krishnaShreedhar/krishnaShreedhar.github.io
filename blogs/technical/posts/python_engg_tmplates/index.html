@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Python Engineering Patterns &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A curated collection of minimal, runnable examples illustrating production-grade Python engineering patterns. Every module is self-contained, reads its configur">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Python Engineering Patterns</span>
+        </div>
+        <h1 class="post-title">Python Engineering Patterns</h1>
+        <p class="post-subtitle">A curated collection of minimal, runnable examples illustrating production-grade Python engineering patterns. Every module is self-contained, reads its configuration from `config.yaml`, and writes structured logs...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-01-22</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">python-engg-tmplates</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Python Engineering Patterns</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0 active"><a href="index.html">Python Engineering Patterns</a></li><li class="project-nav__lvl-1"><a href="docs/concepts.html">Python Engineering Patterns – Concept Reference</a></li><li class="project-nav__lvl-1"><a href="docs/flow_diagrams.html">Execution Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A curated collection of minimal, runnable examples illustrating production-grade Python
+engineering patterns. Every module is self-contained, reads its configuration from
+<code>config.yaml</code>, and writes structured logs under <code>logs/</code>.</p>
+<h2>Patterns Covered</h2>
+<table>
+<thead>
+<tr>
+  <th>Area</th>
+  <th>Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Collections / itertools</strong></td>
+  <td><code>defaultdict</code>, <code>Counter</code>, <code>deque</code>, <code>namedtuple</code>, <code>ChainMap</code>, <code>itertools</code> combinatorics, <code>functools.lru_cache</code>, <code>singledispatch</code>, generators</td>
+</tr>
+<tr>
+  <td><strong>Logging</strong></td>
+  <td>JSON formatter, rotating file handler, <code>LoggerAdapter</code> context, <code>QueueHandler</code> async logging, <code>dictConfig</code></td>
+</tr>
+<tr>
+  <td><strong>Concurrency</strong></td>
+  <td><code>ThreadPoolExecutor</code>, thread-safe <code>Queue</code> / <code>Lock</code> / <code>Semaphore</code> / <code>Event</code> / <code>Barrier</code>, <code>ProcessPoolExecutor</code>, shared memory, <code>asyncio</code> producer-consumer, <code>TaskGroup</code>, timeout/cancellation</td>
+</tr>
+<tr>
+  <td><strong>Design Patterns</strong></td>
+  <td>Singleton (metaclass, thread-safe), Observer / EventBus, Strategy, Builder, Retry decorator (exp backoff + jitter), context managers, TTL cache</td>
+</tr>
+<tr>
+  <td><strong>Production Template</strong></td>
+  <td>Graceful shutdown, batch processing with GC control, <code>stream_jsonl</code>, in-process metrics (counter + histogram), exception hierarchy, global exception handler</td>
+</tr>
+</tbody>
+</table>
+<h2>Repository Layout</h2>
+<pre><code>python_engg_tmplates/
+├── config.yaml                          # All constants and hyperparameters
+├── pyproject.toml
+├── README.md
+├── logs/                                # Runtime log files (auto-created)
+├── docs/
+│   ├── concepts.md                      # Pattern explanations + mermaid diagrams
+│   └── flow_diagrams.md                 # Execution flow diagrams
+├── docker/
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── requirements.txt
+└── src/
+    ├── collections_itertools/
+    │   ├── collections_demo.py
+    │   ├── itertools_demo.py
+    │   └── functools_demo.py
+    ├── logging_patterns/
+    │   ├── json_logger.py
+    │   ├── async_logger.py
+    │   └── logger_factory.py
+    ├── concurrency/
+    │   ├── threading_patterns.py
+    │   ├── multiprocessing_patterns.py
+    │   └── async_patterns.py
+    ├── design_patterns/
+    │   ├── creational_patterns.py
+    │   ├── behavioral_patterns.py
+    │   └── structural_patterns.py
+    ├── production_template/
+    │   ├── service.py
+    │   ├── metrics.py
+    │   └── exception_hierarchy.py
+    └── notebooks/
+        └── python_patterns_demo.ipynb
+</code></pre>
+<h2>Quick Start</h2>
+<h3>Local</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># Install dependencies
+pip install -e &quot;.[dev]&quot;
+
+# Create logs directory
+mkdir -p logs
+
+# Run any module directly (each has __main__ block)
+python src/collections_itertools/collections_demo.py
+python src/logging_patterns/json_logger.py
+python src/concurrency/threading_patterns.py
+python src/design_patterns/creational_patterns.py
+python src/production_template/service.py
+
+# Launch notebook
+jupyter notebook src/notebooks/python_patterns_demo.ipynb
+</code></pre></div>
+<h3>Docker</h3>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">cd docker
+docker-compose up --build
+</code></pre></div>
+<h2>Configuration</h2>
+<p>All tuneable knobs live in <code>config.yaml</code>. No CLI flags are used anywhere in this project.
+Edit <code>config.yaml</code> and re-run any module to change behaviour.</p>
+<h2>Logging</h2>
+<p>Every module writes to <code>logs/python_engg.log</code> (rotating, JSON-structured) and also
+emits to stdout. The log level is controlled by <code>logging.level</code> in <code>config.yaml</code>.</p>
+
+        
+        <nav class="post-nav">
+            <a href="../../../../blogs/technical/" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Back</span><span class="post-nav__title">Technical Blog</span></a>
+            <a href="docs/concepts.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Python Engineering Patterns – Concept Reference</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../blogs/technical/">Technical</a>
+                <a href="../../../../blogs/">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>

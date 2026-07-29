@@ -1,5 +1,17 @@
-# Flow Diagrams: Statistical Analysis Pipelines
-
+---
+title: "Flow Diagrams: Statistical Analysis Pipelines"
+subtitle: "This document contains workflow diagrams for the three main analysis patterns in this project."
+category: technical
+project: probability_statistics
+project_title: "Probability & Statistics"
+date: 2025-03-26
+reading_time: 5
+tags:
+  - probability-statistics
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/probability_statistics/docs/flow_diagrams.html"
+---
 This document contains workflow diagrams for the three main analysis patterns
 in this project.
 

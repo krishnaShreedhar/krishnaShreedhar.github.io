@@ -1,5 +1,17 @@
-# Dreamer V2 — World Models for Model-Based RL
-
+---
+title: "Dreamer V2 — World Models for Model-Based RL"
+subtitle: "Dreamer V2 [Hafner et al., 2020] learns a compact latent world model from environment interactions, then trains an actor-critic policy **entirely in imagination** — inside the learned model — without additional real..."
+category: technical
+project: rl_envs
+project_title: "RL Environments — Educational Reinforcement Learning Tutorials"
+date: 2025-10-12
+reading_time: 5
+tags:
+  - rl-envs
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/rl_envs/docs/algorithms/10_dreamer.html"
+---
 **Use case:** Autonomous vehicle control  
 **Type:** Model-based RL, latent dynamics, imagination-based actor-critic  
 **Action space:** Continuous

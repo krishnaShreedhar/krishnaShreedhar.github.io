@@ -1,5 +1,17 @@
-# Tutorial 04: Memory Coalescing
-
+---
+title: "Tutorial 04: Memory Coalescing"
+subtitle: "See `src/tutorials/04_memory_coalescing/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-02-08
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/04_memory_coalescing.html"
+---
 ## Concept
 
 See `src/tutorials/04_memory_coalescing/main.cu` for detailed inline comments explaining

@@ -1,5 +1,17 @@
-# Tutorial 21: cuDNN Handles & Descriptors
-
+---
+title: "Tutorial 21: cuDNN Handles & Descriptors"
+subtitle: "See `src/tutorials/21_cudnn_descriptors/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-09-09
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/21_cudnn_descriptors.html"
+---
 ## Concept
 
 See `src/tutorials/21_cudnn_descriptors/main.cu` for detailed inline comments explaining

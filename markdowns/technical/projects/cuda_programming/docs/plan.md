@@ -1,5 +1,17 @@
-# CUDA & cuDNN Tutorial Implementation Plan
-
+---
+title: "CUDA & cuDNN Tutorial Implementation Plan"
+subtitle: "25 standalone tutorials covering the full GPU programming stack, from fundamental execution model concepts through advanced library usage and profiling. Each tutorial is a self-contained CUDA C++ program built from..."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-09-07
+reading_time: 4
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/plan.html"
+---
 ## Overview
 
 25 standalone tutorials covering the full GPU programming stack, from fundamental

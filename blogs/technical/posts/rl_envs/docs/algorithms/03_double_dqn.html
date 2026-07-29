@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>03 — Double DQN &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Double DQN (van Hasselt et al., 2015) addresses a systematic overestimation bias in standard DQN by decoupling the **selection** of the best next action from it">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">03 — Double DQN</span>
+        </div>
+        <h1 class="post-title">03 — Double DQN</h1>
+        <p class="post-subtitle">Double DQN (van Hasselt et al., 2015) addresses a systematic overestimation bias in standard DQN by decoupling the **selection** of the best next action from its **evaluation**.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-27</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">rl-envs</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">RL Environments — Educational Reinforcement Learning Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">RL Environments — Educational Reinforcement Learning Tutorials</a></li><li class="project-nav__lvl-1"><a href="../plan.html">RL Environments — Project Plan</a></li><li class="project-nav__lvl-2"><a href="01_q_learning.html">01 — Q-Learning</a></li><li class="project-nav__lvl-2"><a href="02_dqn.html">02 — Deep Q-Network (DQN)</a></li><li class="project-nav__lvl-2 active"><a href="03_double_dqn.html">03 — Double DQN</a></li><li class="project-nav__lvl-2"><a href="04_a2c.html">A2C — Advantage Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="05_ppo.html">PPO — Proximal Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="06_ddpg.html">DDPG — Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="07_td3.html">TD3 — Twin Delayed Deep Deterministic Policy Gradient</a></li><li class="project-nav__lvl-2"><a href="08_sac.html">SAC — Soft Actor-Critic</a></li><li class="project-nav__lvl-2"><a href="09_grpo.html">GRPO — Group Relative Policy Optimization</a></li><li class="project-nav__lvl-2"><a href="10_dreamer.html">Dreamer V2 — World Models for Model-Based RL</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Concept</h2>
+<p>Double DQN (van Hasselt et al., 2015) addresses a systematic overestimation
+bias in standard DQN by decoupling the <strong>selection</strong> of the best next action
+from its <strong>evaluation</strong>.</p>
+<hr />
+<h2>The Overestimation Bias in DQN</h2>
+<p>In vanilla DQN, the TD target is computed as:</p>
+<pre><code>target = r + gamma * max_a' Q_target(s', a')
+</code></pre>
+<p>The <code>max</code> operator applied to noisy Q-value estimates introduces a positive
+bias: even if individual Q(s', a') estimates have symmetric noise, taking the
+maximum of many noisy values is systematically higher than the true maximum.</p>
+<p>Over many updates, this bias accumulates and inflates Q-values, leading to:</p>
+<ul>
+<li>Overconfident value estimates.</li>
+<li>Suboptimal policies that prefer high-variance actions.</li>
+<li>Training instability in environments with many actions.</li>
+</ul>
+<hr />
+<h2>The Double DQN Fix</h2>
+<p>Double DQN modifies the target computation to use <strong>two different networks</strong>
+for the two roles:</p>
+<pre><code>Vanilla DQN:
+    a* = argmax_a  Q_target(s', a)    # target selects action
+    target = r + gamma * Q_target(s', a*)  # target evaluates action
+    (same network does both -&gt; correlated bias)
+
+Double DQN:
+    a* = argmax_a  Q_online(s', a)    # online net selects action
+    target = r + gamma * Q_target(s', a*)  # target net evaluates action
+    (different networks -&gt; bias largely cancelled)
+</code></pre>
+<p>Because the two networks are independently updated, their errors are
+approximately uncorrelated, and the resulting estimator has much lower bias.</p>
+<hr />
+<h2>Implementation</h2>
+<p>Double DQN inherits <code>DQNAgent</code> and overrides only <code>update()</code>.
+The change is a single line in the target computation:</p>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python"># DQN:
+best_q = q_target(next_states).max(dim=1).values
+
+# Double DQN:
+best_actions = q_online(next_states).argmax(dim=1)      # online selects
+best_q = q_target(next_states).gather(1, best_actions)  # target evaluates
+</code></pre></div>
+<p>All other components (replay buffer, target network hard update, epsilon
+decay, checkpointing) are identical to DQN.</p>
+<hr />
+<h2>Flow Diagram — Difference vs DQN</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph DQN[&quot;Vanilla DQN target&quot;]
+        D1[&quot;next_states&quot;] --&gt; D2[&quot;Q_target(next_states)&quot;]
+        D2 --&gt; D3[&quot;max over actions&quot;]
+        D3 --&gt; D4[&quot;target = r + gamma * max_q&quot;]
+    end
+
+    subgraph DDQN[&quot;Double DQN target&quot;]
+        A1[&quot;next_states&quot;] --&gt; A2[&quot;Q_online(next_states)&quot;]
+        A2 --&gt; A3[&quot;a* = argmax (action SELECTION)&quot;]
+        A1 --&gt; B2[&quot;Q_target(next_states)&quot;]
+        A3 --&gt; B3[&quot;Q_target(s', a*) (action EVALUATION)&quot;]
+        B2 --&gt; B3
+        B3 --&gt; B4[&quot;target = r + gamma * Q_target(s', a*)&quot;]
+    end
+
+    DQN -.-&gt;|&quot;Replace this&quot;|DDQN
+</div></div>
+<p>The <code>mean_bias_vs_vanilla</code> diagnostic is logged at DEBUG level each update:</p>
+<pre><code>[DEBUG] double_dqn_update: mean_bias_vs_vanilla=0.031423
+</code></pre>
+<p>A positive value means vanilla DQN would have overestimated.</p>
+<hr />
+<h2>Expected Improvement Over DQN</h2>
+<p>On the 10x10 GridWorld with 10 obstacles:</p>
+<table>
+<thead>
+<tr>
+  <th>Metric</th>
+  <th>DQN</th>
+  <th>Double DQN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Mean Q-value at convergence</td>
+  <td>Overestimates by ~5–15%</td>
+  <td>Closer to true value</td>
+</tr>
+<tr>
+  <td>Policy quality (mean eval reward)</td>
+  <td>Good</td>
+  <td>Equal or slightly better</td>
+</tr>
+<tr>
+  <td>Training stability</td>
+  <td>Moderate</td>
+  <td>More stable (less overestimation noise)</td>
+</tr>
+<tr>
+  <td>Convergence speed</td>
+  <td>Baseline</td>
+  <td>Similar or slightly faster</td>
+</tr>
+</tbody>
+</table>
+<p>The improvement is most pronounced in environments with many actions or sparse
+rewards, where the overestimation bias is largest.</p>
+<hr />
+<h2>Key Config Parameters</h2>
+<p>Identical to DQN (<code>02_dqn.yaml</code>), with only the algorithm identifier changed:</p>
+<div class="code-wrapper"><span class="code-lang">yaml</span><pre><code class="language-yaml">algorithm: double_dqn    # was: dqn
+</code></pre></div>
+<p>All network, training, buffer, and env parameters are shared with DQN for
+a clean apples-to-apples comparison.</p>
+<hr />
+<h2>Summary</h2>
+<p>Double DQN is a minimal, high-impact improvement to DQN:</p>
+<ul>
+<li>One extra <code>argmax</code> call on the online network.</li>
+<li>No additional parameters or memory.</li>
+<li>Removes a fundamental statistical bias.</li>
+<li>Directly applicable to any DQN-based algorithm (Dueling DQN, Rainbow, etc.).</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="02_dqn.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">02 — Deep Q-Network (DQN)</span></a>
+            <a href="04_a2c.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">A2C — Advantage Actor-Critic</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

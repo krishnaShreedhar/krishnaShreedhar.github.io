@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Feature Stores &middot; Shreedhar Kodate</title>
+    <meta name="description" content="A feature store is a centralized platform for storing, computing, and serving ML features. It solves two critical problems in ML systems: feature reuse (prevent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Feature Stores</span>
+        </div>
+        <h1 class="post-title">Feature Stores</h1>
+        <p class="post-subtitle">A feature store is a centralized platform for storing, computing, and serving ML features. It solves two critical problems in ML systems: feature reuse (preventing different teams from recomputing the same features...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-08-10</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2 active"><a href="02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>A feature store is a centralized platform for storing, computing, and serving ML features. It solves two critical problems in ML systems: feature reuse (preventing different teams from recomputing the same features independently) and training-serving consistency (ensuring the same feature values are used in training and production serving).</p>
+<h2>Feature Store Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Sources[Data Sources]
+        OLTP[OLTP Databases\ntransactional data]
+        Warehouse[Data Warehouse\nhistorical aggregations]
+        Streams[Event Streams\nKafka, Kinesis]
+        External[External APIs\nenrichment data]
+    end
+
+    subgraph Computation[Feature Computation]
+        BatchComp[Batch Computation\nSpark, dbt, SQL\nScheduled or triggered]
+        StreamComp[Stream Computation\nFlink, Spark Streaming\nReal-time features]
+    end
+
+    subgraph Storage[Dual Storage]
+        OfflineStore[Offline Store\nFeature values over time\nParquet on S3 or DeltaLake\nPoint-in-time correct joins]
+        OnlineStore[Online Store\nLatest feature values\nRedis, DynamoDB, Cassandra\nLow latency serving]
+    end
+
+    subgraph Consumers[Feature Consumers]
+        TrainingJob[ML Training Jobs\nbatch retrieve historical features\npoint-in-time correct]
+        ServingInf[Online Inference\nreal-time feature lookup\nlow latency required]
+        Analytics[Analytics\nfeature statistics\ndrift monitoring]
+    end
+
+    Sources --&gt; BatchComp &amp; StreamComp
+    BatchComp --&gt; OfflineStore &amp; OnlineStore
+    StreamComp --&gt; OnlineStore
+    OfflineStore --&gt; TrainingJob &amp; Analytics
+    OnlineStore --&gt; ServingInf
+
+    style OfflineStore fill:#dbeafe,stroke:#2563eb
+    style OnlineStore fill:#dcfce7,stroke:#16a34a
+    style OfflineStore fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+</div></div>
+<h2>Point-in-Time Correct Joins</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph PTCJoin[Point-in-Time Correct Join]
+        Problem[Problem: Leakage\nTraining query that joins user features\nas-of TODAY for all historical orders\nuses future information!\nModel sees data it wouldn't have at inference time]
+        style Problem fill:#fee2e2,stroke:#dc2626
+
+        Solution[Point-in-Time Join:\nFor each order at timestamp T\njoin user features as-of timestamp T\nnot the current value\nPrevents future data leakage]
+        style Solution fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+
+        Problem --&gt; Solution
+    end
+
+    subgraph Timeline[Example Timeline]
+        T1[Order placed: 2024-01-15\nUser feature at 2024-01-15:\npurchase_count_30d = 5]
+        T2[Current date: 2024-03-01\nUser feature today:\npurchase_count_30d = 47]
+        
+        BadJoin[Wrong join: uses 47\nModel trains on future data!]
+        GoodJoin[Correct PIT join: uses 5\nModel trains on data available at order time]
+
+        T1 --&gt; BadJoin &amp; GoodJoin
+        T2 --&gt; BadJoin
+    end
+</div></div>
+<h2>Feature Reuse Across Teams</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph WithoutFS[Without Feature Store - Duplication]
+        Team1[Team 1 - Fraud\ncomputes: user_spend_7d\ncustom SQL pipeline]
+        Team2[Team 2 - Recommendations\ncomputes: user_spend_7d\ndifferent SQL - subtle difference!]
+        Team3[Team 3 - Marketing\ncomputes: user_spend_7d\nthird implementation]
+        Problem2[3 teams, 3 implementations\nInconsistent values\nWasted compute]
+        style Problem2 fill:#fee2e2,stroke:#dc2626
+    end
+
+    subgraph WithFS[With Feature Store - Shared Features]
+        FS[Feature Store\nuser_spend_7d: canonical definition\ncomputed once, served to all]
+        FTeam1[Fraud Team] --&gt; FS
+        FTeam2[Recommendations Team] --&gt; FS
+        FTeam3[Marketing Team] --&gt; FS
+        Benefit[Single implementation\nConsistent values\nCompute once]
+        style Benefit fill:#dcfce7,stroke:#16a34a
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Offline Store</strong>: Stores the historical time series of feature values. Used by training jobs to retrieve features as they existed at any point in time. Typically implemented on S3/GCS with Parquet files or Delta Lake format. Enables point-in-time correct joins to prevent label leakage.</p>
+</li>
+<li><p><strong>Online Store</strong>: Stores the latest (current) feature values for low-latency serving. Used by the inference serving layer to enrich incoming requests with precomputed features. Implemented with Redis, DynamoDB, or Bigtable for sub-10ms lookups. Only stores the current value, not the history.</p>
+</li>
+<li><p><strong>Point-in-Time Correct Join</strong>: When creating a training dataset, features must be joined to labels using the feature values that were available at the time of the label event — not the current values. Without this, the model trains on data it would not have had access to at prediction time (data leakage), producing overly optimistic evaluation metrics.</p>
+</li>
+<li><p><strong>Feature Groups</strong>: Features are organized into logical groups based on the entity they describe (user features, item features, session features) and the computation frequency (real-time, hourly, daily). Feature groups share a common source and computation logic.</p>
+</li>
+<li><p><strong>Feature Backfilling</strong>: Computing historical values for new features from historical raw data. Required when adding a new feature to the offline store. Can be computationally expensive for long history periods.</p>
+</li>
+<li><p><strong>Feature Freshness</strong>: The staleness of feature values in the online store. Some features (user lifetime value) can be stale for days; others (current session cart value) must be fresh within seconds. Feature freshness requirements drive online store update frequency.</p>
+</li>
+<li><p><strong>Feast, Tecton, Hopsworks</strong>: The leading feature store platforms. Feast is open-source; Tecton and Hopsworks offer managed cloud services. Most large companies build proprietary feature stores optimized for their specific data infrastructure.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Approach</th>
+  <th>Training-Serving Consistency</th>
+  <th>Engineering Overhead</th>
+  <th>Feature Reuse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>No feature store</td>
+  <td>Low (manual consistency)</td>
+  <td>Low</td>
+  <td>Very Low</td>
+</tr>
+<tr>
+  <td>Shared feature library</td>
+  <td>Medium</td>
+  <td>Medium</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Full feature store</td>
+  <td>High</td>
+  <td>High</td>
+  <td>High</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Feature store</strong>: When multiple models share features, when training-serving skew is causing production degradation, or when the ML team has 5+ data scientists with overlapping feature needs</li>
+<li><strong>Offline store only</strong>: Start here — add the online store when online inference latency becomes a constraint</li>
+<li><strong>Skip for simple models</strong>: If the model uses only request-time features (no historical context) and there's only one model, a full feature store may be premature</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="01_ml_pipelines.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">ML Pipelines</span></a>
+            <a href="03_model_serving.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Model Serving</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

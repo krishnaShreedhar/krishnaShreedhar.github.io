@@ -1,5 +1,17 @@
-# Data Collection
-
+---
+title: "Data Collection"
+subtitle: "Data collection is the process of gathering, sourcing, and labeling the raw data that forms the foundation of ML training datasets. The diversity, volume, and quality of collected data determines the ceiling of model..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-11-27
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/04_data_engineering_for_ml/01_data_collection.html"
+---
 Data collection is the process of gathering, sourcing, and labeling the raw data that forms the foundation of ML training datasets. The diversity, volume, and quality of collected data determines the ceiling of model performance — no training algorithm or architecture can overcome a fundamentally biased, limited, or mislabeled dataset.
 
 ## Data Source Taxonomy

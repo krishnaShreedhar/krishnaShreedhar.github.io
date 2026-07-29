@@ -1,5 +1,17 @@
-# Team and Organizational Patterns
-
+---
+title: "Team and Organizational Patterns"
+subtitle: "Software is built by people organized into teams. Team structure, communication patterns, and engineering culture have as much impact on software quality and delivery speed as any technical decision. Conway's Law..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-01-01
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/14_team_organizational/index.html"
+---
 Software is built by people organized into teams. Team structure, communication patterns, and engineering culture have as much impact on software quality and delivery speed as any technical decision. Conway's Law states that systems mirror the communication structures of the organizations that build them.
 
 ## Overview

@@ -1,5 +1,17 @@
-# LLMOps
-
+---
+title: "LLMOps"
+subtitle: "LLMOps (Large Language Model Operations) is the specialized practice of building, deploying, evaluating, and maintaining systems powered by large language models. It extends MLOps with LLM-specific challenges: prompt..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-12-08
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/03_llmops/index.html"
+---
 LLMOps (Large Language Model Operations) is the specialized practice of building, deploying, evaluating, and maintaining systems powered by large language models. It extends MLOps with LLM-specific challenges: prompt engineering and versioning, retrieval-augmented generation, evaluation without ground-truth labels, and the unique cost-quality-latency trade-offs of foundation model APIs and self-hosted LLMs.
 
 ## Overview

@@ -1,5 +1,17 @@
-# MLOps
-
+---
+title: "MLOps"
+subtitle: "MLOps (Machine Learning Operations) applies DevOps principles to the ML lifecycle — automating training, evaluation, deployment, and monitoring of models in production. Unlike traditional software, MLOps must manage..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-01-03
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/02_mlops/index.html"
+---
 MLOps (Machine Learning Operations) applies DevOps principles to the ML lifecycle — automating training, evaluation, deployment, and monitoring of models in production. Unlike traditional software, MLOps must manage both code and data artifacts, and must detect degradation from data distribution shifts rather than just software bugs.
 
 ## Overview

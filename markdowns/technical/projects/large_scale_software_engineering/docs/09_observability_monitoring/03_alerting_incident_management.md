@@ -1,5 +1,17 @@
-# Alerting and Incident Management
-
+---
+title: "Alerting and Incident Management"
+subtitle: "Effective alerting pages engineers only when human action is required, with enough context to act quickly. Poor alerting causes alert fatigue — too many false-positive pages result in engineers ignoring alerts,..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-05-23
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/09_observability_monitoring/03_alerting_incident_management.html"
+---
 Effective alerting pages engineers only when human action is required, with enough context to act quickly. Poor alerting causes alert fatigue — too many false-positive pages result in engineers ignoring alerts, including real ones. Incident management provides a structured process for responding to and learning from production failures.
 
 ## Alert Design Principles

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Inference Optimization &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Inference optimization reduces the latency and cost of running large neural networks at serving time. Training cost is paid once; inference cost is paid for eve">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Inference Optimization</span>
+        </div>
+        <h1 class="post-title">Inference Optimization</h1>
+        <p class="post-subtitle">Inference optimization reduces the latency and cost of running large neural networks at serving time. Training cost is paid once; inference cost is paid for every prediction in production — for large LLMs handling...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-11-09</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../03_llmops/index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="../03_llmops/04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2 active"><a href="03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Inference optimization reduces the latency and cost of running large neural networks at serving time. Training cost is paid once; inference cost is paid for every prediction in production — for large LLMs handling millions of requests, optimizing inference has 10-100x impact on total compute spend. Key techniques include quantization, KV-cache management, continuous batching, and speculative decoding.</p>
+<h2>LLM Inference Bottlenecks</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Bottlenecks[LLM Inference Performance Bottlenecks]
+        subgraph Phases[Two Phases of LLM Inference]
+            Prefill[Prefill Phase\nProcess entire input prompt\nParallel matrix multiplications\nCompute-bound\nGPU utilization high]
+
+            Decode[Decode Phase - Token Generation\nGenerate one token at a time\nRead all KV cache from memory each step\nMemory bandwidth-bound\nGPU utilization low - 30-50%]
+        end
+
+        subgraph KVCacheProblem[KV Cache Memory Problem]
+            KVC[KV Cache Size\nfor seq_len tokens\nnum_layers x 2 x num_heads x head_dim x seq_len x dtype_bytes\nA 13B model: 800 MB per request at 2048 tokens\nServing 100 concurrent requests = 80 GB\ncannot fit more requests]
+        end
+    end
+</div></div>
+<h2>Quantization</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Quantization[Quantization Techniques]
+        subgraph W8A8[INT8 Quantization]
+            Q8[Quantize weights to int8\nquantize activations to int8\ndequantize for output\n2x memory reduction from fp16\n15-20% speedup on A100]
+        end
+
+        subgraph W4[INT4 Weight Quantization]
+            Q4[Weights only quantized to int4\nActivations remain fp16\nAWQ GPTQ bitsandbytes NF4\n4x memory reduction from fp16\nMinimal quality loss for LLMs 7B plus]
+            style Q4 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        end
+
+        subgraph Mixed[Mixed Precision Quantization]
+            QM[Important layers kept at fp16\nSensitive attention layers at fp16\nFFN layers at int4\nMinimizes quality loss]
+        end
+
+        subgraph Calibration[Calibration Process]
+            Cal[Collect representative inputs\nrun calibration forward pass\ncompute activation ranges\nfit quantization parameters\nvalidate quality on eval set]
+        end
+    end
+</div></div>
+<h2>KV Cache Management with vLLM</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph PagedAttention[vLLM PagedAttention]
+        subgraph NaiveKV[Naive KV Cache - Fragmented]
+            NK1[Reserve max_seq_len memory\nfor every request upfront\nMost memory wasted\nfor short completions\nMax 10-20 concurrent requests]
+            style NK1 fill:#fee2e2,stroke:#dc2626
+        end
+
+        subgraph Paged[PagedAttention - Efficient]
+            PA1[KV cache divided into fixed-size blocks\nlike OS virtual memory pages\nBlocks allocated on demand\nas tokens are generated]
+            PA2[Multiple requests share physical\nmemory blocks for common prefixes\nPrefix caching: system prompt\nshared across all requests\n3-10x more concurrent requests]
+            PA3[GPU memory utilization: 90%+\nvs 20-40% naive reservation]
+            style PA2 fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        end
+    end
+</div></div>
+<h2>Continuous Batching</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph ContinuousBatching[Continuous Batching vs Static Batching]
+        subgraph Static[Static Batching]
+            SB[Wait for N requests\nprocess all together\nAll must finish before\nnext batch starts\nNew requests wait even if\nGPU has capacity]
+            style SB fill:#fee2e2,stroke:#dc2626
+        end
+
+        subgraph Continuous[Continuous Batching - Iteration-Level Scheduling]
+            CB[After each decode step\ncheck for completed requests\nimmediately insert new waiting requests\ninto freed batch slots\nGPU always processing maximum requests\n3-5x higher throughput]
+            style CB fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+        end
+    end
+</div></div>
+<h2>Speculative Decoding</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph SpecDec[Speculative Decoding]
+        DraftModel[Small Draft Model\n70M-7B parameters\ngenerates K draft tokens\nvery fast - K tokens in ~1 step]
+
+        Verify[Target Model Verification\nVerify K draft tokens\nin parallel single forward pass\nfor all K positions simultaneously]
+
+        Accept{Accept\ndraft token?}
+        AcceptAll[All K tokens accepted\nK tokens generated\nfor cost of 1 target step plus K draft steps]
+        PartAccept[Accept first M tokens\nreject remaining\nM + 1 tokens generated\nsample corrected token for M+1]
+
+        Verify --&gt; Accept
+        Accept --&gt;|Yes| AcceptAll
+        Accept --&gt;|No| PartAccept
+
+        DraftModel --&gt; Verify
+
+        Speedup[Typical speedup: 2-3x\nfor tasks with predictable tokens\ncoding boilerplate, repetitive text]
+        style Speedup fill:#dcfce7,stroke:#16a34a
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>KV Cache</strong>: During autoregressive token generation, each new token attends to all previous tokens. Rather than recomputing attention keys and values for previous tokens at each step, they are cached in GPU memory. This KV cache grows with sequence length and is the dominant memory consumer during LLM inference. A single 13B parameter model request at 4096 tokens requires ~1.6GB of KV cache storage.</p>
+</li>
+<li><p><strong>Continuous Batching (Iteration-Level Batching)</strong>: The core scheduling innovation in modern LLM serving. Traditional static batching processes all requests in a batch together, wasting capacity when short requests complete while long ones continue. Continuous batching evicts completed requests and inserts new ones at every decode step, maximizing GPU utilization. vLLM, TGI (Text Generation Inference), and TensorRT-LLM all implement continuous batching.</p>
+</li>
+<li><p><strong>PagedAttention</strong>: vLLM's innovation that applies virtual memory paging concepts to KV cache management. Instead of pre-allocating contiguous memory for the maximum sequence length, blocks are allocated dynamically as tokens are generated. This eliminates memory waste and enables prefix caching — multiple requests sharing a common system prompt can share the same cached KV blocks.</p>
+</li>
+<li><p><strong>INT4 Quantization</strong>: Reducing model weights from 16-bit (FP16/BF16) to 4-bit integers, achieving 4x memory reduction with minimal quality loss for models above ~7B parameters. Methods: GPTQ (post-training quantization by layer-wise optimization), AWQ (activation-aware weight quantization preserving outlier channels), bitsandbytes NF4 (used in QLoRA). Smaller models suffer more quality degradation from INT4 quantization.</p>
+</li>
+<li><p><strong>Flash Attention</strong>: A hardware-aware attention algorithm that computes attention without materializing the full N×N attention matrix in GPU memory. Instead, attention is computed in tiles that fit in GPU SRAM (fast memory), reducing memory bandwidth requirements from O(N²) to O(N). Flash Attention 2 and 3 achieve near-theoretical GPU bandwidth utilization and are the default implementation in all modern LLM frameworks.</p>
+</li>
+<li><p><strong>Speculative Decoding</strong>: Exploits the observation that the target model's time per token is the same regardless of batch size (it's memory-bandwidth-bound). A small draft model generates K candidate tokens cheaply; the target model verifies all K in one forward pass. When the draft is correct (common for predictable continuations), K tokens are produced for the cost of ~1 target forward pass. Rejection sampling ensures correctness — the output distribution matches the target model exactly.</p>
+</li>
+<li><p><strong>TensorRT-LLM</strong>: NVIDIA's optimized LLM inference library. Fuses operations (attention, layer norm, activation), uses TensorRT's kernel optimization, and implements continuous batching, quantization, and multi-GPU serving. Best-in-class latency and throughput for NVIDIA GPUs in production serving.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Optimization</th>
+  <th>Latency Gain</th>
+  <th>Throughput Gain</th>
+  <th>Quality Loss</th>
+  <th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>INT8 quantization</td>
+  <td>20-30%</td>
+  <td>20-30%</td>
+  <td>Minimal</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>INT4 quantization</td>
+  <td>50-70%</td>
+  <td>50-70%</td>
+  <td>Small (7B+)</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Flash Attention</td>
+  <td>30-50%</td>
+  <td>30-50%</td>
+  <td>None</td>
+  <td>Drop-in</td>
+</tr>
+<tr>
+  <td>Continuous batching</td>
+  <td>0</td>
+  <td>3-5x</td>
+  <td>None</td>
+  <td>Framework</td>
+</tr>
+<tr>
+  <td>PagedAttention</td>
+  <td>0</td>
+  <td>2-4x</td>
+  <td>None</td>
+  <td>vLLM</td>
+</tr>
+<tr>
+  <td>Speculative decoding</td>
+  <td>2-3x</td>
+  <td>~1x</td>
+  <td>None</td>
+  <td>Medium</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>Flash Attention</strong>: Always — it's a drop-in replacement with no quality loss and significant speedup, available in PyTorch 2.0+ natively</li>
+<li><strong>INT4 quantization</strong>: When GPU memory is the constraint and serving models with 7B+ parameters — acceptable quality tradeoff for 4x memory reduction</li>
+<li><strong>vLLM</strong>: Default serving framework for open-source LLMs — continuous batching and PagedAttention are pre-integrated and production-hardened</li>
+<li><strong>Speculative decoding</strong>: High-throughput serving with predictable output patterns (coding assistants, structured generation) — 2-3x speedup with no quality loss</li>
+<li><strong>INT8 quantization</strong>: When INT4 quality loss is unacceptable but memory savings are still needed — intermediate tradeoff</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="02_model_parallelism.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Model Parallelism</span></a>
+            <a href="04_serving_at_scale.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Serving at Scale</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

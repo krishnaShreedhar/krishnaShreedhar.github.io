@@ -1,5 +1,16 @@
-# ONNX Graph Optimizations
-
+---
+title: "ONNX Graph Optimizations"
+subtitle: "A self-contained project illustrating ONNX features and graph optimization techniques with minimal, runnable code examples.  Every concept is paired with working code, mermaid diagrams, and extensive logging so a..."
+category: technical
+project: onnx_graph_optimizations
+project_title: "ONNX Graph Optimizations"
+date: 2025-09-03
+reading_time: 4
+tags:
+  - onnx-graph-optimizations
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/onnx_graph_optimizations/index.html"
+---
 A self-contained project illustrating ONNX features and graph optimization techniques
 with minimal, runnable code examples.  Every concept is paired with working code,
 mermaid diagrams, and extensive logging so a learner can trace exactly what happens at

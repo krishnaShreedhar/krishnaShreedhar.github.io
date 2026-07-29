@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Module 1 — GPU Basics: Memory & Data Transfer &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This module teaches the mechanics of GPU memory management and CPU↔GPU data movement — the foundation every GPU-accelerated workload is built on.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Module 1 — GPU Basics: Memory & Data Transfer</span>
+        </div>
+        <h1 class="post-title">Module 1 — GPU Basics: Memory & Data Transfer</h1>
+        <p class="post-subtitle">This module teaches the mechanics of GPU memory management and CPU↔GPU data movement — the foundation every GPU-accelerated workload is built on.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-05-04</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">gpu-acceleration</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">GPU Acceleration — Transformer Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">GPU Acceleration — Transformer Tutorials</a></li><li class="project-nav__lvl-1 active"><a href="01_gpu_basics.html">Module 1 — GPU Basics: Memory & Data Transfer</a></li><li class="project-nav__lvl-1"><a href="02_transformer_training.html">Module 2 — Transformer Training on GPU</a></li><li class="project-nav__lvl-1"><a href="03_parallelism.html">Module 3 — Parallelism: DDP & FSDP on 2× H200</a></li><li class="project-nav__lvl-1"><a href="04_kv_cache.html">Module 4 — KV-Cache from Scratch</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Overview</h2>
+<p>This module teaches the mechanics of GPU memory management and CPU↔GPU data
+movement — the foundation every GPU-accelerated workload is built on.</p>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>Teaches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>memory_manager.py</code></td>
+  <td>Allocation, pinned memory, <code>empty_cache()</code></td>
+</tr>
+<tr>
+  <td><code>data_transfer.py</code></td>
+  <td>Synchronous vs async transfers, CUDA streams, double-buffering</td>
+</tr>
+<tr>
+  <td><code>profiler.py</code></td>
+  <td>Utilization sampling via NVML, kernel timing with CUDA Events, <code>torch.profiler</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Key Concepts</h2>
+<h3>GPU Memory Hierarchy</h3>
+<pre><code>CPU (DDR5 RAM)
+    │  PCIe 5.0 × 16  (~128 GB/s bidirectional)
+    ▼
+GPU (H200 HBM3e)  — 141 GB  @ ~3.35 TB/s internal bandwidth
+    ├── L2 Cache   (~50 MB)
+    ├── L1 / Shared Memory (per SM)
+    └── Registers  (per thread)
+</code></pre>
+<ul>
+<li><strong>HBM3e</strong> bandwidth is ~26× faster than PCIe — keep data on GPU as long as possible.</li>
+<li><strong>Pinned (page-locked) memory</strong> on the host prevents the OS from paging it out,
+enabling DMA engines to transfer directly without a CPU copy → lower latency and
+higher throughput across PCIe.</li>
+</ul>
+<h3>Memory Allocation Flow</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    A[&quot;torch.empty(size, device='cuda')&quot;] --&gt; B[PyTorch Caching Allocator]
+    B --&gt;|cache hit| C[Return existing block]
+    B --&gt;|cache miss| D[cudaMalloc from OS]
+    D --&gt; C
+    E[&quot;del tensor&quot;] --&gt; F[Return to cache]
+    F --&gt;|&quot;torch.cuda.empty_cache()&quot;| G[cudaFree to OS]
+</div></div>
+<blockquote>
+<p>The PyTorch caching allocator avoids expensive <code>cudaMalloc</code>/<code>cudaFree</code> calls
+on every operation. <code>empty_cache()</code> flushes the cache back to CUDA — useful
+when measuring peak memory but slows subsequent allocations.</p>
+</blockquote>
+<hr />
+<h2>Data Transfer Patterns</h2>
+<h3>Synchronous Transfer</h3>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant CPU
+    participant PCIe
+    participant GPU
+
+    CPU-&gt;&gt;PCIe: tensor.to(&quot;cuda&quot;)
+    note over CPU: blocked
+    PCIe-&gt;&gt;GPU: DMA copy
+    GPU--&gt;&gt;CPU: transfer complete
+    note over CPU: resumes
+</div></div>
+<ul>
+<li>Simple but leaves the CPU idle during transfer.</li>
+<li>Effective bandwidth on H200 via PCIe 5.0: <strong>~64 GB/s per direction</strong>.</li>
+</ul>
+<h3>Asynchronous Transfer with CUDA Streams</h3>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant CPU
+    participant TransferStream
+    participant ComputeStream
+    participant GPU
+
+    CPU-&gt;&gt;TransferStream: tensor.to(&quot;cuda&quot;, non_blocking=True)
+    note over CPU: continues immediately
+    CPU-&gt;&gt;ComputeStream: stream.wait_stream(transfer_stream)
+    TransferStream-&gt;&gt;GPU: DMA copy (background)
+    GPU-&gt;&gt;ComputeStream: compute on arrived data
+</div></div>
+<ul>
+<li><code>non_blocking=True</code> requires the source tensor to be <strong>pinned</strong>.</li>
+<li>The CPU never stalls; compute and transfer overlap on the GPU.</li>
+</ul>
+<h3>Double-Buffering Pattern</h3>
+<p>The key pattern for hiding transfer latency in training:</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Step N
+        T1[&quot;Batch N on GPU&quot;] --&gt; C1[&quot;Compute (stream A)&quot;]
+    end
+    subgraph Step N+1
+        T2[&quot;Batch N+1 transfer (stream B)&quot;] --&gt; W[&quot;stream A waits stream B&quot;]
+        W --&gt; C2[&quot;Compute N+1 (stream A)&quot;]
+    end
+    Step N --&gt; Step N+1
+</div></div>
+<hr />
+<h2>GPU Profiling</h2>
+<h3>CUDA Event Timing</h3>
+<div class="code-wrapper"><span class="code-lang">python</span><pre><code class="language-python">start = torch.cuda.Event(enable_timing=True)
+end   = torch.cuda.Event(enable_timing=True)
+start.record()
+# ... kernel ...
+end.record()
+torch.cuda.synchronize()
+ms = start.elapsed_time(end)  # GPU-side measurement, no CPU round-trip
+</code></pre></div>
+<p>CUDA Events measure time on the <strong>GPU clock</strong> — far more accurate than
+<code>time.perf_counter()</code> which includes CPU-GPU sync overhead.</p>
+<h3>NVML Utilization Sampling</h3>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    A[pynvml.nvmlInit] --&gt; B[nvmlDeviceGetHandleByIndex]
+    B --&gt; C{sample loop}
+    C --&gt; D[nvmlDeviceGetUtilizationRates]
+    D --&gt; E[&quot;gpu_util%, mem_util%&quot;]
+    C --&gt; F[nvmlDeviceGetMemoryInfo]
+    F --&gt; G[&quot;used_bytes, total_bytes&quot;]
+</div></div>
+<p>H200 peak compute: <strong>989 TFLOPS</strong> (FP16), so a well-tuned matmul should approach
+that ceiling when measured with CUDA Events.</p>
+<hr />
+<h2>Running the Module</h2>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash"># All three scripts read from configs/gpu_basics.yaml
+
+# Memory allocation &amp; pinned memory demo
+python -m src.gpu_basics.memory_manager
+
+# PCIe bandwidth benchmark + double-buffering
+python -m src.gpu_basics.data_transfer
+
+# GPU utilization profiler + torch.profiler trace
+python -m src.gpu_basics.profiler
+</code></pre></div>
+<h3>Key config knobs (<code>configs/gpu_basics.yaml</code>)</h3>
+<table>
+<thead>
+<tr>
+  <th>Key</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>logging.level</code></td>
+  <td><code>DEBUG</code> shows per-allocation stats; <code>INFO</code> shows summary</td>
+</tr>
+<tr>
+  <td><code>memory.use_pinned_memory</code></td>
+  <td>Toggle pinned vs pageable comparison</td>
+</tr>
+<tr>
+  <td><code>transfer.num_streams</code></td>
+  <td>Number of CUDA streams for async benchmark</td>
+</tr>
+<tr>
+  <td><code>transfer.tensor_shapes</code></td>
+  <td>Matrix sizes to benchmark</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">GPU Acceleration — Transformer Tutorials</span></a>
+            <a href="02_transformer_training.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Module 2 — Transformer Training on GPU</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

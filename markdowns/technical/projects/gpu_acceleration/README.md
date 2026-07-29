@@ -1,5 +1,16 @@
-# GPU Acceleration — Transformer Tutorials
-
+---
+title: "GPU Acceleration — Transformer Tutorials"
+subtitle: "Minimal, hands-on tutorials for understanding Transformer model training and inference on GPU."
+category: technical
+project: gpu_acceleration
+project_title: "GPU Acceleration — Transformer Tutorials"
+date: 2025-01-18
+reading_time: 1
+tags:
+  - gpu-acceleration
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/gpu_acceleration/index.html"
+---
 Minimal, hands-on tutorials for understanding Transformer model training and inference on GPU.
 
 ## Goals

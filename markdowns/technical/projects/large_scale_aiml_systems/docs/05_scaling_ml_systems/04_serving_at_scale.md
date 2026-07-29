@@ -1,5 +1,17 @@
-# Serving at Scale
-
+---
+title: "Serving at Scale"
+subtitle: "Serving ML models at scale means maintaining low latency, high availability, and cost efficiency while handling highly variable traffic — from zero to millions of requests per hour. Large-scale ML serving combines..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-06-02
+reading_time: 5
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/05_scaling_ml_systems/04_serving_at_scale.html"
+---
 Serving ML models at scale means maintaining low latency, high availability, and cost efficiency while handling highly variable traffic — from zero to millions of requests per hour. Large-scale ML serving combines infrastructure patterns (autoscaling, load balancing, multi-region deployment) with ML-specific optimizations (batching, caching, model routing) to meet production SLAs at sustainable cost.
 
 ## Large-Scale Serving Architecture

@@ -1,5 +1,16 @@
-# Pandas & PySpark — Concepts & Examples
-
+---
+title: "Pandas & PySpark — Concepts & Examples"
+subtitle: "A self-contained learning project that illustrates core Pandas and PySpark concepts through minimal, working code examples backed by synthetic data. Every constant and hyperparameter is controlled from `config.yaml`."
+category: technical
+project: pandas_pyspark
+project_title: "Pandas & PySpark — Concepts & Examples"
+date: 2025-12-22
+reading_time: 3
+tags:
+  - pandas-pyspark
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/pandas_pyspark/index.html"
+---
 A self-contained learning project that illustrates core Pandas and PySpark concepts through minimal, working code examples backed by synthetic data. Every constant and hyperparameter is controlled from `config.yaml`.
 
 ## Concepts Covered

@@ -1,5 +1,17 @@
-# Data Engineering for ML
-
+---
+title: "Data Engineering for ML"
+subtitle: "Data engineering for ML is the practice of designing, building, and maintaining the data infrastructure that supplies ML models with clean, consistent, and well-governed training data. The quality of training data is..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-01-14
+reading_time: 1
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/04_data_engineering_for_ml/index.html"
+---
 Data engineering for ML is the practice of designing, building, and maintaining the data infrastructure that supplies ML models with clean, consistent, and well-governed training data. The quality of training data is the single largest determinant of model quality — garbage in, garbage out — making robust data pipelines a foundational investment for any serious ML system.
 
 ## Overview

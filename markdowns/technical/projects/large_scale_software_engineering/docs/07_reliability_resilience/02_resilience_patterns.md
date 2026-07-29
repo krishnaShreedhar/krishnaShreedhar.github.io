@@ -1,5 +1,17 @@
-# Resilience Patterns
-
+---
+title: "Resilience Patterns"
+subtitle: "Resilience patterns make systems robust against partial failures, resource exhaustion, and cascade effects. A resilient system degrades gracefully under load and recovers automatically — without requiring human..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-11-02
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/07_reliability_resilience/02_resilience_patterns.html"
+---
 Resilience patterns make systems robust against partial failures, resource exhaustion, and cascade effects. A resilient system degrades gracefully under load and recovers automatically — without requiring human intervention for every failure mode.
 
 ## Resilience Pattern Overview

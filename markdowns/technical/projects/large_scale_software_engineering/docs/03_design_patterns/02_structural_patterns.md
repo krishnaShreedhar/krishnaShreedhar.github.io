@@ -1,5 +1,17 @@
-# Structural Patterns
-
+---
+title: "Structural Patterns"
+subtitle: "Structural design patterns describe how classes and objects can be combined to form larger structures. They use inheritance and composition to realize new functionality, making it possible to combine interfaces or..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-08-30
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/03_design_patterns/02_structural_patterns.html"
+---
 Structural design patterns describe how classes and objects can be combined to form larger structures. They use inheritance and composition to realize new functionality, making it possible to combine interfaces or implementations flexibly.
 
 ## Adapter Pattern

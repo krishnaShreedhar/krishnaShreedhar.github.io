@@ -1,5 +1,17 @@
-# Design Patterns
-
+---
+title: "Design Patterns"
+subtitle: "Design patterns are reusable solutions to commonly occurring problems in software design. They are not code templates but rather blueprints for how to structure code to solve a specific class of problem. Patterns..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-09
+reading_time: 1
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/03_design_patterns/index.html"
+---
 Design patterns are reusable solutions to commonly occurring problems in software design. They are not code templates but rather blueprints for how to structure code to solve a specific class of problem. Patterns exist at multiple levels: object-oriented (GoF), concurrency, distributed systems, and cloud infrastructure.
 
 ## Overview

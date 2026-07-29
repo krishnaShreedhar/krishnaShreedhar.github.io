@@ -1,5 +1,17 @@
-# DRY, KISS, and YAGNI
-
+---
+title: "DRY, KISS, and YAGNI"
+subtitle: "DRY, KISS, and YAGNI are three complementary code quality heuristics that guide engineers toward simpler, more maintainable code. Each addresses a common failure mode in software development: unnecessary duplication..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-09-19
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/02_software_engineering_principles/02_dry_kiss_yagni.html"
+---
 DRY, KISS, and YAGNI are three complementary code quality heuristics that guide engineers toward simpler, more maintainable code. Each addresses a common failure mode in software development: unnecessary duplication (DRY), accidental complexity (KISS), and premature scope expansion (YAGNI).
 
 ## The Three Heuristics

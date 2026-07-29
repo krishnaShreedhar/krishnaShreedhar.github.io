@@ -1,5 +1,17 @@
-# Asynchronous Messaging Patterns
-
+---
+title: "Asynchronous Messaging Patterns"
+subtitle: "Asynchronous messaging decouples producers from consumers temporally — producers send messages to an intermediary (broker) without waiting for consumers to be available. This enables resilience, elastic load..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-04-01
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/04_communication_protocols/02_async_messaging_patterns.html"
+---
 Asynchronous messaging decouples producers from consumers temporally — producers send messages to an intermediary (broker) without waiting for consumers to be available. This enables resilience, elastic load distribution, and loose coupling at the cost of eventual consistency and increased operational complexity.
 
 ## Messaging System Topology

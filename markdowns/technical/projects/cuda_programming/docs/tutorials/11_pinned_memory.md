@@ -1,5 +1,17 @@
-# Tutorial 11: Pinned Memory
-
+---
+title: "Tutorial 11: Pinned Memory"
+subtitle: "See `src/tutorials/11_pinned_memory/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-07-27
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/11_pinned_memory.html"
+---
 ## Concept
 
 See `src/tutorials/11_pinned_memory/main.cu` for detailed inline comments explaining

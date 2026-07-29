@@ -1,5 +1,17 @@
-# Synchronous Communication Protocols
-
+---
+title: "Synchronous Communication Protocols"
+subtitle: "Synchronous protocols require the caller to wait for a response before proceeding. They provide immediate feedback, simplify error handling, and are easy to reason about — at the cost of temporal coupling between..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-06-27
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/04_communication_protocols/01_synchronous_protocols.html"
+---
 Synchronous protocols require the caller to wait for a response before proceeding. They provide immediate feedback, simplify error handling, and are easy to reason about — at the cost of temporal coupling between caller and callee.
 
 ## REST vs gRPC vs GraphQL Comparison

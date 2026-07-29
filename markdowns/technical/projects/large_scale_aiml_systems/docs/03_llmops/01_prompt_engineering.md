@@ -1,5 +1,17 @@
-# Prompt Engineering
-
+---
+title: "Prompt Engineering"
+subtitle: "Prompt engineering is the practice of designing, testing, and iterating on the text instructions given to large language models to elicit accurate, reliable, and useful outputs. Unlike traditional ML where..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-01-11
+reading_time: 4
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/03_llmops/01_prompt_engineering.html"
+---
 Prompt engineering is the practice of designing, testing, and iterating on the text instructions given to large language models to elicit accurate, reliable, and useful outputs. Unlike traditional ML where performance is improved by changing data or model weights, prompt engineering improves LLM behavior by carefully crafting the input — making it the primary tool for adapting foundation models without fine-tuning.
 
 ## Prompt Structure

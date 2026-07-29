@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Flow Diagrams — Pandas & PySpark &middot; Shreedhar Kodate</title>
+    <meta name="description" content="From user code to task execution — showing how transformations and actions produce stages and tasks.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Flow Diagrams — Pandas & PySpark</span>
+        </div>
+        <h1 class="post-title">Flow Diagrams — Pandas & PySpark</h1>
+        <p class="post-subtitle">From user code to task execution — showing how transformations and actions produce stages and tasks.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-09-02</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">pandas-pyspark</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Pandas & PySpark — Concepts & Examples</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Pandas & PySpark — Concepts & Examples</a></li><li class="project-nav__lvl-1"><a href="concepts.html">Pandas & PySpark — Core Concepts</a></li><li class="project-nav__lvl-1 active"><a href="flow_diagrams.html">Flow Diagrams — Pandas & PySpark</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>1. Spark Job Execution Flow</h2>
+<p>From user code to task execution — showing how transformations and actions produce stages and tasks.</p>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant U  as User Code
+    participant D  as Driver (DAG Scheduler)
+    participant TS as Task Scheduler
+    participant E  as Executor(s)
+    participant S  as Storage / Shuffle
+
+    Note over U,D: Transformations are lazy — no work yet
+    U-&gt;&gt;D: df.filter(...)        [Transformation]
+    U-&gt;&gt;D: .groupBy(...)         [Transformation]
+    U-&gt;&gt;D: .agg(...)             [Transformation]
+    U-&gt;&gt;D: .count()              [ACTION — triggers execution]
+
+    D-&gt;&gt;D: Build DAG of RDD stages
+    D-&gt;&gt;D: Identify shuffle boundaries → Stage 1, Stage 2
+
+    Note over D,TS: Stage 1: scan + filter (no shuffle)
+    D-&gt;&gt;TS: Submit Stage 1 tasks (one per input partition)
+    TS-&gt;&gt;E: Launch Task 1.1 (partition 0)
+    TS-&gt;&gt;E: Launch Task 1.2 (partition 1)
+    TS-&gt;&gt;E: Launch Task 1.N (partition N)
+    E-&gt;&gt;S: Write shuffle data (map output)
+
+    Note over D,TS: Stage 2: shuffle read + groupBy aggregate
+    D-&gt;&gt;TS: Submit Stage 2 tasks
+    S-&gt;&gt;E: Shuffle fetch (reduce input)
+    E-&gt;&gt;E: Local aggregation
+    E-&gt;&gt;D: Return partial results
+
+    D-&gt;&gt;U: Return final result (count = integer)
+</div></div>
+<hr />
+<h2>2. Transformation vs Action Decision Tree</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    OP[&quot;DataFrame / RDD operation&quot;] --&gt; Q{&quot;Does it\nreturn a new\nDF / RDD?&quot;}
+    Q --&gt;|Yes| TRANS[&quot;TRANSFORMATION\n(lazy, added to DAG)\n\nExamples:\n.filter() .select()\n.withColumn() .groupBy()\n.join() .repartition()&quot;]
+    Q --&gt;|No| ACTION[&quot;ACTION\n(triggers execution)\n\nExamples:\n.count() .show()\n.collect() .write()\n.take() .first()&quot;]
+    TRANS --&gt; DAG[&quot;DAG grows\n(no computation yet)&quot;]
+    ACTION --&gt; EXEC[&quot;Catalyst optimises DAG\nStages split at shuffles\nTasks dispatched to executors\nResult returned / written&quot;]
+
+    style TRANS fill:#2b6cb0,color:#fff
+    style ACTION fill:#c53030,color:#fff
+    style EXEC fill:#276749,color:#fff
+</div></div>
+<hr />
+<h2>3. Spark Stage and Shuffle Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph Stage1[&quot;Stage 1 — Scan + Filter (no shuffle)&quot;]
+        P1[&quot;Partition 0\n(scan + filter)&quot;]
+        P2[&quot;Partition 1\n(scan + filter)&quot;]
+        P3[&quot;Partition N\n(scan + filter)&quot;]
+    end
+
+    subgraph Shuffle[&quot;Shuffle (network transfer)&quot;]
+        SB[&quot;Shuffle Buffers\n(disk / memory)&quot;]
+    end
+
+    subgraph Stage2[&quot;Stage 2 — GroupBy Aggregate&quot;]
+        R1[&quot;Reducer 0\n(group key hash=0)&quot;]
+        R2[&quot;Reducer 1\n(group key hash=1)&quot;]
+        R3[&quot;Reducer M\n(group key hash=M)&quot;]
+    end
+
+    P1 &amp; P2 &amp; P3 --&gt;|map output| SB
+    SB --&gt;|fetch by hash partition| R1 &amp; R2 &amp; R3
+    R1 &amp; R2 &amp; R3 --&gt;|partial aggregates| FINAL[&quot;Final Result\n(Driver)&quot;]
+
+    style Stage1 fill:#2b6cb0,color:#fff
+    style Shuffle fill:#744210,color:#fff
+    style Stage2 fill:#276749,color:#fff
+</div></div>
+<hr />
+<h2>4. ML Pipeline Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Input[&quot;Raw Data&quot;]
+        RAW[&quot;DataFrame\nregion, product, age,\nrevenue, units, label&quot;]
+    end
+
+    subgraph FeatureEng[&quot;Feature Engineering Pipeline (fit on train only)&quot;]
+        SI[&quot;StringIndexer\nregion -&gt; region_index\nproduct -&gt; product_index&quot;]
+        OHE[&quot;OneHotEncoder\nregion_index -&gt; region_ohe\nproduct_index -&gt; product_ohe&quot;]
+        VA[&quot;VectorAssembler\n[ohe cols + numeric cols]\n-&gt; raw_features&quot;]
+        SS[&quot;StandardScaler\nraw_features -&gt; features\n(mean=0, std=1)&quot;]
+    end
+
+    subgraph Training[&quot;Model Training&quot;]
+        SPLIT[&quot;Train / Test Split\n(80% / 20%)&quot;]
+        GBT[&quot;GBTClassifier\nor RandomForest\n(Pipeline API)&quot;]
+        CV[&quot;CrossValidator\n+ ParamGridBuilder\n(k-fold)&quot;]
+    end
+
+    subgraph Eval[&quot;Evaluation &amp; Persistence&quot;]
+        PRED[&quot;Predictions\n(probability, prediction)&quot;]
+        EVAL[&quot;BinaryClassificationEvaluator\nAUC-ROC&quot;]
+        SAVE[&quot;model.write().save(path)&quot;]
+        LOAD[&quot;PipelineModel.load(path)&quot;]
+    end
+
+    RAW --&gt; SPLIT
+    SPLIT --&gt;|train set| SI --&gt; OHE --&gt; VA --&gt; SS --&gt; GBT
+    GBT --&gt; CV --&gt; EVAL
+    SPLIT --&gt;|test set| PRED
+    CV --&gt;|best model| PRED --&gt; EVAL --&gt; SAVE --&gt; LOAD
+
+    style Input fill:#2d3748,color:#fff
+    style FeatureEng fill:#2b6cb0,color:#fff
+    style Training fill:#276749,color:#fff
+    style Eval fill:#744210,color:#fff
+</div></div>
+<hr />
+<h2>5. Data Quality Check Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    DATA[&quot;Input DataFrame&quot;] --&gt; SUITE[&quot;DataQualitySuite\n(register checks)&quot;]
+
+    SUITE --&gt; NC[&quot;NullCheck\n(null fraction per column)&quot;]
+    SUITE --&gt; RC[&quot;RangeCheck\n(min/max bounds)&quot;]
+    SUITE --&gt; UC[&quot;UniquenessCheck\n(duplicate detection)&quot;]
+    SUITE --&gt; SC[&quot;SchemaCheck\n(required columns + dtypes)&quot;]
+    SUITE --&gt; PC[&quot;PredicateCheck\n(custom business rule)&quot;]
+
+    NC &amp; RC &amp; UC &amp; SC &amp; PC --&gt; RES[&quot;CheckResult list\n(passed, actual, expected, message)&quot;]
+
+    RES --&gt; PASS[&quot;PASS checks\n(logged at INFO)&quot;]
+    RES --&gt; FAIL[&quot;FAIL checks\n(logged at WARNING)&quot;]
+
+    PASS &amp; FAIL --&gt; REPORT[&quot;QualityReportGenerator\n-&gt; CSV report\n(suite_quality_report.csv)&quot;]
+    REPORT --&gt; DECIDE{{&quot;All checks pass?&quot;}}
+    DECIDE --&gt;|Yes| PROCEED[&quot;Proceed to downstream\nprocessing / ML&quot;]
+    DECIDE --&gt;|No| BLOCK[&quot;Block pipeline\nAlert / Quarantine data&quot;]
+
+    style PASS fill:#276749,color:#fff
+    style FAIL fill:#c53030,color:#fff
+    style BLOCK fill:#744210,color:#fff
+    style PROCEED fill:#2b6cb0,color:#fff
+</div></div>
+<hr />
+<h2>6. Pandas UDF vs Python UDF Data Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph Python_UDF[&quot;Regular Python UDF (slow path)&quot;]
+        P1[&quot;JVM partition data\n(Java objects)&quot;]
+        P2[&quot;Serialize row-by-row\n(pickle)&quot;]
+        P3[&quot;Python process\nprocesses one row\nat a time&quot;]
+        P4[&quot;Deserialize results\nrow-by-row&quot;]
+        P5[&quot;Return to JVM&quot;]
+        P1 --&gt; P2 --&gt; P3 --&gt; P4 --&gt; P5
+    end
+
+    subgraph Pandas_UDF[&quot;Pandas UDF — Vectorized (fast path)&quot;]
+        Q1[&quot;JVM partition data\n(Java objects)&quot;]
+        Q2[&quot;Serialize entire batch\nvia Apache Arrow\n(zero-copy columnar)&quot;]
+        Q3[&quot;Python process\nreceives Pandas Series\n(entire batch at once)&quot;]
+        Q4[&quot;NumPy / Pandas\nvectorized operation&quot;]
+        Q5[&quot;Arrow serialize\nresult Series&quot;]
+        Q6[&quot;Return to JVM&quot;]
+        Q1 --&gt; Q2 --&gt; Q3 --&gt; Q4 --&gt; Q5 --&gt; Q6
+    end
+
+    COMPARE{{&quot;Speedup comparison&quot;}}
+    P5 --&gt; COMPARE
+    Q6 --&gt; COMPARE
+    COMPARE --&gt; NOTE[&quot;Pandas UDF is typically\n10-100x faster for\nlarge partitions\ndue to Arrow batch transfer&quot;]
+
+    style Python_UDF fill:#c53030,color:#fff
+    style Pandas_UDF fill:#276749,color:#fff
+    style NOTE fill:#2b6cb0,color:#fff
+</div></div>
+<hr />
+<h2>7. Adaptive Query Execution (AQE) Flow</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    Q[&quot;User Query\n(SQL / DataFrame API)&quot;] --&gt; PLAN[&quot;Initial Physical Plan\n(shuffle.partitions = 200)&quot;]
+    PLAN --&gt; STAGE1[&quot;Stage 1 Execution\n(collect partition statistics)&quot;]
+    STAGE1 --&gt; STATS[&quot;Runtime Statistics\n(actual partition sizes,\nrow counts, skew info)&quot;]
+
+    STATS --&gt; AQE{&quot;AQE\nOptimiser&quot;}
+    AQE --&gt; COAL[&quot;Coalesce small partitions\n(reduce from 200 -&gt; few)\nAvoid tiny task overhead&quot;]
+    AQE --&gt; BJ[&quot;Convert SortMerge Join\n-&gt; Broadcast Join\n(one side turned out small)&quot;]
+    AQE --&gt; SKEW[&quot;Split skewed partitions\n(split large -&gt; multiple small)\nEliminate stragglers&quot;]
+
+    COAL &amp; BJ &amp; SKEW --&gt; STAGE2[&quot;Stage 2 Execution\n(re-optimised plan)&quot;]
+    STAGE2 --&gt; RESULT[&quot;Final Result&quot;]
+
+    style AQE fill:#2b6cb0,color:#fff
+    style RESULT fill:#276749,color:#fff
+</div></div>
+
+        
+        <nav class="post-nav">
+            <a href="concepts.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Pandas & PySpark — Core Concepts</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

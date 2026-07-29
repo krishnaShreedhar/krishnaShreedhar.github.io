@@ -1,5 +1,17 @@
-# Monitoring Approaches
-
+---
+title: "Monitoring Approaches"
+subtitle: "Monitoring approaches vary by what is being observed and from whose perspective. Infrastructure monitoring tracks resource health; application monitoring tracks business-level performance; synthetic monitoring probes..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-07-13
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/09_observability_monitoring/02_monitoring_approaches.html"
+---
 Monitoring approaches vary by what is being observed and from whose perspective. Infrastructure monitoring tracks resource health; application monitoring tracks business-level performance; synthetic monitoring probes from the outside; real user monitoring captures actual user experience.
 
 ## Monitoring Taxonomy

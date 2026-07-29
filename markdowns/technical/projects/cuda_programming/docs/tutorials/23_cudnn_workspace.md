@@ -1,5 +1,17 @@
-# Tutorial 23: cuDNN Workspace Memory
-
+---
+title: "Tutorial 23: cuDNN Workspace Memory"
+subtitle: "See `src/tutorials/23_cudnn_workspace/main.cu` for detailed inline comments explaining each CUDA concept, all API calls, and the ablation experiments."
+category: technical
+project: cuda_programming
+project_title: "CUDA & cuDNN Programming Tutorials"
+date: 2025-08-06
+reading_time: 1
+tags:
+  - cuda-programming
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/cuda_programming/docs/tutorials/23_cudnn_workspace.html"
+---
 ## Concept
 
 See `src/tutorials/23_cudnn_workspace/main.cu` for detailed inline comments explaining

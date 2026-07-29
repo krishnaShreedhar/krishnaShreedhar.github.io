@@ -1,5 +1,17 @@
-# Cloud Architecture
-
+---
+title: "Cloud Architecture"
+subtitle: "Cloud architecture leverages managed cloud services to build scalable, resilient, and cost-efficient systems without managing physical hardware. The cloud provider's shared responsibility model, global..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-10-18
+reading_time: 3
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/10_devops_infrastructure/03_cloud_architecture.html"
+---
 Cloud architecture leverages managed cloud services to build scalable, resilient, and cost-efficient systems without managing physical hardware. The cloud provider's shared responsibility model, global infrastructure, and broad service catalog enable capabilities that were previously only available to large enterprises.
 
 ## Cloud Service Models

@@ -1,5 +1,17 @@
-# SmallVLM Architecture
-
+---
+title: "SmallVLM Architecture"
+subtitle: "SmallVLM is a minimal Vision-Language Model built from scratch in PyTorch for the image captioning task. Every component is implemented explicitly so the data flow, parameter counts, and design decisions are easy to..."
+category: technical
+project: model_architectures
+project_title: "SmallVLM — Minimal Vision-Language Model Tutorial"
+date: 2025-10-19
+reading_time: 3
+tags:
+  - model-architectures
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/model_architectures/docs/architecture.html"
+---
 ## Overview
 
 SmallVLM is a minimal Vision-Language Model built from scratch in PyTorch for the image captioning task. Every component is implemented explicitly so the data flow, parameter counts, and design decisions are easy to follow.

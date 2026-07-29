@@ -1,5 +1,17 @@
-# Reactive Architecture
-
+---
+title: "Reactive Architecture"
+subtitle: "Reactive Architecture is a design approach for building systems that are responsive, resilient, elastic, and message-driven — the four pillars of the Reactive Manifesto. The goal is to build systems that remain..."
+category: technical
+project: large_scale_software_engineering
+project_title: "Large Scale Software Engineering"
+date: 2025-04-05
+reading_time: 4
+tags:
+  - large-scale-software-engineering
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_software_engineering/docs/01_architectural_paradigms/08_reactive_architecture.html"
+---
 Reactive Architecture is a design approach for building systems that are responsive, resilient, elastic, and message-driven — the four pillars of the Reactive Manifesto. The goal is to build systems that remain responsive under varying load and in the presence of failures by embracing asynchronous, non-blocking message passing as the fundamental communication primitive.
 
 ## Architecture Diagrams

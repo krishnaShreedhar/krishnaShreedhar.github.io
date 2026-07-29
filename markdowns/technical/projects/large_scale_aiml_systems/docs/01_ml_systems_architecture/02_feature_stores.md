@@ -1,5 +1,17 @@
-# Feature Stores
-
+---
+title: "Feature Stores"
+subtitle: "A feature store is a centralized platform for storing, computing, and serving ML features. It solves two critical problems in ML systems: feature reuse (preventing different teams from recomputing the same features..."
+category: technical
+project: large_scale_aiml_systems
+project_title: "Large Scale AI/ML Systems"
+date: 2025-08-10
+reading_time: 3
+tags:
+  - large-scale-aiml-systems
+  - docs
+author: "Shreedhar Kodate"
+output: "blogs/technical/posts/large_scale_aiml_systems/docs/01_ml_systems_architecture/02_feature_stores.html"
+---
 A feature store is a centralized platform for storing, computing, and serving ML features. It solves two critical problems in ML systems: feature reuse (preventing different teams from recomputing the same features independently) and training-serving consistency (ensuring the same feature values are used in training and production serving).
 
 ## Feature Store Architecture

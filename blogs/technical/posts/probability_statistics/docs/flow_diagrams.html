@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Flow Diagrams: Statistical Analysis Pipelines &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This document contains workflow diagrams for the three main analysis patterns in this project.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Flow Diagrams: Statistical Analysis Pipelines</span>
+        </div>
+        <h1 class="post-title">Flow Diagrams: Statistical Analysis Pipelines</h1>
+        <p class="post-subtitle">This document contains workflow diagrams for the three main analysis patterns in this project.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-03-26</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">probability-statistics</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Probability & Statistics</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Probability & Statistics</a></li><li class="project-nav__lvl-1"><a href="concepts.html">Probability & Statistics: Core Concepts</a></li><li class="project-nav__lvl-1 active"><a href="flow_diagrams.html">Flow Diagrams: Statistical Analysis Pipelines</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>This document contains workflow diagrams for the three main analysis patterns
+in this project.</p>
+<hr />
+<h2>1. Statistical Analysis Pipeline</h2>
+<p>The full end-to-end pipeline from raw data to actionable insights.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    RAW[&quot;Raw Data\n(CSV, DB, API, stream)&quot;]
+
+    EDA[&quot;Exploratory Data Analysis\n\n- Shape and dtypes\n- Missing value audit\n- Duplicate check\n- Value distributions&quot;]
+
+    DESC[&quot;Descriptive Statistics\n\nstatistics_calculator.py\n\n- Central tendency: mean, median, mode\n- Spread: std, IQR, MAD, CV\n- Shape: skewness, kurtosis\n- Percentiles: P25, P50, P75, P99&quot;]
+
+    DIST[&quot;Distribution Analysis\n\ndistribution_analyzer.py\n\n- Fit: Normal, Log-Normal,\n  Gamma, Exponential, Beta\n- Goodness-of-fit: KS test\n- Model selection: AIC\n- QQ plot for normality check&quot;]
+
+    NORM{Data\nnormally\ndistributed?}
+
+    PARAM[&quot;Parametric Methods\n\n- t-tests (Welch's)\n- ANOVA\n- Pearson correlation\n- Linear regression&quot;]
+
+    NONPAR[&quot;Non-parametric Methods\n\n- Mann-Whitney U\n- Kruskal-Wallis\n- Spearman correlation\n- Bootstrap CI&quot;]
+
+    HYPO[&quot;Hypothesis Testing\n\ntest_runner.py\n\n- Formulate H0 and H1\n- Choose test statistic\n- Compute p-value\n- Check power&quot;]
+
+    MULTI{Multiple\nhypotheses?}
+    MTC[&quot;Multiple Testing Correction\n\n- Bonferroni (FWER)\n- Benjamini-Hochberg (FDR)&quot;]
+
+    EFFECT[&quot;Effect Size Analysis\n\n- Cohen's d (continuous)\n- Cohen's h (proportions)\n- Cramér's V (categorical)\n- Rank-biserial r (non-param)&quot;]
+
+    BAYES[&quot;Bayesian Analysis\n\nbayesian_ab_test.py\nconjugate_priors.py\n\n- Posterior distribution\n- Credible intervals\n- P(effect exists)\n- Expected loss&quot;]
+
+    SQL[&quot;SQL Analytics\n\nsql_statistics.py\n\n- Scalable aggregations\n- Window functions\n- Outlier detection\n- Cohort analysis&quot;]
+
+    VIZ[&quot;Visualisation\n\nmatplotlib / seaborn\n\n- Histograms + fitted PDFs\n- QQ plots\n- Power curves\n- Posterior distributions\n- Heatmaps&quot;]
+
+    REPORT[&quot;Report &amp; Decision\n\n- Statistical significance\n- Practical significance\n- Confidence/credible intervals\n- Recommendations&quot;]
+
+    RAW --&gt; EDA --&gt; DESC --&gt; DIST
+    DIST --&gt; NORM
+    NORM --&gt;|Yes| PARAM
+    NORM --&gt;|No| NONPAR
+    PARAM --&gt; HYPO
+    NONPAR --&gt; HYPO
+    HYPO --&gt; MULTI
+    MULTI --&gt;|Yes| MTC --&gt; EFFECT
+    MULTI --&gt;|No| EFFECT
+    EFFECT --&gt; BAYES
+    EFFECT --&gt; SQL
+    BAYES --&gt; VIZ
+    SQL --&gt; VIZ
+    VIZ --&gt; REPORT
+
+    style RAW fill:#34495e,color:#fff
+    style REPORT fill:#2d6a4f,color:#fff
+    style HYPO fill:#4a90d9,color:#fff
+    style BAYES fill:#e06c1a,color:#fff
+    style SQL fill:#6a3d9a,color:#fff
+</div></div>
+<hr />
+<h2>2. Hypothesis Testing Decision Flow</h2>
+<p>Step-by-step process for running a principled hypothesis test.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    START([&quot;State the Research Question\nExample: Does email subject line B\nincrease open rate over A?&quot;])
+
+    H0[&quot;Define Hypotheses\n\nH0 (Null): pA = pB\nH1 (Alt): pA ≠ pB\n(two-sided)&quot;]
+
+    ALPHA[&quot;Set Significance Level\nalpha = 0.05\n(acceptable Type I error rate)&quot;]
+
+    POWER[&quot;Power Analysis\nSet target power = 0.80\nEstimate effect size (MDE)\nCompute required n&quot;]
+
+    COLLECT[&quot;Collect Data\n- Random assignment\n- Full exposure period\n- No peeking (sequential testing requires\n  different stopping rules)&quot;]
+
+    ASSUME[&quot;Check Assumptions\n\nFor t-test:\n  - Independence\n  - Normality (or n &gt; 30 by CLT)\n\nFor z-test (proportions):\n  - np ≥ 10 and n(1-p) ≥ 10\n\nFor chi-squared:\n  - Expected cell counts ≥ 5&quot;]
+
+    ASSUME_OK{Assumptions\nmet?}
+    ASSUME_OK --&gt;|No| TRANSFORM[&quot;Transform Data or\nUse Non-Parametric Test&quot;]
+    ASSUME_OK --&gt;|Yes| COMPUTE
+
+    COMPUTE[&quot;Compute Test Statistic\n\nt = (x̄A - x̄B) / SE\nz = (p̂A - p̂B) / SE_pool\nchi2 = Σ(O-E)²/E&quot;]
+
+    PVAL[&quot;Compute P-value\n\np = P(|T| ≥ |t_obs| | H0)\n\nTwo-sided: multiply by 2\nOne-sided: use tail directly&quot;]
+
+    CI[&quot;Compute Confidence Interval\n\nCI = estimate ± z_{alpha/2} · SE\n\nExample for difference in means:\n95% CI = (x̄B - x̄A) ± 1.96 · SE&quot;]
+
+    EFFECT_SZ[&quot;Compute Effect Size\n\nContinuous: Cohen's d = Δμ / σ_pooled\nProportions: Cohen's h\nCategorical: Cramér's V&quot;]
+
+    DECISION{&quot;Decision Rule\np &lt; alpha AND\nCI excludes 0 AND\neffect_size &gt; practical threshold&quot;}
+
+    REJECT[&quot;Reject H0\nStatistically significant\nREPORT effect size and CI\nDo not claim 'proof'&quot;]
+    FAIL[&quot;Fail to Reject H0\nInsufficient evidence\nDo NOT say 'H0 is proven'\nConsider power and effect size&quot;]
+
+    INTERPRET[&quot;Interpret Results\n\n- Statistical significance ≠ practical significance\n- Large n can make tiny effects 'significant'\n- Always report effect size\n- Replicate before acting on findings&quot;]
+
+    START --&gt; H0 --&gt; ALPHA --&gt; POWER --&gt; COLLECT --&gt; ASSUME
+    TRANSFORM --&gt; COMPUTE
+    COMPUTE --&gt; PVAL --&gt; CI --&gt; EFFECT_SZ --&gt; DECISION
+    DECISION --&gt;|&quot;p &lt; alpha&quot;| REJECT --&gt; INTERPRET
+    DECISION --&gt;|&quot;p ≥ alpha&quot;| FAIL --&gt; INTERPRET
+
+    style START fill:#2d6a4f,color:#fff
+    style REJECT fill:#c0392b,color:#fff
+    style FAIL fill:#f39c12,color:#000
+    style INTERPRET fill:#1a535c,color:#fff
+</div></div>
+<hr />
+<h2>3. Bayesian A/B Test Workflow</h2>
+<p>End-to-end Bayesian A/B testing from prior specification to decision.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    DEFINE([&quot;Define A/B Test\nControl A: current version\nVariant B: new version\nMetric: conversion rate&quot;])
+
+    PRIOR[&quot;Specify Prior\n\nChoose Beta(alpha0, beta0)\n\nVague prior: Beta(1, 1)\n- No prior knowledge\n- Uniform over [0,1]\n\nInformative prior: Beta(10, 90)\n- Believe ~10% base rate\n- Strong prior certainty\n\nPrior mean = alpha0 / (alpha0 + beta0)&quot;]
+
+    DEPLOY[&quot;Deploy Experiment\n- Randomise users to A/B\n- Track conversions\n- No fixed stopping rule needed&quot;]
+
+    DATA[&quot;Observe Data\n\nGroup A: nA users, sA conversions\nGroup B: nB users, sB conversions&quot;]
+
+    UPDATE[&quot;Bayesian Update\n\nPosterior A: Beta(alpha0 + sA, beta0 + fA)\nPosterior B: Beta(alpha0 + sB, beta0 + fB)\n\nwhere fA = nA - sA, fB = nB - sB\n\nConjugate: posterior is also Beta!&quot;]
+
+    SUMMARIES[&quot;Posterior Summaries\n\nMean A = (alpha0+sA)/(alpha0+beta0+nA)\nMean B = (alpha0+sB)/(alpha0+beta0+nB)\n\n95% Credible Interval:\n[Beta_PPF(0.025), Beta_PPF(0.975)]&quot;]
+
+    MC[&quot;Monte Carlo Estimation\nDraw M=100,000 samples from each posterior\n\nsamples_A ~ Beta(posterior_A)\nsamples_B ~ Beta(posterior_B)\n\nlift_samples = samples_B - samples_A&quot;]
+
+    METRICS[&quot;Compute Decision Metrics\n\nP(B &gt; A) = mean(samples_B &gt; samples_A)\n\nExpected Loss(A) = mean(max(0, samples_B - samples_A))\nExpected Loss(B) = mean(max(0, samples_A - samples_B))\n\nCredible interval for lift:\n[P2.5(lift_samples), P97.5(lift_samples)]&quot;]
+
+    STOP{&quot;Stopping Rule\n\nP(B &gt; A) &gt; 0.95\nOR\nP(A &gt; B) &gt; 0.95\nOR\nMax sample size reached&quot;}
+
+    CONTINUE[&quot;Continue Collecting Data\nSequential updating: no fixed n!&quot;]
+
+    DECIDE{&quot;Decision\n\nWhich variant has\nlower expected loss?&quot;}
+
+    SHIP_B[&quot;Ship B\nExpected loss(A) &gt; threshold\nP(B &gt; A) &gt; 0.95&quot;]
+
+    SHIP_A[&quot;Keep A\nExpected loss(B) &gt; threshold\nP(A &gt; B) &gt; 0.95&quot;]
+
+    INCONCLUSIVE[&quot;Inconclusive\nCollect more data or\nReduce prior uncertainty&quot;]
+
+    COMPARE[&quot;Compare with Frequentist\n\nTwo-proportion z-test:\nz = (p̂B - p̂A) / SE_pool\np-value = 2*(1 - Phi(|z|))\n\nTypically agrees with Bayesian\nbut different interpretation&quot;]
+
+    DEFINE --&gt; PRIOR --&gt; DEPLOY --&gt; DATA
+    DATA --&gt; UPDATE --&gt; SUMMARIES --&gt; MC --&gt; METRICS --&gt; STOP
+    STOP --&gt;|Not reached| CONTINUE --&gt; DATA
+    STOP --&gt;|Reached| DECIDE
+    DECIDE --&gt;|&quot;loss(A) minimal&quot;| SHIP_B
+    DECIDE --&gt;|&quot;loss(B) minimal&quot;| SHIP_A
+    DECIDE --&gt;|&quot;Both losses\nequally small&quot;| INCONCLUSIVE
+    SHIP_B --&gt; COMPARE
+    SHIP_A --&gt; COMPARE
+
+    style DEFINE fill:#2d6a4f,color:#fff
+    style UPDATE fill:#27ae60,color:#fff
+    style MC fill:#4a90d9,color:#fff
+    style SHIP_B fill:#c0392b,color:#fff
+    style SHIP_A fill:#f39c12,color:#000
+    style INCONCLUSIVE fill:#6a3d9a,color:#fff
+</div></div>
+<hr />
+<h2>4. SQL Statistical Analysis Pipeline</h2>
+<p>How SQL-based statistics flows from raw tables to insights.</p>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    RAW_TBL[&quot;Raw Tables\nin DuckDB / Warehouse\n\ntransactions\nevents\nusers&quot;]
+
+    CTE[&quot;Common Table Expressions\n(CTEs)\n\nCalculate intermediate\nstatistics reusably\n\nWITH stats AS (...)&quot;]
+
+    WINDOW[&quot;Window Functions\n\nPERCENT_RANK()\nCUME_DIST()\nNTILE(k)\nROW_NUMBER()\nRANK()\nLAG() / LEAD()&quot;]
+
+    AGG[&quot;Aggregate Functions\n\nAVG, STDDEV_SAMP\nVAR_SAMP, COUNT\nPERCENTILE_CONT\nSKEWNESS, KURTOSIS\nCORR, REGR_SLOPE&quot;]
+
+    BUCKET[&quot;Histogram Bucketing\n\nWIDTH_BUCKET(\n  value, lo, hi, n_bins\n)\n\nEqual-width bins&quot;]
+
+    ZSCORE[&quot;Z-Score Normalisation\n\n(x - AVG(x)) /\nSTDDEV_SAMP(x)\n\nFlagged: |z| &gt; 3&quot;]
+
+    IQR[&quot;IQR Outlier Detection\n\nQ1 - 1.5*IQR → lower fence\nQ3 + 1.5*IQR → upper fence\n\nRobust to non-normality&quot;]
+
+    FUNNEL[&quot;Funnel Analysis\n\nCOUNT(DISTINCT user_id)\nby step\n\nStep-to-step conversion\nand cumulative rates&quot;]
+
+    COHORT[&quot;Cohort Retention\n\nJOIN users to events\non cohort_week\n\nRetention = users_active_week_k /\ncohort_size&quot;]
+
+    REGR[&quot;SQL Regression\n\nREGR_SLOPE(y, x)\nREGR_INTERCEPT(y, x)\nREGR_R2(y, x)\nCORR(y, x)&quot;]
+
+    RESULT[&quot;Results DataFrame\n\nvia .df() to Pandas\n\nFurther analysis\nVisualisation\nExport&quot;]
+
+    RAW_TBL --&gt; CTE
+    CTE --&gt; WINDOW
+    CTE --&gt; AGG
+    CTE --&gt; BUCKET
+    CTE --&gt; ZSCORE
+    CTE --&gt; IQR
+    CTE --&gt; FUNNEL
+    CTE --&gt; COHORT
+    CTE --&gt; REGR
+
+    WINDOW --&gt; RESULT
+    AGG --&gt; RESULT
+    BUCKET --&gt; RESULT
+    ZSCORE --&gt; RESULT
+    IQR --&gt; RESULT
+    FUNNEL --&gt; RESULT
+    COHORT --&gt; RESULT
+    REGR --&gt; RESULT
+
+    style RAW_TBL fill:#34495e,color:#fff
+    style RESULT fill:#2d6a4f,color:#fff
+    style AGG fill:#4a90d9,color:#fff
+    style WINDOW fill:#6a3d9a,color:#fff
+    style REGR fill:#e06c1a,color:#fff
+</div></div>
+
+        
+        <nav class="post-nav">
+            <a href="concepts.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Probability & Statistics: Core Concepts</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

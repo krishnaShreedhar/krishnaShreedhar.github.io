@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RAG Systems &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Retrieval-Augmented Generation (RAG) is a technique that enhances LLM responses by retrieving relevant documents from an external knowledge base and including t">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">RAG Systems</span>
+        </div>
+        <h1 class="post-title">RAG Systems</h1>
+        <p class="post-subtitle">Retrieval-Augmented Generation (RAG) is a technique that enhances LLM responses by retrieving relevant documents from an external knowledge base and including them in the context window before generation. RAG...</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-04-01</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>4 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">large-scale-aiml-systems</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Large Scale AI/ML Systems</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../../index.html">Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-0"><a href="../../PLAN.html">Plan: Large Scale AI/ML Systems Documentation</a></li><li class="project-nav__lvl-1"><a href="../00_index.html">Index: Large Scale AI/ML Systems</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../01_ml_systems_architecture/index.html">ML Systems Architecture</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/01_ml_pipelines.html">ML Pipelines</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/02_feature_stores.html">Feature Stores</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/03_model_serving.html">Model Serving</a></li><li class="project-nav__lvl-2"><a href="../01_ml_systems_architecture/04_training_infrastructure.html">Training Infrastructure</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../02_mlops/index.html">MLOps</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/01_model_registry.html">Model Registry</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/02_experiment_tracking.html">Experiment Tracking</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/03_drift_detection.html">Drift Detection</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/04_retraining_pipelines.html">Retraining Pipelines</a></li><li class="project-nav__lvl-2"><a href="../02_mlops/05_ab_testing.html">A/B Testing for ML Models</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="index.html">LLMOps</a></li><li class="project-nav__lvl-2"><a href="01_prompt_engineering.html">Prompt Engineering</a></li><li class="project-nav__lvl-2 active"><a href="02_rag_systems.html">RAG Systems</a></li><li class="project-nav__lvl-2"><a href="03_llm_evaluation.html">LLM Evaluation</a></li><li class="project-nav__lvl-2"><a href="04_fine_tuning.html">Fine-Tuning LLMs</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../04_data_engineering_for_ml/index.html">Data Engineering for ML</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/01_data_collection.html">Data Collection</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/02_data_preprocessing.html">Data Preprocessing</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/03_feature_engineering.html">Feature Engineering</a></li><li class="project-nav__lvl-2"><a href="../04_data_engineering_for_ml/04_data_validation.html">Data Validation</a></li><li class="project-nav__lvl-2 project-nav__section"><a href="../05_scaling_ml_systems/index.html">Scaling ML Systems</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/01_distributed_training.html">Distributed Training</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/02_model_parallelism.html">Model Parallelism</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/03_inference_optimization.html">Inference Optimization</a></li><li class="project-nav__lvl-2"><a href="../05_scaling_ml_systems/04_serving_at_scale.html">Serving at Scale</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Retrieval-Augmented Generation (RAG) is a technique that enhances LLM responses by retrieving relevant documents from an external knowledge base and including them in the context window before generation. RAG addresses the key limitations of standalone LLMs: knowledge cutoff dates, hallucination of facts, and inability to access private or proprietary knowledge — without requiring expensive model fine-tuning.</p>
+<h2>RAG Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Indexing[Offline Indexing Pipeline]
+        Docs[Source Documents\nPDFs, wikis, databases\ncode, emails, reports]
+        Load[Document Loader\nparse PDF, HTML, Markdown\nextract text and metadata]
+        Chunk[Chunking\nsplit into passages\n256-1024 tokens each\noverlap 10-20%]
+        Embed[Embedding Model\ntext-embedding-3-small\nor sentence-transformers\ncreates dense vectors]
+        VectorStore[Vector Store\nFAISS, Pinecone, Weaviate\nChroma, pgvector\nindexes vectors for ANN search]
+
+        Docs --&gt; Load --&gt; Chunk --&gt; Embed --&gt; VectorStore
+    end
+
+    subgraph Query[Online Query Pipeline]
+        UserQ[User Query]
+        QueryEmbed[Embed Query\nsame embedding model\nas indexing]
+        Retrieve[ANN Search\nTop-K most similar\nchunks - K=3 to 10]
+        Rerank[Optional Reranking\ncross-encoder reranker\nmore accurate than ANN\nbut slower]
+        Augment[Augmented Prompt\nSystem prompt\nRetrieved context\nUser question]
+        LLM[LLM Generation\nGPT-4 Claude Llama\nanswers using context]
+        Answer[Generated Answer\nwith source citations]
+
+        UserQ --&gt; QueryEmbed --&gt; Retrieve --&gt; Rerank --&gt; Augment --&gt; LLM --&gt; Answer
+    end
+
+    VectorStore --&gt; Retrieve
+
+    style VectorStore fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+    style LLM fill:#dcfce7,stroke:#16a34a,stroke-width:2px
+</div></div>
+<h2>Chunking Strategies</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Chunking[Document Chunking Approaches]
+        subgraph Fixed[Fixed-Size Chunking]
+            F1[Split by token count\n512 tokens with 50 token overlap\nSimple to implement\nIgnores document structure]
+        end
+
+        subgraph Semantic[Semantic Chunking]
+            S1[Split at natural boundaries\nparagraphs, sections, sentences\nPreserves meaning units\nVariable chunk size]
+        end
+
+        subgraph Hierarchical[Hierarchical Chunking]
+            H1[Parent document: full section\nChild chunks: paragraphs\nRetrieve children\nReturn parent context\nPreserves context around retrieved chunk]
+        end
+
+        subgraph Agentic[Agentic Chunking]
+            A1[LLM determines chunk boundaries\nbased on semantic meaning\nHighest quality\nExpensive to compute at index time]
+        end
+
+        Fixed --&gt; Semantic --&gt; Hierarchical --&gt; Agentic
+    end
+</div></div>
+<h2>Retrieval Quality Improvement</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TD
+    subgraph Improvements[RAG Quality Techniques]
+        subgraph QueryTransform[Query Transformation]
+            HyDE[HyDE - Hypothetical Document Embedding\nGenerate a hypothetical answer\nembed that instead of query\nImproves retrieval for question-answering]
+            QueryExpand[Query Expansion\nGenerate multiple phrasings\nof the user question\nretrieve for each\nmerge results]
+        end
+
+        subgraph Hybrid[Hybrid Retrieval]
+            Dense[Dense Retrieval\nembedding similarity\nsemantics]
+            Sparse[Sparse Retrieval\nBM25 keyword search\nexact term matching]
+            HybridSearch[Hybrid Search\nReciprocal Rank Fusion\ncombines dense and sparse\nbetter than either alone]
+            Dense &amp; Sparse --&gt; HybridSearch
+        end
+
+        subgraph Reranking[Cross-Encoder Reranking]
+            Rerank[Cross-Encoder Model\nconsiders query AND document together\nmore accurate than bi-encoder ANN\nreranks top-50 candidates to top-5\nbge-reranker cohere-rerank]
+        end
+    end
+</div></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><p><strong>Vector Embeddings</strong>: Dense numerical representations of text that capture semantic meaning — similar texts have nearby vectors in embedding space. Computed by embedding models (OpenAI text-embedding-3-small, Cohere Embed, sentence-transformers). The quality of the embedding model directly determines retrieval quality. Embedding the query with the same model used for indexing is essential.</p>
+</li>
+<li><p><strong>Approximate Nearest Neighbor (ANN) Search</strong>: Finding the K vectors most similar to the query vector from potentially millions of indexed chunks. Exact search scales as O(n*d) which is too slow for large knowledge bases. ANN algorithms (HNSW, IVF, LSH) trade perfect recall for dramatic speed improvements, typically achieving 95-99% recall at 10-100x speedup.</p>
+</li>
+<li><p><strong>Chunking</strong>: Splitting long documents into passages small enough to fit in the context window while large enough to be semantically meaningful. Chunk size is a critical hyperparameter — too small misses context, too large includes irrelevant text. Overlapping adjacent chunks ensures information at chunk boundaries is not lost.</p>
+</li>
+<li><p><strong>Context Window Stuffing</strong>: After retrieval, the top-K chunks are concatenated into the LLM context window along with the system prompt and user query. Context windows of 128K tokens (GPT-4 Turbo, Claude) can accommodate many chunks, but LLM performance degrades for information in the middle of very long contexts (the &quot;lost in the middle&quot; problem). Reranking and selecting fewer, higher-quality chunks often outperforms retrieving more chunks.</p>
+</li>
+<li><p><strong>Hybrid Search</strong>: Combining dense embedding search (captures semantics) with sparse keyword search (BM25 — captures exact term matches). Many queries benefit from both: &quot;What is the revenue of AAPL?&quot; needs keyword match for AAPL and semantic understanding of revenue. Reciprocal Rank Fusion (RRF) is the standard method for merging ranked lists from multiple retrieval methods.</p>
+</li>
+<li><p><strong>RAG Evaluation</strong>: Measuring RAG system quality requires evaluating multiple components: retrieval recall (were the relevant documents retrieved?), context relevance (are the retrieved documents actually relevant to the query?), answer faithfulness (does the answer only use information from the retrieved context?), and answer correctness (is the answer factually correct?). RAGAS is a framework that automates these evaluations using LLM-as-judge.</p>
+</li>
+<li><p><strong>Metadata Filtering</strong>: Restricting retrieval to a subset of the knowledge base using metadata filters (date range, document type, department, access permissions). Metadata filtering combines with vector search to implement access control and scoped search. Example: only retrieve documents from the past 6 months, or only retrieve documents the user has permission to see.</p>
+</li>
+</ul>
+<h2>Trade-offs</h2>
+<table>
+<thead>
+<tr>
+  <th>Retrieval Method</th>
+  <th>Semantic Quality</th>
+  <th>Exact Match</th>
+  <th>Speed</th>
+  <th>Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Dense (ANN only)</td>
+  <td>High</td>
+  <td>Low</td>
+  <td>Very Fast</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Sparse (BM25 only)</td>
+  <td>Low</td>
+  <td>High</td>
+  <td>Fast</td>
+  <td>Low</td>
+</tr>
+<tr>
+  <td>Hybrid (Dense + Sparse)</td>
+  <td>High</td>
+  <td>High</td>
+  <td>Fast</td>
+  <td>Medium</td>
+</tr>
+<tr>
+  <td>Hybrid + Reranker</td>
+  <td>Highest</td>
+  <td>High</td>
+  <td>Medium</td>
+  <td>High</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use</h2>
+<ul>
+<li><strong>RAG over fine-tuning</strong>: When the knowledge base changes frequently (news, product docs, pricing), when you need source citations, or when domain knowledge is vast and structured — RAG is cheaper and more maintainable than fine-tuning</li>
+<li><strong>Fine-tuning over RAG</strong>: When the task requires a specific output format or style that cannot be achieved by prompting, or when the knowledge is stable and the model needs to internalize reasoning patterns rather than facts</li>
+<li><strong>Hybrid search</strong>: Default for production RAG systems — pure dense retrieval misses exact keyword matches that users expect</li>
+<li><strong>Hierarchical chunking</strong>: When source documents have clear structure (documentation, reports) and surrounding context is important for understanding retrieved passages</li>
+</ul>
+
+        
+        <nav class="post-nav">
+            <a href="01_prompt_engineering.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Prompt Engineering</span></a>
+            <a href="03_llm_evaluation.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">LLM Evaluation</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../../js/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Module 4 — KV-Cache from Scratch &middot; Shreedhar Kodate</title>
+    <meta name="description" content="This module builds a KV-cache from first principles and measures the throughput improvement it delivers during autoregressive inference.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Module 4 — KV-Cache from Scratch</span>
+        </div>
+        <h1 class="post-title">Module 4 — KV-Cache from Scratch</h1>
+        <p class="post-subtitle">This module builds a KV-cache from first principles and measures the throughput improvement it delivers during autoregressive inference.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-07-21</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>3 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">gpu-acceleration</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">GPU Acceleration — Transformer Tutorials</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">GPU Acceleration — Transformer Tutorials</a></li><li class="project-nav__lvl-1"><a href="01_gpu_basics.html">Module 1 — GPU Basics: Memory & Data Transfer</a></li><li class="project-nav__lvl-1"><a href="02_transformer_training.html">Module 2 — Transformer Training on GPU</a></li><li class="project-nav__lvl-1"><a href="03_parallelism.html">Module 3 — Parallelism: DDP & FSDP on 2× H200</a></li><li class="project-nav__lvl-1 active"><a href="04_kv_cache.html">Module 4 — KV-Cache from Scratch</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <h2>Overview</h2>
+<p>This module builds a KV-cache from first principles and measures the
+throughput improvement it delivers during autoregressive inference.</p>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>Teaches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>attention.py</code></td>
+  <td>Naive MHA (full K/V recompute) vs cached MHA</td>
+</tr>
+<tr>
+  <td><code>kv_cache_manager.py</code></td>
+  <td>Pre-allocated GPU buffer for K/V tensors</td>
+</tr>
+<tr>
+  <td><code>inference_engine.py</code></td>
+  <td>Prefill + decode phases, throughput benchmark</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>The Problem: Autoregressive Decode is Expensive</h2>
+<p>To generate token <code>t</code>, the model needs to attend to <strong>all previous tokens</strong> <code>0…t-1</code>.
+Without caching:</p>
+<pre><code>Step 1: attend over [t₀]              — 1 token
+Step 2: attend over [t₀, t₁]         — 2 tokens
+Step 3: attend over [t₀, t₁, t₂]     — 3 tokens
+...
+Step T: attend over [t₀, …, t_{T-1}] — T tokens
+</code></pre>
+<p>Total K/V computation: <strong>O(T²)</strong> — quadratic in sequence length.</p>
+<p>The KV-cache reuses previously computed K and V tensors, reducing per-step
+cost to <strong>O(T)</strong> amortized.</p>
+<hr />
+<h2>KV-Cache Mechanics</h2>
+<h3>Without Cache</h3>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Model
+    participant GPU
+
+    note over Model,GPU: Decode step t=5 (history=[t0..t4])
+
+    Model-&gt;&gt;GPU: Q = x_t5 · Wq
+    Model-&gt;&gt;GPU: K = [t0..t5] · Wk  ← recomputed every step!
+    Model-&gt;&gt;GPU: V = [t0..t5] · Wv  ← recomputed every step!
+    GPU-&gt;&gt;GPU: Attention(Q, K, V)
+    GPU--&gt;&gt;Model: output token t5
+</div></div>
+<h3>With Cache</h3>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Model
+    participant KVCache as &quot;KV Cache (GPU buffer)&quot;
+    participant GPU
+
+    note over Model,GPU: Decode step t=5
+
+    Model-&gt;&gt;GPU: Q = x_t5 · Wq
+    Model-&gt;&gt;GPU: K_new = x_t5 · Wk  ← only new token!
+    Model-&gt;&gt;GPU: V_new = x_t5 · Wv  ← only new token!
+    Model-&gt;&gt;KVCache: append K_new at position 5
+    Model-&gt;&gt;KVCache: append V_new at position 5
+    KVCache--&gt;&gt;GPU: K[0..5], V[0..5]  ← full history from cache
+    GPU-&gt;&gt;GPU: Attention(Q, K[0..5], V[0..5])
+    GPU--&gt;&gt;Model: output token t5
+</div></div>
+<p><strong>Savings</strong>: For T=512, cached avoids <strong>512× recomputation</strong> of K/V at the final step.</p>
+<hr />
+<h2>KV-Cache Data Structure</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart TD
+    subgraph &quot;KVCacheManager (GPU)&quot;
+        K[&quot;k_cache\n[num_layers, B, H, max_seq_len, head_dim]&quot;]
+        V[&quot;v_cache\n[num_layers, B, H, max_seq_len, head_dim]&quot;]
+    end
+
+    L0[&quot;Layer 0&quot;] --&gt;|&quot;update(0, k_new, v_new, pos)&quot;| K
+    L0 --&gt; V
+    L1[&quot;Layer 1&quot;] --&gt;|&quot;update(1, k_new, v_new, pos)&quot;| K
+    L1 --&gt; V
+
+    K --&gt;|&quot;read k_cache[0, :, :, :pos]&quot;| ATT0[&quot;Attention Layer 0&quot;]
+    V --&gt; ATT0
+</div></div>
+<h3>Memory Cost</h3>
+<p>For a 6-layer model, 8 heads, 64 head_dim, batch=4, max_seq=1024 (BF16):</p>
+<pre><code>2 (K+V) × 6 × 4 × 8 × 1024 × 64 × 2 bytes = 48 MB
+</code></pre>
+<p>On H200 (141 GB), this is negligible. Scaling to 70B LLMs with 32k context
+requires careful management (paged attention, etc.), but the principle is identical.</p>
+<hr />
+<h2>Two-Phase Generation</h2>
+<div class="mermaid-wrap"><div class="mermaid">flowchart LR
+    subgraph Prefill
+        P[&quot;Prompt tokens\n[t0..t_{n-1}]&quot;] --&gt;|&quot;forward (full seq)&quot;| KVC[&quot;Populate KV cache\nfor all prompt tokens&quot;]
+    end
+
+    subgraph Decode
+        KVC --&gt; D1[&quot;Step 1: new token t_n&quot;]
+        D1 --&gt; KVC2[&quot;Append to cache&quot;]
+        KVC2 --&gt; D2[&quot;Step 2: new token t_{n+1}&quot;]
+        D2 --&gt; D3[&quot;...&quot;]
+        D3 --&gt; DN[&quot;Step T: token t_{n+T-1}&quot;]
+    end
+</div></div>
+<ul>
+<li><strong>Prefill</strong> processes the entire prompt in one batched forward pass — high GPU utilization.</li>
+<li><strong>Decode</strong> processes one token at a time — low arithmetic intensity (memory-bound).</li>
+</ul>
+<p>This is why decode throughput is limited by HBM bandwidth, not FLOPS.
+H200's 3.35 TB/s HBM makes it ~4× faster at decode than A100.</p>
+<hr />
+<h2>Benchmark Results (expected on 2× H200)</h2>
+<table>
+<thead>
+<tr>
+  <th>Strategy</th>
+  <th>Prompt=64, Generate=128</th>
+  <th>Speedup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Naive (recompute)</td>
+  <td>~800 tok/s</td>
+  <td>1×</td>
+</tr>
+<tr>
+  <td>KV-cached</td>
+  <td>~15,000 tok/s</td>
+  <td>~19×</td>
+</tr>
+</tbody>
+</table>
+<p>Actual numbers depend on model size, batch size, and dtype.</p>
+<hr />
+<h2>Running</h2>
+<div class="code-wrapper"><span class="code-lang">bash</span><pre><code class="language-bash">python -m src.kv_cache.inference_engine
+</code></pre></div>
+<h3>Key config knobs (<code>configs/kv_cache.yaml</code>)</h3>
+<table>
+<thead>
+<tr>
+  <th>Key</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>kv_cache.max_batch_size</code></td>
+  <td>Pre-allocation batch dimension</td>
+</tr>
+<tr>
+  <td><code>kv_cache.max_seq_len</code></td>
+  <td>Maximum sequence length the cache supports</td>
+</tr>
+<tr>
+  <td><code>kv_cache.dtype</code></td>
+  <td><code>bfloat16</code> halves cache memory vs <code>float32</code></td>
+</tr>
+<tr>
+  <td><code>inference.prompt_tokens</code></td>
+  <td>Prefill length</td>
+</tr>
+<tr>
+  <td><code>inference.max_new_tokens</code></td>
+  <td>Decode length</td>
+</tr>
+<tr>
+  <td><code>inference.benchmark_iters</code></td>
+  <td>Runs to average for stable throughput numbers</td>
+</tr>
+<tr>
+  <td><code>logging.level</code></td>
+  <td><code>DEBUG</code> shows per-step timing</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="03_parallelism.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Module 3 — Parallelism: DDP & FSDP on 2× H200</span></a>
+            <span></span>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>

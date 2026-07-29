@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ray Engineering – Architecture Reference &middot; Shreedhar Kodate</title>
+    <meta name="description" content="Comprehensive architectural diagrams and explanatory text covering every major Ray subsystem implemented in this project.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../../css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <script src="../../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+</button>
+
+<nav class="site-ribbon" aria-label="Page sections">
+    <ul>
+        <li><a class="ribbon-dot" href="#top" data-section="top">
+            <span class="ribbon-label">Top</span>
+        </a></li>
+        <li><a class="ribbon-dot" href="#post-article" data-section="post-article">
+            <span class="ribbon-label">Article</span>
+        </a></li>
+    </ul>
+</nav>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../../index.html" aria-label="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../../index.html">Home</a></li>
+                    <li><a href="../../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../../../blogs/">Blog</a></li>
+                    <li><a href="../../../../../resources.html">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="post-header">
+    <div class="row">
+        <div class="post-breadcrumb">
+            <a href="../../../../../blogs/">Blog</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <a href="../../../../../blogs/technical/">Technical</a>
+            <span class="post-breadcrumb__sep">/</span>
+            <span class="post-breadcrumb__current">Ray Engineering – Architecture Reference</span>
+        </div>
+        <h1 class="post-title">Ray Engineering – Architecture Reference</h1>
+        <p class="post-subtitle">Comprehensive architectural diagrams and explanatory text covering every major Ray subsystem implemented in this project.</p>
+        <div class="post-meta">
+            <span class="post-meta__author">Shreedhar Kodate</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>2025-01-02</span>
+            <span class="post-meta__sep">&middot;</span>
+            <span>5 min read</span>
+        </div>
+        <div class="tags-row"><span class="tag tag--technical">ray-engineering</span><span class="tag tag--technical">docs</span></div>
+    </div>
+</div>
+
+<div class="row">
+<div class="post-layout">
+    <aside class="post-toc">
+        <div class="post-toc__title">Ray Engineering</div>
+        <nav class="project-nav"><ul class="project-nav__list"><li class="project-nav__lvl-0"><a href="../index.html">Ray Engineering</a></li><li class="project-nav__lvl-1 active"><a href="architecture.html">Ray Engineering – Architecture Reference</a></li><li class="project-nav__lvl-1"><a href="flow_diagrams.html">Ray Engineering – Flow Diagrams</a></li></ul></nav>
+        <hr class="project-nav__divider">
+        <div class="post-toc__title">On This Page</div>
+        <nav class="toc-nav"><ul data-auto></ul></nav>
+    </aside>
+    <article class="post-body" id="post-article">
+        <p>Comprehensive architectural diagrams and explanatory text covering every
+major Ray subsystem implemented in this project.</p>
+<hr />
+<h2>1. Ray Cluster Architecture</h2>
+<p>A Ray cluster consists of a <strong>Head Node</strong> and one or more <strong>Worker Nodes</strong>.
+All coordination flows through the Global Control Service (GCS) on the head
+node, while actual task and object data flows directly between workers.</p>
+<div class="mermaid-wrap"><div class="mermaid">graph TB
+    subgraph HeadNode[&quot;Head Node&quot;]
+        GCS[&quot;Global Control Service (GCS)\n─ Node registry\n─ Actor table\n─ Job metadata&quot;]
+        Scheduler[&quot;Distributed Scheduler\n─ Resource matching\n─ Task placement&quot;]
+        Dashboard[&quot;Ray Dashboard\n:8265&quot;]
+        Raylet_H[&quot;Raylet\n─ Local task queue\n─ Object manager&quot;]
+        PlasmaH[&quot;Plasma Store\n(Object Store)\nShared Memory&quot;]
+        GCS --- Scheduler
+        Raylet_H --- PlasmaH
+    end
+
+    subgraph Worker1[&quot;Worker Node 1&quot;]
+        Raylet_W1[&quot;Raylet&quot;]
+        Plasma_W1[&quot;Plasma Store&quot;]
+        WP1[&quot;Worker Processes\n(Task/Actor)&quot;]
+        Raylet_W1 --- Plasma_W1
+        Raylet_W1 --- WP1
+    end
+
+    subgraph Worker2[&quot;Worker Node 2&quot;]
+        Raylet_W2[&quot;Raylet&quot;]
+        Plasma_W2[&quot;Plasma Store&quot;]
+        WP2[&quot;Worker Processes\n(Task/Actor)&quot;]
+        Raylet_W2 --- Plasma_W2
+        Raylet_W2 --- WP2
+    end
+
+    GCS &lt;--&gt;|Node heartbeats| Raylet_W1
+    GCS &lt;--&gt;|Node heartbeats| Raylet_W2
+    Scheduler --&gt;|Task assignment| Raylet_W1
+    Scheduler --&gt;|Task assignment| Raylet_W2
+    Plasma_W1 &lt;--&gt;|Object transfer| Plasma_W2
+    Plasma_W1 &lt;--&gt;|Object transfer| PlasmaH
+    Dashboard -.-&gt;|Metrics / events| GCS
+
+    Client[&quot;Driver (Python process)\nray.init()&quot;] --&gt;|Submit tasks / actors| GCS
+    Client --&gt;|ray.get / ray.put| PlasmaH
+</div></div>
+<h3>Key components</h3>
+<table>
+<thead>
+<tr>
+  <th>Component</th>
+  <th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>GCS</strong></td>
+  <td>Single source of truth for cluster state. Stores actor handles, node liveness, job info.</td>
+</tr>
+<tr>
+  <td><strong>Raylet</strong></td>
+  <td>Per-node daemon. Maintains a local task queue, manages the local Plasma Store, and communicates with the GCS.</td>
+</tr>
+<tr>
+  <td><strong>Plasma Store</strong></td>
+  <td>Shared-memory object store (Apache Arrow format). Workers on the same node read objects via zero-copy mmap. Cross-node transfers go over the network.</td>
+</tr>
+<tr>
+  <td><strong>Distributed Scheduler</strong></td>
+  <td>Matches task resource requirements (<code>num_cpus</code>, <code>num_gpus</code>, custom resources) to available worker slots.</td>
+</tr>
+<tr>
+  <td><strong>Dashboard</strong></td>
+  <td>Web UI at <code>:8265</code> showing task throughput, actor states, object store usage, and logs.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Ray Data Pipeline Architecture</h2>
+<p>Ray Data provides a lazy, parallel Dataset abstraction built on top of Ray
+tasks.  Transformations are fused and executed in a streaming fashion to
+avoid materialising large intermediate datasets.</p>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    subgraph Ingestion
+        CSV[&quot;CSV / Parquet\nfiles&quot;]
+        PD[&quot;Pandas\nDataFrame&quot;]
+        HF[&quot;HuggingFace\nDataset&quot;]
+        CSV --&gt; DS_Raw[&quot;ray.data.Dataset\n(partitioned into Blocks)&quot;]
+        PD --&gt; DS_Raw
+        HF --&gt; DS_Raw
+    end
+
+    subgraph Transforms[&quot;Lazy Transforms (fused)&quot;]
+        DS_Raw --&gt;|&quot;.map_batches(normalise)&quot;| DS_Norm[&quot;Normalised\nDataset&quot;]
+        DS_Norm --&gt;|&quot;.map_batches(features)&quot;| DS_Feat[&quot;Feature-Engineered\nDataset&quot;]
+        DS_Feat --&gt;|&quot;.filter()&quot;| DS_Filt[&quot;Filtered\nDataset&quot;]
+    end
+
+    subgraph Output
+        DS_Filt --&gt;|&quot;.split(n_workers)&quot;| Shard0[&quot;Shard 0\n→ Worker 0&quot;]
+        DS_Filt --&gt;|&quot;.split(n_workers)&quot;| Shard1[&quot;Shard 1\n→ Worker 1&quot;]
+        DS_Filt --&gt;|&quot;.take_batch()&quot;| Sample[&quot;Sample batch\nfor inspection&quot;]
+    end
+
+    Shard0 --&gt; Trainer0[&quot;TorchTrainer\nWorker 0&quot;]
+    Shard1 --&gt; Trainer1[&quot;TorchTrainer\nWorker 1&quot;]
+</div></div>
+<h3>Key concepts</h3>
+<ul>
+<li><strong>Block</strong>: the unit of parallelism in Ray Data.  Each block is a Pandas
+DataFrame stored as a plasma object.</li>
+<li><strong><code>map_batches(fn)</code></strong>: applies <code>fn</code> to each block in parallel using Ray
+tasks.  The <code>batch_format=&quot;numpy&quot;</code> option returns NumPy arrays for
+compute-intensive transforms.</li>
+<li><strong>Lazy execution</strong>: transformations are not executed until <code>.take()</code>,
+<code>.iter_batches()</code>, or a trainer consumes the dataset.</li>
+<li><strong>Streaming ingestion</strong>: during training, Ray Data streams blocks from
+disk / object store directly into the training loop, avoiding OOM.</li>
+</ul>
+<hr />
+<h2>3. Actor Communication Sequence</h2>
+<p>This diagram shows the message flow when multiple workers push gradients to
+a centralised ParameterServer actor.</p>
+<div class="mermaid-wrap"><div class="mermaid">sequenceDiagram
+    participant Driver as Driver Process
+    participant GCS as Global Control Service
+    participant PS as ParameterServer Actor
+    participant W0 as Worker 0
+    participant W1 as Worker 1
+
+    Driver-&gt;&gt;GCS: Create actor (ParameterServer)
+    GCS--&gt;&gt;Driver: ActorHandle ref
+    Driver-&gt;&gt;GCS: Create actor (Worker 0)
+    Driver-&gt;&gt;GCS: Create actor (Worker 1)
+    GCS--&gt;&gt;Driver: ActorHandle refs
+
+    loop Training Iteration
+        Driver-&gt;&gt;PS: ps.get_params.remote()
+        PS--&gt;&gt;Driver: ObjectRef[params]
+        Driver-&gt;&gt;Driver: params = ray.get(ref)
+
+        par Parallel Gradient Computation
+            Driver-&gt;&gt;W0: w0.compute_gradient.remote(params, step)
+            Driver-&gt;&gt;W1: w1.compute_gradient.remote(params, step)
+        end
+
+        W0--&gt;&gt;Driver: ObjectRef[grad_0]
+        W1--&gt;&gt;Driver: ObjectRef[grad_1]
+        Driver-&gt;&gt;Driver: grads = ray.get([ref0, ref1])
+
+        Driver-&gt;&gt;PS: ps.apply_gradients.remote(grad_0, grad_1)
+        PS-&gt;&gt;PS: average gradients, SGD step
+        PS--&gt;&gt;Driver: ObjectRef[new_params]
+        Driver-&gt;&gt;Driver: new_params = ray.get(ref)
+    end
+
+    Driver-&gt;&gt;GCS: ray.shutdown()
+    GCS-&gt;&gt;PS: terminate actor
+    GCS-&gt;&gt;W0: terminate actor
+    GCS-&gt;&gt;W1: terminate actor
+</div></div>
+<h3>Why actors instead of tasks?</h3>
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th>Remote Task</th>
+  <th>Actor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>State</strong></td>
+  <td>Stateless – restarted fresh each call</td>
+  <td>Stateful – persists across calls</td>
+</tr>
+<tr>
+  <td><strong>Scheduling</strong></td>
+  <td>Re-scheduled each call (possible migration)</td>
+  <td>Pinned to a node/worker process</td>
+</tr>
+<tr>
+  <td><strong>Use case</strong></td>
+  <td>Pure functions, embarrassingly parallel work</td>
+  <td>Parameter servers, caches, counters, simulators</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. Ray Train DDP Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TB
+    Driver[&quot;Driver\nTorchTrainer.fit()&quot;] --&gt; RC[&quot;RunConfig\n(checkpoint, storage)&quot;]
+    Driver --&gt; SC[&quot;ScalingConfig\n(num_workers, use_gpu)&quot;]
+
+    Driver --&gt; W0[&quot;Train Worker 0\n_train_loop_per_worker()&quot;]
+    Driver --&gt; W1[&quot;Train Worker 1\n_train_loop_per_worker()&quot;]
+
+    subgraph Worker0[&quot;Worker 0 Process&quot;]
+        W0 --&gt; M0[&quot;prepare_model()\n→ DDP wrapping&quot;]
+        W0 --&gt; L0[&quot;prepare_data_loader()\n→ Shard 0&quot;]
+        M0 --&gt; FWD0[&quot;Forward pass\nLoss computation&quot;]
+        FWD0 --&gt; BWD0[&quot;Backward pass\nGradients&quot;]
+    end
+
+    subgraph Worker1[&quot;Worker 1 Process&quot;]
+        W1 --&gt; M1[&quot;prepare_model()\n→ DDP wrapping&quot;]
+        W1 --&gt; L1[&quot;prepare_data_loader()\n→ Shard 1&quot;]
+        M1 --&gt; FWD1[&quot;Forward pass\nLoss computation&quot;]
+        FWD1 --&gt; BWD1[&quot;Backward pass\nGradients&quot;]
+    end
+
+    BWD0 &lt;--&gt;|&quot;AllReduce\n(gradient sync)&quot;| BWD1
+
+    BWD0 --&gt; RPT0[&quot;ray.train.report()\nmetrics + Checkpoint&quot;]
+    BWD1 --&gt; RPT1[&quot;ray.train.report()\nmetrics + Checkpoint&quot;]
+
+    RPT0 --&gt; CKP[&quot;CheckpointManager\n(num_to_keep=3)&quot;]
+    RPT1 --&gt; CKP
+    CKP --&gt; Storage[&quot;Local / Remote\nCheckpoint Storage&quot;]
+</div></div>
+<hr />
+<h2>5. Ray Tune HPO Architecture</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph TB
+    subgraph Tuner
+        PS[&quot;Param Space\n(loguniform, choice, uniform)&quot;]
+        TC[&quot;TuneConfig\n(metric, mode, num_samples)&quot;]
+        ASHA[&quot;ASHAScheduler\n(early stopping)&quot;]
+        Optuna[&quot;OptunaSearch\n(Bayesian next-point)&quot;]
+    end
+
+    PS --&gt; Trial0[&quot;Trial 0\n(lr=0.01, hidden=64, ...)&quot;]
+    PS --&gt; Trial1[&quot;Trial 1\n(lr=0.001, hidden=128, ...)&quot;]
+    PS --&gt; TrialN[&quot;Trial N\n(sampled by Optuna)&quot;]
+
+    Trial0 --&gt; TT0[&quot;TorchTrainer\n_trainable_loop&quot;]
+    Trial1 --&gt; TT1[&quot;TorchTrainer\n_trainable_loop&quot;]
+    TrialN --&gt; TTN[&quot;TorchTrainer\n_trainable_loop&quot;]
+
+    TT0 --&gt;|&quot;ray.train.report(accuracy)&quot;| ASHA
+    TT1 --&gt;|&quot;ray.train.report(accuracy)&quot;| ASHA
+    TTN --&gt;|&quot;ray.train.report(accuracy)&quot;| ASHA
+
+    ASHA --&gt;|&quot;Stopped (grace_period)&quot;| Pruned[&quot;Pruned Trials\n(no further epochs)&quot;]
+    ASHA --&gt;|&quot;Promoted&quot;| Optuna
+    Optuna --&gt;|&quot;Suggest next config&quot;| PS
+
+    Tuner --&gt;|&quot;fit() → ResultGrid&quot;| RG[&quot;ResultGrid\n.get_best_result()\n.get_dataframe()&quot;]
+</div></div>
+<hr />
+<h2>6. Ray Serve Deployment Graph</h2>
+<div class="mermaid-wrap"><div class="mermaid">graph LR
+    Client[&quot;HTTP Client\nPOST /predict\n{features: [...]}&quot;]
+
+    subgraph RayServe[&quot;Ray Serve&quot;]
+        Ingress[&quot;InferencePipeline\n(num_replicas=1)\nIngress deployment&quot;]
+
+        subgraph PreprocessorPool[&quot;Preprocessor (num_replicas=2)&quot;]
+            P0[&quot;Preprocessor\nReplica 0&quot;]
+            P1[&quot;Preprocessor\nReplica 1&quot;]
+        end
+
+        subgraph ClassifierPool[&quot;BatchClassifier (num_replicas=2)&quot;]
+            C0[&quot;BatchClassifier\nReplica 0&quot;]
+            C1[&quot;BatchClassifier\nReplica 1&quot;]
+        end
+    end
+
+    Client --&gt;|HTTP| Ingress
+    Ingress --&gt;|DeploymentHandle| P0
+    Ingress --&gt;|DeploymentHandle| P1
+    P0 --&gt;|normalised features| C0
+    P1 --&gt;|normalised features| C1
+
+    subgraph Batching[&quot;@serve.batch (max_batch_size=32)&quot;]
+        C0 --&gt;|coalesced inference| Model[&quot;PyTorch\nModel&quot;]
+        C1 --&gt;|coalesced inference| Model
+    end
+
+    Model --&gt;|predictions| Ingress
+    Ingress --&gt;|JSON response| Client
+</div></div>
+<h3>@serve.batch behaviour</h3>
+<p>When multiple requests arrive concurrently at <code>BatchClassifier</code>, Ray Serve
+coalesces them into a single call to <code>_batched_predict()</code> up to
+<code>max_batch_size</code>.  The <code>batch_wait_timeout_s</code> controls how long Serve waits
+to fill a batch before dispatching a partial one.</p>
+<table>
+<thead>
+<tr>
+  <th>Config key</th>
+  <th>Value</th>
+  <th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>max_batch_size</code></td>
+  <td>32</td>
+  <td>Maximum samples per inference call</td>
+</tr>
+<tr>
+  <td><code>batch_wait_timeout_s</code></td>
+  <td>0.05</td>
+  <td>Max latency penalty for batching</td>
+</tr>
+<tr>
+  <td><code>num_replicas</code></td>
+  <td>2</td>
+  <td>Horizontal scale-out</td>
+</tr>
+<tr>
+  <td><code>max_concurrent_queries</code></td>
+  <td>10</td>
+  <td>Back-pressure limit per replica</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <nav class="post-nav">
+            <a href="../index.html" class="post-nav__item post-nav__item--prev"><span class="post-nav__label">&larr; Prev</span><span class="post-nav__title">Ray Engineering</span></a>
+            <a href="flow_diagrams.html" class="post-nav__item post-nav__item--next"><span class="post-nav__label">Next &rarr;</span><span class="post-nav__title">Ray Engineering – Flow Diagrams</span></a>
+        </nav>
+    </article>
+</div>
+</div>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; Shreedhar Kodate</span>
+            <div class="sk-footer__links">
+                <a href="../../../../../blogs/technical/">Technical</a>
+                <a href="../../../../../blogs/">All Blogs</a>
+                <a href="../../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("pre code").forEach(function(el){hljs.highlightElement(el);});});</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>
+
+<script src="../../../../../js/blog.js"></script>
+</body>
+</html>
