@@ -45,11 +45,11 @@ Adding a new blog post
 
 import argparse
 import os
-import random
 import re
+import subprocess
 import sys
 import textwrap
-from datetime import datetime, timedelta
+from datetime import date, datetime
 from pathlib import Path
 
 # ── optional dependencies — install via requirements.txt ──────────────────────
@@ -68,6 +68,14 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = REPO_ROOT / "content" / "config.yaml"
 MARKDOWNS_DIR = REPO_ROOT / "markdowns"
 PROJECTS_ROOT = MARKDOWNS_DIR / "technical" / "projects"
+
+# Anything that can change what build_file()/render_post() emit for a page
+# that isn't the source .md itself — a template edit or a config change
+# (author name, CDN URL, category color, ...) must invalidate every output,
+# even though no markdown file touched. Bump GLOBAL_MTIME by touching either.
+BUILD_PY_MTIME = Path(__file__).resolve().stat().st_mtime
+CONFIG_MTIME = CONFIG_PATH.stat().st_mtime if CONFIG_PATH.exists() else 0.0
+GLOBAL_MTIME = max(BUILD_PY_MTIME, CONFIG_MTIME)
 
 # ── load site config ──────────────────────────────────────────────────────────
 def load_config():
@@ -163,11 +171,24 @@ def extract_subtitle(body: str) -> str:
     return ""
 
 
-def random_2025_date(seed_key: str) -> datetime:
-    """Deterministic-per-file random date in 2025 (stable across re-runs)."""
-    rng = random.Random(seed_key)
-    start = datetime(2025, 1, 1)
-    return start + timedelta(days=rng.randint(0, 364))
+def committed_date(path: Path) -> date:
+    """The date a markdown source file was actually added to the repo, so
+    auto-injected frontmatter dates reflect real publish history instead of
+    an arbitrary/random value. Falls back to today for files not yet
+    committed (the common case: this runs as part of authoring a new post,
+    before it's committed) or when git isn't available."""
+    try:
+        out = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "log", "--diff-filter=A",
+             "--format=%as", "--follow", "--", str(path)],
+            capture_output=True, text=True, timeout=5,
+        )
+        lines = [l for l in out.stdout.strip().splitlines() if l]
+        if lines:
+            return datetime.strptime(lines[-1], "%Y-%m-%d").date()
+    except (OSError, subprocess.SubprocessError, ValueError):
+        pass
+    return date.today()
 
 
 def ordered_project_files(project_dir: Path):
@@ -230,7 +251,7 @@ def inject_project_frontmatter(verbose: bool = True):
 
             word_count = len(re.findall(r"\S+", body))
             reading_time = max(1, round(word_count / 220))
-            date_val = random_2025_date(f"{slug}/{rel.as_posix()}")
+            date_val = committed_date(f)
 
             tags = [slug.replace("_", "-")]
             if rel.parent != Path("."):
@@ -325,6 +346,243 @@ def render_prev_next(entries, current_path: Path, current_output: Path):
             f'<span class="post-nav__title">{m.get("title", "")}</span></a>'
         )
     return prev_html, next_html
+
+
+# ── series (sub-category) docs (markdowns/<category>/<series_slug>/*.md) ──────
+#
+# A "series" is a flat folder of sibling posts under any category — e.g.
+# markdowns/leadership/learning_from_sandeep_swadia/ — that should be
+# presented on the site as one grouped sub-collection (a single card on the
+# category index pointing to a series landing page, with sidebar nav +
+# prev/next between its posts). This mirrors the existing technical/projects
+# mechanism but works for any category. technical/projects keeps its own
+# (nested, README-driven) handling and is excluded here.
+
+def discover_series_dirs():
+    """{series_slug: (category, [md_path, ...])} for every flat sub-folder of
+    a category directory that contains markdown files directly. Files are
+    kept in filename order (series posts are numbered, e.g. 01_, 02_, ...)."""
+    series = {}
+    if not MARKDOWNS_DIR.exists():
+        return series
+    for category_dir in sorted(p for p in MARKDOWNS_DIR.iterdir() if p.is_dir()):
+        for sub in sorted(p for p in category_dir.iterdir() if p.is_dir()):
+            if category_dir.name == "technical" and sub.name == "projects":
+                continue
+            md_files = sorted(p for p in sub.iterdir() if p.suffix == ".md")
+            if md_files:
+                series[sub.name] = (category_dir.name, md_files)
+    return series
+
+
+def series_output_slug(path: Path) -> str:
+    """'01_Systems_Thinking.md' -> 'systems-thinking'."""
+    stem = re.sub(r'^\d+[_\-]*', '', path.stem)
+    return re.sub(r'[_\s]+', '-', stem).strip('-').lower()
+
+
+def inject_series_frontmatter(verbose: bool = True):
+    """Add missing YAML frontmatter to every markdown file inside a series
+    folder. Idempotent — files that already start with a '---' frontmatter
+    block are left completely untouched."""
+    author = SITE_CONFIG.get("site", {}).get("author", "Shreedhar Kodate")
+    added = 0
+
+    for series_slug, (category, md_files) in discover_series_dirs().items():
+        series_title = humanize_slug(series_slug)
+
+        for f in md_files:
+            text = f.read_text(encoding="utf-8")
+            if FRONTMATTER_RE.match(text):
+                continue
+
+            title, body = extract_leading_h1(text)
+            if not title:
+                title = humanize_slug(f.stem)
+            subtitle = extract_subtitle(body)
+
+            word_count = len(re.findall(r"\S+", body))
+            reading_time = max(1, round(word_count / 220))
+            date_val = committed_date(f)
+            out_rel = f"blogs/{category}/posts/{series_slug}/{series_output_slug(f)}.html"
+
+            tags = [category, series_slug.replace("_", "-")[:24]]
+
+            meta_lines = ["---", f'title: "{yaml_dquote(title)}"']
+            if subtitle:
+                meta_lines.append(f'subtitle: "{yaml_dquote(subtitle)}"')
+            meta_lines += [
+                f"category: {category}",
+                f"series: {series_slug}",
+                f'series_title: "{yaml_dquote(series_title)}"',
+                f'date: {date_val.strftime("%Y-%m-%d")}',
+                f"reading_time: {reading_time}",
+                "tags:",
+            ]
+            meta_lines += [f"  - {t}" for t in tags]
+            meta_lines += [
+                f'author: "{yaml_dquote(author)}"',
+                f'output: "{out_rel}"',
+                "---",
+                "",
+            ]
+            f.write_text("\n".join(meta_lines) + body, encoding="utf-8")
+            added += 1
+            if verbose:
+                print(f"  +  frontmatter: {f.relative_to(REPO_ROOT)}")
+
+    if verbose and added:
+        print(f"\nAdded frontmatter to {added} series doc(s).")
+
+
+def build_series_index():
+    """{series_slug: [(md_path, meta), ...]} in reading order, built from
+    files that now have an 'output' key (after inject_series_frontmatter)."""
+    index = {}
+    for series_slug, (category, md_files) in discover_series_dirs().items():
+        entries = []
+        for f in md_files:
+            meta, _ = parse_file(f)
+            if meta.get("output"):
+                entries.append((f, meta))
+        index[series_slug] = entries
+    return index
+
+
+def render_series_index_page(series_slug: str, category: str, entries) -> str:
+    """Build the series landing page: a scoped listing of every post in the
+    series, styled like a category index page."""
+    cat_cfg = next(
+        (c for c in SITE_CONFIG.get("categories", []) if c.get("id") == category),
+        {},
+    )
+    cat_name = cat_cfg.get("name", category.capitalize())
+    series_title = humanize_slug(series_slug)
+
+    cards = []
+    for f, meta in entries:
+        output_rel = Path(meta["output"])
+        href = output_rel.name  # sibling file inside the same posts/<series>/ dir
+        date_val = meta.get("date", "")
+        date_str = date_val.strftime("%d %b %Y") if isinstance(date_val, date) else str(date_val)
+        day = date_val.strftime("%d") if isinstance(date_val, date) else ""
+        month = date_val.strftime("%b&nbsp;%Y") if isinstance(date_val, date) else date_str
+        tag_html = "".join(f'<span class="tag tag--{category}">{t}</span>' for t in meta.get("tags", []))
+        cards.append(f"""
+            <a href="{href}" class="post-card post-card--{category} anim-in">
+                <div class="post-card__date">
+                    <span class="post-card__date-day">{day}</span>
+                    <span class="post-card__date-month">{month}</span>
+                </div>
+                <div class="post-card__body">
+                    <h2 class="post-card__title">{meta.get('title', '')}</h2>
+                    <p class="post-card__excerpt">{meta.get('subtitle', '')}</p>
+                    <div class="post-card__footer">
+                        {tag_html}
+                        <span class="post-card__readtime">&#9711;&nbsp;{meta.get('reading_time', '?')} min</span>
+                    </div>
+                </div>
+            </a>""")
+
+    author = SITE_CONFIG.get("site", {}).get("author", "Shreedhar Kodate")
+
+    return f"""<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{series_title} &middot; {author}</title>
+    <meta name="description" content="A series of posts on {series_title}.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../../css/base.css">
+    <link rel="stylesheet" href="../../../../css/main.css">
+    <link rel="stylesheet" href="../../../../css/blog.css">
+    <script src="../../../../js/modernizr.js"></script>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
+</head>
+<body id="top" class="sk-page">
+
+<div class="reading-progress"></div>
+
+<button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<header>
+    <div class="row">
+        <div class="top-bar">
+            <div class="logo"><a href="../../../../index.html" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a></div>
+            <nav id="main-nav-wrap">
+                <ul class="main-navigation">
+                    <li><a href="../../../../index.html">Home</a></li>
+                    <li><a href="../../../../experience/">Experience</a></li>
+                    <li class="current"><a href="../../../">Blog</a></li>
+                    <li><a href="../../../../resources/">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<section class="page-hero page-hero--{category}">
+    <div class="row">
+        <span class="page-hero__eyebrow">{cat_name} &middot; Series</span>
+        <h1>{series_title}</h1>
+        <p class="page-hero__desc">
+            A grouped series of posts within {cat_name}.
+        </p>
+    </div>
+</section>
+
+<section class="blog-listing">
+    <div class="row">
+        <div class="post-grid">
+{"".join(cards)}
+        </div>
+    </div>
+</section>
+
+<footer class="sk-footer">
+    <div class="sk-row">
+        <div class="sk-footer__inner">
+            <span class="sk-footer__copy">&copy; {author}</span>
+            <div class="sk-footer__links">
+                <a href="../../../">All Blogs</a>
+                <a href="../../../../index.html">Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="../../../../js/blog.js"></script>
+</body>
+</html>
+"""
+
+
+def build_series_landing_pages(series_index: dict, verbose: bool = True, force: bool = False):
+    """Write the grouped landing page for every discovered series. Skipped
+    when the existing landing page is already newer than every member post
+    and the template/config (same freshness rule as build_file)."""
+    dirs = discover_series_dirs()
+    for series_slug, entries in series_index.items():
+        if not entries:
+            continue
+        category = dirs[series_slug][0]
+        out_dir = REPO_ROOT / f"blogs/{category}/posts/{series_slug}"
+        out_path = out_dir / "index.html"
+
+        if not force and out_path.exists():
+            source_mtime = max(f.stat().st_mtime for f, _ in entries)
+            if out_path.stat().st_mtime >= max(source_mtime, GLOBAL_MTIME):
+                if verbose:
+                    print(f"  ·  up to date: series index  {out_path.relative_to(REPO_ROOT)}")
+                continue
+
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(render_series_index_page(series_slug, category, entries), encoding="utf-8")
+        if verbose:
+            print(f"  ✓  series index  →  {out_path.relative_to(REPO_ROOT)}")
 
 
 # ── markdown post-processing ──────────────────────────────────────────────────
@@ -472,7 +730,15 @@ def depth_prefix(output_path: Path) -> str:
 # ── CDN includes ──────────────────────────────────────────────────────────────
 
 def cdn_includes(meta: dict, prefix: str) -> dict:
-    """Return dict of CDN <link> and <script> tags based on post requirements."""
+    """Return dict of CDN <link> and <script> tags based on post requirements.
+
+    Library inclusion is driven primarily by what's actually present in the
+    rendered post (meta['_has_mermaid'] / meta['_has_math'], set by
+    build_file() from the post-processed HTML) so any category — not just
+    "technical" — gets working diagrams/math when it uses them. The
+    'requires' frontmatter key and legacy per-category defaults still work
+    as an override/fallback.
+    """
     cdn = SITE_CONFIG.get("cdn", {})
     requires = meta.get("requires", [])
 
@@ -490,26 +756,29 @@ def cdn_includes(meta: dict, prefix: str) -> dict:
             'hljs.highlightElement(el);});});</script>\n'
         )
 
-    if "katex" in requires or "$$" in meta.get("subtitle", "") or True:
-        # Always include KaTeX on technical posts; it's lightweight when unused
-        if meta.get("category") in ("technical", "growth"):
-            head_extras += (
-                f'<link rel="stylesheet" href="{cdn.get("katex_css", "")}">\n'
-            )
-            body_extras += (
-                f'<script defer src="{cdn.get("katex_js", "")}"></script>\n'
-                f'<script defer src="{cdn.get("katex_auto", "")}" '
-                'onload="renderMathInElement(document.body,{delimiters:['
-                '{left:\'\\\\[\',right:\'\\\\]\',display:true},'
-                '{left:\'\\\\(\',right:\'\\\\)\',display:false},'
-                '{left:\'$$\',right:\'$$\',display:true},'
-                '{left:\'$\',right:\'$\',display:false}]});"></script>\n'
-            )
+    needs_math = "katex" in requires or meta.get("_has_math") or meta.get("category") in ("technical", "growth")
+    if needs_math:
+        head_extras += (
+            f'<link rel="stylesheet" href="{cdn.get("katex_css", "")}">\n'
+        )
+        body_extras += (
+            f'<script defer src="{cdn.get("katex_js", "")}"></script>\n'
+            f'<script defer src="{cdn.get("katex_auto", "")}" '
+            'onload="renderMathInElement(document.body,{delimiters:['
+            '{left:\'\\\\[\',right:\'\\\\]\',display:true},'
+            '{left:\'\\\\(\',right:\'\\\\)\',display:false},'
+            '{left:\'$$\',right:\'$$\',display:true},'
+            '{left:\'$\',right:\'$\',display:false}]});"></script>\n'
+        )
 
-    if "mermaid" in requires or meta.get("category") == "technical":
+    needs_mermaid = "mermaid" in requires or meta.get("_has_mermaid") or meta.get("category") == "technical"
+    if needs_mermaid:
         body_extras += (
             f'<script src="{cdn.get("mermaid_js", "")}"></script>\n'
-            '<script>mermaid.initialize({startOnLoad:true,theme:"dark"});</script>\n'
+            '<script>(function(){'
+            'var t=document.body.dataset.theme==="light"?"default":"dark";'
+            'mermaid.initialize({startOnLoad:true,theme:t});'
+            '})();</script>\n'
         )
 
     return {"head": head_extras, "body": body_extras}
@@ -529,7 +798,7 @@ def render_post(meta: dict, content_html: str, refs_html: str,
     subtitle = meta.get("subtitle", "")
     author = meta.get("author", SITE_CONFIG.get("site", {}).get("author", ""))
     date_val = meta.get("date", "")
-    if isinstance(date_val, datetime):
+    if isinstance(date_val, date):
         date_str = date_val.strftime("%d %B %Y")
     else:
         date_str = str(date_val)
@@ -564,7 +833,8 @@ def render_post(meta: dict, content_html: str, refs_html: str,
     cat_label = cat_labels.get(category, category.capitalize())
 
     if project_nav_html:
-        toc_aside = f"""<div class="post-toc__title">{meta.get('project_title', 'Contents')}</div>
+        series_label = meta.get('project_title') or meta.get('series_title') or 'Contents'
+        toc_aside = f"""<div class="post-toc__title">{series_label}</div>
         <nav class="project-nav">{project_nav_html}</nav>
         <hr class="project-nav__divider">
         <div class="post-toc__title">On This Page</div>
@@ -701,16 +971,25 @@ def render_post(meta: dict, content_html: str, refs_html: str,
     </div>
 </footer>
 
-{cdns['body']}
+
 <script src="{nav['js_blog']}"></script>
+{cdns['body']}
 </body>
 </html>"""
 
 
 # ── main build function ───────────────────────────────────────────────────────
 
-def build_file(md_path: Path, verbose: bool = True, project_index: dict = None):
-    """Build a single markdown file to HTML."""
+def build_file(md_path: Path, verbose: bool = True, project_index: dict = None,
+               series_index: dict = None, force: bool = False):
+    """Build a single markdown file to HTML.
+
+    Skips the rebuild (mistune conversion + write) when the existing output
+    is already newer than every input that could affect it: the source .md,
+    build.py / config.yaml (template or site-wide settings), and — for
+    project/series members — every sibling post's .md (their titles feed
+    this page's sidebar nav). Pass force=True to always rebuild.
+    """
     md_path = md_path.resolve()
     if not md_path.exists():
         print(f"ERROR: file not found: {md_path}")
@@ -723,6 +1002,22 @@ def build_file(md_path: Path, verbose: bool = True, project_index: dict = None):
         return False
 
     output_path = REPO_ROOT / meta["output"]
+
+    # Freshness check — bail out before any conversion work if nothing that
+    # could affect this page's output has changed since it was last built.
+    if not force and output_path.exists():
+        source_mtime = md_path.stat().st_mtime
+        slug = meta.get("project")
+        if slug and project_index and slug in project_index:
+            source_mtime = max(source_mtime, *(f.stat().st_mtime for f, _ in project_index[slug]))
+        series_slug = meta.get("series")
+        if series_slug and series_index and series_slug in series_index:
+            source_mtime = max(source_mtime, *(f.stat().st_mtime for f, _ in series_index[series_slug]))
+
+        if output_path.stat().st_mtime >= max(source_mtime, GLOBAL_MTIME):
+            if verbose:
+                print(f"  ·  up to date: {md_path.relative_to(REPO_ROOT)}")
+            return True
 
     # Convert markdown → HTML
     md = mistune.create_markdown(
@@ -739,6 +1034,11 @@ def build_file(md_path: Path, verbose: bool = True, project_index: dict = None):
     html = process_relative_md_links(html)
     html, refs_html = process_footnotes(body, html)
 
+    # Drive CDN inclusion (mermaid/katex) off what's actually in the post,
+    # not just its category, so any category renders diagrams/math correctly.
+    meta["_has_mermaid"] = "mermaid-wrap" in html
+    meta["_has_math"] = "math-block" in html
+
     # Nested project docs: sidebar nav + prev/next through the project
     project_nav_html = ""
     prev_html = next_html = None
@@ -747,6 +1047,15 @@ def build_file(md_path: Path, verbose: bool = True, project_index: dict = None):
         entries = project_index[slug]
         project_dir = PROJECTS_ROOT / slug
         project_nav_html = render_project_nav(entries, project_dir, md_path, output_path)
+        prev_html, next_html = render_prev_next(entries, md_path, output_path)
+
+    # Sub-category "series" (e.g. leadership/learning_from_sandeep_swadia):
+    # sidebar nav + prev/next through the series, same mechanism as projects.
+    series_slug = meta.get("series")
+    if series_slug and series_index and series_slug in series_index:
+        entries = series_index[series_slug]
+        series_dir = MARKDOWNS_DIR / meta.get("category", "") / series_slug
+        project_nav_html = render_project_nav(entries, series_dir, md_path, output_path)
         prev_html, next_html = render_prev_next(entries, md_path, output_path)
 
     # Render full page
@@ -764,10 +1073,13 @@ def build_file(md_path: Path, verbose: bool = True, project_index: dict = None):
     return True
 
 
-def build_all(verbose: bool = True):
-    """Build every markdown file with an 'output' frontmatter key."""
+def build_all(verbose: bool = True, force: bool = False):
+    """Build every markdown file with an 'output' frontmatter key. Files
+    whose output is already up to date are skipped — see build_file()."""
     inject_project_frontmatter(verbose)
+    inject_series_frontmatter(verbose)
     project_index = build_project_index()
+    series_index = build_series_index()
 
     md_files = list(MARKDOWNS_DIR.rglob("*.md"))
     if not md_files:
@@ -776,8 +1088,10 @@ def build_all(verbose: bool = True):
 
     success = 0
     for f in sorted(md_files):
-        if build_file(f, verbose, project_index=project_index):
+        if build_file(f, verbose, project_index=project_index, series_index=series_index, force=force):
             success += 1
+
+    build_series_landing_pages(series_index, verbose, force=force)
 
     print(f"\nBuilt {success}/{len(md_files)} files.")
 
@@ -796,6 +1110,10 @@ def main():
         "--watch", action="store_true",
         help="Watch markdowns/ for changes and rebuild automatically."
     )
+    parser.add_argument(
+        "--force", action="store_true",
+        help="Rebuild every page even if its output is already up to date."
+    )
     args = parser.parse_args()
 
     if args.watch:
@@ -808,7 +1126,8 @@ def main():
         class Handler(FileSystemEventHandler):
             def on_modified(self, event):
                 if event.src_path.endswith(".md"):
-                    build_file(Path(event.src_path), project_index=build_project_index())
+                    build_file(Path(event.src_path), project_index=build_project_index(),
+                               series_index=build_series_index())
 
         print(f"Watching {MARKDOWNS_DIR} for changes…  (Ctrl+C to stop)")
         observer = Observer()
@@ -825,9 +1144,12 @@ def main():
 
     if args.files:
         inject_project_frontmatter(verbose=False)
+        inject_series_frontmatter(verbose=False)
         project_index = build_project_index()
+        series_index = build_series_index()
         for f in args.files:
-            build_file(Path(f), project_index=project_index)
+            build_file(Path(f), project_index=project_index, series_index=series_index)
+        build_series_landing_pages(series_index, verbose=False)
     else:
         build_all()
 

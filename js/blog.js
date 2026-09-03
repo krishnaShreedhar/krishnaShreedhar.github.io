@@ -44,6 +44,24 @@
         if (toggle) {
             toggle.addEventListener('click', function () {
                 applyTheme(document.body.dataset.theme === 'light' ? 'dark' : 'light');
+
+                /* Re-render any Mermaid diagrams so they follow the new theme —
+                   Mermaid only themes at render time, not via CSS. */
+                if (window.mermaid && typeof window.mermaid.initialize === 'function') {
+                    var nodes = document.querySelectorAll('.mermaid-wrap .mermaid');
+                    if (nodes.length) {
+                        var sources = [];
+                        nodes.forEach(function (el) {
+                            if (!el.dataset.mermaidSrc) { el.dataset.mermaidSrc = el.textContent; }
+                            el.removeAttribute('data-processed');
+                            el.innerHTML = el.dataset.mermaidSrc;
+                            sources.push(el);
+                        });
+                        var t = document.body.dataset.theme === 'light' ? 'default' : 'dark';
+                        window.mermaid.initialize({ startOnLoad: false, theme: t });
+                        window.mermaid.init(undefined, sources);
+                    }
+                }
             });
         }
 
